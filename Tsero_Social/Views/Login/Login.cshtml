@@ -1,0 +1,107 @@
+﻿@{
+    Layout = null;
+}
+@using Microsoft.AspNetCore.Mvc
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model User
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LectureStudentService</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+</head>
+<body>
+
+    <div class="modalwindow" id="myModal">
+        <p>@ViewBag.SuccessAlert</p>
+        <p>@ViewBag.ErrorAlert</p>
+    </div>
+
+    <div class= "HeaderLayout">
+      <li class="nav-item">
+          <a class="nav-link" asp-area="" asp-controller="Home" asp-action="home">Home</a>
+      </li>
+      <li class="nav-item">
+         <a class="nav-link" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
+      </li>
+    </div>
+    <div class="authorizathion_parent">
+      <div class="container">
+        <div class="card" id="card">
+          <div class="card-inner login" id="login">
+            <h2>Login</h2>
+            <form method="post" asp-action="Login">
+              <label>Email</label>
+             <input type="text" id="Email" asp-for="@Model.Email" class="place" placeholder="gmail.com" required />
+             
+              <label>Password</label>
+              <input type="password" id="password" asp-for="@Model.Password" class="place" placeholder="*****" required/>
+              <button type="submit">Submit</button>                 
+              </form>
+            @if (ViewBag.ErrorMessage != null)
+            {
+           <p class="error">@ViewBag.ErrorMessage</p>
+            }
+          </div>
+
+         <div class="card-inner register" id="register">
+          <h2>Registration</h2>
+          <form method="post" asp-action="Register">
+              <label>UserName</label>
+              <input type="text" id="text" asp-for="@Model.Username" class="place" placeholder="gmail.com" required />
+
+              <label>Email</label>
+              <input type="text" id="Email" asp-for="@Model.Email" class="place" placeholder="gmail.com" required />
+        
+              <label>Password:</label>
+              <input type="password" id="Password" asp-for="@Model.Password" class="place" placeholder="*****" required/>
+        
+              <label>Name</label>
+              <input type="text" id="name" asp-for="@Model.Name" class="place" placeholder="John" required />
+              <label>Lastname</label>
+              <input type="text" id="lastname" asp-for="@Model.Lastname" class="place" placeholder="Doe" required/>
+        
+              <button type="submit">Submit</button>
+          </form>
+          <!--Modal window-->
+             @if (ViewBag.SuccessAlert != null || ViewBag.ErrorAlert!= null)
+             {            
+              <script>
+                  var modal = document.getElementById("myModal");
+                  modal.style.transition = "0.3s all ease-in-out";
+                  modal.style.display = "flex";
+                  setTimeout(function(){
+                      modal.style.opacity = "1";                     
+                  }, 500);
+                  setTimeout(function(){
+                     modal.style.opacity = "0";  
+                  }, 6000);
+                  setTimeout(function(){
+                      modal.style.display = "none";
+                  }, 7000);
+              </script>
+             }
+          <!--Modal window-->
+
+         </div>
+        </div>
+      </div>
+      <div class="switch">
+        <p class="donthave">Dont have an account?</p>
+        <button class="flip-btn">Switch to Register</button>
+      </div>
+    </div>
+
+<script src="/js/login.js">
+</script>
+
+</body>
+</html>

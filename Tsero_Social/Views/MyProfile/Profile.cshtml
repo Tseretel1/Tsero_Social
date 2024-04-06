@@ -1,0 +1,69 @@
+﻿@model Tsero_Social.Models.ImageUpload
+@using (Html.BeginForm("Profile", "MyProfile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+ <!--Modal window-->
+ <div class="modalwindow" id="myModal">
+      <p>@ViewBag.LooginFirst</p>
+ </div>
+ @if (ViewBag.SuccessAlert != null || ViewBag.ErrorAlert != null)
+ {            
+                   <script>
+                       var modal = document.getElementById("myModal");
+                       modal.style.transition = "0.3s all ease-in-out";
+                       modal.style.display = "flex";
+                       setTimeout(function(){
+                           modal.style.opacity = "1";                     
+                       }, 500);
+                       setTimeout(function(){
+                          modal.style.opacity = "0";  
+                       }, 6000);
+                       setTimeout(function(){
+                           modal.style.display = "none";
+                       }, 7000);
+                   </script>
+ }
+<!--Modal window-->
+<link rel="stylesheet" href="~/css/Profile.css" asp-append-version="true" />
+    <div class="containercenter">
+       <div class="updatepost">    
+         <div class="Profile_data">
+            <div id="ProfilePictureCont">
+                <img id="ProfilePreview" src="@ViewBag.Profile" alt="">
+            </div>
+                <p class= "userName">@ViewBag.Name @ViewBag.LastName</p>
+            </div>
+     <div class="buttonsflex">
+        <div> 
+          <button class="change" id="changephoto">Change Profile</button>
+          <button class="change" id = "writepost">Write Post</button>
+        </div>
+        <div class = "formhidden" id="formhidden">
+           <form asp-action="Profile" method="post" enctype="multipart/form-data">
+               <form id="imageForm" asp-action="Profile" method="post" enctype="multipart/form-data">
+                   <div class="form-group">
+                           <input id="imageInput" class="fileinput" type="file" name="ImageFile" accept="image/*" required onchange="previewImage(event)" />
+                   </div>
+                   <div class="form-group">
+                        <button  class="button" type="submit" data-text="Awesome"  id="submitBtn">
+                          <span class="actual-text">&nbsp;Upload&nbsp;</span>
+                          <span aria-hidden="true" class="hover-text"
+                            >&nbsp;Upload&nbsp;</span
+                          >
+                        </button>
+                   </div>
+               </form>
+           </form>
+        </div>
+     </div>
+   </div>
+
+      <div class= "Post" id="Post"></div>
+      <div class="MyPosts">
+
+      </div>
+    </div>
+    <script src="/js/Profile.js"></script>
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

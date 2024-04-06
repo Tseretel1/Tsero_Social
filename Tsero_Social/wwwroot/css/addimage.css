@@ -1,0 +1,207 @@
+﻿
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(26, 25, 25);
+    margin:0;
+    padding:0;
+}
+.containercenter{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content : center;
+    margin-top:80px;
+}
+.upload_img {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.img_content {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url(backgroundupload.png);
+    background-size: cover;
+    border: none;
+}
+
+.uploaded_img {
+    width: 120px;
+    height: 120px;
+}
+
+.img_upload_button {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background: black;
+    font-family: "Montserrat", sans-serif;
+    box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    width: 100px;
+    height: 30px;
+    border: 1px solid white;
+}
+
+.uploadddd {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+}
+
+.img_upload_button:after {
+    content: " ";
+    width: 0%;
+    height: 100%;
+    background: lightblue;
+    position: absolute;
+    transition: all 0.4s ease-in-out;
+    right: 0;
+}
+
+.img_upload_button::placeholder {
+    background-color: red;
+}
+
+button:hover::after {
+    right: auto;
+    left: 0;
+    width: 100%;
+    color: black;
+}
+
+
+.updatepost {
+    width: clamp(280px, 75%, 900px);
+    height: auto;
+    padding: 20px 0px 10px 0px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    box-shadow: 0px 0px 20px black inset;
+}
+
+.profile_section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.prof_back {
+    width: 150px;
+    height: 150px;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.prof_pic {
+    width: 155px;
+    transition: 0.3s all ease-in-out;
+    border-radius: 20px;
+}
+
+.prof_back::after {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    border-radius: 50%;
+    position: absolute;
+    margin:50px 0px 0px 100px;
+
+    transition: background-color 0.3s ease-in-out;
+}
+
+.prof_back.offline::after {
+    background-color: red;
+}
+
+.prof_pic:hover {
+    scale: 1.2;
+}
+
+.user {
+    height: 100%;
+}
+
+.username {
+    font-family: sans-serif;
+    color: white;
+    font-size: 25px;
+}
+
+.postinput {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid grey;
+    outline: none;
+    color: white;
+    height: 50px;
+}
+
+.button {
+    margin: 0;
+    height: auto;
+    background: transparent;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+
+.postform {
+    gap: 20px;
+}
+
+.button {
+    --border-right: 6px;
+    --text-stroke-color: rgba(255, 255, 255, 0.6);
+    --animation-color: whitesmoke;
+    --fs-size: 2em;
+    letter-spacing: 3px;
+    text-decoration: none;
+    font-size: var(--fs-size);
+    font-family: "Arial";
+    position: relative;
+    text-transform: uppercase;
+    color: white;
+    -webkit-text-stroke: 1px var(--text-stroke-color);
+    border: 1px solid grey;
+    text-shadow: 0px 0px 3px white;
+    margin-top: 20px;
+}
+
+.hover-text {
+    position: absolute;
+    box-sizing: border-box;
+    content: attr(data-text);
+    color: lightblue;
+    width: 0px;
+    inset: 0;
+    border-right: var(--border-right) solid var(--animation-color);
+    overflow: hidden;
+    transition: 0.5s;
+    -webkit-text-stroke: 1px var(--animation-color);
+}
+
+.button:hover .hover-text {
+    width: 100%;
+    filter: drop-shadow(0 0 23px var(--animation-color));
+}

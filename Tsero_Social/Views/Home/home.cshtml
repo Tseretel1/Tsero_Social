@@ -1,0 +1,39 @@
+﻿@{
+    Layout =null;
+}
+@using Microsoft.AspNetCore.Mvc
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Post
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LectureStudentService</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+</head>
+<body>
+    <!--For You Page-->
+    <div class= "HeaderLayout">
+      <li class="nav-item">
+          <a class="nav-link" asp-area="" asp-controller="Home" asp-action="home">Home</a>
+      </li>
+      <li class="nav-item">
+         <a class="nav-link" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
+      </li>
+    </div>
+    <div class="homepage">
+        @if (ViewBag.loginedornot == null)
+        {
+              <h1 class= "viewbag">@ViewBag.loginedornot</h1>
+
+         }
+      <section class="foryoupage"></section>
+    </div>
+</body>
+</html>

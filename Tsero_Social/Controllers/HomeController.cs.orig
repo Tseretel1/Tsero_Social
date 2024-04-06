@@ -1,0 +1,82 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing.Constraints;
+using System.Diagnostics;
+using System.Drawing.Imaging;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Tsero_Social.Models;
+using Microsoft.Extensions.Hosting.Internal;
+using Tsero_Social.Dbcontext;
+using System.IO;
+using Microsoft.EntityFrameworkCore;
+using Tsero_Social.Services;
+
+namespace Tsero_Social.Controllers
+{
+    public class HomeController : Controller
+    {
+<<<<<<< HEAD
+=======
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly UserDbcontext _dbcontext;
+        public HomeController(IWebHostEnvironment hostingEnvironment, UserDbcontext db)
+        {
+            _hostingEnvironment = hostingEnvironment;
+            _dbcontext = db;
+        }
+        private readonly ILogger<HomeController> _logger;
+>>>>>>> 22214b85c393bdd7f0011e480401d5c1f7b59f99
+        public IActionResult Index()
+        {
+            return View("Home");
+        }
+        public IActionResult home()
+        {
+            return View("home");
+        }
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+<<<<<<< HEAD
+=======
+
+        [HttpGet]
+        public IActionResult addimage()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult addimage2()
+        {
+            return View("AddImage2");
+        }
+
+        [HttpPost]
+        public IActionResult AddImage2(ImageUpload model)
+        {
+            if (model.ImageFile != null && model.ImageFile.Length > 0)
+            {
+                string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath + "/" + "UploadedPictures");
+                string uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ImageFile.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.ImageFile.CopyTo(stream);
+                }
+                var image = new ImageUpload
+                {
+                    ImagePath = filePath,
+                    Title = model.Title,
+                };
+                ModelState.Clear();
+                _dbcontext.images.Add(image);
+                _dbcontext.SaveChanges();
+            }
+            return View("AddImage2");
+        }
+>>>>>>> 22214b85c393bdd7f0011e480401d5c1f7b59f99
+    }
+}

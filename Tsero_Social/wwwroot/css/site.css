@@ -1,0 +1,44 @@
+.nav-item {
+    color: white;
+}
+.container-fluid {
+    background-color: transparent;
+    backdrop-filter: blur(20px);
+}
+.navigatorrs {
+    margin: 0;
+    padding: 0;
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:5000;
+}
+.HeaderLayout {
+    display: flex;
+    width: 280px;
+    height: 40px;
+    justify-content: space-evenly;
+    background-color: white;
+    font-family: sans-serif;
+    font-weight: bold;
+    align-items: center;
+    border-radius: 0px 0px 20px 0px;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    z-index: 200;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link {
+    transition: 0.3s all ease-in-out;
+    color: black;
+}
+
+    .nav-link:hover {
+        color: gray;
+    }
