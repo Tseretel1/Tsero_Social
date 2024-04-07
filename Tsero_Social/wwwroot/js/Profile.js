@@ -17,6 +17,8 @@ function previewImage(event) {
         imagePreview.style.display = 'none';
     }
 }
+
+
 var hidden = true;
 function UpdateProfile() {
     if (hidden == true) {

@@ -11,7 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<UploadImg>();
 builder.Services.AddScoped<IuploadImg, UploadImg>();
-
+builder.Services.AddScoped<postService>();
+builder.Services.AddScoped<IpostService, postService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<UserServices>();
 builder.Services.AddScoped<IuserService, UserServices>();

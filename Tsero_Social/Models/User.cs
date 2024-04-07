@@ -9,7 +9,6 @@
         public string Name { get; set; }
         public string Lastname { get; set; }
         public string? ProfilePicture { get; set; }  
-        public string? ProfilePath { get; set; }
         public bool Isonline { get; set; }
 
         public static List<User> Loged_user = new List<User>();

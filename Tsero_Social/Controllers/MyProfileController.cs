@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Tsero_Social.Dbcontext;
+using Tsero_Social.Migrations;
 using Tsero_Social.Models;
 using Tsero_Social.Services;
 
@@ -9,16 +10,15 @@ namespace Tsero_Social.Controllers
     public class MyProfileController : Controller
     {
         private readonly IuploadImg _uploadimg;
-        private readonly UserServices _userServices;
         private readonly UserDbcontext _userDbcontext;
-        private readonly User _user;
         private readonly IuserService _userService;
-
-        public MyProfileController(IuploadImg upload, UserDbcontext userDbcontext, IuserService userface)
+        private readonly IpostService _ipostservice;
+        public MyProfileController(IuploadImg upload, UserDbcontext userDbcontext, IuserService userface, IpostService postService)
         {
             _uploadimg = upload;
             _userDbcontext = userDbcontext;
             _userService = userface;
+            _ipostservice = postService;
         }
         public IActionResult Index()
         {
@@ -44,6 +44,10 @@ namespace Tsero_Social.Controllers
                                 ViewBag.Username = loggedUser.Username;
                                 ViewBag.Profile = loggedUser.ProfilePicture;
                                 ViewBag.isonline = loggedUser.Isonline;
+                                ViewBag.NoPosts = "NO Post Available";
+                                var userPosts = _userDbcontext.Posts.Where(p => p.UserID == loggedUser.id).ToList();
+                                ViewBag.UserPosts = userPosts;
+
                                 break;
                             }
                         }
@@ -64,11 +68,21 @@ namespace Tsero_Social.Controllers
             }
         }
 
-        [HttpPost]
         public IActionResult Profile(ImageUpload model)
         {
             _uploadimg.UploadIMG(model);
-       
+
+            return View("Profile");
+        }
+        [HttpGet]
+        public IActionResult PostPublish()
+        {
+            return View("Profile");
+        }
+        [HttpPost]
+        public IActionResult PostPublish(string PostTitle, string PostPost, ImageUpload model)
+        {
+            _ipostservice.PostWriting(PostTitle, PostPost, model);
             return View("Profile");
         }
     }

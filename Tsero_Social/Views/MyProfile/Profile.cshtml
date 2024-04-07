@@ -1,4 +1,4 @@
-﻿@model Tsero_Social.Models.ImageUpload
+﻿
 @using (Html.BeginForm("Profile", "MyProfile", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
  <!--Modal window-->
@@ -22,6 +22,8 @@
                        }, 7000);
                    </script>
  }
+
+@model Post;
 <!--Modal window-->
 <link rel="stylesheet" href="~/css/Profile.css" asp-append-version="true" />
     <div class="containercenter">
@@ -41,7 +43,7 @@
            <form asp-action="Profile" method="post" enctype="multipart/form-data">
                <form id="imageForm" asp-action="Profile" method="post" enctype="multipart/form-data">
                    <div class="form-group">
-                           <input id="imageInput" class="fileinput" type="file" name="ImageFile" accept="image/*" required onchange="previewImage(event)" />
+                       <input id="imageInput" class="fileinput" type="file" name="ImageFile" accept="image/*" required onchange="previewImage(event)" />
                    </div>
                    <div class="form-group">
                         <button  class="button" type="submit" data-text="Awesome"  id="submitBtn">
@@ -56,10 +58,52 @@
         </div>
      </div>
    </div>
+   <!--Post Publish-->
 
-      <div class= "Post" id="Post"></div>
+      <div class= "PostPublish" id="PostPublish">
+                <form asp-action="PostPublish" method="post" enctype="multipart/form-data">
+                <input type="text" class= "inputpost title" placeholder ="Title"  asp-for="@Model.Title" name="PostTitle" required> 
+                <input type="text" class= "inputpost Post" placeholder ="Post"  asp-for="@Model.post" name="PostPost" required> 
+                <input id="imageInput" class="fileinput" type="file" name="ImageFile" accept="image/*" onchange="previewImage(event)" />
+                <button class= "btn-primary" type="submit">submit</button>
+            </form>
+      </div>
+
+
+      <!--My Post-->
       <div class="MyPosts">
-
+          
+            @if (ViewBag.UserPosts != null)
+            {
+                foreach (var post in ViewBag.UserPosts)
+                {
+                     <div class="Each_Post">
+                         <div class="userdata">
+                             <div class= "namephotoflex">
+                                <img class="PostProfile" src="@ViewBag.Profile" alt="">
+                                <h2 class = "postusername">@ViewBag.Name  @ViewBag.LastName</h2>
+                              </div>
+                              <div>
+                                <p class= "postdate">Date: @post.DateTime.ToString("MM/dd/yyyy HH:mm:ss")</p>
+                             </div>
+                         </div>
+                        <div class= "Postcontent">
+                            <div class="flextitles"> 
+                                <p>@post.post</p>
+                            </div>
+                            <div class= "photocontentwitdth">
+                                <div class="imgofpost">
+                                    <img src="@post.Photo" class= "Post_photowidth" alt="Post Image">
+                                </div>   
+                            </div>
+                            <div></div>
+                        </div>
+                    </div>
+                }
+            }
+            else{
+                <h1>ViewBag.NoPosts</h1>
+            }
       </div>
     </div>
     <script src="/js/Profile.js"></script>

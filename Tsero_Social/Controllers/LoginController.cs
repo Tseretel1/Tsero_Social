@@ -44,7 +44,7 @@ namespace Tsero_Social.Controllers
             bool isAuthenticated = _userService.Register(user);
             if (isAuthenticated)
             {
-                ViewBag.ErrorAlert = "User with given Email already Exist!";
+                ViewBag.EmailExist = "This Email is Already Registered";
                 return View("Login");
             }
             else

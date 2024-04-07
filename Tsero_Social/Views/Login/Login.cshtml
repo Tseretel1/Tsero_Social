@@ -20,9 +20,11 @@
 </head>
 <body>
 
-    <div class="modalwindow" id="myModal">
-        <p>@ViewBag.SuccessAlert</p>
-        <p>@ViewBag.ErrorAlert</p>
+    <div class="ModalBack" id="myModal">
+       <div class= "modalwindow" id="modalwindow">
+        <div class="XContainer"><button class="OkBUtton" id="OkBUtton">X</button></div>
+        <p class="viewmessage viewmessage1"><img src="/img/warning-icon-transparent-free-png.webp" width="40px"/> @ViewBag.EmailExist</p>
+       </div>
     </div>
 
     <div class= "HeaderLayout">
@@ -40,7 +42,7 @@
             <h2>Login</h2>
             <form method="post" asp-action="Login">
               <label>Email</label>
-             <input type="text" id="Email" asp-for="@Model.Email" class="place" placeholder="gmail.com" required />
+            <input type="text" id="Email" asp-for="@Model.Email" class="place" placeholder="gmail.com" required />
              
               <label>Password</label>
               <input type="password" id="password" asp-for="@Model.Password" class="place" placeholder="*****" required/>
@@ -72,21 +74,27 @@
               <button type="submit">Submit</button>
           </form>
           <!--Modal window-->
-             @if (ViewBag.SuccessAlert != null || ViewBag.ErrorAlert!= null)
+                    @if (ViewBag.EmailExist != null)
              {            
               <script>
-                  var modal = document.getElementById("myModal");
-                  modal.style.transition = "0.3s all ease-in-out";
-                  modal.style.display = "flex";
-                  setTimeout(function(){
-                      modal.style.opacity = "1";                     
-                  }, 500);
-                  setTimeout(function(){
-                     modal.style.opacity = "0";  
-                  }, 6000);
-                  setTimeout(function(){
-                      modal.style.display = "none";
-                  }, 7000);
+                      var modalwindow = document.getElementById("modalwindow");
+                      var modal = document.getElementById("myModal");
+                      modal.style.transition = "0.3s all ease-in-out";
+                      modal.style.display = "flex";
+                      modalwindow.style.transition = "0.3s all ease-in-out";
+                      modalwindow.style.display = "flex";
+                      setTimeout(function(){
+                          modal.style.opacity = "1"; 
+                          modalwindow.style.opacity = "1";
+                      }, 500);
+                      setTimeout(function(){
+                          modalwindow.style.opacity = "0";
+                          modal.style.opacity = "0";  
+                      }, 6000);
+                      setTimeout(function(){
+                          modal.style.display = "none";
+                          modalwindow.style.display = "none";
+                      }, 7000);
               </script>
              }
           <!--Modal window-->

@@ -138,7 +138,7 @@ button:hover::after {
 }
 
 .prof_pic:hover {
-    scale: 1.2;
+    transform:scale(1.2);
 }
 
 .user {
@@ -234,9 +234,12 @@ button:hover::after {
     display: flex;
     width: 180px;
     height: 180px;
-    box-shadow: 0px 0px 20px black inset;
     border-radius: 50%;
     overflow: hidden;
+    background-color: rgb(26, 25, 25);
+    background:url(../img/profileback.jpg);
+    background-size:cover;
+    border:2px solid white
 }
 .fileinput {
     color:white;
@@ -279,6 +282,9 @@ input[type=file]::file-selector-button {
     height:auto;
     padding: 20px 0px 20px 0px;
     border-radius:20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 .change{
     color:white;
@@ -293,4 +299,71 @@ input[type=file]::file-selector-button {
     display:flex;
     flex-direction:column;
     align-items:start;
+}
+
+/*Post Publish*/
+.PostPublish {
+    width: clamp(280px, 75%, 900px);
+    height: 200px;
+    background-color:red;
+    border-radius:20px;
+}
+.Each_Post{
+    width:80%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    box-shadow:0px 0px 5px inset;
+    border-radius:20px;
+    height:auto;
+    padding:20px;
+    margin-top:60px;
+    flex-direction:column;
+    gap:50px;
+}
+.Postcontent{
+
+}
+.PostProfile{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+}
+.userdata {
+    display: flex;
+    width: clamp(280px, 75%, 400px);
+    align-items: center;
+    justify-content: space-between;
+}
+.namephotoflex{
+    display:flex;
+}
+.titlegrey {
+    font-size:15px;
+    color:gray;
+    font-weight:100;
+}
+.flextitles {
+    display: flex;
+    width: clamp(280px, 75%, 400px);
+}
+.imgofpost {
+    width: clamp(280px, 75%, 400px);
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.photocontentwitdth {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+.Post_photowidth {
+    width: 280px;
+    border-radius :10px;
 }

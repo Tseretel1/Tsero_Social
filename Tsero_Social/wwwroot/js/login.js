@@ -31,3 +31,10 @@ function reglog() {
     card.style.transition = "0.2s all ease-in-out";
 }
 flipbt.addEventListener("click", reglog);
+
+function Okbutton() {
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";   
+}
+document.getElementById("OkBUtton").addEventListener("click", Okbutton);
+document.getElementById("myModal").addEventListener("click", Okbutton);

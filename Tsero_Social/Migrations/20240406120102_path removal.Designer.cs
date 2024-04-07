@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tsero_Social.Dbcontext;
 
@@ -11,9 +12,11 @@ using Tsero_Social.Dbcontext;
 namespace Tsero_Social.Migrations
 {
     [DbContext(typeof(UserDbcontext))]
-    partial class UserDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20240406120102_path removal")]
+    partial class pathremoval
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
