@@ -35,10 +35,6 @@
                 <p class= "userName">@ViewBag.Name @ViewBag.LastName</p>
             </div>
      <div class="buttonsflex">
-        <div> 
-          <button class="change" id="changephoto">Change Profile</button>
-          <button class="change" id = "writepost">Write Post</button>
-        </div>
         <div class = "formhidden" id="formhidden">
            <form asp-action="Profile" method="post" enctype="multipart/form-data">
                <form id="imageForm" asp-action="Profile" method="post" enctype="multipart/form-data">
@@ -57,17 +53,30 @@
            </form>
         </div>
      </div>
-   </div>
-   <!--Post Publish-->
-
-      <div class= "PostPublish" id="PostPublish">
-                <form asp-action="PostPublish" method="post" enctype="multipart/form-data">
-                <input type="text" class= "inputpost title" placeholder ="Title"  asp-for="@Model.Title" name="PostTitle" required> 
-                <input type="text" class= "inputpost Post" placeholder ="Post"  asp-for="@Model.post" name="PostPost" required> 
-                <input id="imageInput" class="fileinput" type="file" name="ImageFile" accept="image/*" onchange="previewImage(event)" />
-                <button class= "btn-primary" type="submit">submit</button>
-            </form>
+   </div>  
+  <!--Post Publish-->
+   <div class ="PostParent" id = "PostParent">
+      <div class="PostPublish" id="PostPublish" onclick="togglePublishSection()">
+            <div class="WritePostText" id="WritePostText">
+                 <h1>Write Post...</h1>
+          </div>
+          <div class="HidePublish">
+              <button class="HidePublishButtton" id="HidePublishButtton" onclick="hidePublishSection()">X</button>
+          </div>
+          <form class="Formpublish" asp-action="PostPublish" method="post" enctype="multipart/form-data">
+              <input type="text" class="inputpost" placeholder="Post" asp-for="@Model.post" name="PostPost" required>
+              <div class="photocontainer">
+                  <input id="imageInput" class="photouploadbutton" type="file" name="ImageFile" accept="image/*" onchange="previewImage(this)" />
+                  <div class="photopreviewcontainer" id="photopreviewcontainer">
+                      <img id="ProfilePreview2" src="" alt="">
+                  </div>
+              </div>
+              <button class="submitPostButton" type="submit">submit</button>
+          </form>
       </div>
+   </div>
+
+
 
 
       <!--My Post-->
@@ -81,7 +90,9 @@
                          <div class="userdata">
                              <div class= "namephotoflex">
                                 <img class="PostProfile" src="@ViewBag.Profile" alt="">
-                                <h2 class = "postusername">@ViewBag.Name  @ViewBag.LastName</h2>
+                                <div>
+                                   <h2 class= "MyUsername">@ViewBag.Username</h2>
+                                </div>
                               </div>
                               <div>
                                 <p class= "postdate">Date: @post.DateTime.ToString("MM/dd/yyyy HH:mm:ss")</p>
@@ -91,10 +102,17 @@
                             <div class="flextitles"> 
                                 <p>@post.post</p>
                             </div>
-                            <div class= "photocontentwitdth">
-                                <div class="imgofpost">
-                                    <img src="@post.Photo" class= "Post_photowidth" alt="Post Image">
-                                </div>   
+                          <div class= "photocontentwitdth">
+                                <div class="imgofpost" id="imgofpost">
+                                    @if (@post.Photo != null)
+                                    {
+                                        <img src="@post.Photo" class="Post_photowidth" id="Post_photowidth" alt="Post Image">
+                                    }
+                                    else
+                                    {
+                                        
+                                    }
+                                </div>
                             </div>
                             <div></div>
                         </div>

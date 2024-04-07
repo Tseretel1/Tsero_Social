@@ -17,7 +17,7 @@ namespace Tsero_Social.Services
 
         private static readonly object lockObject = new object();
 
-        public void PostWriting(string PostTitle, string PostPost, ImageUpload model)
+        public void PostWriting(string PostPost, ImageUpload model)
         {
             lock (lockObject)
             {
@@ -63,7 +63,6 @@ namespace Tsero_Social.Services
                             UserID = userid,
                             Photo = PattoDisplay,
                             DateTime = DateTime.Now,
-                            Title = PostTitle,
                             post = PostPost,
                         };
                         _dbcontext.Posts.Add(postupload);
@@ -73,6 +72,28 @@ namespace Tsero_Social.Services
                     {
                         model = null;
                     }
+                }
+                else
+                {
+                    int userid = 0;
+                    string title = "";
+                    foreach (var item in User.Loged_user)
+                    {
+                        if (item != null)
+                        {
+                            userid = item.id;
+                            title = item.Username;
+                        }
+                    }
+                    var postupload = new Post
+                    {
+                        UserID = userid,
+                        Photo = null,
+                        DateTime = DateTime.Now,
+                        post = PostPost,
+                    };
+                    _dbcontext.Posts.Add(postupload);
+                    _dbcontext.SaveChanges();
                 }
             }
         }

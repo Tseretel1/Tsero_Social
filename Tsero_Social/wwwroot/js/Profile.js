@@ -18,28 +18,54 @@ function previewImage(event) {
     }
 }
 
+var photostatus = false;
 
-var hidden = true;
-function UpdateProfile() {
-    if (hidden == true) {
-        document.getElementById("formhidden").style.display = "flex";
-        hidden = false;
-    }
-    else if (hidden == false){
-        document.getElementById("formhidden").style.display = "none";
-        hidden = true;
-    }
-}
-document.getElementById("changephoto").addEventListener("click", UpdateProfile);
-var hiddenn = false;
-function WritePost() {
-    if (hiddenn == true) {
-        document.getElementById("Post").style.display = "flex";
-        hiddenn = false;
-    }
-    else if (hidden == false) {
-        document.getElementById("Post").style.display = "none";
-        hiddenn = true;
+
+
+function previewImage(input) {
+    var imagePreview = document.getElementById('ProfilePreview2');
+    var PhotoContHeight = document.getElementById('photopreviewcontainer');
+    var PhotoHeight = imagePreview.clientHeight;
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            imagePreview.src = e.target.result;
+            imagePreview.style.display = 'flex';
+            document.getElementById("Post").style.display = "none";
+            hiddenn = true;
+        };
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        imagePreview.src = '';
+        imagePreview.style.display = 'none';
     }
 }
-document.getElementById("writepost").addEventListener("click", UpdateProfile);
+
+
+function publishclick() {
+    var publishbtn = document.getElementById("HidePublishButtton");
+    var contclick = document.getElementById("PostPublish");
+    var parent = document.getElementById("PostParent");
+
+    publishbtn.style.transition = "0.3s all ease-in-out";
+    contclick.style.height = "700px";
+    contclick.style.width = "clamp(280px, 75%, 900px)";
+    publishbtn.style.opacity = "1";
+    parent.style.justifyContent = "center";
+}
+document.getElementById("WritePostText").addEventListener("click", publishclick);
+
+
+function publishclick2() {
+    var publishbtn = document.getElementById("HidePublishButtton");
+    var contclick = document.getElementById("PostPublish");
+    var parent = document.getElementById("PostParent");
+
+    publishbtn.style.transition = "0.3s all ease-in-out";
+    contclick.style.height = "0px";
+    publishbtn.style.opacity = "1";
+    contclick.style.width = "40%";
+    parent.style.justifyContent = "flex-start";
+}
+document.getElementById("HidePublishButtton").addEventListener("click", publishclick2);

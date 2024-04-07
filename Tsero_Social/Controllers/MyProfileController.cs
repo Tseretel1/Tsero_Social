@@ -41,7 +41,7 @@ namespace Tsero_Social.Controllers
                             {
                                 ViewBag.Name = loggedUser.Name;
                                 ViewBag.LastName = loggedUser.Lastname;
-                                ViewBag.Username = loggedUser.Username;
+                                ViewBag.Username = $"@{loggedUser.Username}";
                                 ViewBag.Profile = loggedUser.ProfilePicture;
                                 ViewBag.isonline = loggedUser.Isonline;
                                 ViewBag.NoPosts = "NO Post Available";
@@ -80,9 +80,9 @@ namespace Tsero_Social.Controllers
             return View("Profile");
         }
         [HttpPost]
-        public IActionResult PostPublish(string PostTitle, string PostPost, ImageUpload model)
+        public IActionResult PostPublish( string PostPost, ImageUpload model)
         {
-            _ipostservice.PostWriting(PostTitle, PostPost, model);
+            _ipostservice.PostWriting(PostPost, model);
             return View("Profile");
         }
     }

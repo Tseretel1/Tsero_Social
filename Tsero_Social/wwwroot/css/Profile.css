@@ -2,9 +2,9 @@
 html, body {
     width: 100%;
     height: 100%;
-    background-color: rgb(26, 25, 25);
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(57, 57, 57);
 }
 .containercenter{
     width:100%;
@@ -22,6 +22,7 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: rgb(26, 25, 25);
 }
 
 .img_content {
@@ -94,7 +95,9 @@ button:hover::after {
     border-radius: 20px;
     display: flex;
     justify-content: space-evenly;
-    box-shadow: 0px 0px 20px black inset;
+    box-shadow: 0px 0px 20px black;
+    background-color:ghostwhite;
+    color:black;
 }
 
 .profile_section {
@@ -129,7 +132,6 @@ button:hover::after {
     border-radius: 50%;
     position: absolute;
     margin:50px 0px 0px 100px;
-
     transition: background-color 0.3s ease-in-out;
 }
 
@@ -147,7 +149,7 @@ button:hover::after {
 
 .username {
     font-family: sans-serif;
-    color: white;
+    color: black;
     font-size: 25px;
 }
 
@@ -244,19 +246,116 @@ button:hover::after {
 .fileinput {
     color:white;
 }
+
+
+/*Publish Post*/
+.PostParent {
+    width: 70%;
+    display:flex;
+}
+.PostPublish {
+    width: 40%;
+    height: 0;
+    padding:0px 0px 50px 0px ;
+    border-radius: 10px;
+    background-color: rgb(26, 25, 25);
+    overflow:hidden;
+    transition:0.3s all ease-in-out;
+    cursor:pointer;
+
+}
+.Formpublish {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.HidePublish {
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+}
+.HidePublishButtton {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: red;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    transition: 0.3s all ease-in-out;
+    color: white;
+    background-color: red;
+    border-radius: 10px;
+    opacity:0;
+}
+.HidePublishButtton:hover {
+    background-color: darkred;
+}
+.WritePostText {
+    width: 100%;
+    display: flex;
+    color: whitesmoke;
+    justify-content: center;
+}
+.photocontainer{
+    gap:20px;
+}
 input[type=file]::file-selector-button {
+    visibility: hidden;
+}
+.photouploadbutton::before {
+    content: 'Select some files';
+    display: inline-block;
+    background: linear-gradient(top, #f9f9f9, #e3e3e3);
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 10pt;
+}
+.photouploadbutton {
+    color: transparent;
+}
+.photouploadbutton {
     margin-right: 20px;
     border: none;
-    background: orangered;
-    padding: 10px 20px;
     border-radius: 10px;
-    color: #fff;
-    cursor: pointer;
-    transition: background .2s ease-in-out;
+    color: white;
 }
-.formhidden{
-    display:none;
-    flex-direction:column;
+.submitPostButton{
+    width:150px;
+    height:40px;
+    background-color:white;
+    color:black;
+    font-family:sans-serif;
+}
+.inputpost {
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid grey;
+    outline: none;
+    color: white;
+    width: 300px;
+}
+.photopreviewcontainer{
+    width:300px;
+    height:300px;
+    border:1px solid white;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:20px;
+}
+#ProfilePreview2 {
+    width: 300px;
+}
+.formhidden {
+    display: flex;
+    flex-direction: column;
 }
 .modalwindow {
     width: 200px;
@@ -275,17 +374,6 @@ input[type=file]::file-selector-button {
     justify-content: center;
     text-align: center;
 }
-.MyPosts {
-    width: clamp(280px, 75%, 900px);
-    background-color : grey;
-    box-shadow: 0px 0px 10px black inset;
-    height:auto;
-    padding: 20px 0px 20px 0px;
-    border-radius:20px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-}
 .change{
     color:white;
     background-color:darkred;
@@ -301,28 +389,36 @@ input[type=file]::file-selector-button {
     align-items:start;
 }
 
-/*Post Publish*/
-.PostPublish {
+/*My Post */
+.MyPosts {
     width: clamp(280px, 75%, 900px);
-    height: 200px;
-    background-color:red;
-    border-radius:20px;
+    background-color: grey;
+    box-shadow: 0px 0px 10px black;
+    height: auto;
+    padding: 20px 0px 20px 0px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-.Each_Post{
-    width:80%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    box-shadow:0px 0px 5px inset;
-    border-radius:20px;
-    height:auto;
-    padding:20px;
-    margin-top:60px;
-    flex-direction:column;
-    gap:50px;
+.Each_Post {
+    width: clamp(280px, 65%, 500px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 10px;
+    border-radius: 20px;
+    height: auto;
+    padding: 20px 0px 70px 0px;
+    margin-top: 60px;
+    flex-direction: column;
+    gap: 50px;
+    background-color: ghostwhite;
 }
 .Postcontent{
-
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 .PostProfile{
     width:50px;
@@ -337,6 +433,8 @@ input[type=file]::file-selector-button {
 }
 .namephotoflex{
     display:flex;
+    gap:20px;
+    align-items:flex-start;
 }
 .titlegrey {
     font-size:15px;
@@ -346,6 +444,8 @@ input[type=file]::file-selector-button {
 .flextitles {
     display: flex;
     width: clamp(280px, 75%, 400px);
+    border-bottom :1px solid black;
+    margin-bottom:10px;
 }
 .imgofpost {
     width: clamp(280px, 75%, 400px);
@@ -354,6 +454,7 @@ input[type=file]::file-selector-button {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    border-radius: 10px;
 }
 .photocontentwitdth {
     width: 100%;
@@ -364,6 +465,17 @@ input[type=file]::file-selector-button {
     border-radius: 10px;
 }
 .Post_photowidth {
-    width: 280px;
-    border-radius :10px;
+    width: 300px;
+    border-radius: 10px;
+    transition: 0.3s all ease-in-out;
+}
+.Post_photowidth:hover{
+    transform:scale(1.1);
+}
+.MyUsername{
+    font-size:20px;
+    color:black;
+}
+.Name_lastname{
+    font-size:13px;
 }
