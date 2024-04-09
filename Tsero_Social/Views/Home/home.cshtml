@@ -33,7 +33,55 @@
               <h1 class= "viewbag">@ViewBag.loginedornot</h1>
 
          }
-      <section class="foryoupage"></section>
+      <section class="foryoupage">
+
+      <div class="MyPosts">
+
+                @if (ViewBag.UserPosts != null)
+                {
+                    foreach (var post in ViewBag.UserPosts)
+                    {
+                        foreach (var user in ViewBag.Posts)
+                        {
+                            <div class="Each_Post">
+                                <div class="userdata">
+                                    <div class= "namephotoflex">
+                                        <img class="PostProfile" src="@user.ProfilePicture" alt="">
+                                        <div>
+                                            <h2 class= "MyUsername">@user.Username</h2>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class= "postdate">Date: @post.DateTime.ToString("MM/dd/yyyy HH:mm:ss")</p>
+                                    </div>
+                                </div>
+                                <div class= "Postcontent">
+                                    <div class="flextitles"> 
+                                        <p>@post.post</p>
+                                    </div>
+                                    <div class= "photocontentwitdth">
+                                        <div class="imgofpost" id="imgofpost">
+                                            @if (@post.Photo != null)
+                                            {
+                                                <img src="@post.Photo" class="Post_photowidth" id="Post_photowidth" alt="Post Image">
+                                            }
+                                            else
+                                            {
+
+                                            }
+                                        </div>
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </div>
+                         }
+                    }
+                }
+                else
+                {
+                    <h1>ViewBag.NoPosts</h1>
+                }
+      </section>
     </div>
 </body>
 </html>

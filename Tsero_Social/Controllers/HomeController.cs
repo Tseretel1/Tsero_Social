@@ -23,13 +23,36 @@ namespace Tsero_Social.Controllers
             _hostingEnvironment = hostingEnvironment;
             _dbcontext = db;
         }
-        private readonly ILogger<HomeController> _logger;
         public IActionResult Index()
         {
+            var userPosts = _dbcontext.Posts
+                .Where(p => p.DateTime < DateTime.Now)
+                .OrderByDescending(p => p.DateTime)
+                .ToList();
+
+            ViewBag.UserPosts = userPosts;
+            ViewBag.Posts = new List<User>();
+            foreach (var post in userPosts)
+            {
+                var user = _dbcontext.Users.FirstOrDefault(u => u.id == post.UserID);
+                if (user != null)
+                {
+                    ViewBag.Posts.Add(user);
+                }
+            }
+
             return View("Home");
         }
+
+
         public IActionResult home()
         {
+            var userPosts = _dbcontext.Posts
+               .Where(p => p.DateTime < DateTime.Now)
+               .OrderByDescending(p => p.DateTime)
+               .ToList();
+
+            ViewBag.UserPosts = userPosts;
             return View("home");
         }
         public IActionResult Privacy()

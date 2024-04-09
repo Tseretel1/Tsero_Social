@@ -6,6 +6,7 @@ function previewImage(event) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
+            imagePreview.src = '';
             imagePreview.src = e.target.result;
             imagePreview.style.display = 'flex';
             document.getElementById("Post").style.display = "none";
@@ -19,9 +20,6 @@ function previewImage(event) {
 }
 
 var photostatus = false;
-
-
-
 function previewImage(input) {
     var imagePreview = document.getElementById('ProfilePreview2');
     var PhotoContHeight = document.getElementById('photopreviewcontainer');
@@ -65,7 +63,7 @@ function publishclick2() {
     publishbtn.style.transition = "0.3s all ease-in-out";
     contclick.style.height = "0px";
     publishbtn.style.opacity = "1";
-    contclick.style.width = "40%";
+    contclick.style.width = "60%";
     parent.style.justifyContent = "flex-start";
 }
 document.getElementById("HidePublishButtton").addEventListener("click", publishclick2);
