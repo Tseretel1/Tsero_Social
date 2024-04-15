@@ -25,16 +25,18 @@ namespace Tsero_Social.Controllers
         }
         public IActionResult Index()
         {
-            var userPosts = _dbcontext.Posts
-                .Where(p => p.DateTime < DateTime.Now)
-                .OrderByDescending(p => p.DateTime)
-                .ToList();
+            var allPosts = _dbcontext.Posts.Where(p => p.DateTime < DateTime.Now).ToList();
+            var random = new Random();
+            var randomPosts = allPosts.OrderBy(x => random.Next()).ToList();
 
-            ViewBag.UserPosts = userPosts;
+
+
+            ViewBag.UserPosts = randomPosts;
             ViewBag.Posts = new List<User>();
-            foreach (var post in userPosts)
+            var allUsers = _dbcontext.Users.ToList();
+            foreach (var post in randomPosts)
             {
-                var user = _dbcontext.Users.FirstOrDefault(u => u.id == post.UserID);
+                var user = allUsers.FirstOrDefault(u => u.id == post.UserID);
                 if (user != null)
                 {
                     ViewBag.Posts.Add(user);
@@ -47,12 +49,23 @@ namespace Tsero_Social.Controllers
 
         public IActionResult home()
         {
-            var userPosts = _dbcontext.Posts
-               .Where(p => p.DateTime < DateTime.Now)
-               .OrderByDescending(p => p.DateTime)
-               .ToList();
+            var allPosts = _dbcontext.Posts.Where(p => p.DateTime < DateTime.Now).ToList();
+            var random = new Random();
+            var randomPosts = allPosts.OrderBy(x => random.Next()).ToList();
 
-            ViewBag.UserPosts = userPosts;
+            ViewBag.Users = _dbcontext.Users.ToList();
+            ViewBag.Comments = _dbcontext.Comments.ToList();
+            ViewBag.UserPosts = randomPosts;
+            ViewBag.Posts = new List<User>();
+            var allUsers = _dbcontext.Users.ToList();
+            foreach (var post in randomPosts)
+            {
+                var user = allUsers.FirstOrDefault(u => u.id == post.UserID);
+                if (user != null)
+                {
+                    ViewBag.Posts.Add(user);
+                }
+            }
             return View("home");
         }
         public IActionResult Privacy()

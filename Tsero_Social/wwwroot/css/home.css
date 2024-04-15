@@ -131,3 +131,42 @@ body {
 .Name_lastname {
     font-size: 13px;
 }
+
+/*Comment section */
+.commentSection{
+    display:flex;
+    width:90%;
+    gap:20px;
+    flex-direction:column;
+    margin-top:20px;
+    height:auto;
+    max-height:200px;
+    overflow:hidden;
+}
+.comment_likes {
+    width: clamp(280px, 75%, 400px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid black;
+}
+.comclick {
+    font-size: 20px;
+    font-weight: 600;
+}
+.like {
+    color: darkblue;
+    font-size: 20px;
+}
+.profilepic{
+    width:40px;
+    border-radius:50%;
+}
+.commenterProfile{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.eachcomment {
+    border-bottom: 1px solid gray;
+}

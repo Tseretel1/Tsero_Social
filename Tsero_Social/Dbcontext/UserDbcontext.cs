@@ -16,7 +16,7 @@ namespace Tsero_Social.Dbcontext
         public DbSet<User> Users { get; set; }
         public DbSet<Post>Posts { get; set; }
         public DbSet<ImageUpload> images { get; set; }
-
+        public DbSet<Comments> Comments { get; set; }
         public UserDbcontext(DbContextOptions<UserDbcontext> options) : base(options)
         {
 

@@ -41,14 +41,45 @@
                 {
                     foreach (var post in ViewBag.UserPosts)
                     {
-                        foreach (var user in ViewBag.Posts)
+                        string username = "";
+                        string profilepicture = "";
+                        var postsList = ViewBag.Posts as List<User>; 
+                            if (postsList != null)
+                            {
+                            var user = postsList.FirstOrDefault(u => u.id == post.UserID);
+                                if (user != null)
+                               {
+                                profilepicture = user.ProfilePicture;
+                                username = user.Username;
+                            }
+                        }
+                        string comment = "";
+                        string comenterUserName = "";
+                        string ComenterProfilePicture = "";
+                        List<Comments> commentslist = new List<Comments>();
+                        var users = ViewBag.Users as List<User>;
+                        var comments = ViewBag.Comments as List<Comments>;
+                        var comcount = comments != null ? comments.Where(u => u.PostID == post.Id).Count() : 0;
+                        @if (comments != null)
                         {
+                            var com = comments.Where(c => c.PostID == post.Id);
+                            if (com != null)
+                            {
+                                foreach(var item in com)
+                                {
+                                  commentslist.Add(item);               
+                                }
+                            }
+                        }
+
+
+
                             <div class="Each_Post">
                                 <div class="userdata">
                                     <div class= "namephotoflex">
-                                        <img class="PostProfile" src="@user.ProfilePicture" alt="">
+                                        <img class="PostProfile" src="@profilepicture" alt="">
                                         <div>
-                                            <h2 class= "MyUsername">@user.Username</h2>
+                                        <h2 class= "MyUsername">@username</h2>
                                         </div>
                                     </div>
                                     <div>
@@ -71,10 +102,42 @@
                                             }
                                         </div>
                                     </div>
-                                    <div></div>
+
+                                    <div class = "comment_likes">
+                                        <div class= "like">Like</div>
+                                        <div class= "comclick">Comment @comcount</div>
+                                    </div>
+
+                                    <div class = "commentSection">
+                                    @if (users!=null) {
+                                       var usercoment = comments.Where(u => u.PostID == post.Id);
+                                       if (usercoment != null)
+                                         {                
+                                            foreach (var item in usercoment)
+                                            {
+
+                                                var userData = users.Where(u => u.id == item.UserID);
+                                                <div class = "eachcomment">
+                                                @foreach (var user in userData)
+                                                {
+                                                   
+                                                   <div class = "commenterProfile">
+                                                     <img class="profilepic" src="@user.ProfilePicture" alt="">
+                                                     <b> @user.Username</b>
+                                                   </div>
+                                                }
+                                                <p>@item.Comment</p>
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            
+                                        }
+                                    }
+                                  </div>                                   
                                 </div>
-                            </div>
-                         }
+                            </div>                         
                     }
                 }
                 else
