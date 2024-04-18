@@ -1,0 +1,23 @@
+﻿@model Post   
+
+
+<div class ="PostParent" id = "PostParent">
+      <div class="PostPublish" id="PostPublish" onclick="togglePublishSection()">
+            <div class="WritePostText" id="WritePostText">
+                 <h1>Write Post...</h1>
+          </div>
+          <div class="HidePublish">
+              <button class="HidePublishButtton" id="HidePublishButtton" onclick="hidePublishSection()">X</button>
+          </div>
+          <form class="Formpublish" asp-action="PostPublish" method="post" enctype="multipart/form-data">
+              <input type="text" class="inputpost" placeholder="Post" asp-for="@Model.post" name="PostPost" required>
+              <div class="photocontainer">
+                  <input id="imageInput2" class="photouploadbutton" type="file" name="ImageFile" accept="image/*" onchange="previewImage(this)" />
+                  <div class="photopreviewcontainer" id="photopreviewcontainer">
+                      <img id="ProfilePreview2" src="" alt="">
+                  </div>
+              </div>
+              <button class="submitPostButton" type="submit">submit</button>
+          </form>
+      </div>
+   </div>

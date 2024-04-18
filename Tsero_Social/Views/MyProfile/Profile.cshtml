@@ -24,63 +24,34 @@
  }
 <!--Modal window-->
 
-
-
-
 <link rel="stylesheet" href="~/css/Profile.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/PostCards.css" asp-append-version="true" />
     <div class="containercenter">
        <div class="updatepost">    
          <div class="Profile_data">
-            <div id="ProfilePictureCont">
-                <img id="ProfilePreview" src="@ViewBag.Profile" alt="">
-            </div>
-                <p class= "userName">@ViewBag.Name @ViewBag.LastName</p>
-            </div>
-     <div class="buttonsflex">
-        <div class = "formhidden" id="formhidden">
-           <form asp-action="Profile" method="post" enctype="multipart/form-data">
-               <form id="imageForm" asp-action="Profile" method="post" enctype="multipart/form-data">
-                   <div class="form-group">
-                       <input id="imageInput" class="fileinput2" type="file" name="ImageFile" accept="image/*" required onchange="previewImage(event)" />
+             <div class="editFlex">
+               <div class="profileandName">
+                       <div id="ProfilePictureCont" id="editbutton">
+                       <img id="ProfilePreview" src="@ViewBag.Profile" alt="">                   
                    </div>
-                   <div class="form-group">
-                        <button  class="button" type="submit" data-text="Awesome"  id="submitBtn">
-                          <span class="actual-text">&nbsp;Upload&nbsp;</span>
-                          <span aria-hidden="true" class="hover-text"
-                            >&nbsp;Upload&nbsp;</span
-                          >
-                        </button>
-                   </div>
-               </form>
-           </form>
-        </div>
-     </div>
-   </div>  
-  <!--Post Publish-->
-   <div class ="PostParent" id = "PostParent">
-      <div class="PostPublish" id="PostPublish" onclick="togglePublishSection()">
-            <div class="WritePostText" id="WritePostText">
-                 <h1>Write Post...</h1>
-          </div>
-          <div class="HidePublish">
-              <button class="HidePublishButtton" id="HidePublishButtton" onclick="hidePublishSection()">X</button>
-          </div>
-          <form class="Formpublish" asp-action="PostPublish" method="post" enctype="multipart/form-data">
-              <input type="text" class="inputpost" placeholder="Post" asp-for="@Model.post" name="PostPost" required>
-              <div class="photocontainer">
-                  <input id="imageInput2" class="photouploadbutton" type="file" name="ImageFile" accept="image/*" onchange="previewImage(this)" />
-                  <div class="photopreviewcontainer" id="photopreviewcontainer">
-                      <img id="ProfilePreview2" src="" alt="">
+                   <p class= "userName">@ViewBag.Name @ViewBag.LastName</p>
+               </div>
+               <div class="editbutton" id = "editbutton">
+                   <img src="../img/icons8-edit-30.png" class="editimage"/>
+                   <b>Edit</b></div>
+               <div class="ChangeButtonsParent" id="ChangeButtonsParent">
+                  <div class="Xbuttonalign"> 
+                      <button class= "changebuttons Xbutton"  id="Xbutton">X</button>                 
                   </div>
-              </div>
-              <button class="submitPostButton" type="submit">submit</button>
-          </form>
-      </div>
-   </div>
-
-
-
-
+                  <div class="changebuttonsdiv">
+                     <a class= "changebuttons" asp-controller="MyProfile" asp-action="ProfileUpdate">Edit Profile</a>
+                     <a class= "changebuttons">Edit Cover</a>
+                  </div>
+                  
+               </div>
+            </div>
+        </div>
+    </div>  
       <!--My Post-->
       <div class="MyPosts">
           
@@ -88,37 +59,134 @@
             {
                 foreach (var post in ViewBag.UserPosts)
                 {
-                     <div class="Each_Post">
-                         <div class="userdata">
-                             <div class= "namephotoflex">
-                                <img class="PostProfile" src="@ViewBag.Profile" alt="">
+                    string username = "";
+                    string profilepicture = "";
+                    var postsList = ViewBag.Posts as List<User>;
+                    if (postsList != null)
+                    {
+                        var user = postsList.FirstOrDefault(u => u.id == post.UserID);
+                        if (user != null)
+                        {
+                            if (user.ProfilePicture != "")
+                            {
+                                profilepicture = user.ProfilePicture;
+                            }
+                            else
+                            {
+                                profilepicture = "/img/profile.png";
+                            }
+                            username = user.Username;
+                        }
+                    }
+                    string comment = "";
+                    string comenterUserName = "";
+                    string ComenterProfilePicture = "";
+                    List<Comments> commentslist = new List<Comments>();
+                    var users = ViewBag.Users as List<User>;
+                    var comments = ViewBag.Comments as List<Comments>;
+                    var Likes = ViewBag.Likes as List<Likes>;
+                    var comcount = comments != null ? comments.Where(u => u.PostID == post.Id).Count() : 0;
+                    var LikeCount = Likes != null ? Likes.Where(u => u.PostID == post.Id).Count() : 0;
+                    string output = "";
+                    @if (LikeCount > 0)
+                    {
+                        output += LikeCount;
+                    }
+                    else if (LikeCount < 0)
+                    {
+                        output = "";
+                    }
+                    @if (comments != null)
+                    {
+                        var com = comments.Where(c => c.PostID == post.Id);
+                        if (com != null)
+                        {
+                            foreach (var item in com)
+                            {
+                                commentslist.Add(item);
+                            }
+                        }
+                    }
+
+
+
+                    <div class="Each_Post">
+                        <div class="userdata">
+                            <div class= "namephotoflex">
+                                <img class="PostProfile" src="@profilepicture" alt="">
                                 <div>
-                                   <h2 class= "MyUsername">@ViewBag.Username</h2>
+                                <h2 class= "MyUsername">@username</h2>
                                 </div>
-                              </div>
-                              <div>
-                                <p class= "postdate">Date: @post.DateTime.ToString("MM/dd/yyyy HH:mm:ss")</p>
-                             </div>
-                         </div>
+                            </div>
+                            <div>
+                                <p class= "postdate">Date: @post.DateTime.ToString("MM/dd/ HH:mm")</p>
+                            </div>
+                        </div>
                         <div class= "Postcontent">
                             <div class="flextitles"> 
                                 <p>@post.post</p>
                             </div>
-                          <div class= "photocontentwitdth">
+                            <div class= "photocontentwitdth">
                                 <div class="imgofpost" id="imgofpost">
-                                    @if (@post.Photo != null)
+                             @if (@post.Photo != null)
+                             {
+                               <img src="@post.Photo" class="Post_photowidth" id="Post_photowidth" alt="Post Image">
+                             }
+                             else
+                             {
+
+                             }
+                         </div>
+                     </div>
+
+                 
+                     <div class = "comment_likes">
+                           <label class="Cont">
+                              <input checked="checked" type="checkbox">
+                              <div class="checkmark">
+                                <svg viewBox="0 0 256 256">
+                                <rect fill="none" height="256" width="256"></rect>
+                                <path d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z" stroke-width="20px" stroke="#FFF" fill="none"></path></svg>
+                              </div>
+                            </label>
+                         <div class= "comclick">Comment @comcount</div>
+                     </div>
+                 
+                     <div class = "commentSection">
+                                @if (users != null)
+                                {
+                                    var usercoment = comments.Where(u => u.PostID == post.Id);
+                                    if (usercoment != null)
                                     {
-                                        <img src="@post.Photo" class="Post_photowidth" id="Post_photowidth" alt="Post Image">
-                                    }
+                                        foreach (var item in usercoment)
+                                        {
+
+                                            var userData = users.Where(u => u.id == item.UserID);
+                                                                        <div class = "eachcomment">
+                                                @foreach (var user in userData)
+                                                {
+
+                                                 <div class = "commenterProfile">
+                                                   <img class="profilepic" src="@user.ProfilePicture" alt="">
+                                                   <b> @user.Username</b>
+                                                 </div>
+                                                }
+                                          <p>@item.Comment</p>
+                                          </div>
+                                        }                                      
+                                    }                            
                                     else
                                     {
-                                        
+
                                     }
-                                </div>
-                            </div>
-                            <div></div>
-                        </div>
-                    </div>
+                                }
+                       </div>   
+                          <form class="commentinput" method="post" asp-action="Profile">
+                          <input type="text" name = "@post.Id" class="commentInputStyle" placeholder="Comment To Post" required />       
+                          <button type="submit" class= "submitbuttonlogin">Submit</button>   
+                       </form>
+                     </div>
+                 </div>                         
                 }
             }
             else{

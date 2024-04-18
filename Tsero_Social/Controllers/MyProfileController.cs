@@ -45,7 +45,11 @@ namespace Tsero_Social.Controllers
                                 ViewBag.Profile = loggedUser.ProfilePicture;
                                 ViewBag.isonline = loggedUser.Isonline;
                                 ViewBag.NoPosts = "NO Post Available";
-                                var userPosts = _userDbcontext.Posts.Where(p => p.UserID == loggedUser.id).ToList();
+                                var userPosts = _userDbcontext.Posts
+                                .Where(p => p.UserID == loggedUser.id)
+                                .OrderByDescending(u => u.DateTime)
+                                .ToList();
+
                                 ViewBag.UserPosts = userPosts;
 
                                 break;
@@ -71,9 +75,11 @@ namespace Tsero_Social.Controllers
 
         public IActionResult Profile(ImageUpload model)
         {
+            { 
             _uploadimg.UploadIMG(model);
-
-            return View("Profile");
+                return View("Profile");
+            }
+            
         }
         [HttpGet]
         public IActionResult PostPublish()
@@ -85,6 +91,40 @@ namespace Tsero_Social.Controllers
         {
             _ipostservice.PostWriting(PostPost, model);
             return View("Profile");
+        }
+        [HttpGet]
+        public IActionResult ProfileUpdate()
+        {
+            {
+                var item = _userService.GetUserLogedUsers();
+                int id = 0;
+                foreach (var i in item)
+                {
+                    id = i.id;
+                    break;
+                }
+                var CurrentUser = _userDbcontext.Users.FirstOrDefault(u => u.id == id);
+                ViewBag.CurrentUser = CurrentUser;
+                return View("ProfIleUpdate");
+            }
+        }
+        [HttpPost]
+        public IActionResult ProfileUpdate(User user, ImageUpload model)
+        {
+            {
+                var item = _userService.GetUserLogedUsers();
+                int id = 0;
+                foreach (var i in item)
+                {
+                    id = i.id;
+                    break;
+                }
+                var CurrentUser = _userDbcontext.Users.FirstOrDefault(u => u.id == id);
+                ViewBag.CurrentUser = CurrentUser;
+                _userService.ProfileUpdateForm(user, model);
+                return View("ProfIleUpdate");
+
+            }
         }
     }
 }

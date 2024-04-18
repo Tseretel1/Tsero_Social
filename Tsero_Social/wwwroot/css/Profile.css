@@ -16,6 +16,10 @@ html, body {
     flex-direction:column;
     gap:40px;
 }
+.fileinput2{
+    color:black;
+    background-color:red;
+}
 .upload_img {
     width: 100%;
     height: auto;
@@ -94,12 +98,70 @@ button:hover::after {
     padding: 20px 0px 10px 0px;
     border-radius: 20px;
     display: flex;
-    justify-content: space-evenly;
     box-shadow: 0px 0px 20px black;
     background-color:ghostwhite;
     color:black;
 }
+.editbutton{
+    background-size:cover;
+    background-color:transparent;
+    border:none;
+    width:auto;
+    height:60px;
+    display:flex;
+    flex-direction:column;
+    cursor:pointer;
+}
+.editimage{
+    width:30px;
+}
+.commentinput{
+    width:100%;
+    height:40px;
+}
+.commentInputStyle {
+    display: flex;
+    width: 95%;
+    height: 40px;
+}
+.changebuttons {
+    border: none;
+    background-color: transparent;
+    color: black;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid grey;
+    cursor: pointer;
+}
+.Xbutton{
+    border:None;
+    font-size:20px;
+    transition:0.3s all ease-in-out;
+}
+.Xbutton:hover{
+    color:red;  
+}
+#ChangeButtonsParent {
+    display: flex;
+    flex-direction: column;
+    width: 0px;
+    overflow: hidden;
+    transition: width 0.3s ease-in-out;
+}
 
+.changebuttonsdiv {
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+.Xbuttonalign{
+    display:flex;
+    justify-content:flex-end;
+}
+.editFlex {
+    display: flex;
+}
 .profile_section {
     display: flex;
     align-items: center;
@@ -213,7 +275,7 @@ button:hover::after {
     filter: drop-shadow(0 0 23px var(--animation-color));
 }
 .Profile_data{
-    width:300px;
+    width:auto;
     height:auto;
     padding: 0px 10px 0px 10px;
     display:flex;
@@ -222,9 +284,14 @@ button:hover::after {
     align-items:center;
 }
 .userName{
-    font-size:20px;
+    font-size:20px; 
     color:black;
     font-family:sans-serif;
+}
+.profileandName{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }
 #ProfilePreview {
     width: 200px;
@@ -402,82 +469,4 @@ input[type=file]::file-selector-button {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.Each_Post {
-    width: clamp(280px, 65%, 500px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0px 0px 10px;
-    border-radius: 20px;
-    height: auto;
-    padding: 20px 0px 70px 0px;
-    margin-top: 60px;
-    flex-direction: column;
-    gap: 50px;
-    background-color: ghostwhite;
-}
-.Postcontent{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-}
-.PostProfile{
-    width:50px;
-    height:50px;
-    border-radius:50%;
-}
-.userdata {
-    display: flex;
-    width: clamp(280px, 75%, 400px);
-    align-items: center;
-    justify-content: space-between;
-}
-.namephotoflex{
-    display:flex;
-    gap:20px;
-    align-items:flex-start;
-}
-.titlegrey {
-    font-size:15px;
-    color:gray;
-    font-weight:100;
-}
-.flextitles {
-    display: flex;
-    width: clamp(280px, 75%, 400px);
-    border-bottom :1px solid black;
-    margin-bottom:10px;
-}
-.imgofpost {
-    width: clamp(280px, 75%, 400px);
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border-radius: 10px;
-}
-.photocontentwitdth {
-    width: 100%;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-}
-.Post_photowidth {
-    width: 300px;
-    border-radius: 10px;
-    transition: 0.3s all ease-in-out;
-}
-.Post_photowidth:hover{
-    transform:scale(1.1);
-}
-.MyUsername{
-    font-size:20px;
-    color:black;
-}
-.Name_lastname{
-    font-size:13px;
 }

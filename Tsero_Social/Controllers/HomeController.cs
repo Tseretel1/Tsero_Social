@@ -29,8 +29,9 @@ namespace Tsero_Social.Controllers
             var random = new Random();
             var randomPosts = allPosts.OrderBy(x => random.Next()).ToList();
 
-
-
+            ViewBag.Users = _dbcontext.Users.ToList();
+            ViewBag.Comments = _dbcontext.Comments.ToList();
+            ViewBag.Likes = _dbcontext.Likes.ToList();
             ViewBag.UserPosts = randomPosts;
             ViewBag.Posts = new List<User>();
             var allUsers = _dbcontext.Users.ToList();
@@ -42,8 +43,7 @@ namespace Tsero_Social.Controllers
                     ViewBag.Posts.Add(user);
                 }
             }
-
-            return View("Home");
+            return View("home");
         }
 
 

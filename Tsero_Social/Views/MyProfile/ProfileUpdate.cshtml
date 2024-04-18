@@ -1,0 +1,38 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LectureStudentService</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/Profile_Update.css" asp-append-version="true" />
+</head>
+<body>
+ @model User
+
+    @if (ViewBag.CurrentUser != null)
+    {
+            <div class="Profile_Update_container">
+                <form asp-action="ProfileUpdate" method="post" enctype="multipart/form-data" class="Profile_Form">
+                    <div class="form-group">
+                        <img id="ImagePreview" src="@ViewBag.CurrentUser.ProfilePicture" />
+                        <input id="imageInput2" class="" type="file" name="ImageFile" accept="image/*" onchange="previewImage(this)" />
+                    </div>
+                    <div class="form-group">
+                        <input class="userdataInput" asp-for="@Model.Username" placeholder="@ViewBag.CurrentUser.Username" />
+                    </div>
+                    <div class="form-group">
+                        <input class="userdataInput" asp-for="@Model.Name" placeholder="@ViewBag.CurrentUser.Name" />
+                        <input class="userdataInput" asp-for="@Model.Lastname" placeholder="@ViewBag.CurrentUser.Lastname" />
+                    </div>
+                    <div class="form-group">
+                        <button class="EditButton" type="submit" data-text="Awesome" id="submitBtn">Edit</button>
+                    </div>
+                </form>  
+            </div>
+    }
+
+</body>
+</html>

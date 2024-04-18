@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 using System.Data;
 using Tsero_Social.Dbcontext;
 using Tsero_Social.Models;
@@ -8,6 +9,7 @@ namespace Tsero_Social.Services
     public class UserServices : IuserService
     {
         private readonly UserDbcontext _Context;
+        private readonly UploadImg _UploadImg;
         public UserServices(UserDbcontext Context)
         {
             _Context = Context;
@@ -54,6 +56,52 @@ namespace Tsero_Social.Services
         public List<User> GetUserLogedUsers()
         {
             return User.Loged_user;
+        }
+        public void ProfileUpdateForm(User user, ImageUpload model)
+        {
+            int id = 0;
+            foreach(var item in User.Loged_user)
+            {
+                if (item != null)
+                {
+                    id = item.id;
+                }
+            }
+
+            if (user != null)
+            {
+
+                var foundUser = _Context.Users.FirstOrDefault(u => u.id == id);
+
+                if (foundUser != null)
+                {
+                    if (model.ImageFile != null && model.ImageFile.Length > 0)
+                    {
+                        _UploadImg.UploadIMG(model);
+                    }
+                    if (!string.IsNullOrEmpty(user.ProfilePicture))
+                    {
+                        foundUser.ProfilePicture = user.ProfilePicture;
+                    }
+
+                    if (!string.IsNullOrEmpty(user.Name))
+                    {
+                        foundUser.Name = user.Name;
+                    }
+
+                    if (!string.IsNullOrEmpty(user.Username))
+                    {
+                        foundUser.Username = user.Username;
+                    }
+
+                    if (!string.IsNullOrEmpty(user.Lastname))
+                    {
+                        foundUser.Lastname = user.Lastname;
+                    }
+                    _Context.SaveChanges();
+                }
+            }
+          
         }
     }
 }

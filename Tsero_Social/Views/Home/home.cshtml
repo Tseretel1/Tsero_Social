@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/PostCards.css" asp-append-version="true" />
 </head>
 <body>
     <!--For You Page-->
@@ -47,9 +48,16 @@
                             if (postsList != null)
                             {
                             var user = postsList.FirstOrDefault(u => u.id == post.UserID);
-                                if (user != null)
-                               {
-                                profilepicture = user.ProfilePicture;
+                            if (user != null)
+                            {
+                                if (user.ProfilePicture != "")
+                                {
+                                    profilepicture = user.ProfilePicture;
+                                }
+                                else
+                                {
+                                    profilepicture = "/img/profile.png";
+                                }
                                 username = user.Username;
                             }
                         }
@@ -59,7 +67,18 @@
                         List<Comments> commentslist = new List<Comments>();
                         var users = ViewBag.Users as List<User>;
                         var comments = ViewBag.Comments as List<Comments>;
+                        var Likes = ViewBag.Likes as List<Likes>;
                         var comcount = comments != null ? comments.Where(u => u.PostID == post.Id).Count() : 0;
+                        var LikeCount = Likes != null ? Likes.Where(u => u.PostID == post.Id).Count() : 0;
+                        string output = "";
+                        @if (LikeCount > 0)
+                        {
+                            output += LikeCount;
+                        }
+                        else if(LikeCount<0)
+                        {
+                            output = "";
+                        }
                         @if (comments != null)
                         {
                             var com = comments.Where(c => c.PostID == post.Id);
@@ -83,7 +102,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <p class= "postdate">Date: @post.DateTime.ToString("MM/dd/yyyy HH:mm:ss")</p>
+                                        <p class= "postdate">Date: @post.DateTime.ToString("MM/dd/ HH:mm")</p>
                                     </div>
                                 </div>
                                 <div class= "Postcontent">
@@ -103,8 +122,9 @@
                                         </div>
                                     </div>
 
+                                   
                                     <div class = "comment_likes">
-                                        <div class= "like">Like</div>
+                                        <a class="Like " asp-area="" asp-controller="Login" asp-action="Login">Like @output</a>
                                         <div class= "comclick">Comment @comcount</div>
                                     </div>
 
@@ -135,7 +155,12 @@
                                             
                                         }
                                     }
-                                  </div>                                   
+                                  </div>   
+                                  
+                                  <div class="commentinput">
+                                     <input type="text" id="text" name = "ragaca" class="commentInputStyle" placeholder="Comment To Post" required />       
+                                     <a class="Like " asp-area="" asp-controller="Login" asp-action="Login"><button type="submit" class= "submitbuttonlogin">Submit</button></a>                                      
+                                  </div>
                                 </div>
                             </div>                         
                     }

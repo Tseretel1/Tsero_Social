@@ -1,0 +1,235 @@
+﻿
+.Each_Post {
+    width: clamp(280px, 75%, 1000px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 10px;
+    border-radius: 20px;
+    height: auto;
+    padding: 20px 0px 70px 0px;
+    margin-top: 60px;
+    flex-direction: column;
+    gap: 50px;
+    background-color: ghostwhite;
+}
+
+.Postcontent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.PostProfile {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.userdata {
+    display: flex;
+    width: clamp(280px, 75%, 400px);
+    align-items: center;
+    justify-content: space-between;
+}
+
+.namephotoflex {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.titlegrey {
+    font-size: 15px;
+    color: gray;
+    font-weight: 100;
+}
+
+.flextitles {
+    display: flex;
+    width: 380px;
+    margin-bottom: 10px;
+}
+
+.imgofpost {
+    width: clamp(280px, 175%, 400px);
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.photocontentwitdth {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.Post_photowidth {
+    width: 400px;
+    border-radius: 10px;
+    transition: 0.3s all ease-in-out;
+}
+
+    .Post_photowidth:hover {
+        transform: scale(1.1);
+    }
+
+.MyUsername {
+    font-size: 20px;
+    color: black;
+}
+
+.Name_lastname {
+    font-size: 13px;
+}
+
+/*Comment section */
+.commentSection {
+    display: flex;
+    width: 90%;
+    gap: 20px;
+    flex-direction: column;
+    margin-top: 20px;
+    height: auto;
+    max-height: 200px;
+    overflow-y: scroll;
+    scrollbar-track-color: red;
+}
+
+.comment_likes {
+    width: clamp(280px, 100%, 500px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid black;
+}
+
+.comclick {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.Cont input {
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.Cont {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    font-size: 20px;
+    user-select: none;
+    transition: 100ms;
+}
+
+.checkmark {
+    top: 0;
+    left: 0;
+    height: 2em;
+    width: 2em;
+    transition: 100ms;
+    animation: dislike_effect 400ms ease;
+    fill: blue;
+}
+
+.Cont input:checked ~ .checkmark path {
+    fill: #FF5353;
+}
+
+.Cont input:checked ~ .checkmark {
+    animation: like_effect 400ms ease;
+}
+
+.Cont:hover {
+    transform: scale(1.1);
+}
+
+
+@keyframes like_effect {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes dislike_effect {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+    .profilepic {
+        width: 40px;
+        border-radius: 50%;
+    }
+
+    .commenterProfile {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .eachcomment {
+        border-bottom: 1px solid gray;
+    }
+
+    .commentinput {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 95%;
+        margin-top: 20px;
+        gap: 10px;
+    }
+
+    .commentInputStyle {
+        background-color: transparent;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid black;
+        border: 1px solid black;
+        padding: 0px 5px 0px 5px;
+        width: 80%;
+        border-radius: 5px;
+    }
+
+    .submitbuttonlogin {
+        border-radius: 5px;
+        background-color: transparent;
+        color: black;
+        border: 2px solid black;
+        height: 25px;
+        font-size: 15px;
+        transition: 0.2s all ease-in-out;
+        display: flex;
+        align-items: center;
+    }
+
+    .submitbuttonlogin:hover {
+        background-color: black;
+        color: whitesmoke;
+    }
