@@ -8,6 +8,7 @@ namespace Tsero_Social.Services
     public class UploadImg : IuploadImg
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
+        private static readonly object lockObject = new object();
         private readonly UserDbcontext _dbcontext;
         private readonly IuserService _userService;
         public UploadImg(IWebHostEnvironment hostingEnvironment, UserDbcontext db)
@@ -16,17 +17,17 @@ namespace Tsero_Social.Services
             _dbcontext = db;
         }
 
-        private static readonly object lockObject = new object();
+ 
 
-        public void UploadIMG(ImageUpload model)
+        public void ProfilePicUpload(ImageUpload model, string title)
         {
             lock (lockObject)
             {
                 if (model.ImageFile != null && model.ImageFile.Length > 0)
                 {
-                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath + "/" + "UploadedPictures/");
+                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath + "/" + "ProfilePictures/");
                     string uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ImageFile.FileName;
-                    string PattoDisplay = $"../UploadedPictures/{uniqueFileName}";
+                    string PattoDisplay = $"../ProfilePictures/{uniqueFileName}";
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
                     using (var stream = new FileStream(filePath, FileMode.Create))
@@ -34,7 +35,6 @@ namespace Tsero_Social.Services
                         model.ImageFile.CopyTo(stream);
                     }
                     int userid = 0;
-                    string title = "";
                     bool Loginedornot =false;
                     foreach (var item in User.Loged_user)
                     {
@@ -42,7 +42,6 @@ namespace Tsero_Social.Services
                         {
                             Loginedornot = true;
                             userid = item.id;
-                            title = item.Username;
                         }
                     }
                     if (Loginedornot)
@@ -72,6 +71,15 @@ namespace Tsero_Social.Services
                                 }
                             }
                         }
+                        var post = new Post
+                        {
+                            DateTime = DateTime.Now,
+                            Photo = PattoDisplay,
+                            UserID = userid,
+                            post = title,
+                        };
+                        _dbcontext.Posts.Add(post);
+                        _dbcontext.SaveChanges();
                     }
                     else
                     {

@@ -4,6 +4,6 @@ namespace Tsero_Social.Services
 {
     public interface IuploadImg
     {
-        void UploadIMG(ImageUpload model);
+        void ProfilePicUpload(ImageUpload model, string title);
     }
 }

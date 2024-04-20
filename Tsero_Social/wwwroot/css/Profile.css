@@ -1,10 +1,22 @@
 ﻿
-html, body {
+html,
+body {
     width: 100%;
     height: 100%;
-    margin: 0;
     padding: 0;
-    background-color: rgb(57, 57, 57);
+    margin: 0;
+    background: url(../img/darkback5.jpeg);
+ 
+}
+.container {
+    width: 100%;
+
+    height: 100%;
+}
+.ParentOfParents {
+    width: 100%;
+    overflow-y: scroll;
+    height: 100%;
 }
 .containercenter{
     width:100%;
@@ -16,9 +28,45 @@ html, body {
     flex-direction:column;
     gap:40px;
 }
-.fileinput2{
-    color:black;
-    background-color:red;
+.nav-item{
+    display:flex;
+    align-items:center;
+    text-decoration:none;
+}
+.exitimg{
+    width:40px;
+    transition:0.3s all ease-in-out;    
+}
+.ExitFromAccount {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+.ExitButton{
+    color:white;
+    font-size:20px;
+    text-decoration:none;
+    transition:0.3s all ease-in-out; 
+}
+.nav-item:hover .ExitButton{
+    text-shadow: 0px 0px 10px white;
+    color: white;
+}
+.borderspan {
+    width: 0px;
+    height: 2px;
+    transition: 0.3s all ease-in-out;
+}
+.nav-item:hover .borderspan {
+    border: 1px solid red;
+    width: 160px;
+    color:white;
+}
+.nav-item:hover .exitimg {
+}
+.fileinput2 {
+    color: black;
+    background-color: red;
 }
 .upload_img {
     width: 100%;
@@ -39,58 +87,6 @@ html, body {
     background-size: cover;
     border: none;
 }
-
-.uploaded_img {
-    width: 120px;
-    height: 120px;
-}
-
-.img_upload_button {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    background: black;
-    font-family: "Montserrat", sans-serif;
-    box-shadow: 0px 6px 24px 0px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    cursor: pointer;
-    border: none;
-    width: 100px;
-    height: 30px;
-    border: 1px solid white;
-}
-
-.uploadddd {
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 5;
-}
-
-.img_upload_button:after {
-    content: " ";
-    width: 0%;
-    height: 100%;
-    background: lightblue;
-    position: absolute;
-    transition: all 0.4s ease-in-out;
-    right: 0;
-}
-
-.img_upload_button::placeholder {
-    background-color: red;
-}
-
-button:hover::after {
-    right: auto;
-    left: 0;
-    width: 100%;
-    color: black;
-    font-size:10px;
-}
-
 
 .updatepost {
     width: clamp(280px, 75%, 900px);
@@ -131,8 +127,11 @@ button:hover::after {
     text-decoration: none;
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid grey;
+    font-weight:bold;
     cursor: pointer;
+    width:100px;
+    border-bottom:1px solid gray;
+    text-align:center;
 }
 .Xbutton{
     border:None;
@@ -148,6 +147,7 @@ button:hover::after {
     width: 0px;
     overflow: hidden;
     transition: width 0.3s ease-in-out;
+    margin-left: 20px;
 }
 
 .changebuttonsdiv {
@@ -294,8 +294,7 @@ button:hover::after {
     align-items:center;
 }
 #ProfilePreview {
-    width: 200px;
-    height: 200px;
+    width: 180px;
     transition: 0.3s all ease-in-out;
 }
 #ProfilePreview:hover {
@@ -461,8 +460,6 @@ input[type=file]::file-selector-button {
 /*My Post */
 .MyPosts {
     width: clamp(280px, 75%, 900px);
-    background-color: grey;
-    box-shadow: 0px 0px 10px black;
     height: auto;
     padding: 20px 0px 20px 0px;
     border-radius: 20px;

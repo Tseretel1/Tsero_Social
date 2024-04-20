@@ -1,35 +1,85 @@
 ﻿html, body {
     width: 100%;
     height: 100%;
-    background-color: #212121;
+    background: url(../img/backg3.jpeg);
     margin: 0;
     padding: 0;
 }
 .container {
     width: 100%;
-    background-color: #212121;
+    background: url(../img/backg3.jpeg);
     display: flex;
     align-items: center;
     height: 100%;
-    justify-content:center;
+    justify-content: center;
 }
-.Profile_Update_container{
+.Profile_Update_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 20px black;
+    border-radius: 10px;
+    background-color: whitesmoke;
+    flex-direction: column;
+}
+.ProfileData{
     display:flex;
     align-items:center;
-    justify-content:center;
-    box-shadow: 0px 0px 20px black;
-    border-radius:10px;
-    background-color:whitesmoke;
+    gap:10px;
 }
+
 .Profile_Form {
     display: flex;
     height: auto;
     flex-direction: column;
-    padding:50px;
-    gap:30px;
+    padding: 50px;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
 }
-.UserLabel{
-    color:black;
+.Profile_Photo_Update {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color:white;
+    border-radius:10px;
+    box-shadow:0px 0px 10px unset;
+    padding:30px 80px 0px 80px;
+}
+.ProfilePreviewCont {
+    width: 350px;
+    height: auto;
+    border-radius: 20px;
+    transition: 0.4s all ease-in-out;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+#ProfilePic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+#ProfilePreview {
+    width: 350px;
+    height:auto;
+    border-radius: 20px;
+    transition:0.4s all ease-in-out
+}
+.saysomething{
+    background-color:transparent;
+    border:none;
+    outline:none;
+    margin-bottom:10px;
+    width:0;
+    transition:0.8s all ease-in-out;
+}
+.UserLabel {
+    color: black;
 }
 .userdataInput{
     background-color:transparent;
@@ -40,17 +90,50 @@
 }
 .EditButton{
     border-radius:10px ;
-    transition:0.2s all ease-in-out;
+    transition:0.4s all ease-in-out;
+    width:200px;
+    padding:10px;
+    border:none;
+    box-shadow:0px 0px 5px black;
+    margin-top:10px;
 }
-.EditButton:hover{
-    background-color:lightblue;
-}
-#ImagePreview {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+#submitBtn2 {
+    visibility:hidden;
 }
 .form-group{
     display:flex;
     flex-direction:column;
+    justify-content:center;
+}
+.custom-file-input {
+    color: transparent;
+    width:150px;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+.custom-file-input::before {
+    content: '+ Update Profile';
+    color: black;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    transition: 0.3s all ease-in-out;
+    margin: 10px 0px 0px 5px;
+}
+.custom-file-input:hover::before {
+    letter-spacing:2px;
+}
+
+.custom-file-input:active {
+    outline: 0;
+}
+
+.custom-file-input:active::before {
+    
 }

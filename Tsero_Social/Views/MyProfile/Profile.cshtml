@@ -26,13 +26,28 @@
 
 <link rel="stylesheet" href="~/css/Profile.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/PostCards.css" asp-append-version="true" />
+
+
     <div class="containercenter">
+       <div class = "ExitFromAccount">
+           <a class="nav-item" asp-controller="Login" asp-action="Login">
+               <img class= "exitimg" src="/img/exit.png">
+               <div class ="">
+                  <p class="ExitButton">Exit From Account</p>
+                  <div class="borderspan"></div>
+               </div>
+
+           </a>
+       </div>
        <div class="updatepost">    
          <div class="Profile_data">
              <div class="editFlex">
                <div class="profileandName">
-                       <div id="ProfilePictureCont" id="editbutton">
-                       <img id="ProfilePreview" src="@ViewBag.Profile" alt="">                   
+                   <div id="ProfilePictureCont" id="editbutton">               
+                     <script>
+                          var photo = document.getElementById("ProfilePictureCont");   
+                         photo.style.backgroundImage = "url('@ViewBag.Profile')";
+                     </script>
                    </div>
                    <p class= "userName">@ViewBag.Name @ViewBag.LastName</p>
                </div>
@@ -108,14 +123,14 @@
                         }
                     }
 
-
-
+                 
+                    
                     <div class="Each_Post">
                         <div class="userdata">
                             <div class= "namephotoflex">
-                                <img class="PostProfile" src="@profilepicture" alt="">
+                               <img class="PostProfile" src="@ViewBag.Profile" alt="">
                                 <div>
-                                <h2 class= "MyUsername">@username</h2>
+                                 <h2 class= "MyUsername">@ViewBag.Username</h2>
                                 </div>
                             </div>
                             <div>
@@ -141,45 +156,36 @@
 
                  
                      <div class = "comment_likes">
-                           <label class="Cont">
-                              <input checked="checked" type="checkbox">
-                              <div class="checkmark">
-                                <svg viewBox="0 0 256 256">
-                                <rect fill="none" height="256" width="256"></rect>
-                                <path d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z" stroke-width="20px" stroke="#FFF" fill="none"></path></svg>
-                              </div>
-                            </label>
+                           <div class= "Like">Like</div>
                          <div class= "comclick">Comment @comcount</div>
                      </div>
                  
                      <div class = "commentSection">
-                                @if (users != null)
-                                {
-                                    var usercoment = comments.Where(u => u.PostID == post.Id);
-                                    if (usercoment != null)
-                                    {
-                                        foreach (var item in usercoment)
-                                        {
-
-                                            var userData = users.Where(u => u.id == item.UserID);
-                                                                        <div class = "eachcomment">
-                                                @foreach (var user in userData)
-                                                {
-
-                                                 <div class = "commenterProfile">
-                                                   <img class="profilepic" src="@user.ProfilePicture" alt="">
-                                                   <b> @user.Username</b>
-                                                 </div>
-                                                }
-                                          <p>@item.Comment</p>
-                                          </div>
-                                        }                                      
-                                    }                            
-                                    else
-                                    {
-
-                                    }
+                        @if (users != null)
+                        {
+                            var usercoment = comments.Where(u => u.PostID == post.Id);
+                            if (usercoment != null)
+                            {
+                                foreach (var item in usercoment)
+                                {                     
+                                    var userData = users.Where(u => u.id == item.UserID);
+                                    <div class = "eachcomment">
+                                        @foreach (var user in userData)
+                                        {                      
+                                        <div class = "commenterProfile">
+                                          <img class="profilepic" src="@user.ProfilePicture" alt="">
+                                          <b> @user.Username</b>
+                                        </div>
+                                        }
+                                <p>@item.Comment</p>
+                                </div>
                                 }
+                            }
+                            else
+                            {
+                       
+                            }
+                       }
                        </div>   
                           <form class="commentinput" method="post" asp-action="Profile">
                           <input type="text" name = "@post.Id" class="commentInputStyle" placeholder="Comment To Post" required />       

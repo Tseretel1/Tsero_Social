@@ -1,6 +1,6 @@
 ﻿
 .Each_Post {
-    width: clamp(280px, 75%, 1000px);
+    width: clamp(280px, 70%, 1000px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,7 +11,8 @@
     margin-top: 60px;
     flex-direction: column;
     gap: 50px;
-    background-color: ghostwhite;
+    backdrop-filter:blur(10px);
+    box-shadow:0px 0px 5px white;
 }
 
 .Postcontent {
@@ -19,7 +20,18 @@
     flex-direction: column;
     align-items: center;
 }
-
+.postdate{
+    color:white;
+}
+.Like{
+    color:white;
+}
+.comclick {
+    color: white;
+}
+.MyUsername {
+    color: white;
+}
 .PostProfile {
     width: 50px;
     height: 50px;
@@ -48,6 +60,7 @@
 .flextitles {
     display: flex;
     width: 380px;
+    color:white;
     margin-bottom: 10px;
 }
 
@@ -76,13 +89,13 @@
     transition: 0.3s all ease-in-out;
 }
 
-    .Post_photowidth:hover {
-        transform: scale(1.1);
-    }
+.Post_photowidth:hover {
+    transform: scale(1.1);
+}
 
 .MyUsername {
     font-size: 20px;
-    color: black;
+    color: white;
 }
 
 .Name_lastname {
@@ -107,9 +120,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid white;
 }
-
 .comclick {
     font-size: 20px;
     font-weight: 600;
@@ -182,54 +194,56 @@
     }
 }
 
-    .profilepic {
-        width: 40px;
-        border-radius: 50%;
-    }
+.profilepic {
+    width: 40px;
+    border-radius: 50%;
+}
 
-    .commenterProfile {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
+.commenterProfile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-    .eachcomment {
-        border-bottom: 1px solid gray;
-    }
+.eachcomment {
+    border-bottom: 1px solid gray;
+}
 
-    .commentinput {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 95%;
-        margin-top: 20px;
-        gap: 10px;
-    }
+.commentinput {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 95%;
+    margin-top: 20px;
+    gap: 10px;
+}
 
-    .commentInputStyle {
-        background-color: transparent;
-        outline: none;
-        border: none;
-        border-bottom: 1px solid black;
-        border: 1px solid black;
-        padding: 0px 5px 0px 5px;
-        width: 80%;
-        border-radius: 5px;
-    }
+.commentInputStyle {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid white;
+    padding: 0px 5px 0px 5px;
+    width: 80%;
+    color:white;
+}
+.commentInputStyle::placeholder{
+    color:white;
+}
+.submitbuttonlogin {
+    border-radius: 5px;
+    background-color: transparent;
+    color: black;
+    border: 2px solid black;
+    height: 25px;
+    font-size: 15px;
+    transition: 0.2s all ease-in-out;
+    display: flex;
+    align-items: center;
+    color: white;
+}
 
-    .submitbuttonlogin {
-        border-radius: 5px;
-        background-color: transparent;
-        color: black;
-        border: 2px solid black;
-        height: 25px;
-        font-size: 15px;
-        transition: 0.2s all ease-in-out;
-        display: flex;
-        align-items: center;
-    }
-
-    .submitbuttonlogin:hover {
-        background-color: black;
-        color: whitesmoke;
-    }
+.submitbuttonlogin:hover {
+    background-color: black;
+    color: whitesmoke;
+}
