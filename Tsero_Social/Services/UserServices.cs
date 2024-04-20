@@ -57,7 +57,7 @@ namespace Tsero_Social.Services
         {
             return User.Loged_user;
         }
-        public void ProfileUpdateForm(User user, ImageUpload model)
+        public void ProfileUpdateForm(User user)
         {
             int id = 0;
             foreach(var item in User.Loged_user)
@@ -70,15 +70,9 @@ namespace Tsero_Social.Services
 
             if (user != null)
             {
-
                 var foundUser = _Context.Users.FirstOrDefault(u => u.id == id);
-
                 if (foundUser != null)
                 {
-                    if (model.ImageFile != null && model.ImageFile.Length > 0)
-                    {
-                        _UploadImg.UploadIMG(model);
-                    }
                     if (!string.IsNullOrEmpty(user.ProfilePicture))
                     {
                         foundUser.ProfilePicture = user.ProfilePicture;
@@ -101,7 +95,6 @@ namespace Tsero_Social.Services
                     _Context.SaveChanges();
                 }
             }
-          
         }
     }
 }

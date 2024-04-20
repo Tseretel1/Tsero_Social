@@ -20,13 +20,11 @@ namespace Tsero_Social.Controllers
             _userService = userface;
             _ipostservice = postService;
         }
-        public IActionResult Index()
+
+
+        public IActionResult ProfileGenerate()
         {
-            return View();
-        }
-        [HttpGet]
-        public IActionResult Profile()
-        {
+
             using (var transaction = _userDbcontext.Database.BeginTransaction(System.Data.IsolationLevel.Serializable))
             {
                 try
@@ -34,6 +32,25 @@ namespace Tsero_Social.Controllers
                     var logedUsers = _userService.GetUserLogedUsers();
                     if (logedUsers != null && logedUsers.Any())
                     {
+
+                        var allPosts = _userDbcontext.Posts.Where(p => p.DateTime < DateTime.Now).ToList();
+                        var random = new Random();
+                        var randomPosts = allPosts.OrderBy(x => random.Next()).ToList();
+
+                        ViewBag.Users = _userDbcontext.Users.ToList();
+                        ViewBag.Comments = _userDbcontext.Comments.ToList();
+                        ViewBag.Likes = _userDbcontext.Likes.ToList();
+                        ViewBag.UserPosts = randomPosts;
+                        ViewBag.Posts = new List<User>();
+                        var allUsers = _userDbcontext.Users.ToList();
+                        foreach (var post in randomPosts)
+                        {
+                            var user = allUsers.FirstOrDefault(u => u.id == post.UserID);
+                            if (user != null)
+                            {
+                                ViewBag.Posts.Add(user);
+                            }
+                        }
                         foreach (var user in logedUsers)
                         {
                             var loggedUser = _userDbcontext.Users.FirstOrDefault(u => u.Email == user.Email && u.Password == user.Password);
@@ -64,31 +81,50 @@ namespace Tsero_Social.Controllers
                     }
                     _userDbcontext.SaveChanges();
                     transaction.Commit();
+
                 }
+
                 catch (Exception ex)
                 {
                     transaction.Rollback();
                 }
-                return View("Profile");
-            }
-        }
 
-        public IActionResult Profile(ImageUpload model)
-        {
-            { 
-            _uploadimg.UploadIMG(model);
-                return View("Profile");
             }
-            
+            return View("Profile");
+        }
+        public IActionResult Index()
+        {
+            ProfileGenerate();
+            return View("Profile");
         }
         [HttpGet]
-        public IActionResult PostPublish()
+        public IActionResult Profile()
         {
-            return View("Profile");
+            {
+                ProfileGenerate();
+                return View("Profile");
+            }
+        }
+        [HttpGet]
+        public IActionResult EditCover()
+        {
+            {
+                return View();
+            }
+        }
+        [HttpPost]
+        public IActionResult Profile(ImageUpload model, string title)
+        {
+            {
+                ProfileGenerate();
+                _uploadimg.ProfilePicUpload(model ,title);
+                return View("Profile");
+            }        
         }
         [HttpPost]
         public IActionResult PostPublish( string PostPost, ImageUpload model)
         {
+            ProfileGenerate();
             _ipostservice.PostWriting(PostPost, model);
             return View("Profile");
         }
@@ -109,9 +145,10 @@ namespace Tsero_Social.Controllers
             }
         }
         [HttpPost]
-        public IActionResult ProfileUpdate(User user, ImageUpload model)
+        public IActionResult ProfileUpdate(User user)
         {
             {
+                ProfileGenerate();
                 var item = _userService.GetUserLogedUsers();
                 int id = 0;
                 foreach (var i in item)
@@ -121,9 +158,8 @@ namespace Tsero_Social.Controllers
                 }
                 var CurrentUser = _userDbcontext.Users.FirstOrDefault(u => u.id == id);
                 ViewBag.CurrentUser = CurrentUser;
-                _userService.ProfileUpdateForm(user, model);
-                return View("ProfIleUpdate");
-
+                _userService.ProfileUpdateForm(user);
+                return View("Profile");
             }
         }
     }

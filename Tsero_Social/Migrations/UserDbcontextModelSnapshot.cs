@@ -109,7 +109,6 @@ namespace Tsero_Social.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("post")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -124,6 +123,9 @@ namespace Tsero_Social.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("CoverPicture")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()

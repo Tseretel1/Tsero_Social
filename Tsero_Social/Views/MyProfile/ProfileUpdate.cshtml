@@ -12,27 +12,50 @@
 <body>
  @model User
 
+ <div class="top_space"></div>
     @if (ViewBag.CurrentUser != null)
     {
-            <div class="Profile_Update_container">
-                <form asp-action="ProfileUpdate" method="post" enctype="multipart/form-data" class="Profile_Form">
-                    <div class="form-group">
-                        <img id="ImagePreview" src="@ViewBag.CurrentUser.ProfilePicture" />
-                        <input id="imageInput2" class="" type="file" name="ImageFile" accept="image/*" onchange="previewImage(this)" />
-                    </div>
-                    <div class="form-group">
-                        <input class="userdataInput" asp-for="@Model.Username" placeholder="@ViewBag.CurrentUser.Username" />
-                    </div>
-                    <div class="form-group">
-                        <input class="userdataInput" asp-for="@Model.Name" placeholder="@ViewBag.CurrentUser.Name" />
-                        <input class="userdataInput" asp-for="@Model.Lastname" placeholder="@ViewBag.CurrentUser.Lastname" />
-                    </div>
-                    <div class="form-group">
-                        <button class="EditButton" type="submit" data-text="Awesome" id="submitBtn">Edit</button>
-                    </div>
-                </form>  
-            </div>
+       <form asp-action="Profile" method="post" enctype="multipart/form-data" class="Profile_Photo_Update" id = "Profile_Photo_Update">
+          <div class="form-group">
+            
+              <div class = "ProfileData">
+                 <img id="ProfilePic" src="@ViewBag.CurrentUser.ProfilePicture" />
+                  <p>@ViewBag.CurrentUser.Name</p>
+                  <p>@ViewBag.CurrentUser.Lastname</p>
+              </div>
+              <div class="InputClasss">
+                 <input id="imageInput2" class="custom-file-input" type="file" name="ImageFile" accept="image/*" onchange=" previewImage(event) " />
+              </div>
+              <input type="text" class= "saysomething"  id = "saysomething" placeholder="Say Something here..." name="title">
+              <div class="ProfilePreviewCont" id = "ProfilePreviewCont">
+                 <img id="ProfilePreview" src="" />
+              </div>
+          </div>         
+          <div class="submitbutton">
+              <button class="EditButton" type="submit" data-text="Awesome" id="submitBtn2">Upload Post </button>
+            
+          </div>
+       </form>  
+
+<!--
+       <div class="Profile_Update_container" id = "Profile_Update_container">
+          <form asp-action="ProfileUpdate" method="post" enctype="multipart/form-data" class="Profile_Form">
+              <div class="form-group">
+                  <input class="userdataInput" asp-for="1@Model.Username" placeholder="1@ViewBag.CurrentUser.Username" />
+              </div>
+              <div class="form-group">
+                  <input class="userdataInput" asp-for="1@Model.Name" placeholder="1@ViewBag.CurrentUser.Name" />
+                  <input class="userdataInput" asp-for="1@Model.Lastname" placeholder="1@ViewBag.CurrentUser.Lastname" />
+              </div>
+              <div class="form-group">
+                  <button class="EditButton" type="submit" data-text="Awesome" id="submitBtn" >Edit</button>
+              </div>
+          </form>  
+      </div>
+          -->
     }
 
+
+    <script src="/js/ProfileUpdate.js"></script>
 </body>
 </html>
