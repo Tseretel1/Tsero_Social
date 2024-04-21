@@ -5,30 +5,25 @@
 @using Microsoft.AspNetCore.Mvc.Rendering
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model Post
+@model IEnumerable<Post>
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - LectureStudentService</title>
+    <title>@ViewData["Title"] For You</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/PostCards.css" asp-append-version="true" />
 </head>
 <body>
-    <div class = "ParentOfParents">
+
+    <div class= "fixedelemt"></div>
     <!--For You Page-->
-    <div class= "HeaderLayout">
-      <li class="nav-item">
-          <a class="nav-link" asp-area="" asp-controller="Home" asp-action="home">Home</a>
-      </li>
-      <li class="nav-item">
-         <a class="nav-link" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
-      </li>
-    </div>
+
     <div class="homepage">
         @if (ViewBag.loginedornot == null)
         {
@@ -37,11 +32,21 @@
          }
       <section class="foryoupage">
 
-      <div class="MyPosts">
+      <div class="MyPosts"  data-page="1" id = "MyPosts">
 
+              <div class= "HeaderLayout">
+                  <dvi class = "NavbarItself">
+                     <li class="nav-item">
+                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="home">Home</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
+                     </li>
+                </dvi>
+             </div>
                 @if (ViewBag.UserPosts != null)
                 {
-                    foreach (var post in ViewBag.UserPosts)
+                    foreach (var post in Model)
                     {
                         string username = "";
                         string profilepicture = "";
@@ -94,7 +99,7 @@
 
 
 
-                            <div class="Each_Post">
+                              <div class="Each_Post" id = "Each_Post">
                                 <div class="userdata">
                                     <div class= "namephotoflex">
                                         <img class="PostProfile" src="@profilepicture" alt="">
@@ -170,9 +175,12 @@
                 {
                     <h1>ViewBag.NoPosts</h1>
                 }
+                   <div class= "LoaderContainer" id = "LoaderContainer">
+                      <div class="loader" id = "loader"></div>
+                   </div>
       </section>
-    </div>
 
     </div>
+  <script src="/js/Feed.js"></script>
 </body>
 </html>

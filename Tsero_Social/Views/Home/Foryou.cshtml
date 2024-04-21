@@ -1,0 +1,174 @@
+﻿
+@using Microsoft.AspNetCore.Mvc
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<Post>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] For You</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/PostCards.css" asp-append-version="true" />
+</head>
+<body>
+
+    <div class= "fixedelemt"></div>
+    <!--For You Page-->
+
+    <div class="homepage">
+        @if (ViewBag.loginedornot == null)
+        {
+                  <h1 class= "viewbag">@ViewBag.loginedornot</h1>
+
+        }
+      <section class="foryoupage">
+
+      <div class="MyPosts"  data-page="1" id = "MyPosts">
+                @if (ViewBag.UserPosts != null)
+                {
+                    foreach (var post in Model)
+                    {
+                        string username = "";
+                        string profilepicture = "";
+                        var postsList = ViewBag.Posts as List<User>;
+                        if (postsList != null)
+                        {
+                            var user = postsList.FirstOrDefault(u => u.id == post.UserID);
+                            if (user != null)
+                            {
+                                if (user.ProfilePicture != "")
+                                {
+                                    profilepicture = user.ProfilePicture;
+                                }
+                                else
+                                {
+                                    profilepicture = "/img/profile.png";
+                                }
+                                username = user.Username;
+                            }
+                        }
+                        string comment = "";
+                        string comenterUserName = "";
+                        string ComenterProfilePicture = "";
+                        List<Comments> commentslist = new List<Comments>();
+                        var users = ViewBag.Users as List<User>;
+                        var comments = ViewBag.Comments as List<Comments>;
+                        var Likes = ViewBag.Likes as List<Likes>;
+                        var comcount = comments != null ? comments.Where(u => u.PostID == post.Id).Count() : 0;
+                        var LikeCount = Likes != null ? Likes.Where(u => u.PostID == post.Id).Count() : 0;
+                        string output = "";
+                        @if (LikeCount > 0)
+                        {
+                            output += LikeCount;
+                        }
+                        else if (LikeCount < 0)
+                        {
+                            output = "";
+                        }
+                        @if (comments != null)
+                        {
+                            var com = comments.Where(c => c.PostID == post.Id);
+                            if (com != null)
+                            {
+                                foreach (var item in com)
+                                {
+                                    commentslist.Add(item);
+                                }
+                            }
+                        }
+
+
+
+                                      <div class="Each_Post" id = "Each_Post">
+                                        <div class="userdata">
+                                            <div class= "namephotoflex">
+                                                <img class="PostProfile" src="@profilepicture" alt="">
+                                                <div>
+                                                <h2 class= "MyUsername">@username</h2>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <p class= "postdate">Date: @post.DateTime.ToString("MM/dd/ HH:mm")</p>
+                                            </div>
+                                        </div>
+                                        <div class= "Postcontent">
+                                            <div class="flextitles"> 
+                                                <p>@post.post</p>
+                                            </div>
+                                            <div class= "photocontentwitdth">
+                                                <div class="imgofpost" id="imgofpost">
+                                        @if (@post.Photo != null)
+                                        {
+                                                            <img src="@post.Photo" class="Post_photowidth" id="Post_photowidth" alt="Post Image">
+                                        }
+                                        else
+                                        {
+
+                                        }
+                                                </div>
+                                            </div>
+
+
+                                            <div class = "comment_likes">
+                                                <a class="Like " asp-area="" asp-controller="Login" asp-action="Login">Like @output</a>
+                                                <div class= "comclick">Comment @comcount</div>
+                                            </div>
+
+                                            <div class = "commentSection">
+                                    @if (users != null)
+                                    {
+                                        var usercoment = comments.Where(u => u.PostID == post.Id);
+                                        if (usercoment != null)
+                                        {
+                                            foreach (var item in usercoment)
+                                            {
+
+                                                var userData = users.Where(u => u.id == item.UserID);
+                                                                    <div class = "eachcomment">
+                                                    @foreach (var user in userData)
+                                                    {
+
+                                                                           <div class = "commenterProfile">
+                                                                             <img class="profilepic" src="@user.ProfilePicture" alt="">
+                                                                             <b> @user.Username</b>
+                                                                           </div>
+                                                    }
+                                                                    <p>@item.Comment</p>
+                                                                    </div>
+                                            }
+                                        }
+                                        else
+                                        {
+
+                                        }
+                                    }
+                                          </div>   
+
+                                          <div class="commentinput">
+                                             <input type="text" id="text" name = "ragaca" class="commentInputStyle" placeholder="Comment To Post" required />       
+                                             <a class="Like " asp-area="" asp-controller="Login" asp-action="Login"><button type="submit" class= "submitbuttonlogin">Submit</button></a>                                      
+                                          </div>
+                                        </div>
+                                    </div>                         
+                    }
+                }
+                else
+                {
+                        <h1>ViewBag.NoPosts</h1>
+                }
+                   <div class= "LoaderContainer" id = "LoaderContainer">
+                      <div class="loader" id = "loader"></div>
+                   </div>
+      </section>
+
+    </div>
+  <script src="/js/Feed.js"></script>
+</body>
+</html>

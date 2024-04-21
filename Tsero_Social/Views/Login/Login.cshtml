@@ -13,7 +13,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - LectureStudentService</title>
+    <title>@ViewData["Title"] Login</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
@@ -27,26 +27,29 @@
        </div>
     </div>
 
-    <div class= "HeaderLayout">
-      <li class="nav-item">
-          <a class="nav-link" asp-area="" asp-controller="Home" asp-action="home">Home</a>
-      </li>
-      <li class="nav-item">
-         <a class="nav-link" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
-      </li>
-    </div>
+     <div class= "HeaderLayout">
+         <dvi class = "NavbarItself">
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="home">Home</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
+            </li>
+        </dvi>
+     </div>
+
     <div class="authorizathion_parent">
       <div class="container">
         <div class="card" id="card">
           <div class="card-inner login" id="login">
             <h2>Login</h2>
-            <form method="post" asp-action="Login">
+            <form method="post" asp-action="Login" class = "forminputs">
               <label>Email</label>
             <input type="text" id="Email" asp-for="@Model.Email" class="place" placeholder="gmail.com" required />
              
               <label>Password</label>
               <input type="password" id="password" asp-for="@Model.Password" class="place" placeholder="*****" required/>
-              <button type="submit">Submit</button>                 
+              <button type="submit" class= "submitbnt">Submit</button>                 
               </form>
             @if (ViewBag.ErrorMessage != null)
             {
@@ -56,9 +59,9 @@
 
          <div class="card-inner register" id="register">
           <h2>Registration</h2>
-          <form method="post" asp-action="Register">
+          <form method="post" asp-action="Register" class = "forminputs">
               <label>UserName</label>
-              <input type="text" id="text" asp-for="@Model.Username" class="place" placeholder="gmail.com" required />
+              <input type="text" id="text" asp-for="@Model.Username" class="place" placeholder="User" required />
 
               <label>Email</label>
               <input type="text" id="Email" asp-for="@Model.Email" class="place" placeholder="gmail.com" required />
@@ -71,7 +74,7 @@
               <label>Lastname</label>
               <input type="text" id="lastname" asp-for="@Model.Lastname" class="place" placeholder="Doe" required/>
         
-              <button type="submit">Submit</button>
+              <button type="submit"  class= "submitbnt">Submit</button>
           </form>
           <!--Modal window-->
                     @if (ViewBag.EmailExist != null)
@@ -101,10 +104,10 @@
 
          </div>
         </div>
-      </div>
       <div class="switch">
         <p class="donthave">Dont have an account?</p>
         <button class="flip-btn">Switch to Register</button>
+      </div>
       </div>
     </div>
 

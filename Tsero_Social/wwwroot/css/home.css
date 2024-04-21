@@ -4,13 +4,15 @@ body {
     height: 100%;
     padding: 0;
     margin: 0;
-    background: url(../img/darkback5.jpeg);
-    overflow:hidden;
+    scroll-behavior:smooth;
 }
-.ParentOfParents{
-    width:100%;
-    overflow-y:scroll;
-    height:100%;
+
+.fixedelemt {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 0;
+    background: url(../img/darkback5.jpeg);
 }
 .homepage {
     width: 100%;
@@ -19,14 +21,13 @@ body {
     align-items: center;
     flex-direction: column;
     position: relative;
-    gap: 30px;
 }
 
 .foryoupage {
     width: clamp(280px, 100%, 900px);
     display: flex;
     flex-direction: column;
-    gap: 40px;
+
     align-items:center;
 }
 .viewbag{
@@ -37,7 +38,6 @@ body {
 .MyPosts {
     width: clamp(280px, 105%, 900px);
     height: auto;
-    padding: 20px 0px 20px 0px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
