@@ -6,6 +6,6 @@ namespace Tsero_Social.Services
     public interface IpostService
     {
         void PostWriting(string PostPost, ImageUpload model);
-        void Myposts ();
+        void DeletePost(int id, string PostPhoto);
     }
 }

@@ -2,7 +2,7 @@
 using System.Security.Policy;
 using Tsero_Social.Dbcontext;
 using Tsero_Social.Models;
-
+using System.IO;
 namespace Tsero_Social.Services
 {
     public class UploadImg : IuploadImg
@@ -71,12 +71,14 @@ namespace Tsero_Social.Services
                                 }
                             }
                         }
+                        int UpdatedProfile = 1;
                         var post = new Post
                         {
                             DateTime = DateTime.Now,
                             Photo = PattoDisplay,
                             UserID = userid,
                             post = title,
+                            PostType = UpdatedProfile,
                         };
                         _dbcontext.Posts.Add(post);
                         _dbcontext.SaveChanges();
@@ -88,5 +90,23 @@ namespace Tsero_Social.Services
                 }
             }
         }
-    }
- }
+
+         public void DeleteImg(string PostPhoto)
+         {
+            var FoundImage = _dbcontext.images.FirstOrDefault(u => u.PathToDisplay == PostPhoto);
+            string Image_To_delete = "";
+            if(FoundImage != null)
+            {
+               _dbcontext.images.Remove(FoundImage);
+               _dbcontext.SaveChanges();
+                Image_To_delete = FoundImage.ImagePath;
+            }
+            if (!string.IsNullOrEmpty(Image_To_delete) && File.Exists(Image_To_delete))
+            {
+                File.Delete(Image_To_delete);
+            }
+         }
+
+
+}
+}

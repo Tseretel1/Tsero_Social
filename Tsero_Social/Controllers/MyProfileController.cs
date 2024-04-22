@@ -9,13 +9,13 @@ namespace Tsero_Social.Controllers
 {
     public class MyProfileController : Controller
     {
-        private readonly IuploadImg _uploadimg;
+        private readonly IuploadImg _Image;
         private readonly UserDbcontext _userDbcontext;
         private readonly IuserService _userService;
         private readonly IpostService _ipostservice;
         public MyProfileController(IuploadImg upload, UserDbcontext userDbcontext, IuserService userface, IpostService postService)
         {
-            _uploadimg = upload;
+            _Image = upload;
             _userDbcontext = userDbcontext;
             _userService = userface;
             _ipostservice = postService;
@@ -32,25 +32,9 @@ namespace Tsero_Social.Controllers
                     var logedUsers = _userService.GetUserLogedUsers();
                     if (logedUsers != null && logedUsers.Any())
                     {
-
-                        var allPosts = _userDbcontext.Posts.Where(p => p.DateTime < DateTime.Now).ToList();
-                        var random = new Random();
-                        var randomPosts = allPosts.OrderBy(x => random.Next()).ToList();
-
                         ViewBag.Users = _userDbcontext.Users.ToList();
                         ViewBag.Comments = _userDbcontext.Comments.ToList();
                         ViewBag.Likes = _userDbcontext.Likes.ToList();
-                        ViewBag.UserPosts = randomPosts;
-                        ViewBag.Posts = new List<User>();
-                        var allUsers = _userDbcontext.Users.ToList();
-                        foreach (var post in randomPosts)
-                        {
-                            var user = allUsers.FirstOrDefault(u => u.id == post.UserID);
-                            if (user != null)
-                            {
-                                ViewBag.Posts.Add(user);
-                            }
-                        }
                         foreach (var user in logedUsers)
                         {
                             var loggedUser = _userDbcontext.Users.FirstOrDefault(u => u.Email == user.Email && u.Password == user.Password);
@@ -117,7 +101,7 @@ namespace Tsero_Social.Controllers
         {
             {
                 ProfileGenerate();
-                _uploadimg.ProfilePicUpload(model ,title);
+                _Image.ProfilePicUpload(model ,title);
                 return View("Profile");
             }        
         }
@@ -161,6 +145,14 @@ namespace Tsero_Social.Controllers
                 _userService.ProfileUpdateForm(user);
                 return View("Profile");
             }
+        }
+        [HttpPost]
+        public IActionResult PostDelete(string PostPhoto, int id)
+        {
+            _ipostservice.DeletePost(id, PostPhoto);
+            _Image.DeleteImg(PostPhoto);
+            ProfileGenerate();
+            return View("Profile");
         }
     }
 }

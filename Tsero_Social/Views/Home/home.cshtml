@@ -21,7 +21,9 @@
 </head>
 <body>
 
+
     <div class= "fixedelemt"></div>
+
     <!--For You Page-->
 
     <div class="homepage">
@@ -107,13 +109,13 @@
                                         <h2 class= "MyUsername">@username</h2>
                                         </div>
                                     </div>
-                                    <div>
+                                    <div class = "postDateParent">
                                         <p class= "postdate">Date: @post.DateTime.ToString("MM/dd/ HH:mm")</p>
                                     </div>
                                 </div>
                                 <div class= "Postcontent">
                                     <div class="flextitles"> 
-                                        <p>@post.post</p>
+                                      <p class= "flexPText">@post.post</p>
                                     </div>
                                     <div class= "photocontentwitdth">
                                         <div class="imgofpost" id="imgofpost">
@@ -178,9 +180,10 @@
                    <div class= "LoaderContainer" id = "LoaderContainer">
                       <div class="loader" id = "loader"></div>
                    </div>
+
       </section>
 
-    </div>
   <script src="/js/Feed.js"></script>
+    </div>
 </body>
 </html>

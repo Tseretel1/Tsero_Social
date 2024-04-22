@@ -3,16 +3,15 @@
 function scrollFunction() {
     var bottomThreshold = document.body.scrollHeight - window.innerHeight - 10;
     var bottomThreshold2 = document.body.scrollHeight - window.innerHeight - 10;
-    var Loader = document.querySelector(".loader");
-    var LoaderContainer = document.querySelector(".LoaderContainer");
-
+    var Loader = document.getElementById("loader");
+    var LoaderContainer = document.getElementById("LoaderContainer");
     if (window.pageYOffset >= bottomThreshold2 && !loadingInProgress) {
-        Loader.style.height = "90px";
-        LoaderContainer.style.height = "350px";
+        Loader.style.height = "65px";
+        LoaderContainer.style.height = "200px";
         setTimeout(function () {
             Loader.style.height = "0px";
             LoaderContainer.style.height = "0px";
-        }, 1000);
+        }, 0);
     }
     if (window.pageYOffset >= bottomThreshold && !loadingInProgress) {
         loadingInProgress = true;
@@ -25,7 +24,7 @@ function scrollFunction() {
             xhr.onload = function () {
                 if (xhr.status >= 200 && xhr.status < 300) {
                     var newPosts = xhr.responseText;
-                    var newPostsArray = newPosts.split('<!-- End Post -->');  
+                    var newPostsArray = newPosts.split('<!-- End Post -->');
                     for (var i = 0; i < Math.min(5, newPostsArray.length); i++) {
                         document.getElementById('MyPosts').innerHTML += newPostsArray[i];
                     }
@@ -41,7 +40,7 @@ function scrollFunction() {
                 loadingInProgress = false;
             };
             xhr.send();
-        }, 1000);
+        }, 500);
     }
 }
 

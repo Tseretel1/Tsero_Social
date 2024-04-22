@@ -1,18 +1,25 @@
 ﻿html,
 body {
-    width: 100%;
     height: 100%;
     padding: 0;
     margin: 0;
     scroll-behavior:smooth;
+    left:0;
+    top:0;
 }
 
 .fixedelemt {
-    width: 100%;
+    width: 150%;
     height: 100%;
     position: fixed;
     z-index: 0;
-    background: url(../img/darkback5.jpeg);
+    background: url(../img/backg14.jpeg);
+    left:0;
+    top:0;
+}
+.ParentOfParents{
+    width:100%;
+    height:100%;
 }
 .homepage {
     width: 100%;
@@ -21,6 +28,10 @@ body {
     align-items: center;
     flex-direction: column;
     position: relative;
+    left: 0;
+    top: 0;
+    margin:0;
+    padding:0;
 }
 
 .foryoupage {

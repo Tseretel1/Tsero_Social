@@ -18,6 +18,7 @@ namespace Tsero_Social.Controllers
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly UserDbcontext _dbcontext;
+        private readonly UserServices _userServices;
         public HomeController(IWebHostEnvironment hostingEnvironment, UserDbcontext db)
         {
             _hostingEnvironment = hostingEnvironment;
@@ -39,7 +40,6 @@ namespace Tsero_Social.Controllers
                 .Skip(offset)
                 .Take(pageSize)
                 .ToList();
-
             ViewBag.Users = _dbcontext.Users.ToList();
             ViewBag.Comments = _dbcontext.Comments.ToList();
             ViewBag.Likes = _dbcontext.Likes.ToList();
@@ -89,37 +89,66 @@ namespace Tsero_Social.Controllers
             }
             return PartialView("home", allPosts);
         }
+
         public IActionResult Foryou(int page = 1)
         {
-            int pageSize = 5;
-            int offset = (page - 1) * pageSize;
-            if (offset < 0)
+            bool IsLogged = true;
+            try
             {
-                offset = 0;
-            }
-
-            var allPosts = _dbcontext.Posts
-                .Where(p => p.DateTime < DateTime.Now)
-                .OrderByDescending(p => p.DateTime)
-                .Skip(offset)
-                .Take(pageSize)
-                .ToList();
-
-            ViewBag.Users = _dbcontext.Users.ToList();
-            ViewBag.Comments = _dbcontext.Comments.ToList();
-            ViewBag.Likes = _dbcontext.Likes.ToList();
-            ViewBag.UserPosts = allPosts;
-            ViewBag.Posts = new List<User>();
-            var allUsers = _dbcontext.Users.ToList();
-            foreach (var post in allPosts)
-            {
-                var user = allUsers.FirstOrDefault(u => u.id == post.UserID);
-                if (user != null)
+                var logedUsers = _userServices.GetUserLogedUsers();
+                if (logedUsers != null && logedUsers.Any())
                 {
-                    ViewBag.Posts.Add(user);
+                    IsLogged = true;
                 }
+
+                else
+                {
+                    IsLogged = false;
+                }
+
             }
-            return PartialView("Foryou", allPosts);
+
+            catch (Exception ex)
+            {
+            }
+            if (IsLogged)
+            {
+
+
+                int pageSize = 5;
+                int offset = (page - 1) * pageSize;
+                if (offset < 0)
+                {
+                    offset = 0;
+                }
+
+                var allPosts = _dbcontext.Posts
+                    .Where(p => p.DateTime < DateTime.Now)
+                    .OrderByDescending(p => p.DateTime)
+                    .Skip(offset)
+                    .Take(pageSize)
+                    .ToList();
+                ViewBag.Users = _dbcontext.Users.ToList();
+                ViewBag.Comments = _dbcontext.Comments.ToList();
+                ViewBag.Likes = _dbcontext.Likes.ToList();
+                ViewBag.UserPosts = allPosts;
+                ViewBag.Posts = new List<User>();
+                var allUsers = _dbcontext.Users.ToList();
+                foreach (var post in allPosts)
+                {
+                    var user = allUsers.FirstOrDefault(u => u.id == post.UserID);
+                    if (user != null)
+                    {
+                        ViewBag.Posts.Add(user);
+                    }
+                }
+                return PartialView("Foryou", allPosts);
+            }
+            else
+            {
+                ViewBag.Noposts = "No Post Are available";
+            }
+            return View("Foryou");
         }
     }
 }

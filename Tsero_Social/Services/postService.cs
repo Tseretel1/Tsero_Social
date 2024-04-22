@@ -98,9 +98,25 @@ namespace Tsero_Social.Services
             }
         }
 
-        public void Myposts()
+        public void DeletePost(int id ,string PostPhoto)
         {
+            var PostToDelete = _dbcontext.Posts.FirstOrDefault(u => u.Id == id);
+            if (PostToDelete != null)
+            {
+                _dbcontext.Posts.Remove(PostToDelete);
+                _dbcontext.SaveChanges();
 
+                if (PostToDelete.PostType == 1)
+                {
+                    var user = _dbcontext.Users.FirstOrDefault(u => u.ProfilePicture == PostPhoto);
+                    if (user != null)
+                    {
+                        user.ProfilePicture = null;
+                        _dbcontext.SaveChanges();
+                    }
+                }
+            }
         }
+
     }
 }
