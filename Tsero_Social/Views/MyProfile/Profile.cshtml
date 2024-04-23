@@ -22,10 +22,16 @@
                      <div class="editFlex">
                        <div class="profileandName">
                            <div id="ProfilePictureCont" id="editbutton">               
-                             <script>
-                                  var photo = document.getElementById("ProfilePictureCont");   
-                                 photo.style.backgroundImage = "url('@ViewBag.Profile')";
-                             </script>
+                                @{
+                                    if (@ViewBag.Profile != null)
+                                    {
+                                            <img class="UploadPicMain" src="@ViewBag.Profile" alt="">
+                                    }
+                                    else
+                                    {
+
+                                    }
+                                }
                            </div>
                            <p class= "userName">@ViewBag.Name @ViewBag.LastName</p>
                        </div>
@@ -59,7 +65,18 @@
             <!--Upload Post-->
             <div class= "UploadPost">
                 <div class= "UploadProfile">
-                     <img class="UploadPic" src="@ViewBag.Profile" alt="">
+                    <div class = "DefaultProfile">
+                        @{
+                           if (@ViewBag.Profile != null)
+                           {
+                                <img class="UploadPic" src="@ViewBag.Profile" alt="">
+                           }
+                           else
+                           {
+                               
+                           }
+                        }
+                    </div>
                      <h2 class= "UploadUsername">@ViewBag.Username</h2>
                 </div>
                 <div class ="Whats_On_Your_Mind">

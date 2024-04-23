@@ -38,9 +38,11 @@
 }
 
 .PostProfile {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+    width: 60px;
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size:cover;
+    border:none;
 }
 
 .userdata {
@@ -120,6 +122,12 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    border-radius: 50%;
+    background: url(../img/ProfileBackground.png);
+    background-size: cover;
+    overflow: hidden;
+    width: 60px;
+    height: 60px;
 }
 .postdate {
     color: grey;

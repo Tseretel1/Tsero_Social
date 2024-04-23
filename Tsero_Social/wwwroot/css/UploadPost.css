@@ -191,3 +191,55 @@
 .custom-file-input:active::before {
 }
 
+
+
+
+@media only screen and (max-width: 600px) {
+    .EditProfileContainer{
+        width:450px;
+    }
+    .EditButton{
+        width:180px;
+        padding:8px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .EditProfileContainer {
+        width: 350px;
+    }
+    .ShareDay{
+        font-size:25px;
+    }
+    .saysomething{
+        width:250px;
+    }
+    .ProfilePreviewCont{
+        width:250px;
+    }
+}
+@media only screen and (max-width: 400px) {
+    .EditProfileContainer {
+        width: 270px;
+    }
+
+    .ShareDay {
+        font-size: 20px;
+    }
+
+    .saysomething {
+        width: 220px;
+    }
+
+    .ProfilePreviewCont {
+        width: 220px;
+    }
+
+    .custom-file-input::before {
+        width:100px;
+        font-size:15px;
+    }
+    .custom-file-input{
+        width:200px;
+    }
+}

@@ -3,49 +3,83 @@
 }
 
 .container-fluid {
-    background-color: transparent;
-    backdrop-filter: blur(20px);
+    display: flex;
+    gap:30px;
 }
-
+.Tsero_Social{
+    color:white;
+    display:flex;
+    align-items:center;
+    text-decoration:none;
+}
+.Tsero_Social:hover {
+    color: white;
+}
 .navigatorrs {
     margin: 0;
     padding: 0;
     position: fixed;
     top: 0;
     width: 100%;
+    background-color: rgba(0, 0, 0, 0.199);
+    backdrop-filter: blur(60px);
     z-index: 5000;
-}
-
-.HeaderLayout {
+    box-shadow: 0px 0px 10px black;
     display: flex;
-    width: 100%;
-    height: 30px;
-    font-family: sans-serif;
-    font-weight: bold;
-    align-items: center;
-    padding: 0;
-    position: fixed;
-    z-index: 9000;
-}
-
-.nav-item {
-    display: flex;
+    height: 50px;
     align-items: center;
 }
-
-.NavbarItself {
-    border-radius: 0px 0px 20px 0px;
-    width: 280px;
-    background-color: white;
+.navbarLIn{
+    display:flex;
+    align-items:center;
+}
+.navbarLinks {
     display: flex;
-    justify-content: space-evenly;
+    align-items: center;
+    color: white;
+    justify-content: space-between;
+    width: 200px;
+    margin: 0;
 }
+.nav-links {
+    color: white;
+    text-decoration: none;
 
-.nav-link {
-    transition: 0.3s all ease-in-out;
-    color: black;
 }
-
-    .nav-link:hover {
-        color: gray;
+@keyframes rotateInCircle {
+    0% {
+        transform: rotate(0deg);
     }
+    30% {
+        transform: rotate(2deg);
+    }
+    70% {
+        transform: rotate(-2deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.nav-links:hover {
+    color: lightblue;
+    text-shadow: 0px 0px 5px lightblue;
+    animation: rotateInCircle 0.3s linear infinite;
+}
+@media only screen and (max-width: 500px) {
+    .EditProfileContainer {
+        width: 350px;
+    }
+
+    .ShareDay {
+        font-size: 25px;
+    }
+
+    .saysomething {
+        width: 250px;
+    }
+
+    .ProfilePreviewCont {
+        width: 250px;
+    }
+}

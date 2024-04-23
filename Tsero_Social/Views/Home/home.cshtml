@@ -15,7 +15,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] For You</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/PostCards.css" asp-append-version="true" />
 </head>
@@ -32,11 +31,7 @@
               <h1 class= "viewbag">@ViewBag.loginedornot</h1>
 
          }
-      <section class="foryoupage">
-
-      <div class="MyPosts"  data-page="1" id = "MyPosts">
-
-              <div class= "HeaderLayout">
+          <div class= "HeaderLayout">
                   <dvi class = "NavbarItself">
                      <li class="nav-item">
                          <a class="nav-link" asp-area="" asp-controller="Home" asp-action="home">Home</a>
@@ -46,29 +41,16 @@
                      </li>
                 </dvi>
              </div>
+ <section class="foryoupage">
+
+      <div class="MyPosts"  data-page="1" id = "MyPosts">
                 @if (ViewBag.UserPosts != null)
                 {
                     foreach (var post in Model)
                     {
                         string username = "";
                         string profilepicture = "";
-                        var postsList = ViewBag.Posts as List<User>; 
-                            if (postsList != null)
-                            {
-                            var user = postsList.FirstOrDefault(u => u.id == post.UserID);
-                            if (user != null)
-                            {
-                                if (user.ProfilePicture != "")
-                                {
-                                    profilepicture = user.ProfilePicture;
-                                }
-                                else
-                                {
-                                    profilepicture = "/img/profile.png";
-                                }
-                                username = user.Username;
-                            }
-                        }
+                        var postsList = ViewBag.Posts as List<User>;
                         string comment = "";
                         string comenterUserName = "";
                         string ComenterProfilePicture = "";
@@ -83,7 +65,7 @@
                         {
                             output += LikeCount;
                         }
-                        else if(LikeCount<0)
+                        else if (LikeCount < 0)
                         {
                             output = "";
                         }
@@ -92,93 +74,133 @@
                             var com = comments.Where(c => c.PostID == post.Id);
                             if (com != null)
                             {
-                                foreach(var item in com)
+                                foreach (var item in com)
                                 {
-                                  commentslist.Add(item);               
+                                    commentslist.Add(item);
                                 }
                             }
                         }
-
-
-
-                              <div class="Each_Post" id = "Each_Post">
-                                <div class="userdata">
-                                    <div class= "namephotoflex">
-                                        <img class="PostProfile" src="@profilepicture" alt="">
-                                        <div>
-                                        <h2 class= "MyUsername">@username</h2>
-                                        </div>
-                                    </div>
-                                    <div class = "postDateParent">
-                                        <p class= "postdate">Date: @post.DateTime.ToString("MM/dd/ HH:mm")</p>
-                                    </div>
-                                </div>
-                                <div class= "Postcontent">
-                                    <div class="flextitles"> 
-                                      <p class= "flexPText">@post.post</p>
-                                    </div>
-                                    <div class= "photocontentwitdth">
-                                        <div class="imgofpost" id="imgofpost">
-                                            @if (@post.Photo != null)
-                                            {
-                                                <img src="@post.Photo" class="Post_photowidth" id="Post_photowidth" alt="Post Image">
-                                            }
-                                            else
-                                            {
-
-                                            }
-                                        </div>
-                                    </div>
-
-                                   
-                                    <div class = "comment_likes">
-                                        <a class="Like " asp-area="" asp-controller="Login" asp-action="Login">Like @output</a>
-                                        <div class= "comclick">Comment @comcount</div>
-                                    </div>
-
-                                    <div class = "commentSection">
-                                    @if (users!=null) {
-                                       var usercoment = comments.Where(u => u.PostID == post.Id);
-                                       if (usercoment != null)
-                                         {                
-                                            foreach (var item in usercoment)
-                                            {
-
-                                                var userData = users.Where(u => u.id == item.UserID);
-                                                <div class = "eachcomment">
-                                                @foreach (var user in userData)
-                                                {
-                                                   
-                                                   <div class = "commenterProfile">
-                                                     <img class="profilepic" src="@user.ProfilePicture" alt="">
-                                                     <b> @user.Username</b>
-                                                   </div>
-                                                }
-                                                <p>@item.Comment</p>
-                                                </div>
-                                            }
+                          <div class="Each_Post" id = "Each_Post">
+                          <div class="userdata">
+                              <div class= "namephotoflex">
+                                  <div class = "postDateParent"> 
+                                  @{ if (postsList != null)
+                                   {
+                                       var user = postsList.FirstOrDefault(u => u.id == post.UserID);
+                                       if (user != null)
+                                       {
+                                           if (user.ProfilePicture != "")
+                                           {
+                                               profilepicture = user.ProfilePicture;
+                                               <img class="PostProfile" src="@profilepicture" alt="">
+                                           }
+                                           else
+                                           {
+                                               
+                                           }
+                                           username = user.Username;
                                         }
-                                        else
-                                        {
-                                            
-                                        }
-                                    }
-                                  </div>   
-                                  
-                                  <div class="commentinput">
-                                     <input type="text" id="text" name = "ragaca" class="commentInputStyle" placeholder="Comment To Post" required />       
-                                     <a class="Like " asp-area="" asp-controller="Login" asp-action="Login"><button type="submit" class= "submitbuttonlogin">Submit</button></a>                                      
+                                      }
+                                   }
+                                      
+                                  </div>                   
+                                  <div class= "UpdateProfile">
+                                    <div class = "UpdateTextAndNameFlex">
+                                     <h2 class= "MyUsername">@username</h2>
+                                     @if (post.PostType == 1)
+                                     {
+                                      <p class= "UpdatedText">-Updated Their Profile Picture </p>
+                                     }                                      
+                                   </div>
+                                   <div>
+                                       @{
+                                           DateTime dbDateTime = post.DateTime;
+                                           DateTime currentDateTime = DateTime.Now;
+                                           TimeSpan timeDifference = currentDateTime - dbDateTime;
+                                      
+                                           int totalMinutes = (int)timeDifference.TotalMinutes;
+                                           int totalHours = (int)timeDifference.TotalHours;
+                                           int totalDays = (int)timeDifference.TotalDays;
+                                      
+                                           if (totalMinutes < 60)
+                                           {                                           
+                                                                <p class="datetimetracking">@totalMinutes minutes ago</p>
+                                           }
+                                           else if (totalHours < 24)
+                                           {
+                                               int remainingMinutes = totalMinutes % 60;
+                                                               <p class="datetimetracking">@totalHours hours and @remainingMinutes minutes ago</p>
+                                           }
+                                           else
+                                           {
+                                               int remainingHours = totalHours % 24;
+                                                               <p class="datetimetracking">@totalDays days, @remainingHours hours ago</p>
+                                           }
+                                       }
+                                   </div>
+                                  </div>                                 
+                              </div>
+                          </div>
+                          <div class= "Postcontent">
+                              <div class="flextitles"> 
+                                 <p class= "flexPText">@post.post</p>
+                              </div>
+                              <div class= "photocontentwitdth">
+                               @if (@post.Photo != null)
+                               {
+                                  <div class="imgofpost" id="imgofpost">
+                                       <img src="@post.Photo" class="Post_photowidth" id="Post_photowidth" alt="Post Image">    
+                                   </div>
+                                }
+                                else
+                                {
+
+                                }
+                              </div>
+
+
+                           <div class = "comment_likes">
+                                 <div class= "Like">Like</div>
+                               <div class= "comclick">Comment @comcount</div>
+                           </div>
+
+                  <div class = "commentSection">
+                      @if (users != null)
+                      {
+                          var usercoment = comments.Where(u => u.PostID == post.Id);
+                          if (usercoment != null)
+                          {
+                              foreach (var item in usercoment)
+                              {
+                                  var userData = users.Where(u => u.id == item.UserID);
+                               <div class = "eachcomment">
+                                      @foreach (var user in userData)
+                                      {                      
+                                       <div class = "commenterProfile">
+                                         <img class="profilepic" src="@user.ProfilePicture" alt="">
+                                         <b> @user.Username</b>
+                                       </div>
+                                      }
+                                  <p>@item.Comment</p>
                                   </div>
-                                </div>
-                            </div>                         
+                              }
+                          }
+                          else
+                          {
+
+                          }
+                     }
+                      </div>   
+                         
+                        </div>
+                     </div>                         
                     }
                 }
                 else
                 {
-                    <h1>ViewBag.NoPosts</h1>
+                    <h1>ViewBag.Noposts</h1>
                 }
       </section>
-
        <script src="/js/Feed.js"></script>
     </div>
 </body>

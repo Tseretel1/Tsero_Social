@@ -338,12 +338,16 @@ body {
     border-radius: 50%;
     overflow: hidden;
     background-color: rgb(26, 25, 25);
-    background:url(../img/profileback.jpg);
+    background:url(../img/ProfileBackground.png);
     background-size:cover;
     border:2px solid white
 }
+.UploadPicMain{
+    width:180px;
+    height:auto;
+}
 .fileinput {
-    color:black;
+    color: black;
 }
 
 .UploadPost {
@@ -362,10 +366,18 @@ body {
     display: flex;
     align-items: center;
 }
-.UploadPic{
-    width:70px;
-    height:70px;
-    border-radius:50%; 
+.DefaultProfile {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow:hidden;
+    background:url(../img/ProfileBackground.png);
+    background-size:cover;
+    background-position:center;
+}
+.UploadPic {
+    width: 70px;
+    height: auto;
 }
 .UploadUsername {
     color:white;
