@@ -1,8 +1,8 @@
 ﻿var loadingInProgress = false;
 
 function scrollFunction() {
-    var bottomThreshold = document.body.scrollHeight - window.innerHeight - 10;
-    var bottomThreshold2 = document.body.scrollHeight - window.innerHeight - 10;
+    var bottomThreshold = document.body.scrollHeight - window.innerHeight - 50;
+    var bottomThreshold2 = document.body.scrollHeight - window.innerHeight - 50;
     var Loader = document.getElementById("loader");
     var LoaderContainer = document.getElementById("LoaderContainer");
     if (window.pageYOffset >= bottomThreshold2 && !loadingInProgress) {

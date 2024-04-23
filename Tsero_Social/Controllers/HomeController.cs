@@ -1,5 +1,5 @@
 ﻿
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing.Constraints;
 using System.Diagnostics;
 using System.Drawing.Imaging;
@@ -33,7 +33,7 @@ namespace Tsero_Social.Controllers
                 offset = 0;
             }
 
-            ViewBag.UserPosts  = "";
+            ViewBag.UserPosts = "";
             var allPosts = _dbcontext.Posts
                 .Where(p => p.DateTime < DateTime.Now)
                 .OrderByDescending(p => p.DateTime)

@@ -52,8 +52,7 @@
 
 .namephotoflex {
     display: flex;
-    gap: 20px;
-    align-items: center;
+    gap: 5px;
 }
 
 .titlegrey {
@@ -63,8 +62,7 @@
 }
 
 .flextitles {
-    display: flex;
-    width: 100%;
+    width: 500px;
     color: white;
 }
 
@@ -104,24 +102,35 @@
 .UpdateProfile{
     width:auto;
     display:flex;
-    align-items:center;
+    flex-direction:column;
+    align-items:flex-start;
 }
 .UpdatedText{
     color:grey;
     font-size:15px;
     margin:0;
+    margin-left:5px;
+}
+.UpdateTextAndNameFlex{
+    display:flex;
+    align-items:flex-start;
 }
 .postDateParent {
     display: flex;
     align-items: center;
-    flex-direction:column;
-    justify-content:center;
+    flex-direction: column;
+    justify-content: center;
 }
 .postdate {
     color: grey;
     margin: 0;
     font:100;
     font-size:15px;
+}
+.datetimetracking {
+    color: grey;
+    font-size: 12px;
+    margin: 0;
 }
 .Name_lastname {
     font-size: 13px;
@@ -314,7 +323,7 @@
     }
 
     .comment_likes {
-        width: clamp(280px, 90%, 500px);
+        width: clamp(280px, 100%, 500px);
     }
     .userdata {
         width:400px;
@@ -325,6 +334,14 @@
     .imgofpost{
        width: 400px;
        height:400px;
+    }
+    .flextitles{
+        width:400px;
+    }
+    .DeltePostButton{
+        width:80px;
+        height:20px;
+        font-size:12px;
     }
 }
 
@@ -356,6 +373,22 @@
         width: 300px;
         height: 300px;
     }
+    .PostProfile{
+        width:50px;
+        height:50px;
+    }
+    .MyUsername{
+        font-size:16px;
+    }
+    .UpdatedText{
+        font-size:12px;
+    }
+    .datetimetracking{
+        font-size:10px;
+    }
+    .flextitles{
+        width:300px;
+    }
 }
 @media only screen and (max-width: 400px) {
 
@@ -381,5 +414,49 @@
     .imgofpost {
         width: 250px;
         height: 250px;
+    }
+    .flextitles{
+        width:250px;
+    }
+    .DeltePostButton {
+        width: 60px;
+        height: 15px;
+        font-size: 9px;
+        border-radius:3px;
+    }
+    .UpdatedText {
+        font-size: 10px;
+    }
+}
+@media only screen and (max-width: 300px) {
+
+    .Each_Post {
+        width: 260px;
+        border-radius: 5px;
+    }
+
+    .comment_likes {
+        width: 230px;
+    }
+
+    .userdata {
+        width: 230px;
+    }
+
+    .Post_photowidth {
+        width: 230px;
+    }
+
+    flexPText {
+        font-size: 10px;
+    }
+
+    .imgofpost {
+        width: 230px;
+        height: 230px;
+    }
+
+    .flextitles {
+        width: 230px;
     }
 }

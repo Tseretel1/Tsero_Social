@@ -105,12 +105,17 @@ namespace Tsero_Social.Controllers
                 return View("Profile");
             }        
         }
+        [HttpGet]
+        public IActionResult UploadPost()
+        {       
+            return View("UploadPost");
+        }
         [HttpPost]
         public IActionResult PostPublish( string PostPost, ImageUpload model)
         {
-            ProfileGenerate();
-            _ipostservice.PostWriting(PostPost, model);
-            return View("Profile");
+
+            _ipostservice.PostWriting(PostPost, model);      
+            return View("UploadPost");
         }
         [HttpGet]
         public IActionResult ProfileUpdate()
@@ -149,7 +154,7 @@ namespace Tsero_Social.Controllers
         [HttpPost]
         public IActionResult PostDelete(string PostPhoto, int id)
         {
-            _ipostservice.DeletePost(id, PostPhoto);
+            _ipostservice.DeletePost(id,PostPhoto);
             _Image.DeleteImg(PostPhoto);
             ProfileGenerate();
             return View("Profile");

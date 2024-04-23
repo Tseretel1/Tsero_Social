@@ -17,16 +17,6 @@
 @using (Html.BeginForm("Profile", "MyProfile", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
             <div class="containercenter">
-               <div class = "ExitFromAccount">
-                   <a class="nav-item" asp-controller="Login" asp-action="Login">
-                       <img class= "exitimg" src="/img/exit.png">
-                       <div class ="">
-                          <p class="ExitButton">Exit From Account</p>
-                          <div class="borderspan"></div>
-                       </div>
-
-                   </a>
-               </div>
                <div class="updatepost">    
                  <div class="Profile_data">
                      <div class="editFlex">
@@ -41,10 +31,12 @@
                        </div>
                        <div class="editbutton" id = "editbutton">
                            <img src="../img/icons8-edit-30.png" class="editimage"/>
-                           <b>Edit</b></div>
+                           <b class= "editbtn">Edit</b></div>
                        <div class="ChangeButtonsParent" id="ChangeButtonsParent">
                           <div class="Xbuttonalign"> 
-                              <button class= "changebuttons Xbutton"  id="Xbutton">X</button>                 
+                              <form>
+                              <button class= "changebuttons Xbutton"  id="Xbutton">X</button>    
+                              </form>
                           </div>
                           <div class="changebuttonsdiv">
                              <a class= "changebuttons" asp-controller="MyProfile" asp-action="ProfileUpdate">Edit Profile</a>
@@ -54,7 +46,32 @@
                        </div>
                     </div>
                 </div>
+                 <a class="nav-item2" asp-controller="Login" asp-action="Login">
+                    <img class= "exitimg" src="/img/exit.png">
+                    <div class ="">
+                       <p class="ExitButton">Exit From Account</p>
+                       <div class="borderspan"></div>
+                    </div>
+                </a>
             </div>  
+
+
+            <!--Upload Post-->
+            <div class= "UploadPost">
+                <div class= "UploadProfile">
+                     <img class="UploadPic" src="@ViewBag.Profile" alt="">
+                     <h2 class= "UploadUsername">@ViewBag.Username</h2>
+                </div>
+                <div class ="Whats_On_Your_Mind">
+                  <input class = "OnYourMindInput" placeholder = "What on your mind?">
+                       <a class="onYourMIndLink" asp-controller="MyProfile" asp-action="UploadPost">
+                        Post
+                   </a>
+                </div>
+            </div>
+
+
+
               <!--My Post-->
               <div class="MyPosts">
 
@@ -139,39 +156,41 @@
                                   <div class = "postDateParent">    
                                       <img class="PostProfile" src="@ViewBag.Profile" alt="">
                                   </div>                   
-                                  <div>
+                                  <div class= "UpdateProfile">
+                                    <div class = "UpdateTextAndNameFlex">
                                      <h2 class= "MyUsername">@ViewBag.Username</h2>
-                                        @{
-                                            DateTime dbDateTime = post.DateTime;
-                                            DateTime currentDateTime = DateTime.Now;
-                                            TimeSpan timeDifference = currentDateTime - dbDateTime;
-
-                                            int totalMinutes = (int)timeDifference.TotalMinutes;
-                                            int totalHours = (int)timeDifference.TotalHours;
-                                            int totalDays = (int)timeDifference.TotalDays;
-
-                                            if (totalMinutes > 60)
-                                            {
-                                                int remainingMinutes = totalMinutes % 60;
-                                                <p class= "datetimetracking">@totalHours hours and @remainingMinutes minutes ago</p>
-                                            }
-                                            else if (totalHours > 24)
-                                            {
-                                                int remainingHours = totalHours % 24;
-                                                <p class= "datetimetracking">@totalDays days, @remainingHours hours and @totalMinutes minutes ago</p>
-                                            }
-                                            else if (totalMinutes < 60)
-                                            {
-                                                <p class= "datetimetracking">@totalMinutes minutes ago</p>
-                                            }
-                                        }
-                                  </div>
-                                    @if (post.PostType == 1)
-                                    {
-                                    <div class = "UpdateProfile">
-                                        <p class= "UpdatedText">Updated Their Profile Picture </p>
-                                    </div>
-                                    }
+                                     @if (post.PostType == 1)
+                                     {
+                                      <p class= "UpdatedText">-Updated Their Profile Picture </p>
+                                     }                                      
+                                   </div>
+                                   <div>
+                                       @{
+                                           DateTime dbDateTime = post.DateTime;
+                                           DateTime currentDateTime = DateTime.Now;
+                                           TimeSpan timeDifference = currentDateTime - dbDateTime;
+                                      
+                                           int totalMinutes = (int)timeDifference.TotalMinutes;
+                                           int totalHours = (int)timeDifference.TotalHours;
+                                           int totalDays = (int)timeDifference.TotalDays;
+                                      
+                                           if (totalMinutes < 60)
+                                           {                                           
+                                             <p class="datetimetracking">@totalMinutes minutes ago</p>
+                                           }
+                                           else if (totalHours < 24)
+                                           {
+                                               int remainingMinutes = totalMinutes % 60;
+                                               <p class="datetimetracking">@totalHours hours and @remainingMinutes minutes ago</p>
+                                           }
+                                           else
+                                           {
+                                               int remainingHours = totalHours % 24;
+                                               <p class="datetimetracking">@totalDays days, @remainingHours hours ago</p>
+                                           }
+                                       }
+                                   </div>
+                                  </div>                                 
                               </div>
                           </div>
                           <div class= "Postcontent">
@@ -206,7 +225,7 @@
                               foreach (var item in usercoment)
                               {
                                   var userData = users.Where(u => u.id == item.UserID);
-                               <div class = "eachcomment">
+                                  <div class = "eachcomment">
                                       @foreach (var user in userData)
                                       {                      
                                        <div class = "commenterProfile">
@@ -225,7 +244,7 @@
                      }
                       </div>   
                          
-                        </div>
+                     </div>
                      </div>                         
                     }
                 }

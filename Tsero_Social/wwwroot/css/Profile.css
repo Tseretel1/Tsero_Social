@@ -30,10 +30,15 @@ body {
     gap:40px;
     z-index:500;
 }
-.nav-item{
-    display:flex;
-    align-items:center;
-    text-decoration:none;
+.nav-item2 {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-right: 50px;
+    background-color: #0000007a;
+    backdrop-filter: blur(5px);
+    border-radius: 5px;
+    padding:5px;
 }
 .exitimg{
     width:40px;
@@ -43,29 +48,30 @@ body {
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    z-index: 5;
+    z-index: 5;    
 }
-.ExitButton{
-    color:white;
-    font-size:20px;
-    text-decoration:none;
-    transition:0.3s all ease-in-out; 
+.ExitButton {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    transition: 0.3s all ease-in-out;
+    text-shadow: 0px 0px 2px black;
+    margin:0;
 }
-.nav-item:hover .ExitButton{
-    text-shadow: 0px 0px 10px white;
+.nav-item2:hover .ExitButton {
+    text-shadow: 0px 0px 2px black;
     color: white;
 }
 .borderspan {
     width: 0px;
     height: 2px;
     transition: 0.3s all ease-in-out;
+    color: white;
 }
-.nav-item:hover .borderspan {
+.nav-item2:hover .borderspan {
     border: 1px solid red;
     width: 160px;
-    color:white;
-}
-.nav-item:hover .exitimg {
+    color: white;
 }
 .fileinput2 {
     color: black;
@@ -94,13 +100,16 @@ body {
 .updatepost {
     width: 90%;
     height: auto;
-    padding:40px 0px 40px 40px;
+    padding: 40px 0px 40px 40px;
     border-radius: 20px;
     display: flex;
     box-shadow: 0px 0px 20px black;
-    background-color: #3e393924;
     z-index: 500;
     backdrop-filter: blur(5px);
+    justify-content: space-between;
+    align-items: flex-start;
+    background-size: cover;
+    background-position: center;
 }
 .editbutton{
     background-size:cover;
@@ -181,7 +190,7 @@ body {
 }
 .Formdelete {
     height: 0;
-    width: 100%;
+    width: 90%;
     display:flex;
     justify-content:flex-end;
 }
@@ -292,23 +301,28 @@ body {
     width: 100%;
     filter: drop-shadow(0 0 23px var(--animation-color));
 }
-.Profile_data{
-    width:auto;
-    height:auto;
-    padding: 0px 10px 0px 10px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    align-items:center;
+.Profile_data {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    padding: 20px;
 }
-.userName{
-    font-size:20px; 
-    color:white;
+.userName {
+    font-size: 20px;
+    color: white;
+    text-shadow: 0px 0px 2px black;
 }
-.profileandName{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+.editbtn {
+    text-shadow: 0px 0px 2px black;
+}
+.profileandName {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 #ProfilePreview {
     width: 180px;
@@ -332,6 +346,59 @@ body {
     color:black;
 }
 
+.UploadPost {
+    width: 650px;
+    padding: 50px 0px 50px 0px;
+    border-radius: 10px;
+    background-color: rgb(26, 25, 25);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index: 2;
+    box-shadow:0px 0px 5px black;
+    border:1px solid grey;
+}
+.UploadProfile {
+    display: flex;
+    align-items: center;
+}
+.UploadPic{
+    width:70px;
+    height:70px;
+    border-radius:50%; 
+}
+.UploadUsername {
+    color:white;
+    font-size:18px;
+}
+.Whats_On_Your_Mind{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+.OnYourMindInput{
+    background-color:transparent;
+    border:none;
+    color:white;
+    outline:none;
+    border-bottom:1px solid white;
+}
+.onYourMIndLink {
+    text-decoration: none;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+    box-shadow: 0px 0px 5px black;
+    margin-top: 20px;
+    transition: 0.3s all ease-in-out;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+    transition:0.3s all ease-in-out;
+}
+.onYourMIndLink:hover{
+    color:white;
+}
 /*My Post */
 .MyPosts {
     width: clamp(280px, 75%, 900px);
