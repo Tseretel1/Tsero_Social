@@ -14,8 +14,6 @@
     <link rel="stylesheet" href="~/css/PostCards.css" asp-append-version="true" />
 </head>
 <body>
-
-
     <div class= "fixedelemt"></div>
         <header class= "navigatorrs">
         <nav class= "navigatorrs2 ">
@@ -147,6 +145,7 @@
                                 </div>
                                 <!--Follow person-->
                                 @{
+
                                     string Follow = "";
                                     var if_following = Follows.FirstOrDefault(u => u.FollowerID == @CurrentUserID && u.FollowingID == PostAuthor.id);
                                     if (if_following !=null)
@@ -158,12 +157,14 @@
                                         Follow = "Follow";
                                     }
                                 }
-                                
-                              <form class="FormFollow" method="post" asp-action="FollowPerson">
-                                  <input type="hidden"  name="FollowerID" value="@PostAuthor.id" />
-                                  <input type="hidden"  name="FollowingID" value="@CurrentUserID"/>
-                                  <button class= "Follow" Id = "Follow" >@Follow</button>
-                              </form>
+                                @if (post.UserID != CurrentUserID)
+                                {
+                                   <form class="FormFollow" method="post" asp-action="FollowPerson">
+                                         <input type="hidden"  name="FollowingID" value=" @PostAuthor.id"/>
+                                         <input type="hidden"  name="FollowerID" value="@CurrentUserID" />
+                                         <button class= "Follow" Id = "Follow" >@Follow</button>
+                                   </form>
+                                }
                               <!--Follow person-->
                           </div>
                           <div class= "Postcontent">

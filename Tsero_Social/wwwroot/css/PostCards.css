@@ -43,7 +43,14 @@
     background-size:cover;
     border:none;
 }
-
+.Follow {
+    color: white;
+    font-size: 20px;
+    transition: 0.2s all ease-in-out;
+    background-color: transparent;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
 .userdata {
     display: flex;
     width: 500px;
@@ -118,6 +125,7 @@
 .UpdateTextAndNameFlex{
     display:flex;
     align-items:flex-start;
+    flex-wrap :wrap;
 }
 .postDateParent {
     display: flex;
@@ -333,8 +341,8 @@
 @media only screen and (max-width: 700px) {
     .Each_Post {
         width: 500px;
+        padding: 20px 0px 20px 0px ;
     }
-
     .comment_likes {
         width: clamp(280px, 100%, 500px);
     }
@@ -402,12 +410,16 @@
     .flextitles{
         width:300px;
     }
+    .Follow {
+        font-size: 15px;
+    }
 }
 @media only screen and (max-width: 400px) {
 
     .Each_Post {
-       width:300px;
+        width: 300px;
         border-radius: 5px;
+        padding: 10px 0px 10px 0px;
     }
 
     .comment_likes {
@@ -438,7 +450,10 @@
         border-radius:3px;
     }
     .UpdatedText {
-        font-size: 10px;
+        font-size: 9px;
+    }
+    .Follow{
+        font-size:12px;
     }
 }
 @media only screen and (max-width: 300px) {

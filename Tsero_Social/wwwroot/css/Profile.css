@@ -77,7 +77,6 @@ body {
 .updatepost {
     width: 70%;
     height: auto;
-    padding: 40px 0px 40px 40px;
     border-radius: 20px;
     display: flex;
     box-shadow: 0px 0px 20px black;
@@ -88,6 +87,8 @@ body {
     background-position: center;
     background-size:cover;
     border:1px solid gray;
+    flex-direction:column;
+    padding: 10px 0px 10px 50px;
 }
 .commentinput{
     width:100%;
@@ -119,10 +120,25 @@ body {
     letter-spacing:1px;
     text-shadow:0px 0px 10px white;
 }
-.Xbutton{
-    border:None;
-    font-size:20px;
-    transition:0.3s all ease-in-out;
+.FollowContaoinerParent {
+    width: auto;
+    padding: 10px;
+    backdrop-filter: blur(50px);
+    background-color: #00000036;
+    border: 1px solid black;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border-radius:5px;
+}
+
+.FollowingCount {
+    color: white;
+}
+.Xbutton {
+    border: None;
+    font-size: 20px;
+    transition: 0.3s all ease-in-out;
 }
 .Xbutton:hover{
     color:red;  
@@ -227,44 +243,6 @@ body {
 
 .postform {
     gap: 20px;
-}
-
-.button {
-    --border-right: 6px;
-    --text-stroke-color: rgba(255, 255, 255, 0.6);
-    --animation-color: whitesmoke;
-    --fs-size: 2em;
-    letter-spacing: 3px;
-    text-decoration: none;
-    font-size: var(--fs-size);
-    font-family: "Arial";
-    position: relative;
-    text-transform: uppercase;
-    color: black;
-    -webkit-text-stroke: 1px var(--text-stroke-color);
-    border: 1px solid grey;
-    text-shadow: 0px 0px 3px white;
-    margin-top: 20px;
-    background-color:black;
-    border-radius:10px;
-}
-
-.hover-text {
-    position: absolute;
-    box-sizing: border-box;
-    content: attr(data-text);
-    color: black;
-    width: 0px;
-    inset: 0;
-    border-right: var(--border-right) solid var(--animation-color);
-    overflow: hidden;
-    transition: 0.5s;
-    -webkit-text-stroke: 1px var(--animation-color);
-}
-
-.button:hover .hover-text {
-    width: 100%;
-    filter: drop-shadow(0 0 23px var(--animation-color));
 }
 .Profile_data {
     width: auto;
@@ -391,27 +369,78 @@ body {
     align-items: center;
     gap:50px;
 }
+@media only screen and (max-width: 934px) {
+    .updatepost {
+        width: 650px;
+    }
+}
 @media only screen and (max-width: 700px) {
     .UploadPost {
         width:500px;
     }
+    .updatepost {
+        width: 550px;
+        padding:20px;
+    }
     #ProfilePictureCont {
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
     }
     .UploadPicMain {
-        width: 120px;
+        width: 100px;
     }
-    .userName{
-        font-size:16px;
+    .FollowingCount {
+        font-size: 12.5px;
+    }
+    .userName {
+        font-size: 16px;
     }
     .MyPosts {
         gap:20px;
     }
 }
+@media only screen and (max-width: 600px) {
+    .updatepost {
+        width: 490px;
+        padding: 20px;
+    }
+
+    .changebuttons {
+        font-size: 13px;
+    }
+
+    .UploadPicMain {
+        width: 70px;
+        height: auto;
+    }
+
+    #ProfilePictureCont {
+        width: 70px;
+        height: 70px;
+    }
+
+    .changebuttons {
+        font-size: 10px;
+    }
+
+    .userName {
+        font-size: 13px;
+    }
+
+    .FollowingCount {
+        font-size: 11px;
+    }
+
+    .FollowContaoinerParent {
+        padding: 5px;
+    }
+}
 @media only screen and (max-width: 500px) {
     .UploadPost {
         width: 400px;
+    }
+    .updatepost{
+        width:400px;
     }
 
 }
@@ -433,6 +462,15 @@ body {
     .OnYourMindInput{
         font-size:10px;
         width:100px;
+    }
+    .updatepost {
+        width: 300px;
+    }
+    .Profile_data{
+        padding:10px;
+    }
+    .updatepost{
+        padding:10px;
     }
 }
 @media only screen and (max-width: 300px) {

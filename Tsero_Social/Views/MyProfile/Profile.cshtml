@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - LectureStudentService</title>
+    <title>@ViewData["Title"] - Profile</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/Profile.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/PostCards.css" asp-append-version="true" />
@@ -31,29 +31,44 @@
                 </div>
             </div>
         </nav>
-       <form class="nav-item2" method="Get"  asp-controller="Login" asp-action="Exit">
-            <img class= "exitimg" src="/img/exit.png">
+       <div class="nav-item2">
+            <img class= "exitimg" src="/img/settings.png">
             <div class ="">
-               <button class="ExitButton">Exit From Account</button>
-               <div class="borderspan"></div>
+                  <a class="Settings" asp-controller="MyProfile" asp-action="Settings">
+                     <button class="ExitButton">Settings</button>
+                   </a>
+               </div>
             </div>
-        </form>
+       
     </header>
 
     <div class = "fixedContainerBackground"></div>
 @using (Html.BeginForm("Profile", "MyProfile", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
+        var Follows = ViewBag.Follows as List<Follow>;
         @if (ViewBag.UserPosts != null)
         {
             <div class="containercenter">
-               <div class="updatepost" id = "updatepost">         
-                 <script>
+               <div class="updatepost" id = "updatepost">  
+                   <div class = "FollowContaoinerParent">
+                     @{
+                         <div class = "FollowingCount">
+                            Followers @ViewBag.Followers
+                            
+                         </div>
+                         <div class = "FollowingCount">
+                            Following @ViewBag.Following
+                         </div>
+                     }
+                    </div>
+
+                  <script>
                       function CoverPhoto() {
                           var CoverContainer = document.getElementById("updatepost");
                           CoverContainer.style.background = "url('@(ViewBag.Cover)') center/cover";
                       }
                       CoverPhoto();
-               </script>
+                  </script>
                   <div class="Profile_data">
                      <div class="editFlex">
                        <div class="profileandName">
@@ -84,6 +99,7 @@
                              <a class= "changebuttons" asp-controller="MyProfile" asp-action="ProfileUpdate">Change Profile</a>
                              <a class= "changebuttons" asp-controller="MyProfile" asp-action="EditCover">Change Cover</a>
                           </div>
+
                        </div>
                     </div>
                 </div>

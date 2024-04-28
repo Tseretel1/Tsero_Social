@@ -1,0 +1,67 @@
+﻿
+@{
+    Layout = null;
+    IgnoreBody();
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] Profile update</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/Settings.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    @model User
+
+      <header class= "navigatorrs">
+        <nav class= "navigatorrs2 ">
+            <div class="container_fluidd">
+                <a class="Tsero_Social" asp-area="" asp-controller="Home" asp-action="Foryou">Tsero_Sociall</a>
+                <div class="navbarLIn">
+                    <div class="navbarLinks">
+                        <div class="nav-item">
+                            <a class="nav-links" asp-area="" asp-controller="Home" asp-action="Foryou"><img src="../img/smartphone.png" class="NavImgs"/> For You</a>
+                        </div>
+                        <div class="nav-item">
+                            <a class="nav-links" asp-area="" asp-controller="MyProfile" asp-action="Profile"><img src="../img/ProfileBackground.png"class="NavImgs"/> Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+   <div class="ProfileData_Update">
+    <form asp-action="Settings" method="post" enctype="multipart/form-data" class="Profile_Form">
+        <div class="form-group">
+            <label class="LabelData">UserName</label>
+            <input class="userdataInput" asp-for="@Model.Username" placeholder="@ViewBag.CurrentUser?.Username" />
+        </div>
+        <div class="form-group">
+            <label class="LabelData">Name</label>
+            <input class="userdataInput" asp-for="@Model.Name" placeholder="@ViewBag.CurrentUser?.Name" />
+        </div>
+        <div class="form-group">
+            <label class="LabelData">Lastname</label>
+            <input class="userdataInput" asp-for="@Model.Lastname" placeholder="@ViewBag.CurrentUser?.Lastname" />
+        </div>
+        <div class="form-group2">
+            <button class="EditButton" type="submit" data-text="Awesome" id="submitBtn">Edit</button>
+        </div>
+    </form>
+    <form class="nav-item2" method="Get"  asp-controller="Login" asp-action="Exit">
+       <img class= "exitimg" src="/img/exit.png">
+       <div class ="">
+          <button class="ExitButton">Exit From Account</button>
+          <div class="borderspan"></div>
+       </div>
+    </form>
+</div>
+
+
+</body>
+</html>

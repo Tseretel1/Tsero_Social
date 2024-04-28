@@ -64,27 +64,9 @@
               </div>
           </div>         
           <div class="submitbutton">
-              <button class="EditButton" type="submit" data-text="Awesome" id="submitBtn2">Upload Post </button>
-            
+              <button class="EditButton" type="submit" data-text="Awesome" id="submitBtn2">Upload Post </button>           
           </div>
        </form>  
-
-          <div class="Profile_Update_Form" id = "Profile_Update_container">
-              <form asp-action="ProfileUpdate" method="post" enctype="multipart/form-data" class="Profile_Form">
-                  <div class="form-group">
-                      <input class="userdataInput" asp-for="@Model.Username" placeholder="@ViewBag.CurrentUser.Username" />
-                  </div>
-                  <div class="form-group">
-                      <input class="userdataInput" asp-for="@Model.Name" placeholder="@ViewBag.CurrentUser.Name" />
-                      <input class="userdataInput" asp-for="@Model.Lastname" placeholder="@ViewBag.CurrentUser.Lastname" />
-                  </div>
-                  <div class="form-group">
-                      <button class="EditButton" type="submit" data-text="Awesome" id="submitBtn" >Edit</button>
-                  </div>
-              </form>  
-          </div>
-
-          <button id = "ButtonDzma">Switch to Profile </button>
       </div>
     }
           

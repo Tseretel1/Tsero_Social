@@ -126,14 +126,3 @@ body {
     color:white;
     font-size:15px;
 }
-.Follow{
-    color:white;
-    font-size:20px;
-    transition : 0.2s all ease-in-out;
-    background-color:transparent;
-    border:1px solid grey;
-    border-radius:5px;
-}
-.Follow:hover{
-        animation: rotateInCircle 0.3s linear infinite;
-}

@@ -58,6 +58,11 @@ namespace Tsero_Social.Controllers
                                 ViewBag.Cover = loggedUser.CoverPicture;
                                 ViewBag.isonline = loggedUser.Isonline;
                                 ViewBag.NoPosts = "NO Post Available";
+
+                                var Following = _userDbcontext.Follows.Where(u => u.FollowingID == loggedUser.id).Count();
+                                var Follower = _userDbcontext.Follows.Where(u => u.FollowerID == loggedUser.id).Count();
+                                ViewBag.Followers = Following;
+                                ViewBag.Following = Follower;
                                 var userPosts = _userDbcontext.Posts
                                 .Where(p => p.UserID == loggedUser.id)
                                 .OrderByDescending(u => u.DateTime)
@@ -137,7 +142,7 @@ namespace Tsero_Social.Controllers
             return NoContent();
         }
         [HttpGet]
-        public IActionResult ProfileUpdate()
+        public IActionResult ProfIleUpdate()
         {
             {
                 var item = _userService.GetUserLogedUsers();
@@ -152,11 +157,26 @@ namespace Tsero_Social.Controllers
                 return View("ProfIleUpdate");
             }
         }
-        [HttpPost]
-        public IActionResult ProfileUpdate(User user)
+        [HttpGet]
+        public IActionResult Settings()
         {
             {
-                ProfileGenerate();
+                var item = _userService.GetUserLogedUsers();
+                int id = 0;
+                foreach (var i in item)
+                {
+                    id = i.id;
+                    break;
+                }
+                var CurrentUser = _userDbcontext.Users.FirstOrDefault(u => u.id == id);
+                ViewBag.CurrentUser = CurrentUser;
+                return View("Settings");
+            }
+        }
+        [HttpPost]
+        public IActionResult Settings(User user)
+        {
+            {
                 var item = _userService.GetUserLogedUsers();
                 int id = 0;
                 foreach (var i in item)
@@ -167,7 +187,7 @@ namespace Tsero_Social.Controllers
                 var CurrentUser = _userDbcontext.Users.FirstOrDefault(u => u.id == id);
                 ViewBag.CurrentUser = CurrentUser;
                 _userService.ProfileUpdateForm(user);
-                return NoContent();
+                return View("Settings");
             }
         }
         [HttpPost]
