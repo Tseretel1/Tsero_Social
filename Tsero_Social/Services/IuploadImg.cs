@@ -6,5 +6,6 @@ namespace Tsero_Social.Services
     {
         void ProfilePicUpload(ImageUpload model, string title);
         void DeleteImg(string PostPhoto);
+        void UploadCover(ImageUpload model);
     }
 }

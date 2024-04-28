@@ -1,5 +1,6 @@
 ﻿@{
     Layout = null;
+    IgnoreBody();
 }
 @using Microsoft.AspNetCore.Mvc
 @using Microsoft.AspNetCore.Mvc.Rendering
@@ -76,8 +77,8 @@
               <button type="submit"  class= "submitbnt">Submit</button>
           </form>
           <!--Modal window-->
-                    @if (ViewBag.EmailExist != null)
-             {            
+             @if (ViewBag.EmailExist != null)                  
+             {              
               <script>
                       var modalwindow = document.getElementById("modalwindow");
                       var modal = document.getElementById("myModal");
@@ -88,7 +89,7 @@
                       setTimeout(function(){
                           modal.style.opacity = "1"; 
                           modalwindow.style.opacity = "1";
-                      }, 500);
+                      }, 0);
                       setTimeout(function(){
                           modalwindow.style.opacity = "0";
                           modal.style.opacity = "0";  

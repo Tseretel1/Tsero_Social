@@ -1,4 +1,7 @@
-﻿
+﻿@{
+    Layout = null;
+    IgnoreBody();
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,17 +11,50 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/Profile.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/PostCards.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
     @model Post;
-
+      <header class= "navigatorrs">
+        <nav class= "navigatorrs2 ">
+            <div class="container_fluidd">
+                <a class="Tsero_Social" asp-area="" asp-controller="Home" asp-action="Foryou">Tsero_Sociall</a>
+                <div class="navbarLIn">
+                    <div class="navbarLinks">
+                        <div class="nav-item">
+                            <a class="nav-links" asp-area="" asp-controller="Home" asp-action="Foryou"><img src="../img/smartphone.png" class="NavImgs"/> For You</a>
+                        </div>
+                        <div class="nav-item">
+                            <a class="nav-links" asp-area="" asp-controller="MyProfile" asp-action="Profile"><img src="../img/ProfileBackground.png"class="NavImgs"/> Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+       <form class="nav-item2" method="Get"  asp-controller="Login" asp-action="Exit">
+            <img class= "exitimg" src="/img/exit.png">
+            <div class ="">
+               <button class="ExitButton">Exit From Account</button>
+               <div class="borderspan"></div>
+            </div>
+        </form>
+    </header>
 
     <div class = "fixedContainerBackground"></div>
 @using (Html.BeginForm("Profile", "MyProfile", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
+        @if (ViewBag.UserPosts != null)
+        {
             <div class="containercenter">
-               <div class="updatepost">    
-                 <div class="Profile_data">
+               <div class="updatepost" id = "updatepost">         
+                 <script>
+                      function CoverPhoto() {
+                          var CoverContainer = document.getElementById("updatepost");
+                          CoverContainer.style.background = "url('@(ViewBag.Cover)') center/cover";
+                      }
+                      CoverPhoto();
+               </script>
+                  <div class="Profile_data">
                      <div class="editFlex">
                        <div class="profileandName">
                            <div id="ProfilePictureCont" id="editbutton">               
@@ -35,30 +71,22 @@
                            </div>
                            <p class= "userName">@ViewBag.Name @ViewBag.LastName</p>
                        </div>
-                       <div class="editbutton" id = "editbutton">
-                           <img src="../img/icons8-edit-30.png" class="editimage"/>
-                           <b class= "editbtn">Edit</b></div>
                        <div class="ChangeButtonsParent" id="ChangeButtonsParent">
                           <div class="Xbuttonalign"> 
-                              <form>
-                              <button class= "changebuttons Xbutton"  id="Xbutton">X</button>    
+                              <!--This forms does nothing, but if deleted causes some errors!-->
+                              <form class= "displaynoneForms">
+                                  <button class= "displaynoneForms"  id="Xbutton">X</button>    
                               </form>
+                              <!---->
+
                           </div>
                           <div class="changebuttonsdiv">
-                             <a class= "changebuttons" asp-controller="MyProfile" asp-action="ProfileUpdate">Edit Profile</a>
-                             <a class= "changebuttons">Edit Cover</a>
+                             <a class= "changebuttons" asp-controller="MyProfile" asp-action="ProfileUpdate">Change Profile</a>
+                             <a class= "changebuttons" asp-controller="MyProfile" asp-action="EditCover">Change Cover</a>
                           </div>
-
                        </div>
                     </div>
                 </div>
-                 <a class="nav-item2" asp-controller="Login" asp-action="Login">
-                    <img class= "exitimg" src="/img/exit.png">
-                    <div class ="">
-                       <p class="ExitButton">Exit From Account</p>
-                       <div class="borderspan"></div>
-                    </div>
-                </a>
             </div>  
 
 
@@ -92,9 +120,8 @@
               <!--My Post-->
               <div class="MyPosts">
 
-                @if (ViewBag.UserPosts != null)
-                {
-                    foreach (var post in ViewBag.UserPosts)
+               
+                    @foreach (var post in ViewBag.UserPosts)
                     {
 
                         string username = "";
@@ -161,13 +188,12 @@
                        <div class="Each_Post" id = "Each_Post">
 
                        <!--Post deletion-->
-                          <form class="Formdelete" method="post" asp-action="PostDelete">
+                           <form class="Formdelete" method="post" asp-action="PostDelete">
                                <input type="hidden" class="PostTodeltte" name="id" value="@post.Id" />
                                <input type="hidden" class="PostTodeltte" name="PostPhoto" value="@post.Photo" />
                                <button class="DeltePostButton" type="submit">Delete</button>  
                            </form>
-                            
-
+                       <!--Post deletion-->   
                           <div class="userdata">
                               <div class= "namephotoflex">
                                   <div class = "postDateParent">    
@@ -264,13 +290,13 @@
                      </div>
                      </div>                         
                     }
-                }
-                else
-                {
-                  <h1>@ViewBag.NoPosts</h1>
-                }
+
               </div>
             </div>
+           }
+           else
+           {
+           }
          <script src="/js/Profile.js"></script>
     }
 </body>

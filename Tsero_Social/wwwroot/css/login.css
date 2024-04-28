@@ -6,7 +6,18 @@
     background: url(../img/darkback5.jpeg);
     background-size:inherit;
 }
-
+.email{
+    display:flex;
+    width:100%;
+    height:100%;
+    z-index:100000;
+    position:fixed;
+    justify-content:center;
+    align-items:center;
+    font-size:40px;
+    color:white;
+    background-color:black;
+}
 
 .HeaderLayout {
     display: flex;

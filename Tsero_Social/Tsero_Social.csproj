@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\CoverPictures\" />
     <Folder Include="wwwroot\ProfilePictures\" />
     <Folder Include="wwwroot\UploadedPictures\" />
   </ItemGroup>

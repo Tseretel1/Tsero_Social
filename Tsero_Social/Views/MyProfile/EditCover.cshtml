@@ -1,16 +1,53 @@
-﻿
-
+﻿@{
+    Layout = null;
+    IgnoreBody();
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] Edit Cover</title>
-    <title>@ViewData["Title"] - LectureStudentService</title>
+    <title>@ViewData["Title"] Profile update</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/Profile_Update.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/UploadPost.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
-
+    @model User
+     <header class= "navigatorrs">
+        <nav class= "navigatorrs2 ">
+            <div class="container_fluidd">
+                <a class="Tsero_Social" asp-area="" asp-controller="Home" asp-action="Foryou">Tsero_Sociall</a>
+                <div class="navbarLIn">
+                    <div class="navbarLinks">
+                        <div class="nav-item">
+                            <a class="nav-links" asp-area="" asp-controller="Home" asp-action="Foryou"><img src="../img/smartphone.png" class="NavImgs"/> For You</a>
+                        </div>
+                        <div class="nav-item">
+                            <a class="nav-links" asp-area="" asp-controller="MyProfile" asp-action="Profile"><img src="../img/ProfileBackground.png"class="NavImgs"/> Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class= "centerUpload">
+       <div class ="ShareDay">
+           Update your Cover ...
+       </div>
+       <div class = "EditProfileContainer EditProfileContainer2" id ="EditProfileContainer2">
+           <form asp-action="EditCover" method="post" enctype="multipart/form-data" class="Profile_Photo_Update" id = "Profile_Photo_Update">
+              <div class="form-group">
+                  <div class="InputClasss">
+                     <input id="imageInput2" class="custom-file-input custom2" type="file" name="ImageFile" accept="image/*" onchange=" previewImage(event) " />
+                  </div>
+              </div>         
+              <div class="submitbutton">
+                  <button class="EditButton" id = "EditButton" type="submit" data-text="Awesome" id="submitBtn2">Upload Cover </button>
+              </div>
+           </form>  
+        </div>
+     </div>
+    <script src="/js/UploadCover.js"></script>
 </body>
 </html>

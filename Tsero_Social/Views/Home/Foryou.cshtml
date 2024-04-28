@@ -1,58 +1,51 @@
-﻿@using Microsoft.AspNetCore.Mvc
-@using Microsoft.AspNetCore.Mvc.Rendering
-@using Microsoft.AspNetCore.Mvc.TagHelpers
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model IEnumerable<Post>
-
-
+﻿@{
+    Layout = null;
+    IgnoreBody();
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] For You</title>
+    <title>@ViewData["Title"] - For You</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/PostCards.css" asp-append-version="true" />
 </head>
 <body>
 
+
     <div class= "fixedelemt"></div>
+        <header class= "navigatorrs">
+        <nav class= "navigatorrs2 ">
+            <div class="container_fluidd">
+                <a class="Tsero_Social" asp-area="" asp-controller="Home" asp-action="Foryou">Tsero_Sociall</a>
+                <div class="navbarLIn">
+                    <div class="navbarLinks">
+                        <div class="nav-item">
+                            <a class="nav-links" asp-area="" asp-controller="Home" asp-action="Foryou"><img src="../img/smartphone.png" class="NavImgs"/> For You</a>
+                        </div>
+                        <div class="nav-item">
+                            <a class="nav-links" asp-area="" asp-controller="MyProfile" asp-action="Profile"><img src="../img/ProfileBackground.png"class="NavImgs"/> Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
     <!--For You Page-->
-
+    @if (ViewBag.UserPosts != null)
+    {
     <div class="homepage">
-        @if (ViewBag.loginedornot == null)
-        {
-                  <h1 class= "viewbag">@ViewBag.loginedornot</h1>
-
-        }
-      <section class="foryoupage">
+ <section class="foryoupage">
 
       <div class="MyPosts"  data-page="1" id = "MyPosts">
-                @if (ViewBag.UserPosts != null)
-                {
-                    foreach (var post in Model)
+                    @foreach (var post in Model)
                     {
                         string username = "";
                         string profilepicture = "";
                         var postsList = ViewBag.Posts as List<User>;
-                        if (postsList != null)
-                        {
-                            var user = postsList.FirstOrDefault(u => u.id == post.UserID);
-                            if (user != null)
-                            {
-                                if (user.ProfilePicture != "")
-                                {
-                                    profilepicture = user.ProfilePicture;
-                                }
-                                else
-                                {
-                                    profilepicture = "/img/profile.png";
-                                }
-                                username = user.Username;
-                            }
-                        }
                         string comment = "";
                         string comenterUserName = "";
                         string ComenterProfilePicture = "";
@@ -63,6 +56,14 @@
                         var comcount = comments != null ? comments.Where(u => u.PostID == post.Id).Count() : 0;
                         var LikeCount = Likes != null ? Likes.Where(u => u.PostID == post.Id).Count() : 0;
                         string output = "";
+                        int CurrentUserID = 0;
+                        if (ViewBag.CurrentUser != null)
+                        {
+                            foreach (var item in ViewBag.CurrentUser)
+                            {
+                                CurrentUserID = item.id;
+                            }
+                        }
                         @if (LikeCount > 0)
                         {
                             output += LikeCount;
@@ -85,8 +86,26 @@
                           <div class="Each_Post" id = "Each_Post">
                           <div class="userdata">
                               <div class= "namephotoflex">
-                                  <div class = "postDateParent">    
-                                      <img class="PostProfile" src="@profilepicture" alt="">
+                                  <div class = "postDateParent"> 
+                                  @{ if (postsList != null)
+                                   {
+                                       var user = postsList.FirstOrDefault(u => u.id == post.UserID);
+                                       if (user != null)
+                                       {
+                                           if (user.ProfilePicture != "")
+                                           {
+                                               profilepicture = user.ProfilePicture;
+                                               <img class="PostProfile" src="@profilepicture" alt="">
+                                           }
+                                           else if(user.ProfilePicture == null)
+                                           {
+                                               <img class="PostProfile" src="../img/ProfileBackground.png" alt="">
+                                           }
+                                           username = user.Username;
+                                        }
+                                      }
+                                   }
+                                      
                                   </div>                   
                                   <div class= "UpdateProfile">
                                     <div class = "UpdateTextAndNameFlex">
@@ -144,7 +163,36 @@
 
 
                            <div class = "comment_likes">
-                                 <div class= "Like">Like</div>
+                            @if (ViewBag.CurrentUser != null)
+                             {
+                                        string Like = "Like";
+                                        string YouAnd = "By You And";
+                                        string Others = "Others";
+                                        int Likecount = 0;
+                                        @foreach(var like in Likes)
+                                        {
+                                            var LikeCountQuery = Likes.Where(u => u.PostID == @post.Id).Count();
+                                            var ifLiked = Likes.FirstOrDefault(u => u.UserID == @CurrentUserID && u.PostID == @post.Id);
+                                            if (ifLiked != null)
+                                            {
+                                                Like = "❤️";
+                                                Likecount = LikeCountQuery;
+                                            }
+                                            else
+                                            {
+                                                Like = "🤍";
+                                                Likecount = LikeCountQuery;
+                                            }
+                                          
+                                            
+                                        }
+                                        <form class="Formdelete" method="post" asp-action="Like">
+                                          <input type="hidden" class="LikeTosend" name="Postid" value="@post.Id" />
+                                          <input type="hidden" class="PostTodeltte" name="CurrentUserID" value="@CurrentUserID"/>
+                                          <button class= "Like" Id = "Like" >@Like @Likecount</button>
+                                        </form>
+                                }
+
                                <div class= "comclick">Comment @comcount</div>
                            </div>
 
@@ -180,12 +228,11 @@
                      </div>                         
                     }
                 }
-                else
-                {
-                    <h1>ViewBag.Noposts</h1>
-                }
+                
       </section>
     </div>
-  <script src="/js/Feed.js"></script>
+    }
+   <script src="/js/Like.js"></script>
+   <script src="/js/Foryou.js"></script>
 </body>
 </html>

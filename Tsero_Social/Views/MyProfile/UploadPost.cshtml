@@ -1,17 +1,39 @@
-﻿
+﻿@{
+    Layout = null;
+    IgnoreBody();
+}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] Profile update</title>
+    <title>@ViewData["Title"] Post Upload</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/UploadPost.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
     @model User
-       <div class = "EditProfileContainer">
+      <header class= "navigatorrs">
+        <nav class= "navigatorrs2 ">
+            <div class="container_fluidd">
+                <a class="Tsero_Social" asp-area="" asp-controller="Home" asp-action="Foryou">Tsero_Sociall</a>
+                <div class="navbarLIn">
+                    <div class="navbarLinks">
+                        <div class="nav-item">
+                            <a class="nav-links" asp-area="" asp-controller="Home" asp-action="Foryou"><img src="../img/smartphone.png" class="NavImgs"/> For You</a>
+                        </div>
+                        <div class="nav-item">
+                            <a class="nav-links" asp-area="" asp-controller="MyProfile" asp-action="Profile"><img src="../img/ProfileBackground.png"class="NavImgs"/> Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class = "centerUpload">
+       <div class = "EditProfileContainer" id = "EditProfileContainer">
               <div class ="ShareDay">
                   Share Your day Here...
               </div>
@@ -28,10 +50,11 @@
                   </div>
               </div>         
               <div class="submitbutton">
-                  <button class="EditButton" type="submit" data-text="Awesome" id="submitBtn2">Upload Post </button>
+                  <button class="EditButton" type="submit" data-text="Awesome" id="submitBtn2" onclick="Submit()">Upload Post</button>
               </div>
            </form>  
           </div>
+     </div>
     <script src="/js/UploadPost.js"></script>
 </body>
 </html>

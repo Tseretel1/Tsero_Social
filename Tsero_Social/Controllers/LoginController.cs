@@ -6,8 +6,8 @@ namespace Tsero_Social.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly IuserService _userService;
-        public LoginController(IuserService tuitionService)
+        private readonly UserServices _userService;
+        public LoginController(UserServices tuitionService)
         {
             _userService = tuitionService;
         }
@@ -20,8 +20,18 @@ namespace Tsero_Social.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            var ragaca =  _userService.GetUserLogedUsers().ToList();
+            ragaca.Clear();           
             return View();
         }
+        [HttpGet]
+        public IActionResult Exit()
+        {
+            var ragaca = _userService.GetUserLogedUsers();
+            ragaca.Clear();
+            return View("Login");
+        }
+
         [HttpPost]
         public IActionResult Login(string Email, string Password)
         {

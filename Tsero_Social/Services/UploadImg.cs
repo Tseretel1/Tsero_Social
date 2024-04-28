@@ -10,7 +10,6 @@ namespace Tsero_Social.Services
         private readonly IWebHostEnvironment _hostingEnvironment;
         private static readonly object lockObject = new object();
         private readonly UserDbcontext _dbcontext;
-        private readonly IuserService _userService;
         public UploadImg(IWebHostEnvironment hostingEnvironment, UserDbcontext db)
         {
             _hostingEnvironment = hostingEnvironment;
@@ -107,6 +106,72 @@ namespace Tsero_Social.Services
             }
          }
 
+        public void UploadCover(ImageUpload model)
+        {
+            lock (lockObject)
+            {
+                if (model.ImageFile != null && model.ImageFile.Length > 0)
+                {
+                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath + "/" + "CoverPictures/");
+                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ImageFile.FileName;
+                    string PattoDisplay = $"../CoverPictures/{uniqueFileName}";
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    var existingCover = _dbcontext.Users
+                        .Where(u => u.CoverPicture == PattoDisplay)
+                        .FirstOrDefault();
 
-}
+                    if (existingCover != null)
+                    {
+                        var existingFilePath = Path.Combine(_hostingEnvironment.WebRootPath, existingCover.CoverPicture.TrimStart('~', '/'));
+                        if (File.Exists(existingFilePath))
+                        {
+                            File.Delete(existingFilePath);
+                        }
+                        existingCover.CoverPicture = null;
+                        _dbcontext.SaveChanges();
+                    }
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        model.ImageFile.CopyTo(stream);
+                    }
+
+                    int userid = 0;
+                    bool Loginedornot = false;
+                    foreach (var item in User.Loged_user)
+                    {
+                        if (item != null)
+                        {
+                            Loginedornot = true;
+                            userid = item.id;
+                        }
+                    }
+
+                    if (Loginedornot)
+                    {
+                        var image = new ImageUpload
+                        {
+                            ImagePath = filePath,
+                            Title = null,
+                            PathToDisplay = PattoDisplay,
+                            Userid = userid,
+                        };
+                        _dbcontext.images.Add(image);
+                        _dbcontext.SaveChanges();
+
+                        var loggedUser = _dbcontext.Users.FirstOrDefault(u => u.id == userid);
+                        if (loggedUser != null)
+                        {
+                            loggedUser.CoverPicture = PattoDisplay;
+                            _dbcontext.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        model = null;
+                    }
+                }
+            }
+        }
+    }
 }

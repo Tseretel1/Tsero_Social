@@ -1,5 +1,8 @@
 ﻿
-
+@{
+    Layout = null;
+    IgnoreBody();
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,11 +11,39 @@
     <title>@ViewData["Title"] Profile update</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/Profile_Update.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
  @model User
+      <header class= "navigatorrs">
+        <nav class= "navigatorrs2 ">
+            <div class="container_fluidd">
+                <a class="Tsero_Social" asp-area="" asp-controller="Home" asp-action="Foryou">Tsero_Sociall</a>
+                <div class="navbarLIn">
+                    <div class="navbarLinks">
+                        <div class="nav-item">
+                            <a class="nav-links" asp-area="" asp-controller="Home" asp-action="Foryou"><img src="../img/smartphone.png" class="NavImgs"/> For You</a>
+                        </div>
+                        <div class="nav-item">
+                            <a class="nav-links" asp-area="" asp-controller="MyProfile" asp-action="Profile"><img src="../img/ProfileBackground.png"class="NavImgs"/> Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+
 
  <div class="top_space"></div>
+
+    @if (ViewBag.ProfileMessage != null)
+    {
+        <div class = "You_Updated">
+               @ViewBag.ProfileMessage
+        </div>
+    }   
     @if (ViewBag.CurrentUser != null)
     {
    <div class = "EditProfileContainer">

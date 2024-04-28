@@ -16,6 +16,9 @@ builder.Services.AddScoped<IpostService, postService>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<UserServices>();
 builder.Services.AddScoped<IuserService, UserServices>();
+builder.Services.AddScoped<LikeCommentService>();
+builder.Services.AddScoped<ILikeCommentService, LikeCommentService>();
+
 builder.Services.AddDbContext<UserDbcontext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("UserConection")));
 var app = builder.Build();

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.Intrinsics.X86;
 using Tsero_Social.Dbcontext;
 using Tsero_Social.Migrations;
 using Tsero_Social.Models;
@@ -29,8 +30,18 @@ namespace Tsero_Social.Controllers
             {
                 try
                 {
+                    bool IsLogged = true;
                     var logedUsers = _userService.GetUserLogedUsers();
-                    if (logedUsers != null && logedUsers.Any())
+                    if (logedUsers.Count > 0)
+                    {
+                        IsLogged = true;
+                    }
+
+                    else if (logedUsers.Count <= 0)
+                    {
+                        IsLogged = false;
+                    }
+                    if (IsLogged)
                     {
                         ViewBag.Users = _userDbcontext.Users.ToList();
                         ViewBag.Comments = _userDbcontext.Comments.ToList();
@@ -44,6 +55,7 @@ namespace Tsero_Social.Controllers
                                 ViewBag.LastName = loggedUser.Lastname;
                                 ViewBag.Username = $"@{loggedUser.Username}";
                                 ViewBag.Profile = loggedUser.ProfilePicture;
+                                ViewBag.Cover = loggedUser.CoverPicture;
                                 ViewBag.isonline = loggedUser.Isonline;
                                 ViewBag.NoPosts = "NO Post Available";
                                 var userPosts = _userDbcontext.Posts
@@ -57,12 +69,10 @@ namespace Tsero_Social.Controllers
                             }
                         }
                     }
-
-                    else
+                    else if (!IsLogged)
                     {
-                        ViewBag.LooginFirst = "Please Login First";
                         return RedirectToAction("Login", "Login");
-                    }
+                    }                
                     _userDbcontext.SaveChanges();
                     transaction.Commit();
 
@@ -97,25 +107,34 @@ namespace Tsero_Social.Controllers
             }
         }
         [HttpPost]
+        public IActionResult EditCover(ImageUpload model)
+        {
+            {
+                _Image.UploadCover(model);
+                return RedirectToAction("Profile", "MyProfile");
+            }
+        }
+        [HttpPost]
         public IActionResult Profile(ImageUpload model, string title)
         {
             {
                 ProfileGenerate();
-                _Image.ProfilePicUpload(model ,title);
-                return View("Profile");
-            }        
+                _Image.ProfilePicUpload(model, title);
+                ViewBag.ProfileMessage = "You Updated Profile Picture";
+                return RedirectToAction("ProfIleUpdate", "MyProfile");
+            }
         }
         [HttpGet]
         public IActionResult UploadPost()
-        {       
+        {
             return View("UploadPost");
         }
         [HttpPost]
-        public IActionResult PostPublish( string PostPost, ImageUpload model)
+        public IActionResult PostPublish(string PostPost, ImageUpload model)
         {
 
-            _ipostservice.PostWriting(PostPost, model);      
-            return View("UploadPost");
+            _ipostservice.PostWriting(PostPost, model);
+            return NoContent();
         }
         [HttpGet]
         public IActionResult ProfileUpdate()
@@ -148,13 +167,13 @@ namespace Tsero_Social.Controllers
                 var CurrentUser = _userDbcontext.Users.FirstOrDefault(u => u.id == id);
                 ViewBag.CurrentUser = CurrentUser;
                 _userService.ProfileUpdateForm(user);
-                return View("Profile");
+                return NoContent();
             }
         }
         [HttpPost]
         public IActionResult PostDelete(string PostPhoto, int id)
         {
-            _ipostservice.DeletePost(id,PostPhoto);
+            _ipostservice.DeletePost(id, PostPhoto);
             _Image.DeleteImg(PostPhoto);
             ProfileGenerate();
             return View("Profile");

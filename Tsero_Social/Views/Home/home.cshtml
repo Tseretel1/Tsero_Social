@@ -1,5 +1,6 @@
-﻿﻿@{
-    Layout =null;
+﻿@{
+    Layout = null;
+    IgnoreBody();
 }
 @using Microsoft.AspNetCore.Mvc
 @using Microsoft.AspNetCore.Mvc.Rendering
@@ -26,11 +27,6 @@
     <!--For You Page-->
 
     <div class="homepage">
-        @if (ViewBag.loginedornot == null)
-        {
-              <h1 class= "viewbag">@ViewBag.loginedornot</h1>
-
-         }
           <div class= "HeaderLayout">
                   <dvi class = "NavbarItself">
                      <li class="nav-item">
@@ -61,6 +57,14 @@
                         var comcount = comments != null ? comments.Where(u => u.PostID == post.Id).Count() : 0;
                         var LikeCount = Likes != null ? Likes.Where(u => u.PostID == post.Id).Count() : 0;
                         string output = "";
+                        int CurrentUserID = 0;
+                        if (ViewBag.CurrentUser != null)
+                        {
+                            foreach (var item in ViewBag.CurrentUser)
+                            {
+                                CurrentUserID = item.id;
+                            }
+                        }
                         @if (LikeCount > 0)
                         {
                             output += LikeCount;
@@ -96,7 +100,7 @@
                                            }
                                            else
                                            {
-                                               
+                                            
                                            }
                                            username = user.Username;
                                         }
@@ -124,17 +128,17 @@
                                       
                                            if (totalMinutes < 60)
                                            {                                           
-                                                                <p class="datetimetracking">@totalMinutes minutes ago</p>
+                                             <p class="datetimetracking">@totalMinutes minutes ago</p>
                                            }
                                            else if (totalHours < 24)
                                            {
                                                int remainingMinutes = totalMinutes % 60;
-                                                               <p class="datetimetracking">@totalHours hours and @remainingMinutes minutes ago</p>
+                                               <p class="datetimetracking">@totalHours hours and @remainingMinutes minutes ago</p>
                                            }
                                            else
                                            {
                                                int remainingHours = totalHours % 24;
-                                                               <p class="datetimetracking">@totalDays days, @remainingHours hours ago</p>
+                                               <p class="datetimetracking">@totalDays days, @remainingHours hours ago</p>
                                            }
                                        }
                                    </div>
@@ -159,9 +163,25 @@
                               </div>
 
 
-                           <div class = "comment_likes">
-                                 <div class= "Like">Like</div>
-                               <div class= "comclick">Comment @comcount</div>
+                           <div class = "comment_likes">       
+                                   @{  int Likecount = 0;
+                                        @foreach (var like in Likes)
+                                        {
+                                            var LikeCountQuery = Likes.Where(u => u.PostID == @post.Id).Count();
+                                            var ifLiked = Likes.FirstOrDefault(u => u.UserID == @CurrentUserID && u.PostID == @post.Id);
+                                            if (ifLiked != null)
+                                            {
+                                            
+                                                Likecount = LikeCountQuery;
+                                            }
+                                            else
+                                            {
+                                                Likecount = LikeCountQuery;
+                                            }                                
+                                        }
+                                    }
+                                 <a asp-controller="Login" asp-action="Login" class= "Like">🤍 @Likecount</a>     
+                                 <div class= "comclick">Comment @comcount</div>
                            </div>
 
                   <div class = "commentSection">
@@ -200,7 +220,7 @@
                 {
                     <h1>ViewBag.Noposts</h1>
                 }
-      </section>
+       </section>
        <script src="/js/Feed.js"></script>
     </div>
 </body>
