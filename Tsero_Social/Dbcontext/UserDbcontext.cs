@@ -18,6 +18,7 @@ namespace Tsero_Social.Dbcontext
         public DbSet<ImageUpload> images { get; set; }
         public DbSet<Comments> Comments { get; set; }
         public DbSet<Likes> Likes { get; set; }
+        public DbSet<Follow> Follows { get; set; }
         public UserDbcontext(DbContextOptions<UserDbcontext> options) : base(options)
         {
 

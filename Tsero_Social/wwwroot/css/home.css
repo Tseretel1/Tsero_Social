@@ -102,9 +102,9 @@ body {
     text-decoration:none;
 }
 .Like:hover{
-    color:orangered;
     letter-spacing:1px;
     animation: rotateInCircle 0.3s linear infinite;
+    color:white;
 }
 @keyframes rotateInCircle {
     0% {
@@ -114,7 +114,6 @@ body {
     30% {
         transform: rotate(2deg);
     }
-
     70% {
         transform: rotate(-2deg);
     }
@@ -126,4 +125,15 @@ body {
 .LikeCount{
     color:white;
     font-size:15px;
+}
+.Follow{
+    color:white;
+    font-size:20px;
+    transition : 0.2s all ease-in-out;
+    background-color:transparent;
+    border:1px solid grey;
+    border-radius:5px;
+}
+.Follow:hover{
+        animation: rotateInCircle 0.3s linear infinite;
 }

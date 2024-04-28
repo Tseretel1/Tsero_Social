@@ -18,6 +18,8 @@ builder.Services.AddScoped<UserServices>();
 builder.Services.AddScoped<IuserService, UserServices>();
 builder.Services.AddScoped<LikeCommentService>();
 builder.Services.AddScoped<ILikeCommentService, LikeCommentService>();
+builder.Services.AddScoped<Followserivce>();
+builder.Services.AddScoped<IfollowService, Followserivce>();
 
 builder.Services.AddDbContext<UserDbcontext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("UserConection")));

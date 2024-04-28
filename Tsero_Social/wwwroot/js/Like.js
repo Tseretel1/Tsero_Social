@@ -22,17 +22,14 @@ function applyEventListenersToNewButtons() {
         }
     });
 }
-var likeButtons = document.querySelectorAll('.Like');
-likeButtons.forEach(function (button) {
-    LikeFunc(button);
-    button.setAttribute('data-event-listener-applied', true);
-});
 
 window.addEventListener('load', function () {
     applyEventListenersToNewButtons();
+
     var observer = new MutationObserver(function () {
         applyEventListenersToNewButtons();
     });
+
     observer.observe(document.body, {
         childList: true,
         subtree: true

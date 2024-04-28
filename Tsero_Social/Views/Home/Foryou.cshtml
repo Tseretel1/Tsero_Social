@@ -53,8 +53,10 @@
                         var users = ViewBag.Users as List<User>;
                         var comments = ViewBag.Comments as List<Comments>;
                         var Likes = ViewBag.Likes as List<Likes>;
+                        var Follows = ViewBag.Follows as List<Follow>;
                         var comcount = comments != null ? comments.Where(u => u.PostID == post.Id).Count() : 0;
                         var LikeCount = Likes != null ? Likes.Where(u => u.PostID == post.Id).Count() : 0;
+                        var PostAuthor = users.FirstOrDefault(u => u.id == post.UserID);
                         string output = "";
                         int CurrentUserID = 0;
                         if (ViewBag.CurrentUser != null)
@@ -127,22 +129,42 @@
                                       
                                            if (totalMinutes < 60)
                                            {                                           
-                                                                <p class="datetimetracking">@totalMinutes minutes ago</p>
+                                               <p class="datetimetracking">@totalMinutes minutes ago</p>
                                            }
                                            else if (totalHours < 24)
                                            {
                                                int remainingMinutes = totalMinutes % 60;
-                                                               <p class="datetimetracking">@totalHours hours and @remainingMinutes minutes ago</p>
+                                               <p class="datetimetracking">@totalHours hours and @remainingMinutes minutes ago</p>
                                            }
                                            else
                                            {
                                                int remainingHours = totalHours % 24;
-                                                               <p class="datetimetracking">@totalDays days, @remainingHours hours ago</p>
-                                           }
-                                       }
-                                   </div>
-                                  </div>                                 
-                              </div>
+                                                    <p class="datetimetracking">@totalDays days, @remainingHours hours ago</p>
+                                                }
+                                            }
+                                        </div>
+                                    </div>                                 
+                                </div>
+                                <!--Follow person-->
+                                @{
+                                    string Follow = "";
+                                    var if_following = Follows.FirstOrDefault(u => u.FollowerID == @CurrentUserID && u.FollowingID == PostAuthor.id);
+                                    if (if_following !=null)
+                                    {
+                                        Follow = "Following";
+                                    }
+                                    else if(if_following == null)
+                                    {
+                                        Follow = "Follow";
+                                    }
+                                }
+                                
+                              <form class="FormFollow" method="post" asp-action="FollowPerson">
+                                  <input type="hidden"  name="FollowerID" value="@PostAuthor.id" />
+                                  <input type="hidden"  name="FollowingID" value="@CurrentUserID"/>
+                                  <button class= "Follow" Id = "Follow" >@Follow</button>
+                              </form>
+                              <!--Follow person-->
                           </div>
                           <div class= "Postcontent">
                               <div class="flextitles"> 
@@ -233,6 +255,7 @@
     </div>
     }
    <script src="/js/Like.js"></script>
+   <script src="/js/Follow.js"></script>
    <script src="/js/Foryou.js"></script>
 </body>
 </html>

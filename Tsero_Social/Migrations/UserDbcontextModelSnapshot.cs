@@ -45,6 +45,25 @@ namespace Tsero_Social.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("Tsero_Social.Models.Follow", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<int>("FollowerID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FollowingID")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Follows");
+                });
+
             modelBuilder.Entity("Tsero_Social.Models.ImageUpload", b =>
                 {
                     b.Property<int>("id")

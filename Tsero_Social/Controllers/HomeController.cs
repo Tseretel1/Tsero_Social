@@ -20,12 +20,14 @@ namespace Tsero_Social.Controllers
         private readonly UserDbcontext _dbcontext;
         private readonly UserServices _userServices;
         private readonly LikeCommentService _LikeComment;
-        public HomeController(IWebHostEnvironment hostingEnvironment, UserDbcontext db, UserServices userService, LikeCommentService likeComment)
+        private readonly Followserivce _followservice;
+        public HomeController(IWebHostEnvironment hostingEnvironment, UserDbcontext db, UserServices userService, LikeCommentService likeComment, Followserivce followservice)
         {
             _hostingEnvironment = hostingEnvironment;
             _dbcontext = db;
             _userServices = userService;
             _LikeComment = likeComment;
+            _followservice = followservice;
         }
         public IActionResult Index(int page = 1)
         {
@@ -133,6 +135,7 @@ namespace Tsero_Social.Controllers
                 ViewBag.Users = _dbcontext.Users.ToList();
                 ViewBag.Comments = _dbcontext.Comments.ToList();
                 ViewBag.Likes = _dbcontext.Likes.ToList();
+                ViewBag.Follows = _dbcontext.Follows.ToList();
                 ViewBag.UserPosts = allPosts;
                 ViewBag.Posts = new List<User>();
                 ViewBag.CurrentUser = _userServices.GetUserLogedUsers();
@@ -156,13 +159,18 @@ namespace Tsero_Social.Controllers
             return View("Login");
         }
 
+        [HttpPost]
         public IActionResult Like(int Postid, int CurrentUserID)
         {
             _LikeComment.PostToLike(Postid, CurrentUserID);
-            int updatedLikeCount = _LikeComment.GetLikeCount(Postid);
-            bool isLiked = _LikeComment.IsPostLikedByUser(Postid, CurrentUserID);
             return NoContent();
         }
 
+        [HttpPost]
+        public IActionResult FollowPerson(int FollowerID, int FollowingID)
+        {
+            _followservice.Follow(FollowerID, FollowingID);
+            return NoContent();
+        }
     }
 }
