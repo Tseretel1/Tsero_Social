@@ -17,6 +17,7 @@ function applyEventListenersToNewButtons() {
     var likeButtons = document.querySelectorAll('.Like');
     likeButtons.forEach(function (button) {
         if (!button.hasAttribute('data-event-listener-applied')) {
+            console.log('Applying event listener to new button:', button);
             LikeFunc(button);
             button.setAttribute('data-event-listener-applied', true);
         }
@@ -24,9 +25,11 @@ function applyEventListenersToNewButtons() {
 }
 
 window.addEventListener('load', function () {
+    console.log('Document loaded');
     applyEventListenersToNewButtons();
 
-    var observer = new MutationObserver(function () {
+    var observer = new MutationObserver(function (mutations) {
+        console.log('Mutation detected:', mutations);
         applyEventListenersToNewButtons();
     });
 

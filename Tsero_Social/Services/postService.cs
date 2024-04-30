@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Tsero_Social.Dbcontext;
+using Tsero_Social.InterFaces;
 using Tsero_Social.Migrations;
 using Tsero_Social.Models;
 

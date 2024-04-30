@@ -2,13 +2,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Tsero_Social.Dbcontext;
-
+using Tsero_Social.InterFaces;
 using Tsero_Social.Models;
 using Tsero_Social.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<NotificationsServices>();
+builder.Services.AddScoped<INotification, NotificationsServices>();
 builder.Services.AddScoped<UploadImg>();
 builder.Services.AddScoped<IuploadImg, UploadImg>();
 builder.Services.AddScoped<postService>();

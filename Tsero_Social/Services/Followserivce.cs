@@ -1,4 +1,5 @@
 ﻿using Tsero_Social.Dbcontext;
+using Tsero_Social.InterFaces;
 using Tsero_Social.Models;
 
 namespace Tsero_Social.Services
@@ -33,6 +34,46 @@ namespace Tsero_Social.Services
                     _Context.Follows.Add(Follow);
                     _Context.SaveChanges();
                 }
+            }
+        }
+
+        public void RemoveFollower(int UserToRmoveID, int MyID)
+        {
+            var IFfollowExists = _Context.Follows.FirstOrDefault(u => u.FollowerID == UserToRmoveID && u.FollowingID == MyID);
+            if (IFfollowExists != null)
+            {
+                _Context.Follows.Remove(IFfollowExists);
+                _Context.SaveChanges();
+            }
+            else if(IFfollowExists == null)
+            {
+                var NewFollower = new Follow
+                {
+                    FollowerID = UserToRmoveID,
+                    FollowingID = MyID
+                };
+                _Context.Follows.Add(NewFollower);
+                _Context.SaveChanges();
+            }
+        }
+
+        public void RemoveFollowing(int FollowingToDelete, int MyID)
+        {
+            var IFfollowExists = _Context.Follows.FirstOrDefault(u => u.FollowingID == FollowingToDelete && u.FollowerID == MyID);
+            if (IFfollowExists != null)
+            {
+                _Context.Follows.Remove(IFfollowExists);
+                _Context.SaveChanges();
+            }
+            else if (IFfollowExists == null)
+            {
+                var NewFollower = new Follow
+                {
+                     FollowingID = FollowingToDelete,
+                     FollowerID = MyID
+                };
+                _Context.Follows.Add(NewFollower);
+                _Context.SaveChanges();
             }
         }
     }

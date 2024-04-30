@@ -3,6 +3,8 @@ using System.Security.Policy;
 using Tsero_Social.Dbcontext;
 using Tsero_Social.Models;
 using System.IO;
+using Tsero_Social.InterFaces;
+
 namespace Tsero_Social.Services
 {
     public class UploadImg : IuploadImg

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.Intrinsics.X86;
 using Tsero_Social.Dbcontext;
+using Tsero_Social.InterFaces;
 using Tsero_Social.Migrations;
 using Tsero_Social.Models;
 using Tsero_Social.Services;
@@ -14,12 +15,14 @@ namespace Tsero_Social.Controllers
         private readonly UserDbcontext _userDbcontext;
         private readonly IuserService _userService;
         private readonly IpostService _ipostservice;
-        public MyProfileController(IuploadImg upload, UserDbcontext userDbcontext, IuserService userface, IpostService postService)
+        private readonly Followserivce _followservice; 
+        public MyProfileController(IuploadImg upload, UserDbcontext userDbcontext, IuserService userface, IpostService postService,Followserivce followserivce)
         {
             _Image = upload;
             _userDbcontext = userDbcontext;
             _userService = userface;
             _ipostservice = postService;
+            _followservice = followserivce;
         }
 
 
@@ -46,6 +49,7 @@ namespace Tsero_Social.Controllers
                         ViewBag.Users = _userDbcontext.Users.ToList();
                         ViewBag.Comments = _userDbcontext.Comments.ToList();
                         ViewBag.Likes = _userDbcontext.Likes.ToList();
+                        ViewBag.CurrentUser = _userService.GetUserLogedUsers();
                         foreach (var user in logedUsers)
                         {
                             var loggedUser = _userDbcontext.Users.FirstOrDefault(u => u.Email == user.Email && u.Password == user.Password);
@@ -59,10 +63,17 @@ namespace Tsero_Social.Controllers
                                 ViewBag.isonline = loggedUser.Isonline;
                                 ViewBag.NoPosts = "NO Post Available";
 
-                                var Following = _userDbcontext.Follows.Where(u => u.FollowingID == loggedUser.id).Count();
-                                var Follower = _userDbcontext.Follows.Where(u => u.FollowerID == loggedUser.id).Count();
-                                ViewBag.Followers = Following;
-                                ViewBag.Following = Follower;
+
+                                var Followers = _userDbcontext.Follows.Where(u => u.FollowingID == user.id).ToList();
+                                ViewBag.MyFollowers = Followers;
+                                var Following = _userDbcontext.Follows.Where(u => u.FollowerID == loggedUser.id).ToList();
+                                ViewBag.MyFollowings = Following;
+
+
+                                var FollowersCount = _userDbcontext.Follows.Where(u => u.FollowingID == loggedUser.id).Count();
+                                var FollowingCount = _userDbcontext.Follows.Where(u => u.FollowerID == loggedUser.id).Count();
+                                ViewBag.Followers = FollowersCount;
+                                ViewBag.Following = FollowingCount;
                                 var userPosts = _userDbcontext.Posts
                                 .Where(p => p.UserID == loggedUser.id)
                                 .OrderByDescending(u => u.DateTime)
@@ -198,5 +209,18 @@ namespace Tsero_Social.Controllers
             ProfileGenerate();
             return View("Profile");
         }
+        [HttpPost]
+        public IActionResult FollowerRemove(int UserToDeleteID,int MyID)
+        {
+            _followservice.RemoveFollower(UserToDeleteID, MyID);
+            return NoContent();
+        }
+        [HttpPost]
+        public IActionResult FollowIngRemove(int FollowingToDelete, int MyID)
+        {
+            _followservice.RemoveFollowing(FollowingToDelete, MyID);
+            return NoContent();
+        }
+
     }
 }

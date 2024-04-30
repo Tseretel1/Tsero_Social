@@ -1,19 +1,153 @@
-﻿html,
+﻿
+html,
 body {
     width: 100%;
     height: 100%;
     padding: 0;
     margin: 0;
+    top:0;
+    left:0;
+    position: absolute;
 }
-.PLease_Login_first {
+.XbuttonContainer {
+    width: 750px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    z-index: 290;
+    top: 0;
+    left: 0;
+}
+
+.ButtonX {
+    font-size: 40px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    z-index: 500;
+    cursor: pointer;
+    transition: 0.2s all ease-in-out;
+}
+.ButtonX:hover{
+    color:red;
+}
+.YOurFollowers{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    font-size:30px;
+    color:white;
+    padding:30px 0px 0px 0px;
+}
+
+.FollowersList {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 20;
+    z-index: 120;
+    background-color: #00000029;
+    backdrop-filter: blur(8px);
+    flex-direction: column;
+    position: fixed;
+}
+#FollowerWinodw {
+    display: none;
+}
+#FollowINGWinodw{
+    display:none;
+}
+.FollowerFont{
+    font-size:20px;
+}
+.FollowersContainer {
+    width: 650px;
+    height: auto;
+    background-color: #212121;
+    border-radius: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 0px 20px 30px 50px;
+    justify-content: center;
+    color: white;
+    box-shadow: 0px 0px 10px black;
+    border: 0.5px solid grey;
+}
+.FollowersContainer::-webkit-scrollbar {
+    width:10px;
 }
 
+.FollowersContainer::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+.FollowersContainer::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius:10px;
+}
+.FollowersContainer::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.EachFollower {
+    display: flex;
+    justify-content:space-between;
+    margin-top: 40px;
+    margin-top: 30px;
+}
+.EachFollowerRightSide{
+    display:flex;
+    align-items:center;
+}
+.DeletFollowerBUtton {
+    color: white;
+    background-color: transparent;
+    border: none;
+    padding: 0px 20px 0px 20px;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+.RemoveFollowingBUtton {
+    color: white;
+    background-color: transparent;
+    border: none;
+    padding: 0px 20px 0px 20px;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+.EachFollowerLeftSide {
+    display: flex;
+}
+.FollowerProfile {
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 1px solid white;
+}
+.FollowerPic {
+    width: 70px;
+    height: auto;
+}
+.BoldUsername{
+    font-weight:800;
+}
+.UserDataFlex {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.FollowerDataGap {
+    display: flex;
+    flex-direction: column;
+    margin-left: 14px;
+}
+
+.FolloweruserName {
+    color:grey;
+    font-weight:500;
+}
 .PleaseLogin {
     font-size: 40px;
     color: white;
@@ -41,8 +175,8 @@ body {
     justify-content : center;
     margin-top:80px;
     flex-direction:column;
-    gap:40px;
     z-index:500;
+    overflow-y:scroll;
 }
 .ExitFromAccount {
     display: flex;
@@ -62,7 +196,6 @@ body {
     align-items: center;
     background-color: rgb(26, 25, 25);
 }
-
 .img_content {
     width: 120px;
     height: 120px;
@@ -73,20 +206,24 @@ body {
     background-size: cover;
     border: none;
 }
-
 .updatepost {
     width: 70%;
     height: auto;
     border-radius: 20px;
     display: flex;
     box-shadow: 0px 0px 20px black;
-    z-index: 500;
+    z-index: 2;
     backdrop-filter: blur(5px);
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content:flex-start;
     background-position: center;
     background-size:cover;
     border:1px solid gray;
+    padding: 130px 0px 130px 0px;
+    justify-content:center;
+    max-width:1300px;
+}
+.updatepost:hover #changebuttons{
+    opacity:1;
     flex-direction:column;
     padding: 10px 0px 10px 50px;
 }
@@ -100,25 +237,81 @@ body {
     height: 40px;
 }
 .changebuttons {
-    border: none;
     background-color: transparent;
     color: white;
     text-decoration: none;
     display: flex;
-    flex-direction: column;
     font-weight: bold;
     cursor: pointer;
     width: auto;
-    border: none;
-    border-bottom: 1px solid white;
     text-align: center;
-    color:white;
+    color: white;
+    background-color: #00000024;
+    padding: 5px 0px 0px 0px ;
+    border-radius: 5px;
     transition: 0.3s all ease-in-out;
+    border: none;
+    box-shadow: 0px 0px 5px black;
 }
 .changebuttons:hover {
     color:white;
     letter-spacing:1px;
     text-shadow:0px 0px 10px white;
+}
+#changebuttons {
+    backdrop-filter: blur(5px);
+    background-color: #000000a1;
+    border: 1px solid black;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    text-shadow: 0px 0px 2px black;
+    transition:0.3s all ease-in-out;
+    opacity:1;
+    width:200px;
+    display:flex;
+    justify-content:center;
+    opacity:0;
+}
+#changebuttons:hover {
+    background-color: #0000004d;
+}
+.FollowContaoinerParent {
+    width: auto;
+    padding: 10px 20px 10px 20px;
+    backdrop-filter: blur(50px);
+    background-color: #00000036;
+    border: 1px solid black;
+    display: flex;
+    gap: 50px;
+    border-radius: 5px;
+    color: white;
+    align-items:center;
+    cursor :pointer;
+}
+.ProfileUserNameColumn{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+.FollowerLine {
+    width: 0px;
+    transition: 0.1s all ease-in-out;
+    border: 1px solid transparent;
+}
+.FollowerHover:hover .FollowerLine {
+    width: 100%;
+    border: 1px solid white;
+}
+.FollowingHover:hover .FollowingLine {
+    width: 100%;
+    border: 1px solid white;
+}
+.FollowingLine {
+    width: 0px;
+    transition: 0.1s all ease-in-out;
+    border: 1px solid transparent;
 }
 .FollowContaoinerParent {
     width: auto;
@@ -174,16 +367,21 @@ body {
     display:flex;
     justify-content:flex-end;
 }
-.DeltePostButton{
-    width:100px;
-    height:30px;
-    border:none;
-    outline:none;
-    background-color:red;
-    color:white;
-    border-radius:5px;
-    font-size:15px;
-    z-index:4;
+.DeltePostButton {
+    width: 100px;
+    height: 30px;
+    border: 1px solid grey;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    border-radius: 5px;
+    font-size: 15px;
+    z-index: 4;
+    transition:0.3s all ease-in-out;
+}
+.DeltePostButton:hover{
+    background-color:white;
+    color:black;
 }
 .prof_back {
     width: 150px;
@@ -249,18 +447,28 @@ body {
     height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     border-radius: 10px;
-    padding: 20px;
-    backdrop-filter: blur(50px);
-    background-color: #00000036;
-    border:1px solid black;
+    margin-bottom: 20px;
+    position: absolute;
+    top: 100px;
+    left: 30px;
 }
 .userName {
-    font-size: 20px;
+    font-size: 15px;
     color: white;
     text-shadow: 0px 0px 2px black;
+    max-width:150px;
+    flex-wrap:wrap;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    margin:0;
+}
+.userNameAndLastName{
+    margin:0;
 }
 .editbtn {
     text-shadow: 0px 0px 2px black;
@@ -307,10 +515,19 @@ body {
     z-index: 2;
     box-shadow:0px 0px 5px black;
     border:1px solid grey;
+    margin-top:80px;
+    display:flex;
+    flex-direction:column;
+    gap:40px;
+}
+.cameraButton {
+    width: 20px;
 }
 .UploadProfile {
     display: flex;
     align-items: center;
+    width:70%;
+    justify-content:space-between;
 }
 .DefaultProfile {
     width: 70px;
@@ -378,6 +595,11 @@ body {
     .UploadPost {
         width:500px;
     }
+
+    .UploadPicMain {
+        width: 120px;
+        height: auto;
+    }
     .updatepost {
         width: 550px;
         padding:20px;
@@ -386,7 +608,11 @@ body {
         width: 100px;
         height: 100px;
     }
-    .UploadPicMain {
+    .updatepost {
+        width: 550px;
+        padding: 90px 0px 90px 0px;
+    }
+.UploadPicMain {
         width: 100px;
     }
     .FollowingCount {
@@ -397,6 +623,74 @@ body {
     }
     .MyPosts {
         gap:20px;
+    }
+    .FollowersContainer{
+        width:550px;
+    }
+    .XbuttonContainer {
+        width: 600px;
+    }
+    .Profile_data {
+        top: 70px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .updatepost {
+        width: 490px;
+        padding: 70px 0px 70px 0px;
+    }
+
+    .changebuttons {
+        font-size: 13px;
+    }
+    .UploadPicMain {
+        width: 100px;
+        height: auto;
+    }
+
+    #ProfilePictureCont {
+        width: 100px;
+        height: 100px;
+    }
+
+    .changebuttons {
+        font-size: 10px;
+    }
+
+    .userName {
+        font-size: 13px;
+        max-width:100px;
+    }
+
+    .FollowingCount {
+        font-size: 11px;
+    }
+
+    .FollowContaoinerParent {
+        padding: 5px;
+    }
+    .FollowersContainer {
+        width: 450px;
+        padding: 0px 10px 20px 10px;
+    }
+    .XbuttonContainer {
+        width: 500px;
+    }
+    .FollowerProfile{
+        width:50px;
+        height:50px;
+    }
+    .FollowerPic{
+        width:50px;
+    }
+    .FolloweruserName{
+        font-size:13px;
+    }
+    .UserDataFlex{
+        gap:5px;
+    }
+    .Profile_data {
+        top: 65px;
     }
 }
 @media only screen and (max-width: 600px) {
@@ -441,13 +735,75 @@ body {
     }
     .updatepost{
         width:400px;
+        padding : 50px 0px 50px 0px;
+    }
+    .Profile_data {
+        top: 50px;
+    }
+    .XbuttonContainer {
+        width: 400px;
+    }
+    .FollowersContainer {
+        width: 400px;
+        padding: 0px 10px 20px 10px;
     }
 
+    .FollowerProfile {
+        width: 60px;
+        height: 60px;
+    }
+
+    .FollowerPic {
+        width: 60px;
+    }
+
+    .FolloweruserName {
+        font-size: 15px;
+    }
+
+    .UserDataFlex {
+        gap: 5px;
+    }
+    .DeletFollowerBUtton{
+        padding: 0px 10px 0px 10px;
+    }
+    .BoldUsername{
+        font-size:18px;
+        font-weight:500;
+    }
+    .FolloweruserName{
+        font-size:12px;
+    }
+    .DeletFollowerBUtton{
+        padding:0px 5px 0px 5px;
+        font-size:14px;
+    }
+
+    .UploadPicMain {
+        width: 80px;
+        height: auto;
+    }
+
+    #ProfilePictureCont {
+        width: 80px;
+        height: 80px;
+    }
+    .FollowContaoinerParent{
+        gap:20px;
+    }
 }
 @media only screen and (max-width: 400px) {
     .UploadPost {
         width: 300px;
         padding:10px 0px 10px 0px ;
+    }
+    .updatepost {
+        width: 290px;
+        padding: 40px 0px 40px 0px
+    }
+    .Profile_data {
+        top: 40px;
+        left:0;
     }
     .DefaultProfile{
         width:40px;
@@ -463,14 +819,40 @@ body {
         font-size:10px;
         width:100px;
     }
-    .updatepost {
+    .FollowersContainer {
+        width: 300px;
+        padding: 0px 10px 20px 10px;
+    }
+    .XbuttonContainer {
         width: 300px;
     }
-    .Profile_data{
-        padding:10px;
+
+    .FollowerProfile {
+        width: 50px;
+        height: 50px;
     }
-    .updatepost{
-        padding:10px;
+
+    .FollowerPic {
+        width: 50px;
+    }
+
+    .FolloweruserName {
+        font-size: 13px;
+    }
+    .UploadPicMain {
+        width: 60px;
+        height: auto;
+    }
+
+    #ProfilePictureCont {
+        width: 60px;
+        height: 60px;
+    }
+    .FollowContaoinerParent {
+        gap: 10px;
+    }
+    .FollowerFont{
+        font-size:15px;
     }
 }
 @media only screen and (max-width: 300px) {
@@ -479,7 +861,12 @@ body {
         padding: 10px 0px 10px 0px;
         border-radius:3px;
     }
-
+    .FollowersContainer{
+        width:270px;
+    }
+    .XbuttonContainer {
+        width: 270px;
+    }
     .DefaultProfile {
         width: 30px;
         height: 30px;
@@ -497,4 +884,14 @@ body {
         font-size: 10px;
         width: 80px;
     }
+    .updatepost {
+        width: 270px;
+        padding: 30px 0px 30px 0px
+    }
+
+    .Profile_data {
+        top: 30px;
+        left: 0;
+    }
+
 }

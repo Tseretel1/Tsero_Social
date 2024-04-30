@@ -1,6 +1,20 @@
 .nav-item {
     color: white;
 }
+::-webkit-scrollbar {
+    width: 15px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #212121;
+}
+::-webkit-scrollbar-thumb {
+    background: white;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: white;
+}
+
 .container_fluidd {
     display: flex;
     gap: 30px;
@@ -26,7 +40,7 @@
     width: 100%;
     background-color: rgba(0, 0, 0, 0.199);
     backdrop-filter: blur(60px);
-    z-index: 5000;
+    z-index: 100;
     box-shadow: 0px 0px 10px black;
     display: flex;
     height: 50px;
@@ -106,6 +120,7 @@
     margin: 0;
     background-color:transparent;
     border:none;
+    cursor:pointer;
 }
 
 .nav-item2:hover .ExitButton {
@@ -127,7 +142,7 @@
 }
 .exitimg {
     width: 30px;
-    height:25px;
+    height:30px;
 }
 @media only screen and (max-width: 600px) {
     .ExitButton {
@@ -135,28 +150,29 @@
     }
     .exitimg{
         width:20px;
-        height:15px;
+        height:20px;
     }
     .NavImgs {
-        width: 15px;
+        width: 20px;
     }
     .nav-links{
-        font-size:13px;
+        font-size:20px;
     }
-    .Tsero_Social{
-        font-size:16px;
+    .ExitButton{
+        font-size:20px;
     }
-    .navigatorrs{
-        padding:0;
+    .navigatorrs {
+        padding: 40px;
     }
     .container_fluidd {
         gap: 10px;
     }
+    .Tsero_Social {
+        display: none;
+    }
 }
-
-@media only screen and (max-width: 600px) 
-{
-    .Tsero_Social{
-        display:none;
+@media only screen and (max-width: 400px) {
+    .navbarLinks {
+        flex-wrap: wrap;
     }
 }
