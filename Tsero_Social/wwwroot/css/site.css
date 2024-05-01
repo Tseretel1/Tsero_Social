@@ -1,37 +1,53 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
 .nav-item {
     color: white;
 }
+
 ::-webkit-scrollbar {
     width: 15px;
     height: 10px;
 }
+
 ::-webkit-scrollbar-track {
     background: #212121;
 }
+
 ::-webkit-scrollbar-thumb {
     background: white;
 }
-::-webkit-scrollbar-thumb:hover {
-    background: white;
-}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: white;
+    }
 
 .container_fluidd {
     display: flex;
     gap: 30px;
     padding: 0;
 }
-.Tsero_Social{
-    color:white;
-    display:flex;
-    align-items:center;
-    text-decoration:none;
-}
-.Tsero_Social:hover {
+
+.Tsero_Social {
     color: white;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
 }
-.NavImgs{
-    width:20px;
+
+    .Tsero_Social:hover {
+        color: white;
+    }
+
+.NavImgs {
+    width: 20px;
 }
+
 .navigatorrs {
     margin: 0;
     padding: 0;
@@ -48,44 +64,51 @@
     justify-content: space-between;
     padding: 0px 20px 0px 20px;
 }
+
 .navbarLIn {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: auto;
 }
+
 .navbarLinks {
     display: flex;
     align-items: center;
     color: white;
-    gap:20px;
+    gap: 20px;
     margin: 0;
 }
+
 .nav-links {
     color: white;
     text-decoration: none;
-
 }
 
-.nav-links:hover {
-    color: lightblue;
-    text-shadow: 0px 0px 5px lightblue;
-    animation: rotateInCircle 0.3s linear infinite;
-}
+    .nav-links:hover {
+        color: lightblue;
+        text-shadow: 0px 0px 5px lightblue;
+        animation: rotateInCircle 0.3s linear infinite;
+    }
+
 @keyframes rotateInCircle {
     0% {
         transform: rotate(0deg);
     }
+
     30% {
         transform: rotate(2deg);
     }
+
     70% {
         transform: rotate(-2deg);
     }
+
     100% {
         transform: rotate(0deg);
     }
 }
+
 @media only screen and (max-width: 500px) {
     .EditProfileContainer {
         width: 350px;
@@ -103,12 +126,98 @@
         width: 250px;
     }
 }
+
+.SettingsBurger{
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+.BurgerButtonFixed {
+    width: 90%;
+    height: 30px;
+    display: flex;
+    position: fixed;
+    justify-content: flex-end;
+}
+
+.SpanLines {
+    width: 30px;
+    border-bottom: 4px solid white;
+}
+
+.BurgerButton {
+    width: 100px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display:none;
+}
+
+.HeaderBurgerContainer {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 500;
+    background-color: black;
+    background-color: #00000030;
+    backdrop-filter: blur(6px);
+    justify-content: flex-end;
+}
+
+#HeaderBurgerContainer {
+    display: none;
+}
+
+.HeaderBurger {
+    width: 0%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    border-radius: 20px 0px 0px 0px;
+    align-items: center;
+}
+
+.NavBurgerAlign {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    gap: 50px;
+}
+
 .nav-item2 {
     display: flex;
     align-items: center;
     text-decoration: none;
     border-radius: 5px;
     padding: 5px;
+}
+
+.NavImgsBurger {
+    width: 40px;
+}
+
+.BurgerNavLinks {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.NavBurger {
+    width: 200px;
+    opacity: 0;
+}
+
+.BurgerXbuttonAlign {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    height: 70px;
+    align-items: center;
 }
 
 .ExitButton {
@@ -118,9 +227,9 @@
     transition: 0.3s all ease-in-out;
     text-shadow: 0px 0px 2px black;
     margin: 0;
-    background-color:transparent;
-    border:none;
-    cursor:pointer;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
 
 .nav-item2:hover .ExitButton {
@@ -140,39 +249,41 @@
     border-style: solid;
     border-image: linear-gradient(to right, black, white) 1;
 }
+
 .exitimg {
     width: 30px;
-    height:30px;
+    height: 30px;
+}
+@media only screen and (max-width: 700px) {
+    .BurgerButton {
+        display: flex;
+    }
+    .navbarLIn{
+        display:none;
+    }
+    .Settings{
+        display:none;
+    }
 }
 @media only screen and (max-width: 600px) {
     .ExitButton {
-        font-size:15px;
+        font-size: 15px;
     }
-    .exitimg{
-        width:20px;
-        height:20px;
-    }
-    .NavImgs {
+
+    .exitimg {
         width: 20px;
+        height: 20px;
     }
-    .nav-links{
-        font-size:20px;
+
+    .ExitButton {
+        font-size: 20px;
     }
-    .ExitButton{
-        font-size:20px;
-    }
+
     .navigatorrs {
         padding: 40px;
     }
+
     .container_fluidd {
         gap: 10px;
-    }
-    .Tsero_Social {
-        display: none;
-    }
-}
-@media only screen and (max-width: 400px) {
-    .navbarLinks {
-        flex-wrap: wrap;
     }
 }

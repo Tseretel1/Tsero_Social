@@ -12,36 +12,68 @@
     <link rel="stylesheet" href="~/css/Profile.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/PostCards.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="icon" type="image/x-icon" href="../img/Tlogo.jpg">    
+    <link rel="icon" type="image/x-icon" href="../img/Tlogo.jpg"> 
 </head>
 <body>
-
+   <script src="../js/Profile.js"></script>
+   <script src="../js/site.js"></script>
     @model Post;
-      <header class= "navigatorrs">
-        <nav class= "navigatorrs2 ">
-            <div class="container_fluidd">
-                <a class="Tsero_Social" asp-area="" asp-controller="Home" asp-action="Foryou">Tsero_Sociall</a>
-                <div class="navbarLIn">
-                    <div class="navbarLinks">
-                        <div class="nav-item">
-                            <a class="nav-links" asp-area="" asp-controller="Home" asp-action="Foryou"><img src="../img/smartphone.png" class="NavImgs"/> For You</a>
-                        </div>
-                        <div class="nav-item">
-                            <a class="nav-links" asp-area="" asp-controller="MyProfile" asp-action="Profile"><img src="../img/ProfileBackground.png"class="NavImgs"/> Profile</a>
-                        </div>
+    <header class= "navigatorrs">   
+    <nav class= "navigatorrs2 ">
+        <div class="container_fluidd">
+            <a class="Tsero_Social" asp-area="" asp-controller="Home" asp-action="Foryou">Tsero_Sociall</a>
+            <div class="navbarLIn">
+                <div class="navbarLinks">
+                    <div class="nav-item">
+                        <a class="nav-links" asp-area="" asp-controller="Home" asp-action="Foryou"><img src="../img/smartphone.png" class="NavImgs"/> For You</a>
+                    </div>
+                    <div class="nav-item">
+                        <a class="nav-links" asp-area="" asp-controller="MyProfile" asp-action="Profile"><img src="../img/ProfileBackground.png"class="NavImgs"/> Profile</a>
                     </div>
                 </div>
             </div>
-        </nav>
-       <div class="nav-item2">
-          <a class="Settings" asp-controller="MyProfile" asp-action="Settings">
-              <img class= "exitimg" src="/img/settings.png">
-              <button class="ExitButton">Settings</button>     
-              <div class = "BottomLine"></div>
-          </a>
-      </div> 
-       
-    </header>
+        </div>
+    </nav>       
+   <div class="nav-item2">
+      <a class="Settings" asp-controller="MyProfile" asp-action="Settings">
+          <img class= "exitimg" src="/img/settings.png">
+          <button class="ExitButton">Settings</button>     
+          <div class = "BottomLine"></div>
+      </a>
+  </div> 
+
+  <button class= "BurgerButton" id = "BurgerButton" onclick="BurgerMenuShow()">
+    <div class= "SpanLines Line1"></div>
+    <div class= "SpanLines Line2"></div>
+    <div class= "SpanLines Line3"></div>
+  </button>
+</header>
+<header class= "HeaderBurgerContainer" id = "HeaderBurgerContainer">
+    <div class = "HeaderBurger" id = "HeaderBurger">
+        <div class= "BurgerXbuttonAlign">
+          <div class= "BurgerButton"  id = "BurgerButton2">
+             <div class= "SpanLines Line1"></div>
+             <div class= "SpanLines Line2"></div>
+             <div class= "SpanLines Line3"></div>
+         </div>
+        </div>
+       <div class= "NavBurgerAlign">
+          <div class="nav-item NavBurger">
+             <a class="BurgerNavLinks" asp-area="" asp-controller="Home" asp-action="Foryou"><img src="../img/smartphone.png" class="NavImgsBurger"/> For You</a>
+          </div>
+         <div class="nav-item NavBurger">
+             <a class="BurgerNavLinks" asp-area="" asp-controller="MyProfile" asp-action="Profile"><img src="../img/ProfileBackground.png"class="NavImgsBurger"/> Profile</a>
+         </div>
+           <div class="nav-item2 NavBurger">
+              <a class="SettingsBurger" asp-controller="MyProfile" asp-action="Settings">
+                  <img class= "exitimg" src="/img/settings.png">
+                  <button class="ExitButton">Settings</button>     
+                  <div class = "BottomLine"></div>
+              </a>
+           </div> 
+       </div>
+    </div>
+</header>
 
     <div class = "fixedContainerBackground"></div>
 
@@ -166,15 +198,14 @@
         {
             <div class="containercenter">
                <div class="updatepost" id = "updatepost"> 
-                 <a id  = "changebuttons" asp-controller="MyProfile" asp-action="EditCover">Change Your Cover</a>
+                 <a id  = "changebuttons" asp-controller="MyProfile" asp-action="EditCover">+ Update Cover</a>
                   <script>
                       function CoverPhoto() {
                           var CoverContainer = document.getElementById("updatepost");
                           CoverContainer.style.background = "url('@(ViewBag.Cover)') center/cover";
                       }
                       CoverPhoto();
-                  </script>
-                  <div class="Profile_data">                    
+                  </script>                
                   <div class="Profile_data">
                      <div class="editFlex">
                        <div class="profileandName">
@@ -182,6 +213,7 @@
                                 @{
                                     if (@ViewBag.Profile != null)
                                     {
+                                            <a class= "changebuttons" asp-controller="MyProfile" asp-action="ProfileUpdate"><img src = "../img/Camera.png" class= "cameraButton"></a>
                                             <img class="UploadPicMain" src="@ViewBag.Profile" alt="">
                                     }
                                     else
@@ -205,7 +237,7 @@
                     </div>
                 </div>
             </div>  
-         </div>
+
          
             <!--Upload Post-->
             <div class= "UploadPost">
@@ -236,9 +268,6 @@
                          </div>
                      }
                  </div>
-                <div class= "UploadProfile">
-                   <a class= "changebuttons" asp-controller="MyProfile" asp-action="ProfileUpdate"><img src = "../img/Camera.png" class= "cameraButton"> Change Your Profile</a>
-                </div>
                 <div class ="Whats_On_Your_Mind">
                   <input class = "OnYourMindInput" placeholder = "What on your mind?">
                        <a class="onYourMIndLink" asp-controller="MyProfile" asp-action="UploadPost">
@@ -428,8 +457,8 @@
            else
            {
            }
-    }
-  
+    } 
    <script src="../js/Profile.js"></script>
+   <script src="../js/site.js"></script>
   </body>
 </html>

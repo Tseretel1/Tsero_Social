@@ -21,23 +21,55 @@
 <body>
     @model User
 
-      <header class= "navigatorrs">
-        <nav class= "navigatorrs2 ">
-            <div class="container_fluidd">
-                <a class="Tsero_Social" asp-area="" asp-controller="Home" asp-action="Foryou">Tsero_Sociall</a>
-                <div class="navbarLIn">
-                    <div class="navbarLinks">
-                        <div class="nav-item">
-                            <a class="nav-links" asp-area="" asp-controller="Home" asp-action="Foryou"><img src="../img/smartphone.png" class="NavImgs"/> For You</a>
-                        </div>
-                        <div class="nav-item">
-                            <a class="nav-links" asp-area="" asp-controller="MyProfile" asp-action="Profile"><img src="../img/ProfileBackground.png"class="NavImgs"/> Profile</a>
-                        </div>
+    <header class= "navigatorrs">   
+    <nav class= "navigatorrs2 ">
+        <div class="container_fluidd">
+            <a class="Tsero_Social" asp-area="" asp-controller="Home" asp-action="Foryou">Tsero_Sociall</a>
+            <div class="navbarLIn">
+                <div class="navbarLinks">
+                    <div class="nav-item">
+                        <a class="nav-links" asp-area="" asp-controller="Home" asp-action="Foryou"><img src="../img/smartphone.png" class="NavImgs"/> For You</a>
+                    </div>
+                    <div class="nav-item">
+                        <a class="nav-links" asp-area="" asp-controller="MyProfile" asp-action="Profile"><img src="../img/ProfileBackground.png"class="NavImgs"/> Profile</a>
                     </div>
                 </div>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>       
+   <div class="nav-item2">
+      <a class="Settings" asp-controller="MyProfile" asp-action="Settings">
+          <img class= "exitimg" src="/img/settings.png">
+          <button class="ExitButton">Settings</button>     
+          <div class = "BottomLine"></div>
+      </a>
+  </div> 
+
+  <button class= "BurgerButton" id = "BurgerButton" onclick="BurgerMenuShow()">
+    <div class= "SpanLines Line1"></div>
+    <div class= "SpanLines Line2"></div>
+    <div class= "SpanLines Line3"></div>
+  </button>
+</header>
+<header class= "HeaderBurgerContainer" id = "HeaderBurgerContainer">
+    <div class = "HeaderBurger" id = "HeaderBurger">
+        <div class= "BurgerXbuttonAlign">
+          <div class= "BurgerButton"  id = "BurgerButton2">
+             <div class= "SpanLines Line1"></div>
+             <div class= "SpanLines Line2"></div>
+             <div class= "SpanLines Line3"></div>
+         </div>
+        </div>
+       <div class= "NavBurgerAlign">
+          <div class="nav-item NavBurger">
+             <a class="BurgerNavLinks" asp-area="" asp-controller="Home" asp-action="Foryou"><img src="../img/smartphone.png" class="NavImgsBurger"/> For You</a>
+          </div>
+         <div class="nav-item NavBurger">
+             <a class="BurgerNavLinks" asp-area="" asp-controller="MyProfile" asp-action="Profile"><img src="../img/ProfileBackground.png"class="NavImgsBurger"/> Profile</a>
+         </div>
+       </div>
+    </div>
+</header>
 
 
    <div class="ProfileData_Update">
@@ -67,6 +99,6 @@
     </form>
 </div>
 
-
+   <script src="../js/site.js"></script>
 </body>
 </html>
