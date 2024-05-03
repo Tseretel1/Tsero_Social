@@ -208,9 +208,19 @@
                               <div class= "photocontentwitdth">
                                @if (@post.Photo != null)
                                {
-                                  <div class="imgofpost" id="imgofpost">
-                                       <img src="@post.Photo" class="Post_photowidth" id="Post_photowidth" alt="Post Image">    
-                                   </div>
+                               
+                                  @if (post.PostType == 1)
+                                  {
+                                     <div class="imgofpost2" id="imgofpost">
+                                         <img src="@post.Photo" class="Post_photowidth2" id="Post_photowidth" alt="Post Image">    
+                                     </div>
+                                  }
+                                  else
+                                  {
+                                    <div class="imgofpost" id="imgofpost">
+                                        <img src="@post.Photo" class="Post_photowidth" id="Post_photowidth" alt="Post Image">    
+                                    </div>
+                                  }
                                 }
                                 else
                                 {
@@ -289,9 +299,9 @@
       </section>
     </div>
     }
-   <script src="/js/Like.js"></script>
-   <script src="/js/Follow.js"></script>
-   <script src="/js/Foryou.js"></script>
+   <script src="../js/Like.js"></script>
+   <script src="../js/Follow.js"></script>
+   <script src="../js/Foryou.js"></script>
    <script src="../js/site.js"></script>
 </body>
 </html>

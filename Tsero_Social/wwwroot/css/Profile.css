@@ -58,8 +58,11 @@ body {
 #FollowINGWinodw{
     display:none;
 }
-.FollowerFont{
-    font-size:20px;
+#NotificationWindow{
+    display:none;
+}
+.FollowerFont {
+    font-size: 20px;
 }
 .FollowersContainer {
     width: 650px;
@@ -209,7 +212,7 @@ body {
 .updatepost {
     width: 70%;
     height: auto;
-    border-radius: 20px;
+    border-radius: 10px;
     display: flex;
     box-shadow: 0px 0px 20px black;
     z-index: 2;
@@ -234,29 +237,23 @@ body {
     width: 95%;
     height: 40px;
 }
-.changebuttons {
+.cameraButton {
+    width: 40px;
+    position: absolute;
+    left: 60px;
     background-color: black;
-    color: white;
-    text-decoration: none;
-    display: flex;
-    font-weight: bold;
-    cursor: pointer;
-    width: auto;
-    text-align: center;
-    color: white;
-    padding: 5px 0px 0px 0px ;
-    border-radius: 5px;
-    transition: 0.3s all ease-in-out;
-    border: none;
-    box-shadow: 0px 0px 5px black;
-    position:fixed;
-    z-index:0;
-    top:165px;
+    border-radius:50%;
+    padding:5px;
+    opacity:0;
+    transition:0.3s all ease-in-out;
 }
-.changebuttons:hover {
-    color:white;
-    letter-spacing:1px;
-    text-shadow:0px 0px 10px white;
+.Profile_data:hover .cameraButton{
+    opacity:1;
+}
+.changebuttons {
+    color: white;
+    display: flex;
+    align-items: center;
 }
 #changebuttons {
     backdrop-filter: blur(5px);
@@ -285,7 +282,7 @@ body {
     background-color: #00000036;
     border: 1px solid black;
     display: flex;
-    gap: 50px;
+    gap: 25px;
     border-radius: 5px;
     color: white;
     align-items:center;
@@ -314,20 +311,32 @@ body {
     transition: 0.1s all ease-in-out;
     border: 1px solid transparent;
 }
-.FollowContaoinerParent {
-    width: auto;
-    padding: 10px;
-    backdrop-filter: blur(50px);
-    background-color: #00000036;
-    border: 1px solid black;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    border-radius:5px;
+.NotifyHover:hover .FollowingLine {
+    width: 100%;
+    border: 1px solid white;
 }
-
+.NotifyHover:hover .NTF_img {
+    animation: BellAnimation 0.5s;
+}
+@keyframes BellAnimation {
+    25% {
+        transform: rotate(-25deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    75% {
+        transform: rotate(-25deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
 .FollowingCount {
     color: white;
+}
+.NTF_img{
+    width:30px;
 }
 .Xbutton {
     border: None;
@@ -451,9 +460,8 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    margin-bottom: 20px;
     position: absolute;
-    top: 100px;
+    top: 180px;
     left: 30px;
 }
 .userName {
@@ -521,9 +529,7 @@ body {
     flex-direction:column;
     gap:40px;
 }
-.cameraButton {
-    width: 20px;
-}
+
 .UploadProfile {
     display: flex;
     align-items: center;
@@ -587,6 +593,9 @@ body {
     align-items: center;
     gap:50px;
 }
+.FollowerFont{
+    text-align:center;
+}
 @media only screen and (max-width: 934px) {
     .updatepost {
         width: 650px;
@@ -596,7 +605,19 @@ body {
     .UploadPost {
         width:500px;
     }
-
+    .FollowerFont{
+        font-size:17px;
+    }
+    .DefaultProfile{
+        width:50px;
+        height:50px;
+    }
+    .UploadPic{
+        width:50px;
+    }
+    .FollowContaoinerParent {
+        gap: 5px;
+    }
     .UploadPicMain {
         width: 120px;
         height: auto;
@@ -620,7 +641,7 @@ body {
         font-size: 12.5px;
     }
     .userName {
-        font-size: 16px;
+        font-size: 13px;
     }
     .MyPosts {
         gap:20px;
@@ -632,10 +653,13 @@ body {
         width: 600px;
     }
     .Profile_data {
-        top: 70px;
+        top: 140px;
     }
     .changebuttons {
         top: 110px;
+    }
+    .cameraButton {
+        left:42px;
     }
 }
 @media only screen and (max-width: 600px) {
@@ -660,10 +684,6 @@ body {
     .FollowingCount {
         font-size: 11px;
     }
-
-    .FollowContaoinerParent {
-        padding: 5px;
-    }
     .FollowersContainer {
         width: 450px;
         padding: 0px 10px 20px 10px;
@@ -685,25 +705,41 @@ body {
         gap:5px;
     }
     .Profile_data {
-        top: 65px;
+        top: 125px;
     }
     .changebuttons {
         top: 90px;
         font-size:13px;
     }
+    .cameraButton{
+        left:32px;
+    }
+    .FollowerFont{
+        font-size:15px;
+    }
+    .NTF_img{
+        width:20px;
+    }
+    .DefaultProfile{
+        width:30px;
+        height:30px;
+    }
+    .UploadPic{
+        width:30px;
+    }
 }
 @media only screen and (max-width: 600px) {
     .updatepost {
-        width: 490px;
+        width: 480px;
     }
     .UploadPicMain {
-        width: 70px;
+        width: 90px;
         height: auto;
     }
 
     #ProfilePictureCont {
-        width: 70px;
-        height: 70px;
+        width: 90px;
+        height: 90px;
     }
 
     .changebuttons {
@@ -720,18 +756,22 @@ body {
 
     .FollowContaoinerParent {
         padding: 5px;
+        gap:0px;
+    }
+    .UploadPost{
+        width:480px;
     }
 }
 @media only screen and (max-width: 500px) {
     .UploadPost {
-        width: 400px;
+        width: 380px;
     }
     .updatepost{
         width:400px;
         padding : 50px 0px 50px 0px;
     }
     .Profile_data {
-        top: 50px;
+        top: 90px;
     }
     .XbuttonContainer {
         width: 400px;
@@ -798,7 +838,7 @@ body {
         padding: 40px 0px 40px 0px
     }
     .Profile_data {
-        top: 40px;
+        top: 80px;
         left:0;
     }
     .DefaultProfile{
@@ -848,10 +888,13 @@ body {
         gap: 10px;
     }
     .FollowerFont{
-        font-size:15px;
+        font-size:12px;
     }
     .changebuttons {
         top: 50px;
+    }
+    .userName{
+        font-size:10px;
     }
 }
 @media only screen and (max-width: 300px) {
@@ -867,12 +910,12 @@ body {
         width: 270px;
     }
     .DefaultProfile {
-        width: 30px;
-        height: 30px;
+        width: 20px;
+        height: 20px;
     }
 
     .UploadPic {
-        width: 30px;
+        width: 20px;
     }
 
     .UploadUsername {
@@ -891,6 +934,16 @@ body {
     .Profile_data {
         top: 30px;
         left: 0;
+    }
+    .FollowerFont{
+        font-size:10px;
+    }
+    .NTF_img{
+        width:15px;
+    }
+    .FollowContaoinerParent {
+        gap:0px;
+        padding:0;
     }
 
 }

@@ -1,5 +1,6 @@
 ﻿using Tsero_Social.Dbcontext;
 using Tsero_Social.InterFaces;
+using Tsero_Social.Migrations;
 using Tsero_Social.Models;
 
 namespace Tsero_Social.Services
@@ -7,9 +8,11 @@ namespace Tsero_Social.Services
     public class LikeCommentService : ILikeCommentService
     {
         private readonly UserDbcontext _dbcontext;
-        public LikeCommentService(IWebHostEnvironment hostingEnvironment, UserDbcontext db)
+        private readonly NotificationsServices _notificationss;
+        public LikeCommentService(IWebHostEnvironment hostingEnvironment, UserDbcontext db, NotificationsServices notificationss)
         {
            _dbcontext = db;
+           _notificationss = notificationss;   
         }
 
         public int GetLikeCount(int postId)
@@ -40,6 +43,13 @@ namespace Tsero_Social.Services
                     likes.PostID = Postid;
                     _dbcontext.Likes.Add(likes);
                     _dbcontext.SaveChanges();
+
+                    int Notificationtype = 1;
+                    var Postauthor = _dbcontext.Posts.FirstOrDefault(u => u.Id == Postid);
+                    if (Postauthor != null && CurrentUserID!= Postauthor.UserID)
+                    {
+                        _notificationss.Notification(CurrentUserID, Postauthor.UserID, Notificationtype);
+                    }
                 }
             }
         }

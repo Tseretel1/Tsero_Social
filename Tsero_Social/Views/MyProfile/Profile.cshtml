@@ -81,6 +81,7 @@
         var users2 = ViewBag.Users as List<User>;
         var MyFollowers = ViewBag.MyFollowers as List<Follow>;
         var MyFollowing = ViewBag.MyFollowings as List<Follow>;
+        var MyNotifications = ViewBag.MyNotifications as List<Notificationss>;
         bool IFFollowersExist = false;
         string UserN = "@";
         int CurrentUserID = 0;
@@ -148,46 +149,109 @@
         }
         @if (IFFollowersExist)
         {
-                   <div class = "FollowersList" id = "FollowINGWinodw">
-                       <div class ="XbuttonContainer">
-                           <button class = "ButtonX" id = "FollowINGXbutton">X</button>
-                       </div>
-                   <div class="FollowersContainer">
-                     <div class = "YOurFollowers">Followings</div>
-                    @foreach (var item in MyFollowing)
-                    {
-                        var User = users2?.Where(u => u.id == item.FollowingID).FirstOrDefault();
-                        if (User != null)
+             <div class = "FollowersList" id = "FollowINGWinodw">
+                 <div class ="XbuttonContainer">
+                     <button class = "ButtonX" id = "FollowINGXbutton">X</button>
+                 </div>
+             <div class="FollowersContainer">
+               <div class = "YOurFollowers">Followings</div>
+              @foreach (var item in MyFollowing)
+              {
+                  var User = users2?.Where(u => u.id == item.FollowingID).FirstOrDefault();
+                  if (User != null)
+                  {
+                    <div class="EachFollower">
+                        <div class = "EachFollowerLeftSide">
+                             <div class="FollowerProfile">
+                                 <img class="FollowerPic" src="@User.ProfilePicture" alt="">   
+                             </div>
+                             <div class= "FollowerDataGap">
+                                <div>
+                                   <div class = "BoldUsername">@UserN@User.Username</div>                          
+                                </div>
+                   
+                                <div class= "UserDataFlex">
+                                    <div class = "FolloweruserName">@User.Name</div>
+                                    <div class = "FolloweruserName">@User.Lastname</div>
+                                </div>
+                             </div>
+                         </div>
+                         <div class= "EachFollowerRightSide">
+                         <form asp-controller="MyProfile" method="post" asp-action="FollowIngRemove">
+                            <input type="hidden" class="PostTodeltte" name="FollowingToDelete" value="@item.FollowingID"/>
+                            <input type="hidden" class="PostTodeltte" name="MyID" value="@CurrentUserID"/>
+                            <button class= "RemoveFollowingBUtton" > Following</button>
+                         </form>
+                   
+                         </div>
+                    </div>
+                  }
+              }  
+              </div>
+           </div>
+        }
+        <!--Notificatio Table-->
+        @if (MyNotifications != null)
+        {
+            IFFollowersExist = true;
+        }
+        @if (IFFollowersExist)
+        {
+             <div class = "FollowersList" id = "NotificationWindow">
+                 <div class ="XbuttonContainer">
+                     <button class = "ButtonX" id = "NotificationXbutton">X</button>
+                 </div>
+             <div class="FollowersContainer">
+               <div class = "YOurFollowers">
+                 <div> Notifications</div>   
+             </div>
+              @foreach (var item in MyNotifications)
+              {
+                        if (item != null)
                         {
-                          <div class="EachFollower">
-                              <div class = "EachFollowerLeftSide">
-                                   <div class="FollowerProfile">
-                                       <img class="FollowerPic" src="@User.ProfilePicture" alt="">   
-                                   </div>
-                                   <div class= "FollowerDataGap">
-                                      <div>
-                                         <div class = "BoldUsername">@UserN@User.Username</div>                          
-                                      </div>
-                         
-                                      <div class= "UserDataFlex">
-                                          <div class = "FolloweruserName">@User.Name</div>
-                                          <div class = "FolloweruserName">@User.Lastname</div>
-                                      </div>
-                                   </div>
-                               </div>
-                               <div class= "EachFollowerRightSide">
-                               <form asp-controller="MyProfile" method="post" asp-action="FollowIngRemove">
-                                  <input type="hidden" class="PostTodeltte" name="FollowingToDelete" value="@item.FollowingID"/>
-                                  <input type="hidden" class="PostTodeltte" name="MyID" value="@CurrentUserID"/>
-                                  <button class= "RemoveFollowingBUtton" > Following</button>
-                               </form>
-                         
-                               </div>
-                          </div>
+                            var User = users2?.Where(u => u.id == item.SenderID).FirstOrDefault();
+                            if (User != null)
+                            {
+                                <div class="EachFollower">
+                                    <div class = "EachFollowerLeftSide">
+                                        <div class="FollowerProfile">
+                                            <img class="FollowerPic" src="@User.ProfilePicture" alt="">   
+                                        </div>
+                                        <div class= "FollowerDataGap">
+                                            <div>
+                                                <div class = "BoldUsername">@UserN@User.Username</div>                          
+                                            </div>
+
+                                            <div class= "UserDataFlex">
+                                                <div class = "FolloweruserName">@User.Name</div>
+                                                <div class = "FolloweruserName">@User.Lastname</div>
+                                            </div>                                      
+                                        </div>
+                                         <div class= "NotificationsSide">
+                                              @{
+                                                  if (item.NTF_Type == 1)
+                                                  {
+                                                      <div class= "NotificationMessage">Liked Your Post ❤️</div>
+                                                  }
+                                                  else if (item.NTF_Type == 2)
+                                                  {
+                                                       <div class= "NotificationMessage">Started Following You</div>
+                                                  }
+                                              }
+                                         </div>
+                                    </div>
+                                    <div class= "EachFollowerRightSide">
+                                      <form asp-controller="MyProfile" method="post" asp-action="NotificationDeletion">
+                                          <input type="hidden" class="PostTodeltte" name="NotificationID" value="@item.id"/>
+                                          <button class= "RemoveFollowingBUtton" > Mark As Read</button>
+                                       </form>
+                                    </div>
+                                </div>
+                            }
                         }
                     }  
-                    </div>
-                  </div>
+              </div>
+           </div>
         }
     }
      
@@ -218,7 +282,7 @@
                                     }
                                     else
                                     {
-
+                                        <a class= "changebuttons" asp-controller="MyProfile" asp-action="ProfileUpdate"><img src = "../img/Camera.png" class= "cameraButton"></a>
                                     }
                                 }
                            </div>
@@ -264,6 +328,10 @@
                          </div>
                          <div class = "FollowingCount FollowingHover" id = "FollowINGButton">
                              <div  class= "FollowerFont">Following @ViewBag.Following</div>
+                             <div class= "FollowingLine"></div>
+                         </div>
+                         <div class = "FollowingCount NotifyHover" id = "NotifyButton">
+                             <div class= "FollowerFont"><img src = "../img/Notifications.png"/ class= "NTF_img">Notifications @ViewBag.Notification</div>
                              <div class= "FollowingLine"></div>
                          </div>
                      }
@@ -404,9 +472,19 @@
                               <div class= "photocontentwitdth">
                                @if (@post.Photo != null)
                                {
-                                  <div class="imgofpost" id="imgofpost">
-                                       <img src="@post.Photo" class="Post_photowidth" id="Post_photowidth" alt="Post Image">    
-                                   </div>
+                                
+                                  @if (post.PostType == 1)
+                                  {
+                                     <div class="imgofpost2" id="imgofpost">
+                                         <img src="@post.Photo" class="Post_photowidth2" id="Post_photowidth" alt="Post Image">    
+                                     </div>
+                                  }
+                                  else
+                                  {
+                                    <div class="imgofpost" id="imgofpost">
+                                        <img src="@post.Photo" class="Post_photowidth" id="Post_photowidth" alt="Post Image">    
+                                    </div>
+                                  }
                                 }
                                 else
                                 {

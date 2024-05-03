@@ -86,6 +86,20 @@
     overflow: hidden;
     border-radius: 10px;
 }
+.imgofpost2 {
+    width: 350px;
+    height: 350px;
+    border: 2px solid gray;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.Post_photowidth2 {
+    width: 350px;
+    height: auto;
+}
 .photocontentwitdth {
     width: 100%;
     height: auto;
@@ -335,7 +349,7 @@
 /*Media queryes*/
 @media only screen and (max-width: 700px) {
     .Each_Post {
-        width: 500px;
+        width: 480px;
         padding: 20px 0px 20px 0px ;
     }
     .comment_likes {
@@ -356,17 +370,22 @@
     }
     .DeltePostButton{
         width:80px;
-        height:20px;
         font-size:12px;
+    }
+    .imgofpost2 {
+        width: 250px;
+        height: 250px;
+    }
+    .Post_photowidth2 {
+        width: 250px;
     }
 }
 
 @media only screen and (max-width: 500px) {
 
     .Each_Post {
-        width:400px;
+        width:380px;
         border-radius: 5px;
-        padding: 10px 0px 40px 0px;
         gap:30px;
     }
     .postdate {
@@ -408,11 +427,19 @@
     .Follow {
         font-size: 15px;
     }
+    .imgofpost2 {
+        width: 200px;
+        height: 200px;
+    }
+
+    .Post_photowidth2 {
+        width: 200px;
+    }
 }
 @media only screen and (max-width: 400px) {
 
     .Each_Post {
-        width: 300px;
+        width: 290px;
         border-radius: 5px;
         padding: 10px 0px 10px 0px;
     }
@@ -440,7 +467,7 @@
     }
     .DeltePostButton {
         width: 60px;
-        height: 15px;
+        height: 20px;
         font-size: 9px;
         border-radius:3px;
     }
@@ -449,6 +476,14 @@
     }
     .Follow{
         font-size:12px;
+    }
+    .imgofpost2 {
+        width: 150px;
+        height: 150px;
+    }
+
+    .Post_photowidth2 {
+        width: 150px;
     }
 }
 @media only screen and (max-width: 300px) {

@@ -58,16 +58,6 @@ a{
     text-decoration:none;
     color:transparent;
 }
-.BottomLine{
-    width:100px;
-    border:1px solid red;
-}
-a:hover .BottomLine {
-    width: 100%;
-    border-width: 1px;
-    border-style: solid;
-    border-image: linear-gradient(to right, black, white) 1;
-}
 @media only screen and (max-width: 500px) {
     .Profile_Form{
         padding:60px;

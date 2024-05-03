@@ -110,7 +110,7 @@ namespace Tsero_Social.Migrations
                     b.ToTable("Likes");
                 });
 
-            modelBuilder.Entity("Tsero_Social.Models.Notifications", b =>
+            modelBuilder.Entity("Tsero_Social.Models.Notificationss", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -118,12 +118,11 @@ namespace Tsero_Social.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
+                    b.Property<DateTime>("NTF_DateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("NTF_Type")
                         .HasColumnType("int");
-
-                    b.Property<string>("NotifyMessage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ReceiverID")
                         .HasColumnType("int");

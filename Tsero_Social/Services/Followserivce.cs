@@ -1,5 +1,6 @@
 ﻿using Tsero_Social.Dbcontext;
 using Tsero_Social.InterFaces;
+using Tsero_Social.Migrations;
 using Tsero_Social.Models;
 
 namespace Tsero_Social.Services
@@ -7,9 +8,11 @@ namespace Tsero_Social.Services
     public class Followserivce : IfollowService
     {
         private readonly UserDbcontext _Context;
-        public Followserivce(UserDbcontext Context)
+        private readonly NotificationsServices _Notifycations;
+        public Followserivce(UserDbcontext Context, NotificationsServices n)
         {
             _Context = Context;
+            _Notifycations = n;
         }
 
         public void Follow(int FollowerID, int FollowingID)
@@ -26,13 +29,15 @@ namespace Tsero_Social.Services
                 }
                 else
                 {
-                    var Follow = new Follow
+                    var Follow = new Models.Follow
                     {
                         FollowerID = Follower.id,
                         FollowingID = Following.id
                     };
                     _Context.Follows.Add(Follow);
                     _Context.SaveChanges();
+                    int type = 2;
+                    _Notifycations.Notification(FollowerID, FollowingID , type);
                 }
             }
         }
@@ -47,7 +52,7 @@ namespace Tsero_Social.Services
             }
             else if(IFfollowExists == null)
             {
-                var NewFollower = new Follow
+                var NewFollower = new Models.Follow
                 {
                     FollowerID = UserToRmoveID,
                     FollowingID = MyID
@@ -67,7 +72,7 @@ namespace Tsero_Social.Services
             }
             else if (IFfollowExists == null)
             {
-                var NewFollower = new Follow
+                var NewFollower = new Models.Follow
                 {
                      FollowingID = FollowingToDelete,
                      FollowerID = MyID

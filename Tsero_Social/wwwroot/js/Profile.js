@@ -52,6 +52,36 @@ var FollowingShow = document.getElementById("FollowINGButton");
 FollowingShow.addEventListener("click", FollowingWindowShow);
 
 
+
+
+//Norification Container Hide//
+function NotificationWindowClose() {
+    var WindowToClose = document.getElementById("NotificationWindow");
+    WindowToClose.style.transition = "0.3s all ease-in-out";
+    WindowToClose.style.scale = "0.01";
+    setTimeout(function () {
+        WindowToClose.style.display = "none";
+    }, 300);
+}
+var NotificationCloseBTN = document.getElementById("NotificationXbutton");
+NotificationCloseBTN.addEventListener("click", NotificationWindowClose);
+
+//Norification Container Show//
+function NotificationWindowShow() {
+    var WindowToClose = document.getElementById("NotificationWindow");
+    WindowToClose.style.transition = "0.3s all ease-in-out";
+    WindowToClose.style.display = "flex";
+    WindowToClose.style.scale = "0.01";
+    setTimeout(function () {
+        WindowToClose.style.scale = "1";
+    }, 0);
+}
+var NotificationWindowOPenBTN = document.getElementById("NotifyButton");
+NotificationWindowOPenBTN.addEventListener("click", NotificationWindowShow);
+
+
+
+
 //Follower Remove//
 (function () {
     function toggleButtonText(event) {

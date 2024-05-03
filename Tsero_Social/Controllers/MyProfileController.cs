@@ -15,14 +15,16 @@ namespace Tsero_Social.Controllers
         private readonly UserDbcontext _userDbcontext;
         private readonly IuserService _userService;
         private readonly IpostService _ipostservice;
-        private readonly Followserivce _followservice; 
-        public MyProfileController(IuploadImg upload, UserDbcontext userDbcontext, IuserService userface, IpostService postService,Followserivce followserivce)
+        private readonly Followserivce _followservice;
+        private readonly NotificationsServices _Notifications;
+        public MyProfileController(IuploadImg upload, UserDbcontext userDbcontext, IuserService userface, IpostService postService,Followserivce followserivce, NotificationsServices notifications)
         {
             _Image = upload;
             _userDbcontext = userDbcontext;
             _userService = userface;
             _ipostservice = postService;
             _followservice = followserivce;
+            _Notifications = notifications;
         }
 
 
@@ -68,12 +70,16 @@ namespace Tsero_Social.Controllers
                                 ViewBag.MyFollowers = Followers;
                                 var Following = _userDbcontext.Follows.Where(u => u.FollowerID == loggedUser.id).ToList();
                                 ViewBag.MyFollowings = Following;
-
-
                                 var FollowersCount = _userDbcontext.Follows.Where(u => u.FollowingID == loggedUser.id).Count();
                                 var FollowingCount = _userDbcontext.Follows.Where(u => u.FollowerID == loggedUser.id).Count();
                                 ViewBag.Followers = FollowersCount;
                                 ViewBag.Following = FollowingCount;
+
+                                var NotificationCount = _userDbcontext.Notifications.Where(u=> u.ReceiverID == loggedUser.id).Count();
+                                ViewBag.Notification = NotificationCount;
+
+                                var Notification = _userDbcontext.Notifications.Where(u => u.ReceiverID == user.id).ToList();
+                                ViewBag.MyNotifications = Notification;
                                 var userPosts = _userDbcontext.Posts
                                 .Where(p => p.UserID == loggedUser.id)
                                 .OrderByDescending(u => u.DateTime)
@@ -219,6 +225,12 @@ namespace Tsero_Social.Controllers
         public IActionResult FollowIngRemove(int FollowingToDelete, int MyID)
         {
             _followservice.RemoveFollowing(FollowingToDelete, MyID);
+            return NoContent();
+        }
+        [HttpPost]
+        public IActionResult NotificationDeletion(int NotificationID)
+        {
+            _Notifications.NotificationDelete(NotificationID);
             return NoContent();
         }
 

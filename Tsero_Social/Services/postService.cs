@@ -110,6 +110,14 @@ namespace Tsero_Social.Services
         public void DeletePost(int id ,string PostPhoto)
         {
             var PostToDelete = _dbcontext.Posts.FirstOrDefault(u => u.Id == id);
+            var likesToDelete = _dbcontext.Likes.Where(u => u.PostID == id);
+            foreach (var like in likesToDelete)
+            {
+                _dbcontext.Likes.Remove(like);
+            }
+
+            _dbcontext.SaveChanges();
+
             if (PostToDelete != null)
             {
                 _dbcontext.Posts.Remove(PostToDelete);

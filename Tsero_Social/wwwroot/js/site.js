@@ -44,3 +44,6 @@ function BurgerMenuDelete() {
 
 var BurgerShowButtonn = document.getElementById("BurgerButton2");
 BurgerShowButtonn.addEventListener("click", BurgerMenuDelete);
+
+var HeaderShow = document.getElementById("HeaderBurgerContainer");
+HeaderShow.addEventListener("click", BurgerMenuDelete);
