@@ -13,6 +13,20 @@ namespace Tsero_Social.Services
         {
             _dbcontext = db;
         }
+
+        public void AllNotificationDeletion(int CurrentuserID)
+        {
+            var IFNOtificationExists = _dbcontext.Notifications.Where(u=>u.ReceiverID == CurrentuserID);
+            if(IFNOtificationExists !=null)
+            {
+                foreach(var item  in IFNOtificationExists)
+                {
+                    _dbcontext.Notifications.Remove(item);
+                }
+                _dbcontext.SaveChanges();
+            }
+        }
+
         public void Notification(int SenderID, int RecieverID, int Type)
         {
             var SenderLegit = _dbcontext.Users.SingleOrDefault(u=>u.id == SenderID);

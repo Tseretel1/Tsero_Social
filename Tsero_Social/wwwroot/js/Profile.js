@@ -118,3 +118,14 @@ NotificationWindowOPenBTN.addEventListener("click", NotificationWindowShow);
         button.addEventListener("click", toggleButtonText);
     });
 })();
+
+
+function AllNotificationsClear() {
+    var NotificationAll = document.querySelectorAll(".EachNotification");
+    NotificationAll.forEach(function (notification) {
+        notification.style.display = "none";
+    });
+}
+
+var NotificationAll = document.getElementById("NotificationAll");
+NotificationAll.addEventListener("click", AllNotificationsClear);

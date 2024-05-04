@@ -233,6 +233,11 @@ namespace Tsero_Social.Controllers
             _Notifications.NotificationDelete(NotificationID);
             return NoContent();
         }
-
+        [HttpPost]
+        public IActionResult AllNotificationDeletion(int CurrentuserID)
+        {
+            _Notifications.AllNotificationDeletion(CurrentuserID);
+            return NoContent();
+        }
     }
 }

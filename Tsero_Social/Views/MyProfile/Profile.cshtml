@@ -203,8 +203,19 @@
                  </div>
              <div class="FollowersContainer">
                <div class = "YOurFollowers">
-                 <div> Notifications</div>   
+                 <div> Notifications</div>  
              </div>
+                    @{
+                        if (MyNotifications != null)
+                        {
+                          <div  class ="AllNotificationsClear">
+                               <form asp-controller="MyProfile" method="post" asp-action="AllNotificationDeletion">
+                                  <input type="hidden" class="PostTodeltte" name="CurrentUserID" value="@CurrentUserID"/>
+                                  <button class= "RemoveFollowingBUtton  NotificationAll" id=" NotificationAll" > Clear All Notifications</button>
+                               </form>
+                          </div>
+                        }
+                    }
               @foreach (var item in MyNotifications)
               {
                         if (item != null)
@@ -212,7 +223,7 @@
                             var User = users2?.Where(u => u.id == item.SenderID).FirstOrDefault();
                             if (User != null)
                             {
-                                <div class="EachFollower">
+                                <div class="EachFollower EachNotification">
                                     <div class = "EachFollowerLeftSide">
                                         <div class="FollowerProfile">
                                             <img class="FollowerPic" src="@User.ProfilePicture" alt="">   
@@ -241,9 +252,9 @@
                                          </div>
                                     </div>
                                     <div class= "EachFollowerRightSide">
-                                      <form asp-controller="MyProfile" method="post" asp-action="NotificationDeletion">
+                                       <form asp-controller="MyProfile" method="post" asp-action="NotificationDeletion">
                                           <input type="hidden" class="PostTodeltte" name="NotificationID" value="@item.id"/>
-                                          <button class= "RemoveFollowingBUtton" > Mark As Read</button>
+                                          <button class= "RemoveFollowingBUtton" > Delete</button>
                                        </form>
                                     </div>
                                 </div>
@@ -262,7 +273,18 @@
         {
             <div class="containercenter">
                <div class="updatepost" id = "updatepost"> 
-                 <a id  = "changebuttons" asp-controller="MyProfile" asp-action="EditCover">+ Update Cover</a>
+                 <a id ="changebuttons" asp-controller="MyProfile" asp-action="EditCover">
+                  <button class="btn" type="button">
+                     <strong>Upload Photo</strong>
+                     <div id="container-stars">
+                       <div id="stars"></div>
+                     </div>                  
+                     <div id="glow">
+                       <div class="circle"></div>
+                       <div class="circle"></div>
+                     </div>
+                  </button>
+                 </a>
                   <script>
                       function CoverPhoto() {
                           var CoverContainer = document.getElementById("updatepost");
@@ -277,7 +299,9 @@
                                 @{
                                     if (@ViewBag.Profile != null)
                                     {
-                                            <a class= "changebuttons" asp-controller="MyProfile" asp-action="ProfileUpdate"><img src = "../img/Camera.png" class= "cameraButton"></a>
+                                            <a class= "changebuttons" asp-controller="MyProfile" asp-action="ProfileUpdate">
+                                            <img src = "../img/Camera.png" class= "cameraButton">
+                                            </a>
                                             <img class="UploadPicMain" src="@ViewBag.Profile" alt="">
                                     }
                                     else
