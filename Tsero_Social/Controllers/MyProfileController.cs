@@ -125,13 +125,15 @@ namespace Tsero_Social.Controllers
         public IActionResult EditCover()
         {
             {
-                return View();
+                return View("EditCover");
             }
         }
         [HttpPost]
         public IActionResult EditCover(ImageUpload model)
         {
             {
+
+                ProfileGenerate();
                 _Image.UploadCover(model);
                 return RedirectToAction("Profile", "MyProfile");
             }
@@ -143,7 +145,7 @@ namespace Tsero_Social.Controllers
                 ProfileGenerate();
                 _Image.ProfilePicUpload(model, title);
                 ViewBag.ProfileMessage = "You Updated Profile Picture";
-                return RedirectToAction("ProfIleUpdate", "MyProfile");
+                return RedirectToAction("Profile", "MyProfile");
             }
         }
         [HttpGet]
@@ -155,8 +157,9 @@ namespace Tsero_Social.Controllers
         public IActionResult PostPublish(string PostPost, ImageUpload model)
         {
 
+            ProfileGenerate();
             _ipostservice.PostWriting(PostPost, model);
-            return NoContent();
+            return RedirectToAction("Profile", "MyProfile");
         }
         [HttpGet]
         public IActionResult ProfIleUpdate()

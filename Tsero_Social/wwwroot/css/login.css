@@ -210,13 +210,14 @@ button {
     opacity: 0;
     z-index: 5000;
     flex-direction: column;
+    backdrop-filter: blur(10px);
 }
 .modalwindow {
-    width: 300px;
+    width: 500px;
     height: 300px;
     color: white;
     border-radius: 20px;
-    display: none;
+    display: flex;
     opacity: 0;
     align-items: center;
     text-align: center;
@@ -225,18 +226,22 @@ button {
     background-color: rgba(0, 0, 0, 0.638);
 }
 .viewmessage{
-    font-size:25px;
+    font-size:20px;
     text-shadow:0px 0px 2px black;
     font-family:sans-serif;
+    max-width:300px;
+    text-align:center;
+    letter-spacing:2px;
+    line-height:40px;
 }
 .viewmessage1{
     color:white;
+
 }
 .XContainer{
     width:90%;
     display:flex;
     justify-content:flex-end;
-    height:35%;
 }
 .OkBUtton {
     width: 50px;
@@ -249,4 +254,23 @@ button {
 .OkBUtton:hover{
     color:red;
     background-color:transparent;
+}
+
+@media only screen and (max-width: 522px) {
+    .modalwindow{
+        width:400px;
+    }
+}
+@media only screen and (max-width: 422px) {
+    .modalwindow {
+        width: 300px;
+    }
+}
+@media only screen and (max-width: 322px) {
+    .modalwindow {
+        width: 270px;
+    }
+    .viewmessage {
+        max-width:250px;
+    }
 }

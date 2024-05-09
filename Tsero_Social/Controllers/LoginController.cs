@@ -59,6 +59,21 @@ namespace Tsero_Social.Controllers
             }
             else
             {
+                if (user.Username.Length > 12 )
+                {
+                    ViewBag.EmailExist = "UserName Must Contain Less Than 12 Characters!";
+                    return View("Login");
+                }
+                if ( user.Name.Length > 12 )
+                {
+                    ViewBag.EmailExist = "Name Must Contain Less Than 12 Characters!";
+                    return View("Login");
+                }
+                if (user.Lastname.Length > 12)
+                {
+                    ViewBag.EmailExist = "LastName Must Contain Less Than 12 Characters!";
+                    return View("Login");
+                }
                 ViewBag.SuccessAlert = "You successfully Registered in our App!";
                 return View("Login");
             }
