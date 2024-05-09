@@ -31,6 +31,7 @@ namespace Tsero_Social.Controllers
         public IActionResult ProfileGenerate()
         {
 
+
             using (var transaction = _userDbcontext.Database.BeginTransaction(System.Data.IsolationLevel.Serializable))
             {
                 try
@@ -98,7 +99,9 @@ namespace Tsero_Social.Controllers
                     _userDbcontext.SaveChanges();
                     transaction.Commit();
 
+
                 }
+
 
                 catch (Exception ex)
                 {
@@ -125,13 +128,15 @@ namespace Tsero_Social.Controllers
         public IActionResult EditCover()
         {
             {
-                return View();
+                return View("EditCover");
             }
         }
         [HttpPost]
         public IActionResult EditCover(ImageUpload model)
         {
             {
+
+                ProfileGenerate();
                 _Image.UploadCover(model);
                 return RedirectToAction("Profile", "MyProfile");
             }
@@ -143,7 +148,7 @@ namespace Tsero_Social.Controllers
                 ProfileGenerate();
                 _Image.ProfilePicUpload(model, title);
                 ViewBag.ProfileMessage = "You Updated Profile Picture";
-                return RedirectToAction("ProfIleUpdate", "MyProfile");
+                return RedirectToAction("Profile", "MyProfile");
             }
         }
         [HttpGet]
@@ -155,8 +160,9 @@ namespace Tsero_Social.Controllers
         public IActionResult PostPublish(string PostPost, ImageUpload model)
         {
 
+            ProfileGenerate();
             _ipostservice.PostWriting(PostPost, model);
-            return NoContent();
+            return RedirectToAction("Profile", "MyProfile");
         }
         [HttpGet]
         public IActionResult ProfIleUpdate()
@@ -194,6 +200,7 @@ namespace Tsero_Social.Controllers
         public IActionResult Settings(User user)
         {
             {
+                ProfileGenerate();
                 var item = _userService.GetUserLogedUsers();
                 int id = 0;
                 foreach (var i in item)

@@ -50,7 +50,7 @@ body::selection{
     justify-content: center;
     align-items: center;
     z-index: 120;
-    background-color: #00000029;
+    background-color: #000000;
     backdrop-filter: blur(8px);
     flex-direction: column;
     position: fixed;
@@ -79,6 +79,8 @@ body::selection{
     color: white;
     box-shadow: 0px 0px 10px black;
     border: 0.5px solid grey;
+    display: flex;
+    flex-direction: column;
 }
 .FollowersContainer::-webkit-scrollbar {
     width:10px;
@@ -98,7 +100,6 @@ body::selection{
 .EachFollower {
     display: flex;
     justify-content:space-between;
-    margin-top: 40px;
     margin-top: 30px;
 }
 .EachFollowerRightSide{
@@ -249,13 +250,13 @@ body::selection{
     justify-content:center;
     max-width:1300px;
 }
-.updatepost:hover #changebuttons{
-       transform:scale(1);
+.updatepost:hover .btn{
+    transform:scale(1);
 }
 #changebuttons {
     text-decoration: none;
     transition: 0.2s all ease-in-out;
-    transform: scale(0.01);
+    transform: scale(1);
 }
 .commentinput{
     width:100%;
@@ -298,14 +299,15 @@ body::selection{
     width: 13rem;
     overflow: hidden;
     height: 3rem;
-    background-size: 300% 300%;
-    backdrop-filter: blur(1rem);
     border-radius: 5rem;
     transition: 0.5s;
     animation: gradient_301 5s ease infinite;
-    background-image: linear-gradient(#212121, #212121), linear-gradient(137.48deg, #ffdb3b 10%,#FE53BB 45%, #8F51EA 67%, #0044ff 87%);
     background-origin: border-box;
     background-clip: content-box, border-box;
+    border: 1px solid black;
+    transition: 0.3s all ease-in-out;
+    backdrop-filter: blur(5px);
+    transform:scale(0.01);
 }
 
 #container-stars {
@@ -315,17 +317,14 @@ body::selection{
     height: 100%;
     overflow: hidden;
     transition: 0.5s;
-    backdrop-filter: blur(1rem);
     border-radius: 5rem;
 }
 
 strong {
     z-index: 2;
-    font-family: 'Avalors Personal Use';
     font-size: 12px;
     letter-spacing: 5px;
     color: #FFFFFF;
-    text-shadow: 0 0 4px white;
 }
 
 #glow {
@@ -342,34 +341,9 @@ strong {
     z-index: -1;
 }
 
-    .circle:nth-of-type(1) {
-        background: rgba(254, 83, 186, 0.636);
-    }
-
-    .circle:nth-of-type(2) {
-        background: rgba(142, 81, 234, 0.704);
-    }
-
-.btn:hover #container-stars {
-    z-index: 1;
-    background-color: #212121;
-}
-
 .btn:hover {
-    transform: scale(1.1)
+    backdrop-filter: blur(2px);
 }
-
-.btn:active {
-    border: double 4px #FE53BB;
-    background-origin: border-box;
-    background-clip: content-box, border-box;
-    animation: none;
-}
-
-.btn:active .circle {
-    background: #FE53BB;
-}
-
 #stars {
     position: relative;
     background: transparent;
@@ -565,21 +539,11 @@ strong {
     display:flex;
     justify-content:flex-end;
 }
-.DeltePostButton {
-    width: 100px;
-    height: 30px;
-    border: 1px solid grey;
-    outline: none;
-    background-color: transparent;
-    color: white;
-    border-radius: 5px;
-    font-size: 15px;
-    z-index: 4;
-    transition:0.3s all ease-in-out;
-}
-.DeltePostButton:hover{
-    background-color:white;
-    color:black;
+#NotificationsParenttttt {
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+    width: 100%;
 }
 .prof_back {
     width: 150px;
@@ -677,6 +641,7 @@ strong {
 }
 #ProfilePreview {
     width: 180px;
+    width: 180px;
     transition: 0.3s all ease-in-out;
 }
 #ProfilePreview:hover {
@@ -700,7 +665,18 @@ strong {
 .fileinput {
     color: black;
 }
-
+.DeltePostButton{
+    height:30px;
+    border-radius:5px;
+    border:1px solid white;
+    background-color:transparent;
+    color:white;
+    transition:0.3s all ease-in-out;
+}
+.DeltePostButton:hover{
+    color:black;
+    background-color:white;
+}
 .UploadPost {
     width: 650px;
     padding: 50px 0px 50px 0px;
@@ -710,12 +686,12 @@ strong {
     justify-content: space-evenly;
     align-items: center;
     z-index: 2;
-    box-shadow:0px 0px 5px black;
-    border:1px solid grey;
-    margin-top:80px;
-    display:flex;
-    flex-direction:column;
-    gap:40px;
+    box-shadow: 0px 0px 5px black;
+    border: 1px solid grey;
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
 }
 
 .UploadProfile {
