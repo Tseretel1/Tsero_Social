@@ -1,44 +1,320 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
 .nav-item {
     color: white;
 }
-.container-fluid {
-    background-color: transparent;
-    backdrop-filter: blur(20px);
+
+::-webkit-scrollbar {
+    width: 15px;
+    height: 10px;
 }
+
+::-webkit-scrollbar-track {
+    background: #212121;
+}
+
+::-webkit-scrollbar-thumb {
+    background: white;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: white;
+}
+
+.container_fluidd {
+    display: flex;
+    gap: 30px;
+    padding: 0;
+}
+.Settings
+{
+    color:transparent;
+    text-decoration:none;
+}
+.Tsero_Social {
+    color: white;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.Tsero_Social:hover {
+    color: white;
+}
+
+.NavImgs {
+    width: 20px;
+}
+
 .navigatorrs {
     margin: 0;
     padding: 0;
-    position:fixed;
-    top:0;
-    width:100%;
-    z-index:5000;
-}
-.HeaderLayout {
-    display: flex;
-    width: 280px;
-    height: 40px;
-    justify-content: space-evenly;
-    background-color: white;
-    font-family: sans-serif;
-    font-weight: bold;
-    align-items: center;
-    border-radius: 0px 0px 20px 0px;
-    margin: 0;
-    padding: 0;
     position: fixed;
-    z-index: 200;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.199);
+    backdrop-filter: blur(60px);
+    z-index: 100;
+    box-shadow: 0px 0px 10px black;
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 20px 0px 20px;
 }
 
-.nav-item {
+.navbarLIn {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    width: auto;
 }
 
-.nav-link {
-    transition: 0.3s all ease-in-out;
-    color: black;
+.navbarLinks {
+    display: flex;
+    align-items: center;
+    color: white;
+    gap: 20px;
+    margin: 0;
 }
 
-    .nav-link:hover {
-        color: gray;
+.nav-links {
+    color: white;
+    text-decoration: none;
+}
+
+    .nav-links:hover {
+        color: lightblue;
+        text-shadow: 0px 0px 5px lightblue;
+        animation: rotateInCircle 0.3s linear infinite;
     }
+
+@keyframes rotateInCircle {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    30% {
+        transform: rotate(2deg);
+    }
+
+    70% {
+        transform: rotate(-2deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .EditProfileContainer {
+        width: 350px;
+    }
+
+    .ShareDay {
+        font-size: 25px;
+    }
+
+    .saysomething {
+        width: 250px;
+    }
+
+    .ProfilePreviewCont {
+        width: 250px;
+    }
+}
+.BottomLine {
+    width: 0px;
+    border-bottom: 1px solid transparent;
+    transition: 0.3s all ease-in-out;
+}
+
+.Settings:hover .BottomLine {
+    width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    border-image: linear-gradient(to right, black, white) 1;
+}
+.SettingsBurger{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    text-decoration:none;
+    margin-left:25px;
+}
+.BurgerButtonFixed {
+    width: 90%;
+    height: 30px;
+    display: flex;
+    position: fixed;
+    justify-content: flex-end;
+}
+
+.SpanLines {
+    width: 30px;
+    border-bottom: 4px solid white;
+}
+
+.BurgerButton {
+    width: 100px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    align-items:flex-end;
+}
+#BurgerButton {
+    display: none;
+}
+.HeaderBurgerContainer {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 500;
+    background-color: black;
+    background-color: #00000030;
+    backdrop-filter: blur(6px);
+    justify-content: flex-end;
+}
+
+#HeaderBurgerContainer {
+    display: none;
+}
+
+.HeaderBurger {
+    width: 0%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #1c1a1a;
+    border-radius: 20px 0px 0px 0px;
+    align-items: center;
+    box-shadow:0px 0px 5px black;
+}
+
+.NavBurgerAlign {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    gap: 50px;
+}
+
+.nav-item2 {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.NavImgsBurger {
+    width: 40px;
+}
+
+.BurgerNavLinks {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.NavBurger {
+    width: 200px;
+    opacity: 0;
+    display:flex;
+    justify-content:center;
+}
+
+.BurgerXbuttonAlign {
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+    height: 70px;
+    align-items: center;
+}
+.Line1 {
+    width: 20px;
+}
+
+.Line2 {
+}
+
+.Line3 {
+    width: 20px;
+    transform: translateX(-10px);
+}
+.ExitButton {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    transition: 0.3s all ease-in-out;
+    text-shadow: 0px 0px 2px black;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.nav-item2:hover .ExitButton {
+    text-shadow: 0px 0px 2px black;
+    color: white;
+}
+
+.borderspan {
+    width: 0px;
+    height: 2px;
+    transition: 0.3s all ease-in-out;
+}
+
+.nav-item2:hover .borderspan {
+    width: 160px;
+    border-width: 1px;
+    border-style: solid;
+    border-image: linear-gradient(to right, black, white) 1;
+}
+
+.exitimg {
+    width: 30px;
+    height: 30px;
+}
+
+@media only screen and (max-width: 900px) {
+    #BurgerButton {
+        display: flex;
+    }
+    .navbarLIn{
+        display:none;
+    }
+    .Settings{
+        display:none;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .ExitButton {
+        font-size: 15px;
+    }
+
+    .exitimg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .ExitButton {
+        font-size: 20px;
+    }
+    .container_fluidd {
+        gap: 10px;
+    }
+}
+@media only screen and (max-width: 400px) {
+
+}

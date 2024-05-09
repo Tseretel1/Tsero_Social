@@ -5,18 +5,195 @@ body {
     height: 100%;
     padding: 0;
     margin: 0;
-    background: url(../img/darkback5.jpeg);
- 
+    top:0;
+    left:0;
+    position: absolute;
 }
-.container {
-    width: 100%;
+body::selection{
+    color:red;
+}
+.XbuttonContainer {
+    width: 750px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    z-index: 290;
+    top: 0;
+    left: 0;
+}
 
+.ButtonX {
+    font-size: 40px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    z-index: 500;
+    cursor: pointer;
+    transition: 0.2s all ease-in-out;
+}
+.ButtonX:hover{
+    color:red;
+}
+.YOurFollowers{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    font-size:30px;
+    color:white;
+    padding:30px 0px 0px 0px;
+}
+
+.FollowersList {
+    width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 120;
+    background-color: #000000;
+    backdrop-filter: blur(8px);
+    flex-direction: column;
+    position: fixed;
+}
+#FollowerWinodw {
+    display: none;
+}
+#FollowINGWinodw{
+    display:none;
+}
+#NotificationWindow{
+    display:none;
+}
+.FollowerFont {
+    font-size: 20px;
+}
+.FollowersContainer {
+    width: 650px;
+    height: auto;
+    background-color: #212121;
+    border-radius: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 0px 20px 30px 50px;
+    justify-content: center;
+    color: white;
+    box-shadow: 0px 0px 10px black;
+    border: 0.5px solid grey;
+    display: flex;
+    flex-direction: column;
+}
+.FollowersContainer::-webkit-scrollbar {
+    width:10px;
+}
+
+.FollowersContainer::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+.FollowersContainer::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius:10px;
+}
+.FollowersContainer::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.EachFollower {
+    display: flex;
+    justify-content:space-between;
+    margin-top: 30px;
+}
+.EachFollowerRightSide{
+    display:flex;
+    align-items:center;
+}
+.DeletFollowerBUtton {
+    color: white;
+    background-color: transparent;
+    border: none;
+    padding: 0px 20px 0px 20px;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+.RemoveFollowingBUtton {
+    color: white;
+    background-color: transparent;
+    border: none;
+    padding: 0px 20px 0px 20px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    transition:0.3s all ease-in-out;
+}
+.RemoveFollowingBUtton:hover {
+    color: red;
+    border: 1px solid red;
+}
+.NotificationAll{
+    padding:0px 10px 0px 10px;
+    transition:0.3s all ease-in-out;
+    font-size:16px;
+}
+.NotificationAll:hover{
+    color:red;
+    border:1px solid red;
+}
+.NotificationsSide{
+    display:flex;
+    align-items:center;
+}
+.NotificationMessage {
+    padding: 0px 0px 0px 20px;
+}
+.EachFollowerLeftSide {
+    display: flex;
+}
+.FollowerProfile {
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 1px solid white;
+}
+.FollowerPic {
+    width: 70px;
+    height: auto;
+}
+.BoldUsername{
+    font-weight:800;
+}
+.UserDataFlex {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.FollowerDataGap {
+    display: flex;
+    flex-direction: column;
+    margin-left: 14px;
+}
+
+.FolloweruserName {
+    color:grey;
+    font-weight:500;
+}
+.PleaseLogin {
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+}
+.fixedContainerBackground {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url(../img/darkback5.jpeg);
+    top:0;
+    left:0;
 }
 .ParentOfParents {
     width: 100%;
     overflow-y: scroll;
     height: 100%;
+    z-index:0;
 }
 .containercenter{
     width:100%;
@@ -26,43 +203,14 @@ body {
     justify-content : center;
     margin-top:80px;
     flex-direction:column;
-    gap:40px;
-}
-.nav-item{
-    display:flex;
-    align-items:center;
-    text-decoration:none;
-}
-.exitimg{
-    width:40px;
-    transition:0.3s all ease-in-out;    
+    z-index:500;
+    overflow-y:scroll;
 }
 .ExitFromAccount {
     display: flex;
     justify-content: flex-end;
     width: 100%;
-}
-.ExitButton{
-    color:white;
-    font-size:20px;
-    text-decoration:none;
-    transition:0.3s all ease-in-out; 
-}
-.nav-item:hover .ExitButton{
-    text-shadow: 0px 0px 10px white;
-    color: white;
-}
-.borderspan {
-    width: 0px;
-    height: 2px;
-    transition: 0.3s all ease-in-out;
-}
-.nav-item:hover .borderspan {
-    border: 1px solid red;
-    width: 160px;
-    color:white;
-}
-.nav-item:hover .exitimg {
+    z-index: 5;    
 }
 .fileinput2 {
     color: black;
@@ -76,7 +224,6 @@ body {
     align-items: center;
     background-color: rgb(26, 25, 25);
 }
-
 .img_content {
     width: 120px;
     height: 120px;
@@ -87,29 +234,29 @@ body {
     background-size: cover;
     border: none;
 }
-
 .updatepost {
-    width: clamp(280px, 75%, 900px);
+    width: 70%;
     height: auto;
-    padding: 20px 0px 10px 0px;
-    border-radius: 20px;
+    border-radius: 10px;
     display: flex;
     box-shadow: 0px 0px 20px black;
-    background-color:ghostwhite;
-    color:black;
-}
-.editbutton{
+    z-index: 2;
+    backdrop-filter: blur(5px);
+    justify-content:flex-start;
+    background-position: center;
     background-size:cover;
-    background-color:transparent;
-    border:none;
-    width:auto;
-    height:60px;
-    display:flex;
-    flex-direction:column;
-    cursor:pointer;
+    border:1px solid gray;
+    padding: 130px 0px 130px 0px;
+    justify-content:center;
+    max-width:1300px;
 }
-.editimage{
-    width:30px;
+.updatepost:hover .btn{
+    transform:scale(1);
+}
+#changebuttons {
+    text-decoration: none;
+    transition: 0.2s all ease-in-out;
+    transform: scale(1);
 }
 .commentinput{
     width:100%;
@@ -120,23 +267,243 @@ body {
     width: 95%;
     height: 40px;
 }
-.changebuttons {
-    border: none;
-    background-color: transparent;
-    color: black;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    font-weight:bold;
-    cursor: pointer;
-    width:100px;
-    border-bottom:1px solid gray;
-    text-align:center;
-}
-.Xbutton{
-    border:None;
-    font-size:20px;
+.cameraButton {
+    width: 40px;
+    position: absolute;
+    left: 60px;
+    background-color: black;
+    border-radius:50%;
+    padding:5px;
+    opacity:0;
     transition:0.3s all ease-in-out;
+}
+.Profile_data:hover .cameraButton{
+    opacity:1;
+}
+.changebuttons {
+    color: white;
+    display: flex;
+    align-items: center;
+}
+.UploadPhoto {
+    font-size: 18px;
+    color: #333;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 13rem;
+    overflow: hidden;
+    height: 3rem;
+    border-radius: 5rem;
+    transition: 0.5s;
+    animation: gradient_301 5s ease infinite;
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    border: 1px solid black;
+    transition: 0.3s all ease-in-out;
+    backdrop-filter: blur(5px);
+    transform:scale(0.01);
+}
+
+#container-stars {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    transition: 0.5s;
+    border-radius: 5rem;
+}
+
+strong {
+    z-index: 2;
+    font-size: 12px;
+    letter-spacing: 5px;
+    color: #FFFFFF;
+}
+
+#glow {
+    position: absolute;
+    display: flex;
+    width: 12rem;
+}
+
+.circle {
+    width: 100%;
+    height: 30px;
+    filter: blur(2rem);
+    animation: pulse_3011 4s infinite;
+    z-index: -1;
+}
+
+.btn:hover {
+    backdrop-filter: blur(2px);
+}
+#stars {
+    position: relative;
+    background: transparent;
+    width: 200rem;
+    height: 200rem;
+}
+
+ #stars::after {
+     content: "";
+     position: absolute;
+     top: -10rem;
+     left: -100rem;
+     width: 100%;
+     height: 100%;
+     animation: animStarRotate 90s linear infinite;
+ }
+
+ #stars::after {
+     background-image: radial-gradient(#ffffff 1px, transparent 1%);
+     background-size: 50px 50px;
+ }
+
+ #stars::before {
+     content: "";
+     position: absolute;
+     top: 0;
+     left: -50%;
+     width: 170%;
+     height: 500%;
+     animation: animStar 60s linear infinite;
+ }
+
+ #stars::before {
+     background-image: radial-gradient(#ffffff 1px, transparent 1%);
+     background-size: 50px 50px;
+     opacity: 0.5;
+ }
+
+@keyframes animStar {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-135rem);
+    }
+}
+
+@keyframes animStarRotate {
+    from {
+        transform: rotate(360deg);
+    }
+
+    to {
+        transform: rotate(0);
+    }
+}
+
+@keyframes gradient_301 {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes pulse_3011 {
+    0% {
+        transform: scale(0.75);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+    }
+
+    100% {
+        transform: scale(0.75);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+}
+.FollowContaoinerParent {
+    width: auto;
+    padding: 10px 20px 10px 20px;
+    backdrop-filter: blur(50px);
+    background-color: #00000036;
+    border: 1px solid black;
+    display: flex;
+    gap: 25px;
+    border-radius: 5px;
+    color: white;
+    align-items:center;
+    cursor :pointer;
+}
+.ProfileUserNameColumn{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+.FollowerLine {
+    width: 0px;
+    transition: 0.1s all ease-in-out;
+    border: 1px solid transparent;
+}
+.FollowerHover:hover .FollowerLine {
+    width: 100%;
+    border: 1px solid white;
+}
+.FollowingHover:hover .FollowingLine {
+    width: 100%;
+    border: 1px solid white;
+}
+.FollowingLine {
+    width: 0px;
+    transition: 0.1s all ease-in-out;
+    border: 1px solid transparent;
+}
+.NotifyHover:hover .FollowingLine {
+    width: 100%;
+    border: 1px solid white;
+}
+.NotifyHover:hover .NTF_img {
+    animation: BellAnimation 0.5s;
+}
+@keyframes BellAnimation {
+    25% {
+        transform: rotate(-25deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    75% {
+        transform: rotate(-25deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+.FollowingCount {
+    color: white;
+}
+.NTF_img{
+    width:30px;
+}
+.AllNotificationsClear{
+    display:flex;
+    width:100%;
+    justify-content:center;
+}
+.Xbutton {
+    border: None;
+    font-size: 20px;
+    transition: 0.3s all ease-in-out;
 }
 .Xbutton:hover{
     color:red;  
@@ -144,23 +511,15 @@ body {
 #ChangeButtonsParent {
     display: flex;
     flex-direction: column;
-    width: 0px;
     overflow: hidden;
     transition: width 0.3s ease-in-out;
-    margin-left: 20px;
+    align-items:center;
 }
 
 .changebuttonsdiv {
     display: flex;
     flex-direction: column;
     gap:10px;
-}
-.Xbuttonalign{
-    display:flex;
-    justify-content:flex-end;
-}
-.editFlex {
-    display: flex;
 }
 .profile_section {
     display: flex;
@@ -169,7 +528,23 @@ body {
     flex-wrap: wrap;
     flex-direction: column;
 }
-
+.PostTodeltte{
+    visibility:hidden;
+    height:0;
+    width:0;
+}
+.Formdelete {
+    height: 0;
+    width: 90%;
+    display:flex;
+    justify-content:flex-end;
+}
+#NotificationsParenttttt {
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+    width: 100%;
+}
 .prof_back {
     width: 150px;
     height: 150px;
@@ -208,13 +583,6 @@ body {
 .user {
     height: 100%;
 }
-
-.username {
-    font-family: sans-serif;
-    color: black;
-    font-size: 25px;
-}
-
 .postinput {
     background-color: transparent;
     border: none;
@@ -236,64 +604,43 @@ body {
 .postform {
     gap: 20px;
 }
-
-.button {
-    --border-right: 6px;
-    --text-stroke-color: rgba(255, 255, 255, 0.6);
-    --animation-color: whitesmoke;
-    --fs-size: 2em;
-    letter-spacing: 3px;
-    text-decoration: none;
-    font-size: var(--fs-size);
-    font-family: "Arial";
-    position: relative;
-    text-transform: uppercase;
-    color: black;
-    -webkit-text-stroke: 1px var(--text-stroke-color);
-    border: 1px solid grey;
-    text-shadow: 0px 0px 3px white;
-    margin-top: 20px;
-    background-color:black;
-    border-radius:10px;
-}
-
-.hover-text {
+.Profile_data {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
     position: absolute;
-    box-sizing: border-box;
-    content: attr(data-text);
-    color: black;
-    width: 0px;
-    inset: 0;
-    border-right: var(--border-right) solid var(--animation-color);
-    overflow: hidden;
-    transition: 0.5s;
-    -webkit-text-stroke: 1px var(--animation-color);
+    top: 180px;
+    left: 30px;
 }
-
-.button:hover .hover-text {
-    width: 100%;
-    filter: drop-shadow(0 0 23px var(--animation-color));
-}
-.Profile_data{
-    width:auto;
-    height:auto;
-    padding: 0px 10px 0px 10px;
+.userName {
+    font-size: 15px;
+    color: white;
+    text-shadow: 0px 0px 2px black;
+    max-width:150px;
+    flex-wrap:wrap;
     display:flex;
-    flex-direction:column;
-    justify-content:space-between;
     align-items:center;
+    justify-content:center;
+    gap:5px;
+    margin:0;
 }
-.userName{
-    font-size:20px; 
-    color:black;
-    font-family:sans-serif;
+.userNameAndLastName{
+    margin:0;
 }
-.profileandName{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+.editbtn {
+    text-shadow: 0px 0px 2px black;
+}
+.profileandName {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 #ProfilePreview {
+    width: 180px;
     width: 180px;
     transition: 0.3s all ease-in-out;
 }
@@ -302,161 +649,103 @@ body {
 }
 #ProfilePictureCont {
     display: flex;
-    width: 180px;
-    height: 180px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     overflow: hidden;
     background-color: rgb(26, 25, 25);
-    background:url(../img/profileback.jpg);
+    background:url(../img/ProfileBackground.png);
     background-size:cover;
     border:2px solid white
 }
+.UploadPicMain{
+    width:160px;
+    height:auto;
+}
 .fileinput {
+    color: black;
+}
+.DeltePostButton{
+    height:30px;
+    border-radius:5px;
+    border:1px solid white;
+    background-color:transparent;
+    color:white;
+    transition:0.3s all ease-in-out;
+}
+.DeltePostButton:hover{
     color:black;
+    background-color:white;
 }
-
-
-/*Publish Post*/
-.PostParent {
-    width: 70%;
-    display:flex;
-}
-.PostPublish {
-    width: 40%;
-    height: 0;
-    padding:0px 0px 50px 0px ;
+.UploadPost {
+    width: 650px;
+    padding: 50px 0px 50px 0px;
     border-radius: 10px;
     background-color: rgb(26, 25, 25);
-    overflow:hidden;
-    transition:0.3s all ease-in-out;
-    cursor:pointer;
-
-}
-.Formpublish {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index: 2;
+    box-shadow: 0px 0px 5px black;
+    border: 1px solid grey;
+    margin-top: 80px;
     display: flex;
     flex-direction: column;
+    gap: 40px;
+}
+
+.UploadProfile {
+    display: flex;
     align-items: center;
-    gap: 20px;
+    width:70%;
+    justify-content:space-between;
 }
-.HidePublish {
-    width: 90%;
-    display: flex;
-    justify-content: flex-end;
-}
-.HidePublishButtton {
-    background-color: transparent;
-    border: none;
-    outline: none;
-    color: red;
-    width: 50px;
-    height: 50px;
-    font-size: 30px;
-    transition: 0.3s all ease-in-out;
-    color: white;
-    background-color: red;
-    border-radius: 10px;
-    opacity:0;
-}
-.HidePublishButtton:hover {
-    background-color: darkred;
-}
-.WritePostText {
-    width: 100%;
-    display: flex;
-    color: whitesmoke;
-    justify-content: center;
-}
-.photocontainer{
-    gap:20px;
-}
-input[type=file]::file-selector-button {
-    visibility: hidden;
-}
-.photouploadbutton::before {
-    content: 'Select some files';
-    display: inline-block;
-    background: linear-gradient(top, #f9f9f9, #e3e3e3);
-    border: 1px solid #999;
-    border-radius: 3px;
-    padding: 5px 8px;
-    outline: none;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 10pt;
-}
-.photouploadbutton {
-    color: transparent;
-}
-.photouploadbutton {
-    margin-right: 20px;
-    border: none;
-    border-radius: 10px;
-    color: white;
-}
-.submitPostButton{
-    width:150px;
-    height:40px;
-    background-color:white;
-    color:black;
-    font-family:sans-serif;
-}
-.inputpost {
-    border: none;
-    background-color: transparent;
-    border-bottom: 1px solid grey;
-    outline: none;
-    color: white;
-    width: 300px;
-}
-.photopreviewcontainer{
-    width:300px;
-    height:300px;
-    border:1px solid white;
+.DefaultProfile {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
     overflow:hidden;
+    background:url(../img/ProfileBackground.png);
+    background-size:cover;
+    background-position:center;
+}
+.UploadPic {
+    width: 70px;
+    height: auto;
+}
+.UploadUsername {
+    color:white;
+    font-size:18px;
+}
+.Whats_On_Your_Mind{
     display:flex;
     align-items:center;
-    justify-content:center;
-    margin-top:20px;
+    gap:10px;
 }
-#ProfilePreview2 {
-    width: 300px;
-}
-.formhidden {
-    display: flex;
-    flex-direction: column;
-}
-.modalwindow {
-    width: 200px;
-    height: 100px;
-    position: fixed;
-    right: 55%;
-    top: 10%;
-    background-color: black;
-    color: white;
-    border-radius: 20px;
-    box-shadow: 0px 0px 5px black;
-    z-index: 5000;
-    display: none;
-    opacity: 0;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-.change{
+.OnYourMindInput{
+    background-color:transparent;
+    border:none;
     color:white;
-    background-color:darkred;
-    border-radius:10px;
-    box-shadow:0px 0px 5px black;
-    width:100px;
-    height:20px;
-    font-size:12px;
+    outline:none;
+    border-bottom:1px solid white;
 }
-.buttonsflex{
-    display:flex;
-    flex-direction:column;
-    align-items:start;
+.onYourMIndLink {
+    text-decoration: none;
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+    box-shadow: 0px 0px 5px black;
+    margin-top: 20px;
+    transition: 0.3s all ease-in-out;
+    color: white;
+    padding: 0px 10px 0px 10px ;
+    border-radius: 5px;
+    outline: none;
+    transition:0.3s all ease-in-out;
+    margin:0;
 }
-
+.onYourMIndLink:hover{
+    color:white;
+}
 /*My Post */
 .MyPosts {
     width: clamp(280px, 75%, 900px);
@@ -466,4 +755,359 @@ input[type=file]::file-selector-button {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap:50px;
+}
+.FollowerFont{
+    text-align:center;
+}
+@media only screen and (max-width: 934px) {
+    .updatepost {
+        width: 650px;
+    }
+}
+@media only screen and (max-width: 700px) {
+    .UploadPost {
+        width:500px;
+    }
+    .FollowerFont{
+        font-size:17px;
+    }
+    .DefaultProfile{
+        width:50px;
+        height:50px;
+    }
+    .UploadPic{
+        width:50px;
+    }
+    .FollowContaoinerParent {
+        gap: 5px;
+    }
+    .UploadPicMain {
+        width: 120px;
+        height: auto;
+    }
+    .updatepost {
+        width: 550px;
+        padding:20px;
+    }
+    #ProfilePictureCont {
+        width: 100px;
+        height: 100px;
+    }
+    .updatepost {
+        width: 550px;
+        padding: 90px 0px 90px 0px;
+    }
+    .UploadPicMain {
+        width: 100px;
+    }
+    .FollowingCount {
+        font-size: 12.5px;
+    }
+    .userName {
+        font-size: 13px;
+    }
+    .MyPosts {
+        gap:20px;
+    }
+    .FollowersContainer{
+        width:550px;
+    }
+    .XbuttonContainer {
+        width: 600px;
+    }
+    .Profile_data {
+        top: 140px;
+    }
+    .changebuttons {
+        top: 110px;
+    }
+    .cameraButton {
+        left:42px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .updatepost {
+        width: 490px;
+        padding: 70px 0px 70px 0px;
+    }
+    .UploadPicMain {
+        width: 100px;
+        height: auto;
+    }
+
+    #ProfilePictureCont {
+        width: 100px;
+        height: 100px;
+    }
+    .userName {
+        font-size: 13px;
+        max-width:100px;
+    }
+
+    .FollowingCount {
+        font-size: 11px;
+    }
+    .FollowersContainer {
+        width: 450px;
+        padding: 0px 10px 20px 10px;
+    }
+    .XbuttonContainer {
+        width: 500px;
+    }
+    .FollowerProfile{
+        width:50px;
+        height:50px;
+    }
+    .FollowerPic{
+        width:50px;
+    }
+    .FolloweruserName{
+        font-size:13px;
+    }
+    .UserDataFlex{
+        gap:5px;
+    }
+    .Profile_data {
+        top: 125px;
+    }
+    .changebuttons {
+        top: 90px;
+        font-size:13px;
+    }
+    .cameraButton{
+        left:32px;
+    }
+    .FollowerFont{
+        font-size:15px;
+    }
+    .NTF_img{
+        width:20px;
+    }
+    .DefaultProfile{
+        width:30px;
+        height:30px;
+    }
+    .UploadPic{
+        width:30px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .updatepost {
+        width: 480px;
+    }
+    .UploadPicMain {
+        width: 90px;
+        height: auto;
+    }
+
+    #ProfilePictureCont {
+        width: 90px;
+        height: 90px;
+    }
+
+    .changebuttons {
+        font-size: 10px;
+    }
+
+    .userName {
+        font-size: 13px;
+    }
+
+    .FollowingCount {
+        font-size: 11px;
+    }
+
+    .FollowContaoinerParent {
+        padding: 5px;
+        gap:0px;
+    }
+    .UploadPost{
+        width:480px;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .UploadPost {
+        width: 380px;
+    }
+    .updatepost{
+        width:400px;
+        padding : 50px 0px 50px 0px;
+    }
+    .Profile_data {
+        top: 90px;
+    }
+    .XbuttonContainer {
+        width: 400px;
+    }
+    .FollowersContainer {
+        width: 400px;
+        padding: 0px 10px 20px 10px;
+    }
+
+    .FollowerProfile {
+        width: 60px;
+        height: 60px;
+    }
+
+    .FollowerPic {
+        width: 60px;
+    }
+
+    .FolloweruserName {
+        font-size: 15px;
+    }
+
+    .UserDataFlex {
+        gap: 5px;
+    }
+    .DeletFollowerBUtton{
+        padding: 0px 10px 0px 10px;
+    }
+    .BoldUsername{
+        font-size:18px;
+        font-weight:500;
+    }
+    .FolloweruserName{
+        font-size:12px;
+    }
+    .DeletFollowerBUtton{
+        padding:0px 5px 0px 5px;
+        font-size:14px;
+    }
+
+    .UploadPicMain {
+        width: 80px;
+        height: auto;
+    }
+
+    #ProfilePictureCont {
+        width: 80px;
+        height: 80px;
+    }
+    .FollowContaoinerParent{
+        gap:20px;
+    }
+    .changebuttons{
+        top:80px;
+    }
+}
+@media only screen and (max-width: 400px) {
+    .UploadPost {
+        width: 300px;
+        padding:10px 0px 10px 0px ;
+    }
+    .updatepost {
+        width: 290px;
+        padding: 40px 0px 40px 0px
+    }
+    .Profile_data {
+        top: 80px;
+        left:0;
+    }
+    .DefaultProfile{
+        width:40px;
+        height:40px;
+    }
+    .UploadPic {
+        width: 40px;
+    }
+    .UploadUsername{
+        font-size:13px;
+    }
+    .OnYourMindInput{
+        font-size:10px;
+        width:100px;
+    }
+    .FollowersContainer {
+        width: 300px;
+        padding: 0px 10px 20px 10px;
+    }
+    .XbuttonContainer {
+        width: 300px;
+    }
+
+    .FollowerProfile {
+        width: 50px;
+        height: 50px;
+    }
+
+    .FollowerPic {
+        width: 50px;
+    }
+
+    .FolloweruserName {
+        font-size: 13px;
+    }
+    .UploadPicMain {
+        width: 60px;
+        height: auto;
+    }
+
+    #ProfilePictureCont {
+        width: 60px;
+        height: 60px;
+    }
+    .FollowContaoinerParent {
+        gap: 10px;
+    }
+    .FollowerFont{
+        font-size:12px;
+    }
+    .changebuttons {
+        top: 50px;
+    }
+    .userName{
+        font-size:10px;
+    }
+}
+@media only screen and (max-width: 300px) {
+    .UploadPost {
+        width: 260px;
+        padding: 10px 0px 10px 0px;
+        border-radius:3px;
+    }
+    .FollowersContainer{
+        width:270px;
+    }
+    .XbuttonContainer {
+        width: 270px;
+    }
+    .DefaultProfile {
+        width: 20px;
+        height: 20px;
+    }
+
+    .UploadPic {
+        width: 20px;
+    }
+
+    .UploadUsername {
+        font-size: 12px;
+    }
+
+    .OnYourMindInput {
+        font-size: 10px;
+        width: 80px;
+    }
+    .updatepost {
+        width: 270px;
+        padding: 30px 0px 30px 0px
+    }
+
+    .Profile_data {
+        top: 30px;
+        left: 0;
+    }
+    .FollowerFont{
+        font-size:10px;
+    }
+    .NTF_img{
+        width:15px;
+    }
+    .FollowContaoinerParent {
+        gap:0px;
+        padding:0;
+    }
+
 }

@@ -2,6 +2,7 @@
 using Microsoft.Identity.Client;
 using System.Data;
 using Tsero_Social.Dbcontext;
+using Tsero_Social.InterFaces;
 using Tsero_Social.Models;
 
 namespace Tsero_Social.Services
@@ -27,13 +28,17 @@ namespace Tsero_Social.Services
         {
             var register = _Context.Users.Any(u => u.Email == user.Email);
             if(register)
-            {
+            {              
                 return user != null;
             }
             else
             {
-                _Context.Users.Add(user);
-                _Context.SaveChanges();
+                if (user.Username.Length <= 12)
+                {
+                    _Context.Users.Add(user);
+                    _Context.SaveChanges();
+                    return user == null;
+                }
                 return user == null;
             }
         }

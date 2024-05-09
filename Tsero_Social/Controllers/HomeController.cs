@@ -1,5 +1,5 @@
 ﻿
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing.Constraints;
 using System.Diagnostics;
 using System.Drawing.Imaging;
@@ -18,24 +18,75 @@ namespace Tsero_Social.Controllers
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly UserDbcontext _dbcontext;
-        public HomeController(IWebHostEnvironment hostingEnvironment, UserDbcontext db)
+        private readonly UserServices _userServices;
+        private readonly LikeCommentService _LikeComment;
+        private readonly Followserivce _followservice;
+        public HomeController(IWebHostEnvironment hostingEnvironment, UserDbcontext db, UserServices userService, LikeCommentService likeComment, Followserivce followservice)
         {
             _hostingEnvironment = hostingEnvironment;
             _dbcontext = db;
+            _userServices = userService;
+            _LikeComment = likeComment;
+            _followservice = followservice;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
-            var allPosts = _dbcontext.Posts.Where(p => p.DateTime < DateTime.Now).ToList();
-            var random = new Random();
-            var randomPosts = allPosts.OrderBy(x => random.Next()).ToList();
+            int pageSize = 5;
+            int offset = (page - 1) * pageSize;
+            if (offset < 0)
+            {
+                offset = 0;
+            }
+
+            ViewBag.UserPosts = "";
+            var allPosts = _dbcontext.Posts
+                .Where(p => p.DateTime < DateTime.Now)
+                .OrderByDescending(p => p.DateTime)
+                .Skip(offset)
+                .Take(pageSize)
+                .ToList();
+            ViewBag.Users = _dbcontext.Users.ToList();
+            ViewBag.Comments = _dbcontext.Comments.ToList();
+            ViewBag.Likes = _dbcontext.Likes.ToList();
+            ViewBag.UserPosts = allPosts;
+            ViewBag.Posts = new List<User>();
+            ViewBag.CurrentUser = _userServices.GetUserLogedUsers();
+            var allUsers = _dbcontext.Users.ToList();
+            foreach (var post in allPosts)
+            {
+                var user = allUsers.FirstOrDefault(u => u.id == post.UserID);
+                if (user != null)
+                {
+                    ViewBag.Posts.Add(user);
+                }
+            }
+            return PartialView("home", allPosts);
+        }
+
+        public IActionResult home(int page = 1)
+        {
+            int pageSize = 5;
+            int offset = (page - 1) * pageSize;
+            if (offset < 0)
+            {
+                offset = 0;
+            }
+
+            var allPosts = _dbcontext.Posts
+                .Where(p => p.DateTime < DateTime.Now)
+                .OrderByDescending(p => p.DateTime)
+                .Skip(offset)
+                .Take(pageSize)
+                .ToList();
 
             ViewBag.Users = _dbcontext.Users.ToList();
             ViewBag.Comments = _dbcontext.Comments.ToList();
             ViewBag.Likes = _dbcontext.Likes.ToList();
-            ViewBag.UserPosts = randomPosts;
+            ViewBag.UserPosts = allPosts;
             ViewBag.Posts = new List<User>();
+            ViewBag.CurrentUser = _userServices.GetUserLogedUsers();
             var allUsers = _dbcontext.Users.ToList();
-            foreach (var post in randomPosts)
+            foreach (var post in allPosts)
             {
                 var user = allUsers.FirstOrDefault(u => u.id == post.UserID);
                 if (user != null)
@@ -43,34 +94,83 @@ namespace Tsero_Social.Controllers
                     ViewBag.Posts.Add(user);
                 }
             }
-            return View("home");
+            return PartialView("home", allPosts);
         }
-
-
-        public IActionResult home()
+        public IActionResult Foryou(int page = 1)
         {
-            var allPosts = _dbcontext.Posts.Where(p => p.DateTime < DateTime.Now).ToList();
-            var random = new Random();
-            var randomPosts = allPosts.OrderBy(x => random.Next()).ToList();
-
-            ViewBag.Users = _dbcontext.Users.ToList();
-            ViewBag.Comments = _dbcontext.Comments.ToList();
-            ViewBag.UserPosts = randomPosts;
-            ViewBag.Posts = new List<User>();
-            var allUsers = _dbcontext.Users.ToList();
-            foreach (var post in randomPosts)
+            bool IsLogged = true;
+            try
             {
-                var user = allUsers.FirstOrDefault(u => u.id == post.UserID);
-                if (user != null)
+                var logedUsers = _userServices.GetUserLogedUsers();
+                if (logedUsers.Count > 0)
                 {
-                    ViewBag.Posts.Add(user);
+                    IsLogged = true;
+                }
+
+                else if (logedUsers.Count <= 0)
+                {
+                    IsLogged = false;
                 }
             }
-            return View("home");
+
+
+            catch (Exception ex)
+            {
+            }
+            if (IsLogged)
+            {
+                int pageSize = 5;
+                int offset = (page - 1) * pageSize;
+                if (offset < 0)
+                {
+                    offset = 0;
+                }
+
+                var allPosts = _dbcontext.Posts
+                    .Where(p => p.DateTime < DateTime.Now)
+                    .OrderByDescending(p => p.DateTime)
+                    .Skip(offset)
+                    .Take(pageSize)
+                    .ToList();
+                ViewBag.Users = _dbcontext.Users.ToList();
+                ViewBag.Comments = _dbcontext.Comments.ToList();
+                ViewBag.Likes = _dbcontext.Likes.ToList();
+                ViewBag.Follows = _dbcontext.Follows.ToList();
+                ViewBag.UserPosts = allPosts;
+                ViewBag.Posts = new List<User>();
+                ViewBag.CurrentUser = _userServices.GetUserLogedUsers();
+                var allUsers = _dbcontext.Users.ToList();
+                foreach (var post in allPosts)
+                {
+                    var user = allUsers.FirstOrDefault(u => u.id == post.UserID);
+                    if (user != null)
+                    {
+                        ViewBag.Posts.Add(user);
+                    }
+                }
+                return PartialView("Foryou", allPosts);
+            }
+
+            else if (!IsLogged)
+            {
+                ViewBag.Noposts = "No Post Are available";
+                return RedirectToAction("Login", "Login");
+            }
+            return View("Login");
         }
-        public IActionResult Privacy()
+
+        [HttpPost]
+        public IActionResult Like(int Postid, int CurrentUserID)
         {
-            return View();
+            _LikeComment.PostToLike(Postid, CurrentUserID);
+            return NoContent();
+        }
+
+        [HttpPost]
+        public IActionResult FollowPerson(int FollowerID, int FollowingID)
+        {
+            _followservice.Follow(FollowerID, FollowingID);
+            return NoContent();
         }
     }
 }
