@@ -31,6 +31,7 @@ namespace Tsero_Social.Controllers
         public IActionResult ProfileGenerate()
         {
 
+
             using (var transaction = _userDbcontext.Database.BeginTransaction(System.Data.IsolationLevel.Serializable))
             {
                 try
@@ -98,7 +99,9 @@ namespace Tsero_Social.Controllers
                     _userDbcontext.SaveChanges();
                     transaction.Commit();
 
+
                 }
+
 
                 catch (Exception ex)
                 {
@@ -197,6 +200,7 @@ namespace Tsero_Social.Controllers
         public IActionResult Settings(User user)
         {
             {
+                ProfileGenerate();
                 var item = _userService.GetUserLogedUsers();
                 int id = 0;
                 foreach (var i in item)

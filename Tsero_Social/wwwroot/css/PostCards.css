@@ -1,4 +1,4 @@
-﻿.Each_Post {
+.Each_Post {
     width: 650px;
     display: flex;
     justify-content: center;
@@ -186,8 +186,8 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid white;
+    border-bottom: 2px solid white;
 }
-
 .comclick {
     font-size: 20px;
     font-weight: 600;
@@ -264,7 +264,16 @@
     width: 40px;
     border-radius: 50%;
 }
+.profilepic {
+    width: 40px;
+    border-radius: 50%;
+}
 
+.commenterProfile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 .commenterProfile {
     display: flex;
     align-items: center;
@@ -274,7 +283,18 @@
 .eachcomment {
     border-bottom: 1px solid gray;
 }
+.eachcomment {
+    border-bottom: 1px solid gray;
+}
 
+.commentinput {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 95%;
+    margin-top: 20px;
+    gap: 10px;
+}
 .commentinput {
     display: flex;
     align-items: center;
