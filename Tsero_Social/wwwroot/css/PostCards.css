@@ -1,19 +1,19 @@
-﻿
 .Each_Post {
-    width: clamp(280px, 70%, 900px);
+    width: 650px;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 0px 0px 10px;
-    border-radius: 20px;
     height: auto;
     padding: 20px 0px 70px 0px;
-    margin-top: 60px;
     flex-direction: column;
-    gap: 50px;
-    backdrop-filter:blur(10px);
-    box-shadow:0px 0px 5px white;
-    z-index:5;
+    backdrop-filter: blur(5px);
+    box-shadow: 0px 0px 10px black;
+    z-index: 5;
+    background-color: #212121;
+    border: 1px solid grey;
+    border-radius: 10px;
+    margin-top: 60px;
 }
 
 .Postcontent {
@@ -21,35 +21,49 @@
     flex-direction: column;
     align-items: center;
 }
-.postdate{
-    color:white;
+
+
+.Like {
+    color: white;
 }
-.Like{
-    color:white;
-}
+
 .comclick {
     color: white;
 }
+
 .MyUsername {
     color: white;
-}
-.PostProfile {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
+    margin:0;
 }
 
+.PostProfile {
+    width: 60px;
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size:cover;
+    border:none;
+}
+.Follow {
+    color: white;
+    font-size: 20px;
+    transition: 0.2s all ease-in-out;
+    background-color: transparent;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
 .userdata {
     display: flex;
-    width: clamp(280px, 75%, 400px);
+    width: 500px;
     align-items: center;
     justify-content: space-between;
 }
-
+.displaynoneForms{
+    display:none;
+}
 .namephotoflex {
     display: flex;
-    gap: 20px;
-    align-items: flex-start;
+    gap: 5px;
+    align-items:center;
 }
 
 .titlegrey {
@@ -59,22 +73,33 @@
 }
 
 .flextitles {
-    display: flex;
-    width: 100%;
-    color:white;
-    margin-bottom: 10px;
+    width: 500px;
+    color: white;
 }
 
 .imgofpost {
-    width: clamp(280px, 175%, 400px);
-    height: auto;
+    width: 500px;
+    height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     border-radius: 10px;
 }
-
+.imgofpost2 {
+    width: 350px;
+    height: 350px;
+    border: 2px solid gray;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.Post_photowidth2 {
+    width: 350px;
+    height: auto;
+}
 .photocontentwitdth {
     width: 100%;
     height: auto;
@@ -85,23 +110,62 @@
 }
 
 .Post_photowidth {
-    width: 400px;
+    width: 500px;
     border-radius: 10px;
     transition: 0.3s all ease-in-out;
-}
-
-.Post_photowidth:hover {
-    transform: scale(1.1);
 }
 
 .MyUsername {
     font-size: 20px;
     color: white;
 }
-
+.UpdateProfile{
+    width:auto;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+}
+.UpdatedText{
+    color:grey;
+    font-size:15px;
+    margin:0;
+    margin-left:5px;
+}
+.UpdateTextAndNameFlex{
+    display:flex;
+    align-items:flex-start;
+    flex-wrap :wrap;
+}
+.postDateParent {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 50%;
+    background: url(../img/ProfileBackground.png);
+    background-size: cover;
+    background-repeat:no-repeat;
+    background-position:center;
+    overflow: hidden;
+    width: 60px;
+    height: 60px;
+    border: 1px solid grey;
+}
+.postdate {
+    color: grey;
+    margin: 0;
+    font:100;
+    font-size:15px;
+}
+.datetimetracking {
+    color: grey;
+    font-size: 12px;
+    margin: 0;
+}
 .Name_lastname {
     font-size: 13px;
 }
+
 
 /*Comment section */
 .commentSection {
@@ -121,6 +185,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 2px solid white;
     border-bottom: 2px solid white;
 }
 .comclick {
@@ -199,7 +264,16 @@
     width: 40px;
     border-radius: 50%;
 }
+.profilepic {
+    width: 40px;
+    border-radius: 50%;
+}
 
+.commenterProfile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 .commenterProfile {
     display: flex;
     align-items: center;
@@ -209,7 +283,18 @@
 .eachcomment {
     border-bottom: 1px solid gray;
 }
+.eachcomment {
+    border-bottom: 1px solid gray;
+}
 
+.commentinput {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 95%;
+    margin-top: 20px;
+    gap: 10px;
+}
 .commentinput {
     display: flex;
     align-items: center;
@@ -226,11 +311,13 @@
     border-bottom: 1px solid white;
     padding: 0px 5px 0px 5px;
     width: 80%;
-    color:white;
+    color: white;
 }
-.commentInputStyle::placeholder{
-    color:white;
-}
+
+    .commentInputStyle::placeholder {
+        color: white;
+    }
+
 .submitbuttonlogin {
     border-radius: 5px;
     background-color: transparent;
@@ -251,27 +338,172 @@
 /*Media queryes*/
 @media only screen and (max-width: 700px) {
     .Each_Post {
-        width: clamp(280px, 80%, 900px);
+        width: 480px;
+        padding: 20px 0px 20px 0px ;
     }
     .comment_likes {
-        width: clamp(280px, 90%, 500px);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 2px solid white;
+        width: clamp(280px, 100%, 500px);
+    }
+    .userdata {
+        width:400px;
+    }
+    .Post_photowidth{
+        width:400px;
+    }
+    .imgofpost{
+       width: 400px;
+       height:400px;
+    }
+    .flextitles{
+        width:400px;
+    }
+    .DeltePostButton{
+        width:80px;
+        font-size:12px;
+    }
+    .imgofpost2 {
+        width: 250px;
+        height: 250px;
+    }
+    .Post_photowidth2 {
+        width: 250px;
     }
 }
+
 @media only screen and (max-width: 500px) {
 
     .Each_Post {
-        width: clamp(280px, 93%, 900px);
-        border-radius:5px;
+        width:380px;
+        border-radius: 5px;
+        gap:30px;
+    }
+    .postdate {
+        font-size: 12px;
     }
 
     .comment_likes {
-        width: clamp(280px, 90%, 500px);
+       width: 300px;
     }
-    .imgofpost{
-        width:350px;
+
+    .userdata {
+        width: 300px;
+    }
+
+    .Post_photowidth {
+        width: 300px;
+    }
+
+    .imgofpost {
+        width: 300px;
+        height: 300px;
+    }
+    .PostProfile{
+        width:50px;
+        height:50px;
+    }
+    .MyUsername{
+        font-size:16px;
+    }
+    .UpdatedText{
+        font-size:12px;
+    }
+    .datetimetracking{
+        font-size:10px;
+    }
+    .flextitles{
+        width:300px;
+    }
+    .Follow {
+        font-size: 15px;
+    }
+    .imgofpost2 {
+        width: 200px;
+        height: 200px;
+    }
+
+    .Post_photowidth2 {
+        width: 200px;
+    }
+}
+@media only screen and (max-width: 400px) {
+
+    .Each_Post {
+        width: 290px;
+        border-radius: 5px;
+        padding: 10px 0px 10px 0px;
+    }
+
+    .comment_likes {
+        width: 250px;
+    }
+
+    .userdata {
+        width: 250px;
+    }
+
+    .Post_photowidth {
+        width: 250px;
+    }
+    flexPText {
+        font-size: 10px;
+    }
+    .imgofpost {
+        width: 250px;
+        height: 250px;
+    }
+    .flextitles{
+        width:250px;
+    }
+    .DeltePostButton {
+        width: 60px;
+        height: 20px;
+        font-size: 9px;
+        border-radius:3px;
+    }
+    .UpdatedText {
+        font-size: 9px;
+    }
+    .Follow{
+        font-size:12px;
+    }
+    .imgofpost2 {
+        width: 150px;
+        height: 150px;
+    }
+
+    .Post_photowidth2 {
+        width: 150px;
+    }
+}
+@media only screen and (max-width: 300px) {
+
+    .Each_Post {
+        width: 260px;
+        border-radius: 5px;
+    }
+
+    .comment_likes {
+        width: 230px;
+    }
+
+    .userdata {
+        width: 230px;
+    }
+
+    .Post_photowidth {
+        width: 230px;
+    }
+
+    flexPText {
+        font-size: 10px;
+    }
+
+    .imgofpost {
+        width: 230px;
+        height: 230px;
+    }
+
+    .flextitles {
+        width: 230px;
     }
 }

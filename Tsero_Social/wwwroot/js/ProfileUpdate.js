@@ -39,3 +39,21 @@ function previewImage(event) {
     ProfilePreviewCont.style.transition = "0.4s ease-in-out";
     imagePreview.style.transition = "0.4s ease-in-out";
 }
+
+var bool = false;
+
+function ChangeForms() {
+    var Profile_Update_container = document.getElementById("Profile_Update_container");
+    var Profile_Photo_Update = document.getElementById("Profile_Photo_Update");
+    if (!bool) {
+        Profile_Update_container.style.display = "flex";
+        Profile_Photo_Update.style.display = "none";
+        bool = true;
+    } else {
+        Profile_Update_container.style.display = "none";
+        Profile_Photo_Update.style.display = "flex";
+        bool = false;
+    }
+}
+
+document.getElementById("ButtonDzma").addEventListener('click', ChangeForms);

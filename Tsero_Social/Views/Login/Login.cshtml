@@ -1,5 +1,6 @@
 ﻿@{
     Layout = null;
+    IgnoreBody();
 }
 @using Microsoft.AspNetCore.Mvc
 @using Microsoft.AspNetCore.Mvc.Rendering
@@ -15,15 +16,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] Login</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+    <link rel="icon" type="image/x-icon" href="../img/Tlogo.jpg">
 </head>
 <body>
 
     <div class="ModalBack" id="myModal">
        <div class= "modalwindow" id="modalwindow">
         <div class="XContainer"><button class="OkBUtton" id="OkBUtton">X</button></div>
-        <p class="viewmessage viewmessage1"><img src="/img/warning-icon-transparent-free-png.webp" width="40px"/> @ViewBag.EmailExist</p>
+        <div class ="SignDiv"><img src="/img/warning-icon-transparent-free-png.webp" width="80px"/> </div>
+        <p class="viewmessage viewmessage1">@ViewBag.EmailExist</p>
        </div>
     </div>
 
@@ -77,8 +79,8 @@
               <button type="submit"  class= "submitbnt">Submit</button>
           </form>
           <!--Modal window-->
-                    @if (ViewBag.EmailExist != null)
-             {            
+             @if (ViewBag.EmailExist != null)                  
+             {              
               <script>
                       var modalwindow = document.getElementById("modalwindow");
                       var modal = document.getElementById("myModal");
@@ -89,7 +91,7 @@
                       setTimeout(function(){
                           modal.style.opacity = "1"; 
                           modalwindow.style.opacity = "1";
-                      }, 500);
+                      }, 0);
                       setTimeout(function(){
                           modalwindow.style.opacity = "0";
                           modal.style.opacity = "0";  

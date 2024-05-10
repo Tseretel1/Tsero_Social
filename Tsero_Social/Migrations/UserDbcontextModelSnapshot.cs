@@ -45,6 +45,25 @@ namespace Tsero_Social.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("Tsero_Social.Models.Follow", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<int>("FollowerID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FollowingID")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Follows");
+                });
+
             modelBuilder.Entity("Tsero_Social.Models.ImageUpload", b =>
                 {
                     b.Property<int>("id")
@@ -91,6 +110,34 @@ namespace Tsero_Social.Migrations
                     b.ToTable("Likes");
                 });
 
+            modelBuilder.Entity("Tsero_Social.Models.Notificationss", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<DateTime>("NTF_DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NTF_Type")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReceiverID")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Seen")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("SenderID")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Notifications");
+                });
+
             modelBuilder.Entity("Tsero_Social.Models.Post", b =>
                 {
                     b.Property<int>("Id")
@@ -104,6 +151,9 @@ namespace Tsero_Social.Migrations
 
                     b.Property<string>("Photo")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PostType")
+                        .HasColumnType("int");
 
                     b.Property<int>("UserID")
                         .HasColumnType("int");

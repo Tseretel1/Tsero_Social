@@ -3,9 +3,58 @@
     height: 100%;
     margin: 0;
     padding: 0;
-    background: url(../img/backg3.jpeg);
-    background-size: cover;
+    background: url(../img/darkback5.jpeg);
+    background-size:inherit;
 }
+.email{
+    display:flex;
+    width:100%;
+    height:100%;
+    z-index:100000;
+    position:fixed;
+    justify-content:center;
+    align-items:center;
+    font-size:40px;
+    color:white;
+    background-color:black;
+}
+
+.HeaderLayout {
+    display: flex;
+    width: 100%;
+    height: 30px;
+    font-family: sans-serif;
+    font-weight: bold;
+    align-items: center;
+    padding: 0;
+    position: fixed;
+    z-index: 9000;
+    align-items: center;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+}
+
+.NavbarItself {
+    border-radius: 0px 0px 20px 0px;
+    width: 280px;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgba(0, 0, 0, 0.199);
+    backdrop-filter: blur(60px);
+    z-index: 5000;
+    box-shadow: 0px 0px 10px black;
+}
+
+.nav-link {
+    color: white;
+}
+
+    .nav-link:hover {
+        color: lightblue;
+    }
 
 .authorizathion_parent {
     display: flex;
@@ -42,7 +91,7 @@
     justify-content: center;
     align-items: center;
     background-color: transparent;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(2px);
     color: white;
     border-radius: 20px;
     box-shadow: 0px 0px 5px black;
@@ -161,13 +210,14 @@ button {
     opacity: 0;
     z-index: 5000;
     flex-direction: column;
+    backdrop-filter: blur(10px);
 }
 .modalwindow {
-    width: 300px;
+    width: 500px;
     height: 300px;
     color: white;
     border-radius: 20px;
-    display: none;
+    display: flex;
     opacity: 0;
     align-items: center;
     text-align: center;
@@ -176,18 +226,22 @@ button {
     background-color: rgba(0, 0, 0, 0.638);
 }
 .viewmessage{
-    font-size:25px;
+    font-size:20px;
     text-shadow:0px 0px 2px black;
     font-family:sans-serif;
+    max-width:300px;
+    text-align:center;
+    letter-spacing:2px;
+    line-height:40px;
 }
 .viewmessage1{
     color:white;
+
 }
 .XContainer{
     width:90%;
     display:flex;
     justify-content:flex-end;
-    height:35%;
 }
 .OkBUtton {
     width: 50px;
@@ -200,4 +254,23 @@ button {
 .OkBUtton:hover{
     color:red;
     background-color:transparent;
+}
+
+@media only screen and (max-width: 522px) {
+    .modalwindow{
+        width:400px;
+    }
+}
+@media only screen and (max-width: 422px) {
+    .modalwindow {
+        width: 300px;
+    }
+}
+@media only screen and (max-width: 322px) {
+    .modalwindow {
+        width: 270px;
+    }
+    .viewmessage {
+        max-width:250px;
+    }
 }

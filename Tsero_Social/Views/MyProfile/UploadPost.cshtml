@@ -1,23 +1,92 @@
-﻿@model Post   
+﻿@{
+    Layout = null;
+    IgnoreBody();
+}
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] Post Upload</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/UploadPost.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="icon" type="image/x-icon" href="../img/Tlogo.jpg">
+</head>
+<body>
+    @model User
+    <header class= "navigatorrs">   
+    <nav class= "navigatorrs2 ">
+        <div class="container_fluidd">
+            <a class="Tsero_Social" asp-area="" asp-controller="Home" asp-action="Foryou">Tsero_Sociall</a>
+            <div class="navbarLIn">
+                <div class="navbarLinks">
+                    <div class="nav-item">
+                        <a class="nav-links" asp-area="" asp-controller="Home" asp-action="Foryou"><img src="../img/smartphone.png" class="NavImgs"/> For You</a>
+                    </div>
+                    <div class="nav-item">
+                        <a class="nav-links" asp-area="" asp-controller="MyProfile" asp-action="Profile"><img src="../img/ProfileBackground.png"class="NavImgs"/> Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>       
+   <div class="nav-item2">
+      <a class="Settings" asp-controller="MyProfile" asp-action="Settings">
+          <img class= "exitimg" src="/img/settings.png">
+          <button class="ExitButton">Settings</button>     
+          <div class = "BottomLine"></div>
+      </a>
+  </div> 
 
-<div class ="PostParent" id = "PostParent">
-      <div class="PostPublish" id="PostPublish" onclick="togglePublishSection()">
-            <div class="WritePostText" id="WritePostText">
-                 <h1>Write Post...</h1>
+  <button class= "BurgerButton" id = "BurgerButton" onclick="BurgerMenuShow()">
+    <div class= "SpanLines Line1"></div>
+    <div class= "SpanLines Line2"></div>
+    <div class= "SpanLines Line3"></div>
+  </button>
+</header>
+<header class= "HeaderBurgerContainer" id = "HeaderBurgerContainer">
+    <div class = "HeaderBurger" id = "HeaderBurger">
+        <div class= "BurgerXbuttonAlign">
+          <div class= "BurgerButton"  id = "BurgerButton2">
+             <div class= "SpanLines Line1"></div>
+             <div class= "SpanLines Line2"></div>
+             <div class= "SpanLines Line3"></div>
+         </div>
+        </div>
+       <div class= "NavBurgerAlign">
+          <div class="nav-item NavBurger">
+             <a class="BurgerNavLinks" asp-area="" asp-controller="Home" asp-action="Foryou"><img src="../img/smartphone.png" class="NavImgsBurger"/> For You</a>
           </div>
-          <div class="HidePublish">
-              <button class="HidePublishButtton" id="HidePublishButtton" onclick="hidePublishSection()">X</button>
-          </div>
-          <form class="Formpublish" asp-action="PostPublish" method="post" enctype="multipart/form-data">
-              <input type="text" class="inputpost" placeholder="Post" asp-for="@Model.post" name="PostPost" required>
-              <div class="photocontainer">
-                  <input id="imageInput2" class="photouploadbutton" type="file" name="ImageFile" accept="image/*" onchange="previewImage(this)" />
-                  <div class="photopreviewcontainer" id="photopreviewcontainer">
-                      <img id="ProfilePreview2" src="" alt="">
-                  </div>
+         <div class="nav-item NavBurger">
+             <a class="BurgerNavLinks" asp-area="" asp-controller="MyProfile" asp-action="Profile"><img src="../img/ProfileBackground.png"class="NavImgsBurger"/> Profile</a>
+         </div>
+       </div>
+    </div>
+</header>
+    <div class = "centerUpload">
+       <div class = "EditProfileContainer" id = "EditProfileContainer">
+              <div class ="ShareDay">
+                  Share Your day Here...
               </div>
-              <button class="submitPostButton" type="submit">submit</button>
-          </form>
-      </div>
-   </div>
+           <form asp-action="PostPublish" method="post" enctype="multipart/form-data" class="Profile_Photo_Update" id = "Profile_Photo_Update">
+              <div class="form-group form-group2">
+                  <div class="InputClasss">
+                     <input type="text" class= "saysomething"  id = "saysomething" placeholder="Whats on your Mind?" name="PostPost">
+                     <input id="imageInput2" class="custom-file-input" type="file" name="ImageFile" accept="image/*" onchange=" previewImage(event) " />
+                  </div>
+                  <div class="ProfilePreviewCont" id = "ProfilePreviewCont">
+                     <img id="ProfilePreview" src="" />
+                  </div>
+              </div>         
+              <div class="submitbutton">
+                  <button class="EditButton" type="submit" data-text="Awesome" id="submitBtn2" onclick="Submit()">Upload Post</button>
+              </div>
+           </form>  
+          </div>
+     </div>
+    <script src="/js/UploadPost.js"></script>
+    <script src="../js/site.js"></script>
+</body>
+</html>

@@ -1,67 +1,378 @@
-﻿
-
+@{
+    Layout = null;
+    IgnoreBody();
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - LectureStudentService</title>
+    <title>@ViewData["Title"] - Profile</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/Profile.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/PostCards.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="icon" type="image/x-icon" href="../img/Tlogo.jpg"> 
 </head>
 <body>
-
-    <div class = "fixedContainerBackground"></div>
+   <script src="../js/Profile.js"></script>
+   <script src="../js/site.js"></script>
     @model Post;
-@using (Html.BeginForm("Profile", "MyProfile", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <div class="containercenter">
-           <div class = "ExitFromAccount">
-               <a class="nav-item" asp-controller="Login" asp-action="Login">
-                   <img class= "exitimg" src="/img/exit.png">
-                   <div class ="">
-                      <p class="ExitButton">Exit From Account</p>
-                      <div class="borderspan"></div>
-                   </div>
-
-               </a>
-           </div>
-           <div class="updatepost">    
-             <div class="Profile_data">
-                 <div class="editFlex">
-                   <div class="profileandName">
-                       <div id="ProfilePictureCont" id="editbutton">               
-                         <script>
-                              var photo = document.getElementById("ProfilePictureCont");   
-                             photo.style.backgroundImage = "url('@ViewBag.Profile')";
-                         </script>
-                       </div>
-                       <p class= "userName">@ViewBag.Name @ViewBag.LastName</p>
-                   </div>
-                   <div class="editbutton" id = "editbutton">
-                       <img src="../img/icons8-edit-30.png" class="editimage"/>
-                       <b>Edit</b></div>
-                   <div class="ChangeButtonsParent" id="ChangeButtonsParent">
-                      <div class="Xbuttonalign"> 
-                          <button class= "changebuttons Xbutton"  id="Xbutton">X</button>                 
-                      </div>
-                      <div class="changebuttonsdiv">
-                         <a class= "changebuttons" asp-controller="MyProfile" asp-action="ProfileUpdate">Edit Profile</a>
-                         <a class= "changebuttons">Edit Cover</a>
-                      </div>
-
-                   </div>
+    <header class= "navigatorrs">   
+    <nav class= "navigatorrs2 ">
+        <div class="container_fluidd">
+            <a class="Tsero_Social" asp-area="" asp-controller="Home" asp-action="Foryou">Tsero_Sociall</a>
+            <div class="navbarLIn">
+                <div class="navbarLinks">
+                    <div class="nav-item">
+                        <a class="nav-links" asp-area="" asp-controller="Home" asp-action="Foryou"><img src="../img/smartphone.png" class="NavImgs"/> For You</a>
+                    </div>
+                    <div class="nav-item">
+                        <a class="nav-links" asp-area="" asp-controller="MyProfile" asp-action="Profile"><img src="../img/ProfileBackground.png"class="NavImgs"/> Profile</a>
+                    </div>
                 </div>
             </div>
-        </div>  
-          <!--My Post-->
-          <div class="MyPosts">
+        </div>
+    </nav>       
+   <div class="nav-item2">
+      <a class="Settings" asp-controller="MyProfile" asp-action="Settings">
+          <img class= "exitimg" src="/img/settings.png">
+          <button class="ExitButton">Settings</button>     
+          <div class = "BottomLine"></div>
+      </a>
+  </div> 
 
-                @if (ViewBag.UserPosts != null)
-                {
-                    foreach (var post in ViewBag.UserPosts)
+  <button class= "BurgerButton" id = "BurgerButton" onclick="BurgerMenuShow()">
+    <div class= "SpanLines Line1"></div>
+    <div class= "SpanLines Line2"></div>
+    <div class= "SpanLines Line3"></div>
+  </button>
+</header>
+<header class= "HeaderBurgerContainer" id = "HeaderBurgerContainer">
+    <div class = "HeaderBurger" id = "HeaderBurger">
+        <div class= "BurgerXbuttonAlign">
+          <div class= "BurgerButton"  id = "BurgerButton2">
+             <div class= "SpanLines Line1"></div>
+             <div class= "SpanLines Line2"></div>
+             <div class= "SpanLines Line3"></div>
+         </div>
+        </div>
+       <div class= "NavBurgerAlign">
+          <div class="nav-item NavBurger">
+             <a class="BurgerNavLinks" asp-area="" asp-controller="Home" asp-action="Foryou"><img src="../img/smartphone.png" class="NavImgsBurger"/> For You</a>
+          </div>
+         <div class="nav-item NavBurger">
+             <a class="BurgerNavLinks" asp-area="" asp-controller="MyProfile" asp-action="Profile"><img src="../img/ProfileBackground.png"class="NavImgsBurger"/> Profile</a>
+         </div>
+           <div class="nav-item2 NavBurger">
+              <a class="SettingsBurger" asp-controller="MyProfile" asp-action="Settings">
+                  <img class= "exitimg" src="/img/settings.png">
+                  <button class="ExitButton">Settings</button>     
+                  <div class = "BottomLine"></div>
+              </a>
+           </div> 
+       </div>
+    </div>
+</header>
+
+    <div class = "fixedContainerBackground"></div>
+
+    @{
+        var users2 = ViewBag.Users as List<User>;
+        var MyFollowers = ViewBag.MyFollowers as List<Follow>;
+        var MyFollowing = ViewBag.MyFollowings as List<Follow>;
+        var MyNotifications = ViewBag.MyNotifications as List<Notificationss>;
+        bool IFFollowersExist = false;
+        string UserN = "@";
+        int CurrentUserID = 0;
+        if (ViewBag.CurrentUser != null)
+        {
+            foreach (var item in ViewBag.CurrentUser)
+            {
+                CurrentUserID = item.id;
+            }
+        }
+        <!--Followers Table-->
+        @if (MyFollowers != null)
+        {
+            IFFollowersExist = true;   
+        }
+        @if (IFFollowersExist)
+        {
+           <div class = "FollowersList" id = "FollowerWinodw">
+               <div class ="XbuttonContainer">
+                   <button class = "ButtonX" id = "FollowerXbutton">X</button>
+               </div>
+           <div class="FollowersContainer">
+             <div class = "YOurFollowers">Followers</div>
+            @foreach (var item in MyFollowers)
+             {
+                 var User = users2?.Where(u => u.id == item.FollowerID).FirstOrDefault();
+                 if (User != null)
+                 {
+                     <div class="EachFollower">
+                         <div class = "EachFollowerLeftSide">
+                              <div class="FollowerProfile">
+                                  <img class="FollowerPic" src="@User.ProfilePicture" alt="">   
+                              </div>
+                              <div class= "FollowerDataGap">
+                                 <div>
+                                    <div class = "BoldUsername">@UserN@User.Username</div>                          
+                                 </div>
+                             
+                                 <div class= "UserDataFlex">
+                                     <div class = "FolloweruserName">@User.Name</div>
+                                     <div class = "FolloweruserName">@User.Lastname</div>
+                                 </div>
+                              </div>
+                          </div>
+                          <div class= "EachFollowerRightSide">
+                          <form asp-controller="MyProfile" method="post" asp-action="FollowerRemove">
+                             <input type="hidden" class="PostTodeltte" name="UserToDeleteID" value="@item.FollowerID"/>
+                             <input type="hidden" class="PostTodeltte" name="MyID" value="@CurrentUserID"/>
+                             <button class= "DeletFollowerBUtton" > Remove</button>
+                          </form>
+
+                          </div>
+                     </div>
+                 }
+             }  
+            </div>
+          </div>
+        }
+      <!--Following Table-->   
+      
+
+        @if (MyFollowing != null)
+        {
+            IFFollowersExist = true;
+        }
+        @if (IFFollowersExist)
+        {
+             <div class = "FollowersList" id = "FollowINGWinodw">
+                 <div class ="XbuttonContainer">
+                     <button class = "ButtonX" id = "FollowINGXbutton">X</button>
+                 </div>
+             <div class="FollowersContainer">
+               <div class = "YOurFollowers">Followings</div>
+              @foreach (var item in MyFollowing)
+              {
+                  var User = users2?.Where(u => u.id == item.FollowingID).FirstOrDefault();
+                  if (User != null)
+                  {
+                    <div class="EachFollower">
+                        <div class = "EachFollowerLeftSide">
+                             <div class="FollowerProfile">
+                                 <img class="FollowerPic" src="@User.ProfilePicture" alt="">   
+                             </div>
+                             <div class= "FollowerDataGap">
+                                <div>
+                                   <div class = "BoldUsername">@UserN@User.Username</div>                          
+                                </div>
+                   
+                                <div class= "UserDataFlex">
+                                    <div class = "FolloweruserName">@User.Name</div>
+                                    <div class = "FolloweruserName">@User.Lastname</div>
+                                </div>
+                             </div>
+                         </div>
+                         <div class= "EachFollowerRightSide">
+                         <form asp-controller="MyProfile" method="post" asp-action="FollowIngRemove">
+                            <input type="hidden" class="PostTodeltte" name="FollowingToDelete" value="@item.FollowingID"/>
+                            <input type="hidden" class="PostTodeltte" name="MyID" value="@CurrentUserID"/>
+                            <button class= "RemoveFollowingBUtton" > Following</button>
+                         </form>
+                   
+                         </div>
+                    </div>
+                  }
+              }  
+              </div>
+           </div>
+        }
+        <!--Notificatio Table-->
+        @if (MyNotifications != null)
+        {
+            IFFollowersExist = true;
+        }
+        @if (IFFollowersExist)
+        {
+             <div class = "FollowersList" id = "NotificationWindow">
+                 <div class ="XbuttonContainer">
+                     <button class = "ButtonX" id = "NotificationXbutton">X</button>
+                 </div>
+             <div class="FollowersContainer">
+               <div class = "YOurFollowers">
+                 <div> Notifications</div>  
+             </div>
+                    @{
+                        if (MyNotifications != null)
+                        {
+                          <div  class ="AllNotificationsClear">
+                               <form asp-controller="MyProfile" method="post" asp-action="AllNotificationDeletion">
+                                  <input type="hidden" class="PostTodeltte" name="CurrentUserID" value="@CurrentUserID"/>
+                                  <button class= "RemoveFollowingBUtton  NotificationAll" id="NotificationAl" > Clear All Notifications</button>
+                               </form>
+                          </div>
+                        }
+                    }
+              <div id = "NotificationsParenttttt">
+                   @foreach (var item in MyNotifications)
+                   {
+                        if (item != null)
+                        {
+                            var User = users2?.Where(u => u.id == item.SenderID).FirstOrDefault();
+                            if (User != null)
+                            {
+                                <div class="EachFollower EachNotification">
+                                    <div class = "EachFollowerLeftSide">
+                                        <div class="FollowerProfile">
+                                            <img class="FollowerPic" src="@User.ProfilePicture" alt="">   
+                                        </div>
+                                        <div class= "FollowerDataGap">
+                                            <div>
+                                                <div class = "BoldUsername">@UserN@User.Username</div>                          
+                                            </div>
+
+                                            <div class= "UserDataFlex">
+                                                <div class = "FolloweruserName">@User.Name</div>
+                                                <div class = "FolloweruserName">@User.Lastname</div>
+                                            </div>                                      
+                                        </div>
+                                    </div>
+                                  <div class= "NotificationsSide">
+                                       @{
+                                           if (item.NTF_Type == 1)
+                                           {
+                                               <div class= "NotificationMessage">Liked Your Post ❤️</div>
+                                           }
+                                           else if (item.NTF_Type == 2)
+                                           {
+                                                <div class= "NotificationMessage">Started Following You</div>
+                                           }
+                                       }
+                                  </div>
+                                </div>
+                            }
+                        }
+                    }  
+                 </div>
+              </div>
+           </div>
+        }
+    }
+     
+@using(Html.BeginForm("Profile", "MyProfile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        var Follows = ViewBag.Follows as List<Follow>;
+        @if (ViewBag.UserPosts != null)
+        {
+            <div class="containercenter">
+               <div class="updatepost" id = "updatepost"> 
+                 <a id ="changebuttons" asp-controller="MyProfile" asp-action="EditCover">
+                  <button class="btn" type="button">
+                     <strong>Upload Cover</strong>
+                     <div id="container-stars">
+                       <div id="stars"></div>
+                     </div>                  
+                     <div id="glow">
+                       <div class="circle"></div>
+                       <div class="circle"></div>
+                     </div>
+                  </button>
+                 </a>
+                  <script>
+                      function CoverPhoto() {
+                          var CoverContainer = document.getElementById("updatepost");
+                          CoverContainer.style.background = "url('@(ViewBag.Cover)') center/cover";
+                      }
+                      CoverPhoto();
+                  </script>                
+                  <div class="Profile_data">
+                     <div class="editFlex">
+                       <div class="profileandName">
+                           <div id="ProfilePictureCont" id="editbutton">               
+                                @{
+                                    if (@ViewBag.Profile != null)
+                                    {
+                                            <a class= "changebuttons" asp-controller="MyProfile" asp-action="ProfileUpdate">
+                                            <img src = "../img/Camera.png" class= "cameraButton">
+                                            </a>
+                                            <img class="UploadPicMain" src="@ViewBag.Profile" alt="">
+                                    }
+                                    else
+                                    {
+                                        <a class= "changebuttons" asp-controller="MyProfile" asp-action="ProfileUpdate"><img src = "../img/Camera.png" class= "cameraButton"></a>
+                                    }
+                                }
+                           </div>
+                             <div class= "userName"><p class = "userNameAndLastName">@ViewBag.Name</p><p class = "userNameAndLastName">@ViewBag.LastName </p></div>
+                       </div>
+                       <div class="ChangeButtonsParent" id="ChangeButtonsParent">
+                          <div class="Xbuttonalign"> 
+                              <!--This forms does nothing, but if deleted causes some errors!-->
+                              <form class= "displaynoneForms">
+                                  <button class= "displaynoneForms"  id="Xbutton">X</button>    
+                              </form>
+                              <!---->
+
+                          </div>
+                       </div>
+                    </div>
+                </div>
+            </div>  
+
+         
+            <!--Upload Post-->
+            <div class= "UploadPost">
+                 <div class = "FollowContaoinerParent">
+                 <div class = "ProfileUserNameColumn">
+                      <div class = "DefaultProfile">
+                            @{
+                               if (@ViewBag.Profile != null)
+                               {
+                                    <img class="UploadPic" src="@ViewBag.Profile" alt="">
+                               }
+                               else
+                               {
+                                   
+                               }
+                            }
+                      </div>
+                     <p class= "userName">@ViewBag.Username</p>
+                  </div>  
+                     @{
+                         <div class = "FollowingCount FollowerHover" id = "FollowerButton">
+                           <div class= "FollowerFont"> Followers @ViewBag.Followers</div>
+                           <div class= "FollowerLine"></div>
+                         </div>
+                         <div class = "FollowingCount FollowingHover" id = "FollowINGButton">
+                             <div  class= "FollowerFont">Following @ViewBag.Following</div>
+                             <div class= "FollowingLine"></div>
+                         </div>
+                         <div class = "FollowingCount NotifyHover" id = "NotifyButton">
+                             <div class= "FollowerFont"><img src = "../img/Notifications.png"/ class= "NTF_img">Notifications @ViewBag.Notification</div>
+                             <div class= "FollowingLine"></div>
+                         </div>
+                     }
+                 </div>
+                <div class ="Whats_On_Your_Mind">
+                  <input class = "OnYourMindInput" placeholder = "What on your mind?">
+                       <a class="onYourMIndLink" asp-controller="MyProfile" asp-action="UploadPost">
+                        Post
+                       </a>
+                </div>
+            </div>
+
+
+
+              <!--My Post-->
+              <div class="MyPosts">
+
+               
+                    @foreach (var post in ViewBag.UserPosts)
                     {
+
                         string username = "";
                         string profilepicture = "";
                         var postsList = ViewBag.Posts as List<User>;
@@ -81,6 +392,18 @@
                                 username = user.Username;
                             }
                         }
+
+                        string PostPhoto = "";
+                        if(post.Photo!= null)
+                        {
+                            PostPhoto = post.Photo;
+                        }
+                        int ThisPostID = 0;
+                        if (post.Id != null)
+                        {
+                            ThisPostID = post.Id;
+                        }
+
                         string comment = "";
                         string comenterUserName = "";
                         string ComenterProfilePicture = "";
@@ -111,86 +434,130 @@
                             }
                         }
 
+                       <div class="Each_Post" id = "Each_Post">
 
-
-                                 <div class="Each_Post" id = "Each_Post">
-                                    <div class="userdata">
-                                        <div class= "namephotoflex">
-                                           <img class="PostProfile" src="@ViewBag.Profile" alt="">
-                                            <div>
-                                             <h2 class= "MyUsername">@ViewBag.Username</h2>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <p class= "postdate">Date: @post.DateTime.ToString("MM/dd/ HH:mm")</p>
-                                        </div>
-                                    </div>
-                                    <div class= "Postcontent">
-                                        <div class="flextitles"> 
-                                            <p>@post.post</p>
-                                        </div>
-                                        <div class= "photocontentwitdth">
-                                            <div class="imgofpost" id="imgofpost">
-                                        @if (@post.Photo != null)
-                                        {
-                                               <img src="@post.Photo" class="Post_photowidth" id="Post_photowidth" alt="Post Image">
-                                        }
-                                        else
-                                        {
-
-                                        }
+                       <!--Post deletion-->
+                           <form class="Formdelete" method="post" asp-action="PostDelete">
+                               <input type="hidden" class="PostTodeltte" name="id" value="@post.Id" />
+                               <input type="hidden" class="PostTodeltte" name="PostPhoto" value="@post.Photo" />
+                               <button class="DeltePostButton" type="submit">Delete</button>  
+                           </form>
+                       <!--Post deletion-->   
+                          <div class="userdata">
+                              <div class= "namephotoflex">
+                                  <div class = "postDateParent">    
+                                      <img class="PostProfile" src="@ViewBag.Profile" alt="">
+                                  </div>                   
+                                  <div class= "UpdateProfile">
+                                    <div class = "UpdateTextAndNameFlex">
+                                     <h2 class= "MyUsername">@ViewBag.Username</h2>
+                                     @if (post.PostType == 1)
+                                     {
+                                      <p class= "UpdatedText">-Updated Their Profile Picture </p>
+                                     }                                      
+                                   </div>
+                                   <div>
+                                       @{
+                                           DateTime dbDateTime = post.DateTime;
+                                           DateTime currentDateTime = DateTime.Now;
+                                           TimeSpan timeDifference = currentDateTime - dbDateTime;
+                                      
+                                           int totalMinutes = (int)timeDifference.TotalMinutes;
+                                           int totalHours = (int)timeDifference.TotalHours;
+                                           int totalDays = (int)timeDifference.TotalDays;
+                                      
+                                           if (totalMinutes < 60)
+                                           {                                           
+                                             <p class="datetimetracking">@totalMinutes minutes ago</p>
+                                           }
+                                           else if (totalHours < 24)
+                                           {
+                                               int remainingMinutes = totalMinutes % 60;
+                                               <p class="datetimetracking">@totalHours hours and @remainingMinutes minutes ago</p>
+                                           }
+                                           else
+                                           {
+                                               int remainingHours = totalHours % 24;
+                                               <p class="datetimetracking">@totalDays days, @remainingHours hours ago</p>
+                                           }
+                                       }
+                                   </div>
+                                  </div>                                 
+                              </div>
+                          </div>
+                          <div class= "Postcontent">
+                              <div class="flextitles"> 
+                                 <p class= "flexPText">@post.post</p>
+                              </div>
+                              <div class= "photocontentwitdth">
+                               @if (@post.Photo != null)
+                               {
+                                
+                                  @if (post.PostType == 1)
+                                  {
+                                     <div class="imgofpost2" id="imgofpost">
+                                         <img src="@post.Photo" class="Post_photowidth2" id="Post_photowidth" alt="Post Image">    
                                      </div>
-                                 </div>
+                                  }
+                                  else
+                                  {
+                                    <div class="imgofpost" id="imgofpost">
+                                        <img src="@post.Photo" class="Post_photowidth" id="Post_photowidth" alt="Post Image">    
+                                    </div>
+                                  }
+                                }
+                                else
+                                {
+
+                                }
+                              </div>
 
 
-                                 <div class = "comment_likes">
-                                       <div class= "Like">Like</div>
-                                     <div class= "comclick">Comment @comcount</div>
-                                 </div>
+                           <div class = "comment_likes">
+                                 <div class= "Like">Like</div>
+                               <div class= "comclick">Comment @comcount</div>
+                           </div>
 
-                                 <div class = "commentSection">
-                                    @if (users != null)
-                                    {
-                                        var usercoment = comments.Where(u => u.PostID == post.Id);
-                                        if (usercoment != null)
-                                        {
-                                            foreach (var item in usercoment)
-                                            {
-                                                var userData = users.Where(u => u.id == item.UserID);
-                                                            <div class = "eachcomment">
-                                                    @foreach (var user in userData)
-                                                    {                      
-                                                                    <div class = "commenterProfile">
-                                                                      <img class="profilepic" src="@user.ProfilePicture" alt="">
-                                                                      <b> @user.Username</b>
-                                                                    </div>
-                                                    }
-                                                        <p>@item.Comment</p>
-                                                        </div>
-                                            }
-                                        }
-                                        else
-                                        {
+                  <div class = "commentSection">
+                      @if (users != null)
+                      {
+                          var usercoment = comments.Where(u => u.PostID == post.Id);
+                          if (usercoment != null)
+                          {
+                              foreach (var item in usercoment)
+                              {
+                                  var userData = users.Where(u => u.id == item.UserID);
+                                  <div class = "eachcomment">
+                                      @foreach (var user in userData)
+                                      {                      
+                                       <div class = "commenterProfile">
+                                         <img class="profilepic" src="@user.ProfilePicture" alt="">
+                                         <b> @user.Username</b>
+                                       </div>
+                                      }
+                                  <p>@item.Comment</p>
+                                  </div>
+                              }
+                          }
+                          else
+                          {
 
-                                        }
-                                    }
-                                   </div>   
-                                      <form class="commentinput" method="post" asp-action="Profile">
-                                      <input type="text" name = "@post.Id" class="commentInputStyle" placeholder="Comment To Post" required />       
-                                      <button type="submit" class= "submitbuttonlogin">Submit</button>   
-                                   </form>
-                                 </div>
-                             </div>                         
+                          }
+                     }
+                      </div>   
+                         
+                     </div>
+                     </div>                         
                     }
-                }
-                else
-                {
-                        <h1>@ViewBag.NoPosts</h1>
-                }
-          </div>
-        </div>
-        <script src="/js/Profile.js"></script>
-    }
-</body>
+              </div>
+            </div>  
+           }
+           else
+           {
+           }
+    } 
+   <script src="../js/Profile.js"></script>
+   <script src="../js/site.js"></script>
+   <script src="../js/Notifications.js"></script>
+  </body>
 </html>
-

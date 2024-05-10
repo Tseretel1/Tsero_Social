@@ -1,5 +1,8 @@
 ﻿
-
+@{
+    Layout = null;
+    IgnoreBody();
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,13 +11,75 @@
     <title>@ViewData["Title"] Profile update</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/Profile_Update.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="icon" type="image/x-icon" href="../img/Tlogo.jpg">
 </head>
 <body>
  @model User
+    <header class= "navigatorrs">   
+    <nav class= "navigatorrs2 ">
+        <div class="container_fluidd">
+            <a class="Tsero_Social" asp-area="" asp-controller="Home" asp-action="Foryou">Tsero_Sociall</a>
+            <div class="navbarLIn">
+                <div class="navbarLinks">
+                    <div class="nav-item">
+                        <a class="nav-links" asp-area="" asp-controller="Home" asp-action="Foryou"><img src="../img/smartphone.png" class="NavImgs"/> For You</a>
+                    </div>
+                    <div class="nav-item">
+                        <a class="nav-links" asp-area="" asp-controller="MyProfile" asp-action="Profile"><img src="../img/ProfileBackground.png"class="NavImgs"/> Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>       
+   <div class="nav-item2">
+      <a class="Settings" asp-controller="MyProfile" asp-action="Settings">
+          <img class= "exitimg" src="/img/settings.png">
+          <button class="ExitButton">Settings</button>     
+          <div class = "BottomLine"></div>
+      </a>
+  </div> 
+
+  <button class= "BurgerButton" id = "BurgerButton" onclick="BurgerMenuShow()">
+    <div class= "SpanLines Line1"></div>
+    <div class= "SpanLines Line2"></div>
+    <div class= "SpanLines Line3"></div>
+  </button>
+</header>
+<header class= "HeaderBurgerContainer" id = "HeaderBurgerContainer">
+    <div class = "HeaderBurger" id = "HeaderBurger">
+        <div class= "BurgerXbuttonAlign">
+          <div class= "BurgerButton"  id = "BurgerButton2">
+             <div class= "SpanLines Line1"></div>
+             <div class= "SpanLines Line2"></div>
+             <div class= "SpanLines Line3"></div>
+         </div>
+        </div>
+       <div class= "NavBurgerAlign">
+          <div class="nav-item NavBurger">
+             <a class="BurgerNavLinks" asp-area="" asp-controller="Home" asp-action="Foryou"><img src="../img/smartphone.png" class="NavImgsBurger"/> For You</a>
+          </div>
+         <div class="nav-item NavBurger">
+             <a class="BurgerNavLinks" asp-area="" asp-controller="MyProfile" asp-action="Profile"><img src="../img/ProfileBackground.png"class="NavImgsBurger"/> Profile</a>
+         </div>
+       </div>
+    </div>
+</header>
+
+
+
 
  <div class="top_space"></div>
+
+    @if (ViewBag.ProfileMessage != null)
+    {
+        <div class = "You_Updated">
+               @ViewBag.ProfileMessage
+        </div>
+    }   
     @if (ViewBag.CurrentUser != null)
     {
+   <div class = "EditProfileContainer2">
        <form asp-action="Profile" method="post" enctype="multipart/form-data" class="Profile_Photo_Update" id = "Profile_Photo_Update">
           <div class="form-group">
             
@@ -32,30 +97,15 @@
               </div>
           </div>         
           <div class="submitbutton">
-              <button class="EditButton" type="submit" data-text="Awesome" id="submitBtn2">Upload Post </button>
-            
+              <button class="EditButton" type="submit" data-text="Awesome" id="submitBtn2">Upload Post </button>           
           </div>
        </form>  
-
-<!--
-       <div class="Profile_Update_container" id = "Profile_Update_container">
-          <form asp-action="ProfileUpdate" method="post" enctype="multipart/form-data" class="Profile_Form">
-              <div class="form-group">
-                  <input class="userdataInput" asp-for="1@Model.Username" placeholder="1@ViewBag.CurrentUser.Username" />
-              </div>
-              <div class="form-group">
-                  <input class="userdataInput" asp-for="1@Model.Name" placeholder="1@ViewBag.CurrentUser.Name" />
-                  <input class="userdataInput" asp-for="1@Model.Lastname" placeholder="1@ViewBag.CurrentUser.Lastname" />
-              </div>
-              <div class="form-group">
-                  <button class="EditButton" type="submit" data-text="Awesome" id="submitBtn" >Edit</button>
-              </div>
-          </form>  
       </div>
-          -->
     }
+          
 
 
     <script src="/js/ProfileUpdate.js"></script>
+    <script src="../js/site.js"></script>
 </body>
 </html>

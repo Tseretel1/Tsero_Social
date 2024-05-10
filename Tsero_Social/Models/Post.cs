@@ -7,5 +7,6 @@
         public string? Photo { get; set; }
         public int UserID { get; set; }
         public DateTime DateTime { get; set; }
+        public int? PostType { get;set; }
     }
 }

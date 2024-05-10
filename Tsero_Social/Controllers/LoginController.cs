@@ -6,8 +6,8 @@ namespace Tsero_Social.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly IuserService _userService;
-        public LoginController(IuserService tuitionService)
+        private readonly UserServices _userService;
+        public LoginController(UserServices tuitionService)
         {
             _userService = tuitionService;
         }
@@ -20,8 +20,18 @@ namespace Tsero_Social.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            var ragaca =  _userService.GetUserLogedUsers().ToList();
+            ragaca.Clear();           
             return View();
         }
+        [HttpGet]
+        public IActionResult Exit()
+        {
+            var ragaca = _userService.GetUserLogedUsers();
+            ragaca.Clear();
+            return View("Login");
+        }
+
         [HttpPost]
         public IActionResult Login(string Email, string Password)
         {
@@ -49,6 +59,21 @@ namespace Tsero_Social.Controllers
             }
             else
             {
+                if (user.Username.Length > 12 )
+                {
+                    ViewBag.EmailExist = "UserName Must Contain Less Than 12 Characters!";
+                    return View("Login");
+                }
+                if ( user.Name.Length > 12 )
+                {
+                    ViewBag.EmailExist = "Name Must Contain Less Than 12 Characters!";
+                    return View("Login");
+                }
+                if (user.Lastname.Length > 12)
+                {
+                    ViewBag.EmailExist = "LastName Must Contain Less Than 12 Characters!";
+                    return View("Login");
+                }
                 ViewBag.SuccessAlert = "You successfully Registered in our App!";
                 return View("Login");
             }
