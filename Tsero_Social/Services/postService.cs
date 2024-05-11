@@ -10,11 +10,12 @@ namespace Tsero_Social.Services
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly UserDbcontext _dbcontext;
-        
-        public postService(IWebHostEnvironment hostingEnvironment, UserDbcontext db)
+        private readonly IuserService _userService;
+        public postService(IWebHostEnvironment hostingEnvironment, UserDbcontext db, IuserService iuserService)
         {
             _hostingEnvironment = hostingEnvironment;
             _dbcontext = db;
+            _userService = iuserService;
         }
 
         private static readonly object lockObject = new object();
@@ -106,6 +107,8 @@ namespace Tsero_Social.Services
                 }
             }
         }
+
+
 
         public void DeletePost(int id ,string PostPhoto)
         {

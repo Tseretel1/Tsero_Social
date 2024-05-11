@@ -42,8 +42,7 @@
     width: 280px;
     display: flex;
     justify-content: space-evenly;
-    background-color: rgba(0, 0, 0, 0.199);
-    backdrop-filter: blur(60px);
+    background-color: #1c1a1aed;
     z-index: 5000;
     box-shadow: 0px 0px 10px black;
 }
@@ -90,7 +89,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: transparent;
+    background-color: #00000070;
     backdrop-filter: blur(2px);
     color: white;
     border-radius: 20px;
@@ -98,7 +97,7 @@
     border: 1px solid black;
     font-family: sans-serif;
     border: 1px solid grey;
-    padding:20px 0px 0px 0px;
+    padding: 20px 0px 0px 0px;
 }
 .forminputs{
     display:flex;
@@ -120,6 +119,7 @@
     outline: none;
     border: none;
     border-bottom: 1px solid gray;
+    border-radius:0px;
 }
 
 .register {
@@ -169,7 +169,7 @@ button {
 
 .flip-btn {
     border-radius: 5px;
-    background-color: transparent;
+    background-color: #0000008c;
     backdrop-filter: blur(5px);
     box-shadow: 0px 0px 5px black;
     margin-top: 20px;

@@ -207,6 +207,30 @@ namespace Tsero_Social.Migrations
 
                     b.ToTable("Users");
                 });
+
+            modelBuilder.Entity("Tsero_Social.Models.VideoUpload", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PathToDisplay")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Userid")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("videos");
+                });
 #pragma warning restore 612, 618
         }
     }

@@ -11,19 +11,12 @@ namespace Tsero_Social.Services
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
         private static readonly object lockObject = new object();
-        private static readonly object lockObject = new object();
         private readonly UserDbcontext _dbcontext;
         public UploadImg(IWebHostEnvironment hostingEnvironment, UserDbcontext db)
         {
             _hostingEnvironment = hostingEnvironment;
             _dbcontext = db;
         }
-
- 
-
-        public void ProfilePicUpload(ImageUpload model, string title)
- 
-
         public void ProfilePicUpload(ImageUpload model, string title)
         {
             lock (lockObject)
@@ -31,9 +24,7 @@ namespace Tsero_Social.Services
                 if (model.ImageFile != null && model.ImageFile.Length > 0)
                 {
                     string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath + "/" + "ProfilePictures/");
-                    string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath + "/" + "ProfilePictures/");
                     string uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ImageFile.FileName;
-                    string PattoDisplay = $"../ProfilePictures/{uniqueFileName}";
                     string PattoDisplay = $"../ProfilePictures/{uniqueFileName}";
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 

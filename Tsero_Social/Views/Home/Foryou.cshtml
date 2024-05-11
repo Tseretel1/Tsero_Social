@@ -43,9 +43,7 @@
     <div class = "HeaderBurger" id = "HeaderBurger">
         <div class= "BurgerXbuttonAlign">
           <div class= "BurgerButton"  id = "BurgerButton2">
-             <div class= "SpanLines Line1"></div>
-             <div class= "SpanLines Line2"></div>
-             <div class= "SpanLines Line3"></div>
+            <img src ="../img/WhiteX.png" width - "40px"/>
          </div>
         </div>
        <div class= "NavBurgerAlign">
@@ -64,7 +62,6 @@
     {
     <div class="homepage">
  <section class="foryoupage">
-
       <div class="MyPosts"  data-page="1" id = "MyPosts">
                     @foreach (var post in Model)
                     {
@@ -111,7 +108,35 @@
                             }
                         }
                           <div class="Each_Post" id = "Each_Post">
-                          <div class="userdata">
+                              <div class = "FollowToPerson">
+                              <!--Follow person-->
+                                @{
+
+                                    string Follow = "";
+                                    var if_following = Follows.FirstOrDefault(u => u.FollowerID == @CurrentUserID && u.FollowingID == PostAuthor.id);
+                                    if (if_following !=null)
+                                    {
+                                        Follow = "Following";
+                                    }
+                                    else if(if_following == null)
+                                    {
+                                        Follow = "Follow";
+                                    }
+                                }
+                                @if (post.UserID != CurrentUserID)
+                                {
+                                   <form class="FormFollow" method="post" asp-action="FollowPerson">
+                                         <input type="hidden"  name="FollowingID" value=" @PostAuthor.id"/>
+                                         <input type="hidden"  name="FollowerID" value="@CurrentUserID" />
+                                         <button class= "Follow" Id = "Follow" >@Follow</button>
+                                   </form>
+                                }
+                              <!--Follow person-->
+                              </div>
+
+                          <form class="FormFollow" method="post" asp-action="UserProfileGenerate" asp-controller="UserProfile">
+                             <input type="hidden"  name="UserID" value=" @PostAuthor.id"/>                      
+                          <button class="userdata">
                               <div class= "namephotoflex">
                                   <div class = "postDateParent"> 
                                   @{ if (postsList != null)
@@ -170,30 +195,9 @@
                                         </div>
                                     </div>                                 
                                 </div>
-                                <!--Follow person-->
-                                @{
+                          </button>
+                       </form>
 
-                                    string Follow = "";
-                                    var if_following = Follows.FirstOrDefault(u => u.FollowerID == @CurrentUserID && u.FollowingID == PostAuthor.id);
-                                    if (if_following !=null)
-                                    {
-                                        Follow = "Following";
-                                    }
-                                    else if(if_following == null)
-                                    {
-                                        Follow = "Follow";
-                                    }
-                                }
-                                @if (post.UserID != CurrentUserID)
-                                {
-                                   <form class="FormFollow" method="post" asp-action="FollowPerson">
-                                         <input type="hidden"  name="FollowingID" value=" @PostAuthor.id"/>
-                                         <input type="hidden"  name="FollowerID" value="@CurrentUserID" />
-                                         <button class= "Follow" Id = "Follow" >@Follow</button>
-                                   </form>
-                                }
-                              <!--Follow person-->
-                          </div>
                           <div class= "Postcontent">
                               <div class="flextitles"> 
                                  <p class= "flexPText">@post.post</p>
@@ -202,10 +206,16 @@
                                @if (@post.Photo != null)
                                {
                                
-                                  @if (post.PostType == 1)
+                                  if (post.PostType == 1)
                                   {
                                      <div class="imgofpost2" id="imgofpost">
                                          <img src="@post.Photo" class="Post_photowidth2" id="Post_photowidth" alt="Post Image">    
+                                     </div>
+                                  }
+                                  else  if (post.PostType == 2)
+                                  {
+                                     <div class="imgofpost" id="imgofpost">
+                                          <video src="@post.Photo" class="Post_photowidth" id="Post_photowidth" alt="Post Video" autoplay muted controls></video>
                                      </div>
                                   }
                                   else

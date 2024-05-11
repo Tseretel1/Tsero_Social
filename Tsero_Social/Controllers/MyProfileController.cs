@@ -11,13 +11,14 @@ namespace Tsero_Social.Controllers
 {
     public class MyProfileController : Controller
     {
-        private readonly IuploadImg _Image;
+        private readonly InterFaces.IuploadImg _Image;
         private readonly UserDbcontext _userDbcontext;
         private readonly IuserService _userService;
         private readonly IpostService _ipostservice;
         private readonly Followserivce _followservice;
         private readonly NotificationsServices _Notifications;
-        public MyProfileController(IuploadImg upload, UserDbcontext userDbcontext, IuserService userface, IpostService postService,Followserivce followserivce, NotificationsServices notifications)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        public MyProfileController(InterFaces.IuploadImg upload, IWebHostEnvironment hostEnvironment, UserDbcontext userDbcontext, IuserService userface, IpostService postService,Followserivce followserivce, NotificationsServices notifications)
         {
             _Image = upload;
             _userDbcontext = userDbcontext;
@@ -25,6 +26,7 @@ namespace Tsero_Social.Controllers
             _ipostservice = postService;
             _followservice = followserivce;
             _Notifications = notifications;
+            _hostingEnvironment = hostEnvironment;
         }
 
 
@@ -164,6 +166,57 @@ namespace Tsero_Social.Controllers
             _ipostservice.PostWriting(PostPost, model);
             return RedirectToAction("Profile", "MyProfile");
         }
+        [HttpGet]
+        public IActionResult VideoUpload()
+        {
+            return View("VideoUpload");
+        }
+        [HttpPost]
+        public IActionResult VideoPublish(string PostPost, IFormFile VideoFile)
+        {
+            if (VideoFile != null && VideoFile.Length > 0)
+            {
+                var uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath + "/" + "Videos/");
+                var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(VideoFile.FileName);
+                var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                string PattoDisplay = $"../Videos/{uniqueFileName}";
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    VideoFile.CopyTo(stream);
+                }
+
+                var userId = _userService.GetUserLogedUsers().FirstOrDefault();
+                var videoUpload = new VideoUpload
+                {
+                    ImagePath = filePath,
+                    PathToDisplay = PattoDisplay,
+                    Userid = userId.id,
+                };
+                _userDbcontext.videos.Add(videoUpload);
+                _userDbcontext.SaveChanges();
+
+                var postUpload = new Post
+                {
+                    UserID = userId.id,
+                    Photo = PattoDisplay,
+                    DateTime = DateTime.Now,
+                    post = PostPost,
+                    PostType = 2
+                };
+                _userDbcontext.Posts.Add(postUpload);
+                _userDbcontext.SaveChanges();
+            }
+
+
+            else
+            {
+              
+            }
+
+            return RedirectToAction("Profile", "MyProfile");
+        }
+
         [HttpGet]
         public IActionResult ProfIleUpdate()
         {

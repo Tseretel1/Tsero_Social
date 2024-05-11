@@ -52,9 +52,7 @@
     <div class = "HeaderBurger" id = "HeaderBurger">
         <div class= "BurgerXbuttonAlign">
           <div class= "BurgerButton"  id = "BurgerButton2">
-             <div class= "SpanLines Line1"></div>
-             <div class= "SpanLines Line2"></div>
-             <div class= "SpanLines Line3"></div>
+             <img src ="../img/WhiteX.png" width - "40px"/>
          </div>
         </div>
        <div class= "NavBurgerAlign">
@@ -105,6 +103,8 @@
                </div>
            <div class="FollowersContainer">
              <div class = "YOurFollowers">Followers</div>
+
+             <div id = "NotificationsParenttttt">
             @foreach (var item in MyFollowers)
              {
                  var User = users2?.Where(u => u.id == item.FollowerID).FirstOrDefault();
@@ -136,10 +136,11 @@
                           </div>
                      </div>
                  }
-             }  
-            </div>
+             } 
           </div>
-        }
+         </div>
+       </div>
+       }
       <!--Following Table-->   
       
 
@@ -155,6 +156,9 @@
                  </div>
              <div class="FollowersContainer">
                <div class = "YOurFollowers">Followings</div>
+
+
+             <div id = "NotificationsParenttttt">
               @foreach (var item in MyFollowing)
               {
                   var User = users2?.Where(u => u.id == item.FollowingID).FirstOrDefault();
@@ -186,7 +190,8 @@
                          </div>
                     </div>
                   }
-              }  
+              }
+              </div>
               </div>
            </div>
         }
@@ -295,10 +300,10 @@
                                 @{
                                     if (@ViewBag.Profile != null)
                                     {
-                                            <a class= "changebuttons" asp-controller="MyProfile" asp-action="ProfileUpdate">
-                                            <img src = "../img/Camera.png" class= "cameraButton">
-                                            </a>
-                                            <img class="UploadPicMain" src="@ViewBag.Profile" alt="">
+                                        <a class= "changebuttons" asp-controller="MyProfile" asp-action="ProfileUpdate">
+                                        <img src = "../img/Camera.png" class= "cameraButton">
+                                        </a>
+                                        <img class="UploadPicMain" src="@ViewBag.Profile" alt="">
                                     }
                                     else
                                     {
@@ -315,7 +320,6 @@
                                   <button class= "displaynoneForms"  id="Xbutton">X</button>    
                               </form>
                               <!---->
-
                           </div>
                        </div>
                     </div>
@@ -357,10 +361,9 @@
                      }
                  </div>
                 <div class ="Whats_On_Your_Mind">
-                  <input class = "OnYourMindInput" placeholder = "What on your mind?">
-                       <a class="onYourMIndLink" asp-controller="MyProfile" asp-action="UploadPost">
-                        Post
-                       </a>
+                  <div class ="ShareYourDay">Share Your Day Here!</div>
+                  <a class="onYourMIndLink" asp-controller="MyProfile" asp-action="UploadPost"> Upload Image <img src = "../img/imgicon.png" width="25px"/></a>
+                  <a class="onYourMIndLink" asp-controller="MyProfile" asp-action="VideoUpload"> Upload Video <img src = "../img/videoicon.png" width="25px"/> </a>
                 </div>
             </div>
 
@@ -490,26 +493,32 @@
                                  <p class= "flexPText">@post.post</p>
                               </div>
                               <div class= "photocontentwitdth">
-                               @if (@post.Photo != null)
-                               {
-                                
-                                  @if (post.PostType == 1)
-                                  {
-                                     <div class="imgofpost2" id="imgofpost">
-                                         <img src="@post.Photo" class="Post_photowidth2" id="Post_photowidth" alt="Post Image">    
-                                     </div>
-                                  }
-                                  else
-                                  {
-                                    <div class="imgofpost" id="imgofpost">
-                                        <img src="@post.Photo" class="Post_photowidth" id="Post_photowidth" alt="Post Image">    
-                                    </div>
-                                  }
-                                }
-                                else
+                              @if (@post.Photo != null)
                                 {
-
-                                }
+                                
+                                   if (post.PostType == 1)
+                                   {
+                                      <div class="imgofpost2" id="imgofpost">
+                                          <img src="@post.Photo" class="Post_photowidth2" id="Post_photowidth" alt="Post Image">    
+                                      </div>
+                                   }
+                                   else  if (post.PostType == 2)
+                                   {
+                                      <div class="imgofpost" id="imgofpost">
+                                           <video src="@post.Photo" class="Post_photowidth" id="Post_photowidth" alt="Post Video" autoplay muted controls></video>
+                                      </div>
+                                   }
+                                   else
+                                   {
+                                     <div class="imgofpost" id="imgofpost">
+                                         <img src="@post.Photo" class="Post_photowidth" id="Post_photowidth" alt="Post Image">    
+                                     </div>
+                                   }
+                                 }
+                                 else
+                                 {
+                             
+                                 }
                               </div>
 
 

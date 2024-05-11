@@ -40,8 +40,7 @@ body {
     width: 280px;
     display: flex;
     justify-content: space-evenly;
-    background-color: rgba(0, 0, 0, 0.199);
-    backdrop-filter: blur(60px);
+    background-color: #1c1a1aed;
     z-index: 5000;
     box-shadow: 0px 0px 10px black;
 }
