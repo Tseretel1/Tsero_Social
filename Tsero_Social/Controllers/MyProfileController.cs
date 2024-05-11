@@ -193,8 +193,11 @@ namespace Tsero_Social.Controllers
                     PathToDisplay = PattoDisplay,
                     Userid = userId.id,
                 };
-                _userDbcontext.videos.Add(videoUpload);
-                _userDbcontext.SaveChanges();
+                if (videoUpload.PathToDisplay != null && videoUpload.ImagePath != null && videoUpload.Userid != null)
+                {
+                    _userDbcontext.videos.Add(videoUpload);
+                    _userDbcontext.SaveChanges();
+                }
 
                 var postUpload = new Post
                 {
@@ -207,8 +210,6 @@ namespace Tsero_Social.Controllers
                 _userDbcontext.Posts.Add(postUpload);
                 _userDbcontext.SaveChanges();
             }
-
-
             else
             {
               
