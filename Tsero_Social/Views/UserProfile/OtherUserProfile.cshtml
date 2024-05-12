@@ -367,20 +367,25 @@
                               </div>
                               <div class= "photocontentwitdth">
                                @if (@post.Photo != null)
-                               {
-                                
-                                  @if (post.PostType == 1)
-                                  {
-                                     <div class="imgofpost2" id="imgofpost">
-                                         <img src="@post.Photo" class="Post_photowidth2" id="Post_photowidth" alt="Post Image">    
+                               {                                   
+                                   if (post.PostType == 1)
+                                   {
+                                      <div class="imgofpost2" id="imgofpost">
+                                          <img src="@post.Photo" class="Post_photowidth2" id="Post_photowidth" alt="Post Image">    
+                                      </div>
+                                   }
+                                   else  if (post.PostType == 2)
+                                   {
+                                      <div class="imgofpost" id="imgofpost">
+                                           <video src="@post.Photo" class="Post_photowidth" id="Post_photowidth" alt="Post Video" autoplay muted controls></video>
+                                      </div>
+                                   }
+                                   else
+                                   {
+                                     <div class="imgofpost" id="imgofpost">
+                                         <img src="@post.Photo" class="Post_photowidth" id="Post_photowidth" alt="Post Image">    
                                      </div>
-                                  }
-                                  else
-                                  {
-                                    <div class="imgofpost" id="imgofpost">
-                                        <img src="@post.Photo" class="Post_photowidth" id="Post_photowidth" alt="Post Image">    
-                                    </div>
-                                  }
+                                   }
                                 }
                                 else
                                 {

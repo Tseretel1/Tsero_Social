@@ -92,12 +92,19 @@ namespace Tsero_Social.Services
          public void DeleteImg(string PostPhoto)
          {
             var FoundImage = _dbcontext.images.FirstOrDefault(u => u.PathToDisplay == PostPhoto);
+            var FoundVideo = _dbcontext.videos.FirstOrDefault(u => u.PathToDisplay == PostPhoto);
             string Image_To_delete = "";
             if(FoundImage != null)
             {
                _dbcontext.images.Remove(FoundImage);
                _dbcontext.SaveChanges();
                 Image_To_delete = FoundImage.ImagePath;
+            }
+            else if(FoundVideo != null)
+            {
+                _dbcontext.videos.Remove(FoundVideo);
+                _dbcontext.SaveChanges();
+                Image_To_delete = FoundVideo.ImagePath;
             }
             if (!string.IsNullOrEmpty(Image_To_delete) && File.Exists(Image_To_delete))
             {

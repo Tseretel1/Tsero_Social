@@ -756,7 +756,7 @@ strong {
     display:flex;
     align-items:center;
     justify-content:center; 
-    font-size:5vh;
+    font-size:4vh;
     color:white;
 }
 .onYourMIndLink {
@@ -1099,8 +1099,11 @@ strong {
         padding: 10px 0px 10px 0px;
         border-radius:3px;
     }
-    .FollowersContainer{
-        width:270px;
+    .ShareYourDay{
+        font-size:4vh;
+    }
+    .FollowersContainer {
+        width: 270px;
     }
     .XbuttonContainer {
         width: 270px;

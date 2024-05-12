@@ -1,15 +1,6 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing.Constraints;
-using System.Diagnostics;
-using System.Drawing.Imaging;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Mvc;
 using Tsero_Social.Models;
-using Microsoft.Extensions.Hosting.Internal;
 using Tsero_Social.Dbcontext;
-using System.IO;
-using Microsoft.EntityFrameworkCore;
 using Tsero_Social.Services;
 
 namespace Tsero_Social.Controllers
@@ -29,21 +20,13 @@ namespace Tsero_Social.Controllers
             _LikeComment = likeComment;
             _followservice = followservice;
         }
-        public IActionResult Index(int page = 1)
+        public IActionResult Index()
         {
-            int pageSize = 5;
-            int offset = (page - 1) * pageSize;
-            if (offset < 0)
-            {
-                offset = 0;
-            }
 
             ViewBag.UserPosts = "";
             var allPosts = _dbcontext.Posts
                 .Where(p => p.DateTime < DateTime.Now)
                 .OrderByDescending(p => p.DateTime)
-                .Skip(offset)
-                .Take(pageSize)
                 .ToList();
             ViewBag.Users = _dbcontext.Users.ToList();
             ViewBag.Comments = _dbcontext.Comments.ToList();
@@ -96,7 +79,7 @@ namespace Tsero_Social.Controllers
             }
             return PartialView("home", allPosts);
         }
-        public IActionResult Foryou(int page = 1)
+        public IActionResult Foryou()
         {
             bool IsLogged = true;
             try
@@ -119,18 +102,9 @@ namespace Tsero_Social.Controllers
             }
             if (IsLogged)
             {
-                int pageSize = 5;
-                int offset = (page - 1) * pageSize;
-                if (offset < 0)
-                {
-                    offset = 0;
-                }
-
                 var allPosts = _dbcontext.Posts
                     .Where(p => p.DateTime < DateTime.Now)
                     .OrderByDescending(p => p.DateTime)
-                    .Skip(offset)
-                    .Take(pageSize)
                     .ToList();
                 ViewBag.Users = _dbcontext.Users.ToList();
                 ViewBag.Comments = _dbcontext.Comments.ToList();
@@ -158,14 +132,12 @@ namespace Tsero_Social.Controllers
             }
             return View("Login");
         }
-
         [HttpPost]
         public IActionResult Like(int Postid, int CurrentUserID)
         {
             _LikeComment.PostToLike(Postid, CurrentUserID);
             return NoContent();
         }
-
         [HttpPost]
         public IActionResult FollowPerson(int FollowerID, int FollowingID)
         {
