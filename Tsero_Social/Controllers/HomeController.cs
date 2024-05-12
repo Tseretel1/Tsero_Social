@@ -136,13 +136,21 @@ namespace Tsero_Social.Controllers
         public IActionResult Like(int Postid, int CurrentUserID)
         {
             _LikeComment.PostToLike(Postid, CurrentUserID);
-            return NoContent();
+            return PartialView("_FollowResult", "Home");
         }
+    
         [HttpPost]
         public IActionResult FollowPerson(int FollowerID, int FollowingID)
         {
-            _followservice.Follow(FollowerID, FollowingID);
-            return NoContent();
+            try
+            {
+                _followservice.Follow(FollowerID, FollowingID);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("An error occurred while following the person.");
+            }
         }
     }
 }

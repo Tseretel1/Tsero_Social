@@ -274,8 +274,8 @@
         {
             <div class="containercenter">
                <div class="updatepost" id = "updatepost"> 
-                 <a id ="changebuttons" asp-controller="MyProfile" asp-action="EditCover">
-                  <button class="btn" type="button">
+                 <div id ="changebuttons">
+                  <a  asp-controller="MyProfile" asp-action="EditCover" class="btn" type="button">
                      <strong>Upload Cover</strong>
                      <div id="container-stars">
                        <div id="stars"></div>
@@ -284,8 +284,8 @@
                        <div class="circle"></div>
                        <div class="circle"></div>
                      </div>
-                  </button>
-                 </a>
+                  </a>
+                 </div>
                   <script>
                       function CoverPhoto() {
                           var CoverContainer = document.getElementById("updatepost");

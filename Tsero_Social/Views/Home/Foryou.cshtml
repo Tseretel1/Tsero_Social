@@ -125,10 +125,14 @@
                                 }
                                 @if (post.UserID != CurrentUserID)
                                 {
+                                    <div id = "NOnExistent"></div>
                                    <form class="FormFollow" method="post" asp-action="FollowPerson">
                                          <input type="hidden"  name="FollowingID" value=" @PostAuthor.id"/>
                                          <input type="hidden"  name="FollowerID" value="@CurrentUserID" />
-                                         <button class= "Follow" Id = "Follow" >@Follow</button>
+                                         <button class= "Follow" Id = "Follow" >@Follow</button>                             
+                                           <script>
+                                                $('#NOnExistent').load("/Home/_FollowResult")
+                                           </script>                               
                                    </form>
                                 }
                               <!--Follow person-->

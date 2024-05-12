@@ -91,8 +91,8 @@
     max-height: 600px;
 }
 .imgofpost2 {
-    width: 350px;
-    height: 350px;
+    width: 450px;
+    height: 450px;
     border: 2px solid gray;
     border-radius: 50%;
     display: flex;
@@ -101,7 +101,7 @@
     overflow: hidden;
 }
 .Post_photowidth2 {
-    width: 350px;
+    width: 450px;
     height: auto;
 }
 .photocontentwitdth {
@@ -387,10 +387,12 @@
     }
     .Post_photowidth{
         width:400px;
+        height:auto;
     }
-    .imgofpost{
-       width: 400px;
-       height:400px;
+    .imgofpost {
+        width: 400px;
+        height: auto;
+        max-height:600px;
     }
     .flextitles{
         width:400px;
@@ -400,11 +402,11 @@
         font-size:12px;
     }
     .imgofpost2 {
-        width: 250px;
-        height: 250px;
+        width: 350px;
+        height: 350px;
     }
     .Post_photowidth2 {
-        width: 250px;
+        width: 350px;
     }
 }
 
@@ -433,7 +435,8 @@
 
     .imgofpost {
         width: 300px;
-        height: 300px;
+        height: auto;
+        max-height:450px;
     }
     .PostProfile{
         width:60px;
@@ -455,18 +458,18 @@
         font-size: 15px;
     }
     .imgofpost2 {
-        width: 200px;
-        height: 200px;
+        width: 300px;
+        height: 300px;
     }
 
     .Post_photowidth2 {
-        width: 200px;
+        width: 300px;
     }
 }
 @media only screen and (max-width: 400px) {
 
     .Each_Post {
-        width: 290px;
+        width: 350px;
         border-radius: 5px;
     }
 
@@ -486,7 +489,8 @@
     }
     .imgofpost {
         width: 250px;
-        height: 250px;
+        height: auto;
+        max-height: 450px;
     }
     .flextitles{
         width:250px;
@@ -504,18 +508,25 @@
         font-size:12px;
     }
     .imgofpost2 {
-        width: 150px;
-        height: 150px;
+        width: 200px;
+        height: 200px;
     }
 
     .Post_photowidth2 {
-        width: 150px;
+        width: 200px;
+    }
+}
+@media only screen and (max-width: 350px) {
+
+    .Each_Post {
+        width: 300px;
+        border-radius: 5px;
     }
 }
 @media only screen and (max-width: 300px) {
 
     .Each_Post {
-        width: 260px;
+        width: 270px;
         border-radius: 5px;
     }
 
@@ -537,7 +548,8 @@
 
     .imgofpost {
         width: 230px;
-        height: 230px;
+        height: auto;
+        max-height: 350px;
     }
 
     .flextitles {

@@ -244,9 +244,12 @@ body::selection{
     background-position: center;
     background-size:cover;
     border:1px solid gray;
-    padding: 130px 0px 130px 0px;
     justify-content:center;
     max-width:1300px;
+    flex-direction:column;
+    padding:0;
+    align-items:flex-start;
+    padding:20px 0px 20px 0px;
 }
 .updatepost:hover .btn{
     transform:scale(1);
@@ -255,6 +258,11 @@ body::selection{
     text-decoration: none;
     transition: 0.2s all ease-in-out;
     transform: scale(1);
+    display:flex;
+    justify-content:center;
+    width:100%;
+    position:absolute;
+    align-items:center;
 }
 .commentinput{
     width:100%;
@@ -294,18 +302,18 @@ body::selection{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 13rem;
+    width: 200px;
     overflow: hidden;
     height: 3rem;
-    border-radius: 5rem;
-    transition: 0.5s;
+    border-radius: 10px;
     animation: gradient_301 5s ease infinite;
     background-origin: border-box;
     background-clip: content-box, border-box;
     border: 1px solid black;
     transition: 0.3s all ease-in-out;
-    backdrop-filter: blur(5px);
-    transform:scale(0.01);
+    transform: scale(0.001);
+    background-color: #00000075;
+    padding:0;
 }
 
 #container-stars {
@@ -612,16 +620,14 @@ strong {
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    position: absolute;
-    top: 180px;
-    left: 30px;
+    position: relative;
+    top:50px;
+    left:10px;
 }
 .userName {
     font-size: 15px;
     color: white;
     text-shadow: 0px 0px 2px black;
-    max-width:150px;
-    flex-wrap:wrap;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -820,7 +826,6 @@ strong {
     }
     .updatepost {
         width: 550px;
-        padding:20px;
     }
     #ProfilePictureCont {
         width: 100px;
@@ -828,7 +833,6 @@ strong {
     }
     .updatepost {
         width: 550px;
-        padding: 90px 0px 90px 0px;
     }
     .UploadPicMain {
         width: 100px;
@@ -848,20 +852,24 @@ strong {
     .XbuttonContainer {
         width: 600px;
     }
-    .Profile_data {
-        top: 140px;
-    }
     .changebuttons {
         top: 110px;
     }
     .cameraButton {
         left:42px;
     }
+    .btn {
+        width:150px;
+        height:40px;
+        font-size:13px;
+    }
+    strong{
+        font-size:10px;
+    }
 }
 @media only screen and (max-width: 600px) {
     .updatepost {
         width: 490px;
-        padding: 70px 0px 70px 0px;
     }
     .UploadPicMain {
         width: 100px;
@@ -899,9 +907,6 @@ strong {
     }
     .UserDataFlex{
         gap:5px;
-    }
-    .Profile_data {
-        top: 125px;
     }
     .changebuttons {
         top: 90px;
@@ -964,10 +969,6 @@ strong {
     }
     .updatepost{
         width:400px;
-        padding : 50px 0px 50px 0px;
-    }
-    .Profile_data {
-        top: 90px;
     }
     .XbuttonContainer {
         width: 400px;
@@ -1023,6 +1024,9 @@ strong {
     .changebuttons{
         top:80px;
     }
+    .ShareYourDay{
+        font-size:30px;
+    }
 }
 @media only screen and (max-width: 400px) {
     .UploadPost {
@@ -1031,11 +1035,6 @@ strong {
     }
     .updatepost {
         width: 290px;
-        padding: 40px 0px 40px 0px
-    }
-    .Profile_data {
-        top: 80px;
-        left:0;
     }
     .DefaultProfile{
         width:40px;
@@ -1127,12 +1126,6 @@ strong {
     }
     .updatepost {
         width: 270px;
-        padding: 30px 0px 30px 0px
-    }
-
-    .Profile_data {
-        top: 30px;
-        left: 0;
     }
     .FollowerFont{
         font-size:10px;
@@ -1143,6 +1136,9 @@ strong {
     .FollowContaoinerParent {
         gap:0px;
         padding:0;
+    }
+    .ShareYourDay {
+        font-size: 20px;
     }
 
 }
