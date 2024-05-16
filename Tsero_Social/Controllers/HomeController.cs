@@ -79,6 +79,8 @@ namespace Tsero_Social.Controllers
             }
             return PartialView("home", allPosts);
         }
+
+
         public IActionResult Foryou()
         {
             bool IsLogged = true;
@@ -136,7 +138,7 @@ namespace Tsero_Social.Controllers
         public IActionResult Like(int Postid, int CurrentUserID)
         {
             _LikeComment.PostToLike(Postid, CurrentUserID);
-            return PartialView("_FollowResult", "Home");
+            return NoContent();
         }
     
         [HttpPost]

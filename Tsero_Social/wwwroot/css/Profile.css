@@ -714,40 +714,16 @@ strong {
     background: url(../img/ProfileBackground.png);
     background-size: cover;
     background-position: center;
-    border: 2px solid;
-    border-color: white black black black;
+    border: 1px solid;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.DefaultProfile:hover{
-    animation :rotate 0.5s linear infinite;
-}
-@keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-    100%{
-        transform:rotate(360deg);
-    }
-}
-@keyframes rotate2 {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(-360deg);
-    }
-}
 .UploadPic {
     width: 70px;
     height: auto;
     position:absolute;
-}
-.UploadPic:hover{
-     animation :rotate2 0.5s linear infinite;
 }
 .UploadUsername {
     color:white;

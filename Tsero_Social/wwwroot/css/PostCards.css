@@ -270,22 +270,43 @@
 
 .profilepic {
     width: 40px;
-    border-radius: 50%;
+    height:auto;
 }
-.profilepic {
-    width: 40px;
+.CoomenterprofileComntainer {
+    wdith: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
     border-radius: 50%;
+    flex-direction:column;
 }
+.LiteralComment{
+    color:white;
+    font-size:14px;
+    padding:0;
+    margin:4px;
+}
+.commenterphtotousername{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+.commenterUsername {
+    color: white;
+    font-size: 14px;
+}
+.commenterProfile {
+    display: flex;
+    gap: 10px;
+}
+.commenterProfile {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    padding-bottom:20px;
 
-.commenterProfile {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.commenterProfile {
-    display: flex;
-    align-items: center;
-    gap: 10px;
 }
 
 .eachcomment {

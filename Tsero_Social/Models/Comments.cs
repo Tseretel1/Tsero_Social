@@ -6,5 +6,6 @@
         public int PostID { get; set; }
         public int UserID { get; set; }
         public string Comment { get; set; }
+        public DateTime DateTime { get; set; }
     }
 }

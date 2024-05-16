@@ -34,6 +34,9 @@ namespace Tsero_Social.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("PostID")
                         .HasColumnType("int");
 

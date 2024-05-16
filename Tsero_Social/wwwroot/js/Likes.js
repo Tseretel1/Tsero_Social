@@ -1,42 +1,29 @@
 ﻿function likeFunc(button) {
     button.addEventListener('click', function () {
-        var likeSymbol = button.querySelector('.like-symbol');
+        var likeSymbol = button.querySelector('i');
         var likeCountElement = button.querySelector('.like-count');
 
         var likeCount = parseInt(likeCountElement.textContent.trim());
-        if (likeSymbol.textContent.trim() === '❤️') {
-            likeSymbol.textContent = '🤍';
+        if (likeSymbol.classList.contains('fas')) {
+            likeSymbol.classList.remove('fas');
+            likeSymbol.classList.add('far');
+            likeSymbol.style.color = 'white';
             likeCount--;
         } else {
-            likeSymbol.textContent = '❤️';
+            likeSymbol.classList.remove('far');
+            likeSymbol.classList.add('fas');
+            likeSymbol.style.color = 'red';
             likeCount++;
         }
         likeCountElement.textContent = likeCount;
     });
 }
 
-function applyEventListenersToNewButtons() {
-    var likeButtons = document.querySelectorAll('.Like');
-    likeButtons.forEach(function (button) {
-        if (!button.hasAttribute('data-event-listener-applied')) {
-            console.log('Applying event listener to new button:', button);
-            likeFunc(button);
-            button.setAttribute('data-event-listener-applied', true);
-        }
-    });
-}
-
 window.addEventListener('load', function () {
     console.log('Document loaded');
-    applyEventListenersToNewButtons();
 
-    var observer = new MutationObserver(function (mutations) {
-        console.log('Mutation detected:', mutations);
-        applyEventListenersToNewButtons();
-    });
-
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
+    var likeButtons = document.querySelectorAll('.Like');
+    likeButtons.forEach(function (button) {
+        likeFunc(button);
     });
 });
