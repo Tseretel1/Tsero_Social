@@ -24,6 +24,7 @@ namespace Tsero_Social.Dbcontext
         public UserDbcontext(DbContextOptions<UserDbcontext> options) : base(options)
         {
 
+
         }
     }
 }

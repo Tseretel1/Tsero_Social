@@ -654,7 +654,6 @@ strong {
     transform: scale(1.1);
 }
 #ProfilePictureCont {
-    display: flex;
     width: 160px;
     height: 160px;
     border-radius: 50%;
@@ -662,7 +661,8 @@ strong {
     background-color: rgb(26, 25, 25);
     background:url(../img/ProfileBackground.png);
     background-size:cover;
-    border:2px solid white
+    border:2px solid white;
+    position:relative;
 }
 .UploadPicMain{
     width:160px;

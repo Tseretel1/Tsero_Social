@@ -46,25 +46,16 @@ namespace Tsero_Social.Controllers
             return PartialView("home", allPosts);
         }
 
-        public IActionResult home(int page = 1)
+        public IActionResult home()
         {
-            int pageSize = 5;
-            int offset = (page - 1) * pageSize;
-            if (offset < 0)
-            {
-                offset = 0;
-            }
-
             var allPosts = _dbcontext.Posts
-                .Where(p => p.DateTime < DateTime.Now)
-                .OrderByDescending(p => p.DateTime)
-                .Skip(offset)
-                .Take(pageSize)
-                .ToList();
-
+                   .Where(p => p.DateTime < DateTime.Now)
+                   .OrderByDescending(p => p.DateTime)
+                   .ToList();
             ViewBag.Users = _dbcontext.Users.ToList();
             ViewBag.Comments = _dbcontext.Comments.ToList();
             ViewBag.Likes = _dbcontext.Likes.ToList();
+            ViewBag.Follows = _dbcontext.Follows.ToList();
             ViewBag.UserPosts = allPosts;
             ViewBag.Posts = new List<User>();
             ViewBag.CurrentUser = _userServices.GetUserLogedUsers();
