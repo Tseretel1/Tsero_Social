@@ -62,7 +62,12 @@ namespace Tsero_Social.Migrations
                     b.Property<int>("FollowingID")
                         .HasColumnType("int");
 
+                    b.Property<int>("userid")
+                        .HasColumnType("int");
+
                     b.HasKey("id");
+
+                    b.HasIndex("userid");
 
                     b.ToTable("Follows");
                 });
@@ -90,6 +95,8 @@ namespace Tsero_Social.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("id");
+
+                    b.HasIndex("Userid");
 
                     b.ToTable("images");
                 });
@@ -121,19 +128,19 @@ namespace Tsero_Social.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
-                    b.Property<DateTime>("NTF_DateTime")
+                    b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("NTF_Type")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ReceiverID")
-                        .HasColumnType("int");
 
                     b.Property<bool>("Seen")
                         .HasColumnType("bit");
 
-                    b.Property<int>("SenderID")
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<int>("User1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("User2")
                         .HasColumnType("int");
 
                     b.HasKey("id");
@@ -232,7 +239,51 @@ namespace Tsero_Social.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("Userid");
+
                     b.ToTable("videos");
+                });
+
+            modelBuilder.Entity("Tsero_Social.Models.Follow", b =>
+                {
+                    b.HasOne("Tsero_Social.Models.User", "user")
+                        .WithMany("Follow")
+                        .HasForeignKey("userid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("user");
+                });
+
+            modelBuilder.Entity("Tsero_Social.Models.ImageUpload", b =>
+                {
+                    b.HasOne("Tsero_Social.Models.User", "user")
+                        .WithMany("ImageUpload")
+                        .HasForeignKey("Userid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("user");
+                });
+
+            modelBuilder.Entity("Tsero_Social.Models.VideoUpload", b =>
+                {
+                    b.HasOne("Tsero_Social.Models.User", "user")
+                        .WithMany("VideoUpload")
+                        .HasForeignKey("Userid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("user");
+                });
+
+            modelBuilder.Entity("Tsero_Social.Models.User", b =>
+                {
+                    b.Navigation("Follow");
+
+                    b.Navigation("ImageUpload");
+
+                    b.Navigation("VideoUpload");
                 });
 #pragma warning restore 612, 618
         }

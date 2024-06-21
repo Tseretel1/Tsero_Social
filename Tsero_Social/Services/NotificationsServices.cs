@@ -16,7 +16,7 @@ namespace Tsero_Social.Services
 
         public void AllNotificationDeletion(int CurrentuserID)
         {
-            var IFNOtificationExists = _dbcontext.Notifications.Where(u=>u.ReceiverID == CurrentuserID);
+            var IFNOtificationExists = _dbcontext.Notifications.Where(u=>u.User2 == CurrentuserID || u.User1 == CurrentuserID);
             if(IFNOtificationExists !=null)
             {
                 foreach(var item  in IFNOtificationExists)
@@ -27,19 +27,20 @@ namespace Tsero_Social.Services
             }
         }
 
-        public void Notification(int SenderID, int RecieverID, int Type)
+        public void Notification(Notificationss Notification)
         {
-            var SenderLegit = _dbcontext.Users.SingleOrDefault(u=>u.id == SenderID);
-            var RecieverLegit = _dbcontext.Users.SingleOrDefault(u => u.id == RecieverID);
+            var SenderLegit = _dbcontext.Users.SingleOrDefault(u=>u.id == Notification.User1);
+            var RecieverLegit = _dbcontext.Users.SingleOrDefault(u => u.id == Notification.User2);
             if(SenderLegit != null && RecieverLegit!=null)
             {
                 var Follow = new Notificationss
                 {
-                    SenderID = SenderID,
-                    ReceiverID = RecieverID,
-                    NTF_DateTime = DateTime.Now,
-                    NTF_Type = Type,
+                    User1 = Notification.User1,
+                    User2= Notification.User2,
+                    DateTime = DateTime.Now,
+                    Type = Notification.Type,
                     Seen = false,
+                    userid = Notification.User1,
                 };
                 _dbcontext.Notifications.Add(Follow);
                 _dbcontext.SaveChanges();

@@ -1,5 +1,11 @@
-﻿namespace Tsero_Social.Models
+﻿using MessagePack;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Tsero_Social.Migrations;
+
+namespace Tsero_Social.Models
 {
+
     public class User
     {
         public int id { get; set; }
@@ -11,6 +17,7 @@
         public string? ProfilePicture { get; set; }
         public string? CoverPicture { get; set; }
         public bool Isonline { get; set; }
+        [NotMapped]
         public static List<User> Loged_user = new List<User>();
     }
 }

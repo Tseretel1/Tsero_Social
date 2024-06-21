@@ -1,4 +1,7 @@
-﻿namespace Tsero_Social.Models
+﻿using MessagePack;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Tsero_Social.Models
 {
     public class Post
     {

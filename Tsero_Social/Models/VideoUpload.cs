@@ -10,5 +10,6 @@ namespace Tsero_Social.Models
         public string ImagePath { get; set; }
         [NotMapped]
         public IFormFile VideoFile { get; set; }
+        public User user { get; set; }
     }
 }

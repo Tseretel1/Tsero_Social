@@ -59,14 +59,6 @@
                         var comcount = comments != null ? comments.Where(u => u.PostID == post.Id).Count() : 0;
                         var LikeCount = Likes != null ? Likes.Where(u => u.PostID == post.Id).Count() : 0;
                         string output = "";
-                        int CurrentUserID = 0;
-                        if (ViewBag.CurrentUser != null)
-                        {
-                            foreach (var item in ViewBag.CurrentUser)
-                            {
-                                CurrentUserID = item.id;
-                            }
-                        }
                         @if (LikeCount > 0)
                         {
                             output += LikeCount;
@@ -186,16 +178,8 @@
                                         @foreach (var like in Likes)
                                         {
                                             var LikeCountQuery = Likes.Where(u => u.PostID == @post.Id).Count();
-                                            var ifLiked = Likes.FirstOrDefault(u => u.UserID == @CurrentUserID && u.PostID == @post.Id);
-                                            if (ifLiked != null)
-                                            {
-                                            
-                                                Likecount = LikeCountQuery;
-                                            }
-                                            else
-                                            {
-                                                Likecount = LikeCountQuery;
-                                            }                                
+                                            Likecount = LikeCountQuery;
+                                                                       
                                         }
                                     }
                                  <a asp-controller="Login" asp-action="Login" class= "Like">  <i class="far fa-heart" style="color: white;"></i> @Likecount </a>     

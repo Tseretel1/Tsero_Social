@@ -147,7 +147,6 @@
     flex-direction: column;
     justify-content: center;
     border-radius: 50%;
-    background: url(../img/ProfileBackground.png);
     background-size: cover;
     background-repeat:no-repeat;
     background-position:center;
@@ -155,12 +154,7 @@
     width: 60px;
     height: 60px;
     border: 1px solid grey;
-}
-.postdate {
-    color: grey;
-    margin: 0;
-    font:100;
-    font-size:15px;
+    box-shadow: 0px 0px 10px black inset;
 }
 .datetimetracking {
     color: grey;

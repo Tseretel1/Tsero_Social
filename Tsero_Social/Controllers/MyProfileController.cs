@@ -78,10 +78,10 @@ namespace Tsero_Social.Controllers
                                 ViewBag.Followers = FollowersCount;
                                 ViewBag.Following = FollowingCount;
 
-                                var NotificationCount = _userDbcontext.Notifications.Where(u=> u.ReceiverID == loggedUser.id).Count();
+                                var NotificationCount = _userDbcontext.Notifications.Where(u=> u.User2 == loggedUser.id).Count();
                                 ViewBag.Notification = NotificationCount;
 
-                                var Notification = _userDbcontext.Notifications.Where(u => u.ReceiverID == user.id).ToList();
+                                var Notification = _userDbcontext.Notifications.Where(u => u.User2 == loggedUser.id).OrderByDescending(u => u.DateTime).ToList();
                                 ViewBag.MyNotifications = Notification;
                                 var userPosts = _userDbcontext.Posts
                                 .Where(p => p.UserID == loggedUser.id)

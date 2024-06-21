@@ -19,7 +19,7 @@ namespace Tsero_Social.Dbcontext
         public DbSet<VideoUpload> videos { get; set; }
         public DbSet<Comments> Comments { get; set; }
         public DbSet<Likes> Likes { get; set; }
-        public DbSet<Follow> Follows { get; set; }
+        public DbSet<FollowFriends> Follows { get; set; }
         public DbSet<Notificationss> Notifications { get; set; }
         public UserDbcontext(DbContextOptions<UserDbcontext> options) : base(options)
         {

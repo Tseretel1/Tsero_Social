@@ -76,7 +76,7 @@
                         var users = ViewBag.Users as List<User>;
                         var comments = ViewBag.Comments as List<Comments>;
                         var Likes = ViewBag.Likes as List<Likes>;
-                        var Follows = ViewBag.Follows as List<Follow>;
+                        var Follows = ViewBag.Follows as List<FollowFriends>;
                         var comcount = comments != null ? comments.Where(u => u.PostID == post.Id).Count() : 0;
                         var LikeCount = Likes != null ? Likes.Where(u => u.PostID == post.Id).Count() : 0;
                         var PostAuthor = users.FirstOrDefault(u => u.id == post.UserID);
@@ -126,14 +126,11 @@
                                 }
                                 @if (post.UserID != CurrentUserID)
                                 {
-                                    <div id = "NOnExistent"></div>
+                                   <div id = "NOnExistent"></div>
                                    <form class="FormFollow" method="post" asp-action="FollowPerson">
                                          <input type="hidden"  name="FollowingID" value=" @PostAuthor.id"/>
                                          <input type="hidden"  name="FollowerID" value="@CurrentUserID" />
-                                         <button class= "Follow" Id = "Follow" >@Follow</button>                             
-                                           <script>
-                                                $('#NOnExistent').load("/Home/_FollowResult")
-                                           </script>                               
+                                         <button class= "Follow" Id = "Follow" >@Follow</button>                                                          
                                    </form>
                                 }
                               <!--Follow person-->
@@ -153,10 +150,6 @@
                                            {
                                                profilepicture = user.ProfilePicture;
                                                <img class="PostProfile" src="@profilepicture" alt="">
-                                           }
-                                           else if(user.ProfilePicture == null)
-                                           {
-                                               <img class="PostProfile" src="../img/ProfileBackground.png" alt="">
                                            }
                                            username = user.Username;
                                         }
@@ -317,10 +310,10 @@
                      }
                       </div>   
                          
-                        </div>
-                     </div>                         
-                    }
-                }
+                  </div>
+                  </div>                         
+                 }
+            }
                 
       </section>
     </div>

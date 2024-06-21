@@ -55,7 +55,6 @@ namespace Tsero_Social.Controllers
             ViewBag.Users = _dbcontext.Users.ToList();
             ViewBag.Comments = _dbcontext.Comments.ToList();
             ViewBag.Likes = _dbcontext.Likes.ToList();
-            ViewBag.Follows = _dbcontext.Follows.ToList();
             ViewBag.UserPosts = allPosts;
             ViewBag.Posts = new List<User>();
             ViewBag.CurrentUser = _userServices.GetUserLogedUsers();

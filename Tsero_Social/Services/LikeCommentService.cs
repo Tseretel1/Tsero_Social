@@ -48,7 +48,16 @@ namespace Tsero_Social.Services
                     var Postauthor = _dbcontext.Posts.FirstOrDefault(u => u.Id == Postid);
                     if (Postauthor != null && CurrentUserID!= Postauthor.UserID)
                     {
-                        _notificationss.Notification(CurrentUserID, Postauthor.UserID, Notificationtype);
+                        var Notification = new Notificationss()
+                        {
+                            User1 = CurrentUserID,
+                            User2 = Postauthor.UserID,
+                            Type = Notificationtype,
+                            Seen = false,
+                            DateTime = DateTime.Now,
+                            userid = CurrentUserID,
+                        };
+                        _notificationss.Notification(Notification);
                     }
                 }
             }

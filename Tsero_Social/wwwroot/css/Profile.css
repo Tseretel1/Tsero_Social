@@ -150,6 +150,9 @@ body::selection{
     overflow: hidden;
     border-radius: 50%;
     border: 1px solid white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 .FollowerPic {
     width: 70px;
@@ -277,6 +280,7 @@ body::selection{
     width: 40px;
     position: absolute;
     left: 60px;
+    top: 60px;
     background-color: black;
     border-radius:50%;
     padding:5px;
@@ -545,13 +549,17 @@ strong {
     display:flex;
     justify-content:flex-end;
 }
+.Like{
+    background-color:transparent;
+    border:none;
+}
 #NotificationsParenttttt {
     display: flex;
     flex-direction: column;
     max-width: 100%;
     width: 100%;
     overflow-y: scroll;
-    padding:0px 30px 0px 0px;
+    padding: 0px 30px 0px 0px;
 }
 .prof_back {
     width: 150px;
@@ -659,10 +667,13 @@ strong {
     border-radius: 50%;
     overflow: hidden;
     background-color: rgb(26, 25, 25);
-    background:url(../img/ProfileBackground.png);
+    backdrop-filter:blur(20px);
     background-size:cover;
     border:2px solid white;
     position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 .UploadPicMain{
     width:160px;
@@ -711,7 +722,6 @@ strong {
     height: 70px;
     border-radius: 50%;
     overflow: hidden;
-    background: url(../img/ProfileBackground.png);
     background-size: cover;
     background-position: center;
     border: 1px solid;
@@ -832,7 +842,8 @@ strong {
         top: 110px;
     }
     .cameraButton {
-        left:42px;
+        left:30px;
+        top:30px;
     }
     .btn {
         width:150px;
@@ -889,7 +900,8 @@ strong {
         font-size:13px;
     }
     .cameraButton{
-        left:32px;
+        left:25px;
+        top:25px;
     }
     .FollowerFont{
         font-size:15px;
@@ -937,6 +949,10 @@ strong {
     }
     .UploadPost{
         width:480px;
+    }
+    .cameraButton{
+        top:25px;
+        left:25px;
     }
 }
 @media only screen and (max-width: 500px) {
@@ -1003,6 +1019,10 @@ strong {
     .ShareYourDay{
         font-size:30px;
     }
+    .cameraButton {
+        top: 20px;
+        left: 20px;
+    }
 }
 @media only screen and (max-width: 400px) {
     .UploadPost {
@@ -1066,6 +1086,10 @@ strong {
     }
     .userName{
         font-size:10px;
+    }
+    .cameraButton {
+        top: 10px;
+        left: 10px;
     }
 }
 @media only screen and (max-width: 300px) {

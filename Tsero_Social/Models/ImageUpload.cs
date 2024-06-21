@@ -15,5 +15,6 @@ namespace Tsero_Social.Models
         public string ImagePath { get; set; }
         [NotMapped]
         public IFormFile ImageFile { get; set; }
-     }
+        public User user { get; set; }
+    }
 }

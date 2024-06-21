@@ -77,8 +77,8 @@
 
     @{
         var users2 = ViewBag.Users as List<User>;
-        var MyFollowers = ViewBag.MyFollowers as List<Follow>;
-        var MyFollowing = ViewBag.MyFollowings as List<Follow>;
+        var MyFollowers = ViewBag.MyFollowers as List<FollowFriends>;
+        var MyFollowing = ViewBag.MyFollowings as List<FollowFriends>;
         var MyNotifications = ViewBag.MyNotifications as List<Notificationss>;
         bool IFFollowersExist = false;
         string UserN = "@";
@@ -187,7 +187,7 @@
      
 @using(Html.BeginForm("Profile", "MyProfile", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        var Follows = ViewBag.Follows as List<Follow>;
+        var Follows = ViewBag.Follows as List<FollowFriends>;
         @if (ViewBag.UserPosts != null)
         {
             <div class="containercenter">

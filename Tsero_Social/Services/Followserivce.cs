@@ -29,7 +29,7 @@ namespace Tsero_Social.Services
                 }
                 else
                 {
-                    var Follow = new Models.Follow
+                    var Follow = new Models.FollowFriends
                     {
                         FollowerID = Follower.id,
                         FollowingID = Following.id
@@ -37,7 +37,16 @@ namespace Tsero_Social.Services
                     _Context.Follows.Add(Follow);
                     _Context.SaveChanges();
                     int type = 2;
-                    _Notifycations.Notification(FollowerID, FollowingID , type);
+                    var NewNotification = new Notificationss()
+                    {
+                        User1 = FollowerID,
+                        User2 = FollowingID,
+                        Seen = false,
+                        DateTime = DateTime.Now,
+                        Type = type,
+                        userid = FollowerID
+                    };
+                    _Notifycations.Notification(NewNotification);
                 }
             }
         }
@@ -52,7 +61,7 @@ namespace Tsero_Social.Services
             }
             else if(IFfollowExists == null)
             {
-                var NewFollower = new Models.Follow
+                var NewFollower = new Models.FollowFriends
                 {
                     FollowerID = UserToRmoveID,
                     FollowingID = MyID
@@ -72,7 +81,7 @@ namespace Tsero_Social.Services
             }
             else if (IFfollowExists == null)
             {
-                var NewFollower = new Models.Follow
+                var NewFollower = new Models.FollowFriends
                 {
                      FollowingID = FollowingToDelete,
                      FollowerID = MyID
