@@ -172,14 +172,27 @@
 /*Comment section */
 .commentSection {
     display: flex;
-    width: 90%;
+    width: 100%;
     gap: 20px;
     flex-direction: column;
     margin-top: 20px;
     height: auto;
-    max-height: 200px;
+    max-height: 300px;
     overflow-y: scroll;
-    scrollbar-track-color: red;
+    padding:20px 0px 0px 0px;
+    border-top:2px solid white;
+    overflow-x:hidden;
+}
+.commentSection::-webkit-scrollbar-button {
+    display: none;
+    height:0px;
+}
+.commentSection::-webkit-scrollbar {
+    width: 8px;
+}
+.commentSection::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px; 
 }
 
 .comment_likes {
@@ -187,8 +200,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid white;
-    border-bottom: 2px solid white;
 }
 .comclick {
     font-size: 20px;
@@ -261,13 +272,32 @@
         transform: scale(1);
     }
 }
-
+.eachcomment{
+    display:flex;
+    align-items:start;
+    justify-content:space-between;
+}
+.Comment_data_Parent{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    gap:10px;
+}
+.UserName_Datetime{
+    display:flex;
+    gap:10px;
+    height:10px;
+    justify-content:space-between;
+}
+.Datetime_Comment{
+    color:grey;
+}
 .profilepic {
     width: 40px;
-    height:auto;
+    height: auto;
 }
 .CoomenterprofileComntainer {
-    wdith: 40px;
+    width: 40px;
     height: 40px;
     display: flex;
     align-items: center;
@@ -276,11 +306,13 @@
     border-radius: 50%;
     flex-direction:column;
 }
-.LiteralComment{
-    color:white;
-    font-size:14px;
-    padding:0;
-    margin:4px;
+.LiteralComment {
+    color: white;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+    max-width: 300px;
+    word-wrap: break-word;
 }
 .commenterphtotousername{
     display:flex;
@@ -297,49 +329,85 @@
 }
 .commenterProfile {
     display: flex;
-    align-items: flex-end;
     gap: 10px;
     padding-bottom:20px;
-
 }
 
 .eachcomment {
     border-bottom: 1px solid gray;
 }
-.eachcomment {
-    border-bottom: 1px solid gray;
-}
-
-.commentinput {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 95%;
-    margin-top: 20px;
-    gap: 10px;
-}
-.commentinput {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 95%;
-    margin-top: 20px;
-    gap: 10px;
-}
-
-.commentInputStyle {
+.Like {
     background-color: transparent;
-    outline: none;
+    color: white;
     border: none;
-    border-bottom: 1px solid white;
-    padding: 0px 5px 0px 5px;
-    width: 80%;
+    transition: 0.2s all ease-in-out;
+    font-size: 25px;
+    text-decoration: none;
+    gap: 10px;
+}
+
+.Like:hover {
+    letter-spacing: 1px;
+    animation: rotateInCircle 0.3s linear infinite;
     color: white;
 }
 
-    .commentInputStyle::placeholder {
-        color: white;
+@keyframes rotateInCircle {
+    0% {
+        transform: rotate(0deg);
     }
+
+    30% {
+        transform: rotate(2deg);
+    }
+
+    70% {
+        transform: rotate(-2deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.LikeCount {
+    color: white;
+    font-size: 15px;
+}
+
+.Add_Comment_section {
+    width: 100%;
+    padding:40px 0px 0px 0px;
+}
+
+.CommentForm {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.CommetnInput {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid grey;
+    color: white;
+    width: 80%;
+    outline:none;
+}
+
+.Submitcomment {
+    color: white;
+    background-color: #2d2b2b;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 0px 5px black;
+}
+
+
+
+.commentInputStyle::placeholder {        
+    color: white;
+}
 
 .submitbuttonlogin {
     border-radius: 5px;
@@ -480,6 +548,9 @@
     .Post_photowidth2 {
         width: 300px;
     }
+    .LiteralComment {
+        max-width:200px;
+    }
 }
 @media only screen and (max-width: 400px) {
 
@@ -536,6 +607,19 @@
     .Each_Post {
         width: 300px;
         border-radius: 5px;
+    }
+    .LiteralComment{
+        max-width:200px;
+        font-size:14px;
+    }
+    .Datetime_Comment{
+        font-size:15px;
+    }
+    .eachcomment{
+        align-items:center;
+    }
+    .eachcomment{
+        width:90%;
     }
 }
 @media only screen and (max-width: 300px) {

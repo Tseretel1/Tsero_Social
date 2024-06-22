@@ -15,6 +15,22 @@ namespace Tsero_Social.Services
            _notificationss = notificationss;   
         }
 
+        public void AddComment(int Postid, int currentUserID, string Comment)
+        {
+            if(Comment != null && Postid!=null && currentUserID!=null)
+            {
+                var NewComment = new Models.Comments()
+                {
+                    Comment = Comment,
+                    UserID = currentUserID,
+                    PostID = Postid,
+                    DateTime = DateTime.Now,
+                };
+                _dbcontext.Comments.Add(NewComment);
+                _dbcontext.SaveChanges();
+            }
+        }
+
         public int GetLikeCount(int postId)
         {
             return _dbcontext.Likes.Count(l => l.PostID == postId);

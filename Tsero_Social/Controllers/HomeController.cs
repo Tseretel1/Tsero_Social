@@ -144,5 +144,19 @@ namespace Tsero_Social.Controllers
                 return BadRequest("An error occurred while following the person.");
             }
         }
+
+        [HttpPost]
+        public IActionResult Add_Comment(int PostID, int UserId,string Comment)
+        {
+            try
+            {
+                _LikeComment.AddComment(PostID, UserId , Comment);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("An error occurred while following the person.");
+            }
+        }
     }
 }

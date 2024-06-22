@@ -292,31 +292,95 @@
                           {
                               foreach (var item in usercoment)
                               {
-                                  var userData = users.Where(u => u.id == item.UserID);
+                               var userData = users.Where(u => u.id == item.UserID);
                                <div class = "eachcomment">
                                       @foreach (var user in userData)
                                       {   
                                           
                                        <div class = "commenterProfile">
                                          <div class= "commenterphtotousername">
-                                            <b class ="commenterUsername"> @user.Username</b>
                                             <div class = "CoomenterprofileComntainer">
                                               <img class="profilepic" src="@user.ProfilePicture" alt="">
                                             </div>
                                          </div>
-                                         <p class= "LiteralComment">@item.Comment</p>
-                                       </div>
+                                         <div class="Comment_data_Parent">
+                                             <div class = "UserName_Datetime"> 
+                                                <b class="commenterUsername"> @user.Username</b>
+                                                <p class="Datetime_Comment">@item.DateTime</p>
+                                             </div>                   
+                                             <p class="LiteralComment">@item.Comment</p>
+                                         </div>
+                                </div>
                                       }
-                                 
+                                  <div class="CommentLike">
+                                    @if (ViewBag.CurrentUser != null)
+                                    {
+                                        bool Like = true;
+                                        string YouAnd = "By You And";
+                                        string Others = "Others";
+                                        int Likecount = 0;
+                                        @foreach(var like in Likes)
+                                        {
+                                            var LikeCountQuery = Likes.Where(u => u.PostID == @post.Id).Count();
+                                            var ifLiked = Likes.FirstOrDefault(u => u.UserID == @CurrentUserID && u.PostID == @post.Id);
+                                            if (ifLiked != null)
+                                            {
+                                                Like = true;
+                                                Likecount = LikeCountQuery;
+                                            }
+                                            else
+                                            {
+                                                Like = false;
+                                                Likecount = LikeCountQuery;
+                                            }
+                                          
+                                            
+                                        }
+                                        if (Like)
+                                        {
+                                            <form class="Formdelete" method="post" asp-action="Like">
+                                                <input type="hidden" class="LikeTosend" name="Postid" value="@post.Id" />
+                                                <input type="hidden" class="PostTodeltte" name="CurrentUserID" value="@CurrentUserID"/>
+                                                <button class="Like" id="Like">
+                                                    <i class="fas fa-heart" style="color: red;"></i>
+                                                    <span class="like-count">@Likecount</span>
+                                                </button>
+
+                                            </form>
+                                        }
+                                        else if(!Like)
+                                        {
+                                            <form class="Formdelete" method="post" asp-action="Like">
+                                                <input type="hidden" class="LikeTosend" name="Postid" value="@post.Id" />
+                                                <input type="hidden" class="PostTodeltte" name="CurrentUserID" value="@CurrentUserID"/>
+                                                <button class="Like" id="Like">
+                                                    <i class="fas fa-heart" style="color: white;"></i>
+                                                    <span class="like-count">@Likecount</span>
+                                                </button>
+
+                                            </form>
+                                        }
+
+                                }
                                   </div>
+                                  </div>
+                               
                               }
                           }
                           else
                           {
-
                           }
+
                      }
-                      </div>   
+                      </div>  
+                      <div class="Add_Comment_section">
+                           <form class="CommentForm" method="post" asp-action="Add_Comment">
+                               <input type="hidden" class="LikeTosend" name="Postid" value="@post.Id" />
+                               <input type="hidden" class="PostTodeltte" name="UserID" value="@CurrentUserID" />
+                               <input class="CommetnInput" placeholder="Comment goes here" name="Comment">
+                               <button class="Submitcomment"> Submit </button>
+                           </form>
+                      </div>
                          
                   </div>
                   </div>                         
