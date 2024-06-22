@@ -258,7 +258,7 @@
                                            }
                                        }
                                   </div>
-                                </div>
+                               </div>
                             }
                         }
                     }  
@@ -549,21 +549,28 @@
                                         }
                                         if (Like)
                                         {
-                                            <form class="FormLike" method="post" asp-action="Like">
+                                            <form class="Formdlete" method="post" asp-action="Like" asp-controller="Home">
                                                 <input type="hidden" class="LikeTosend" name="Postid" value="@post.Id" />
                                                 <input type="hidden" class="PostTodeltte" name="CurrentUserID" value="@CurrentUserID" />
-                                                <button class="Like" Id="Like"><i class="fas fa-heart" style="color: red;"></i> @Likecount</button>
+                                                <button class="Like" id="Like">
+                                                    <i class="fas fa-heart" style="color: red;"></i>
+                                                    <span class="like-count">@Likecount</span>
+                                                </button>
+
                                             </form>
                                         }
                                         else if (!Like)
                                         {
-                                            <form class="FormLike" method="post" asp-action="Like">
+                                            <form class="Formdeete" method="post" asp-action="Like" asp-controller="Home">
                                                 <input type="hidden" class="LikeTosend" name="Postid" value="@post.Id" />
                                                 <input type="hidden" class="PostTodeltte" name="CurrentUserID" value="@CurrentUserID" />
-                                                <button class="Like" Id="Like">  <i class="far fa-heart" style="color: white;"></i> @Likecount</button>
+                                                <button class="Like" id="Like">
+                                                    <i class="fas fa-heart" style="color: white;"></i>
+                                                    <span class="like-count">@Likecount</span>
+                                                </button>
+
                                             </form>
                                         }
-
                                     }
 
                                     <div class="comclick">Comment @comcount</div>
@@ -614,6 +621,7 @@
            }
     } 
    <script src="../js/Profile.js"></script>
+   <script src="../js/Follow.js"></script>
    <script src="../js/site.js"></script>
    <script src="../js/Notifications.js"></script>
   </body>

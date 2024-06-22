@@ -84,3 +84,22 @@ window.addEventListener('load', function () {
     });
 });
 
+
+function likeFunc(button) {
+    button.addEventListener('click', function () {
+        var likeSymbol = button.querySelector('i');
+        var likeCountElement = button.querySelector('.like-count');
+
+        var likeCount = parseInt(likeCountElement.textContent.trim());
+        if (likeSymbol.style.color === 'red') {
+            likeSymbol.style.color = 'white';
+            if (likeCount > 0) {
+                likeCount--;
+            }
+        } else {
+            likeSymbol.style.color = 'red';
+            likeCount++;
+        }
+        likeCountElement.textContent = likeCount;
+    });
+}

@@ -31,10 +31,10 @@ namespace Tsero_Social.Services
         {
             var SenderLegit = _dbcontext.Users.SingleOrDefault(u=>u.id == Notification.User1);
             var RecieverLegit = _dbcontext.Users.SingleOrDefault(u => u.id == Notification.User2);
-            if(SenderLegit != null && RecieverLegit!=null)
+            if(SenderLegit != null && RecieverLegit != null)
             {
-                var Follow = new Notificationss
-                {
+                var Notify = new Notificationss
+                { 
                     User1 = Notification.User1,
                     User2= Notification.User2,
                     DateTime = DateTime.Now,
@@ -42,7 +42,7 @@ namespace Tsero_Social.Services
                     Seen = false,
                     userid = Notification.User1,
                 };
-                _dbcontext.Notifications.Add(Follow);
+                _dbcontext.Notifications.Add(Notify);
                 _dbcontext.SaveChanges();
             }
         }

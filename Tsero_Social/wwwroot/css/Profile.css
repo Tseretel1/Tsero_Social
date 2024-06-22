@@ -549,9 +549,10 @@ strong {
     display:flex;
     justify-content:flex-end;
 }
-.Like{
-    background-color:transparent;
-    border:none;
+.Like {
+    background-color: transparent;
+    border: none;
+    font-size:25px;
 }
 #NotificationsParenttttt {
     display: flex;

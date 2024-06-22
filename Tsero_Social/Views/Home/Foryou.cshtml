@@ -259,7 +259,11 @@
                                             <form class="Formdelete" method="post" asp-action="Like">
                                                 <input type="hidden" class="LikeTosend" name="Postid" value="@post.Id" />
                                                 <input type="hidden" class="PostTodeltte" name="CurrentUserID" value="@CurrentUserID"/>
-                                                <button class= "Like" Id = "Like" ><i class="fas fa-heart" style="color: red;"></i> @Likecount</button>
+                                                <button class="Like" id="Like">
+                                                    <i class="fas fa-heart" style="color: red;"></i>
+                                                    <span class="like-count">@Likecount</span>
+                                                </button>
+
                                             </form>
                                         }
                                         else if(!Like)
@@ -267,7 +271,11 @@
                                             <form class="Formdelete" method="post" asp-action="Like">
                                                 <input type="hidden" class="LikeTosend" name="Postid" value="@post.Id" />
                                                 <input type="hidden" class="PostTodeltte" name="CurrentUserID" value="@CurrentUserID"/>
-                                                <button class= "Like" Id = "Like" >  <i class="far fa-heart" style="color: white;"></i> @Likecount</button>
+                                                <button class="Like" id="Like">
+                                                    <i class="fas fa-heart" style="color: white;"></i>
+                                                    <span class="like-count">@Likecount</span>
+                                                </button>
+
                                             </form>
                                         }
 
