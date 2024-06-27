@@ -327,10 +327,10 @@
                                                int remainingMinutes = totalMinutesCom % 60;
                                                <p class="datetimetracking">@totalHoursCom hours and @remainingMinutes minutes ago</p>
                                            }
-                                           else
+                                           else if(totalHoursCom > 24)
                                            {
                                                int remainingHours = totalHoursCom % 24;
-                                                    <p class="datetimetracking">@totalDaysCom days, @totalHoursCom hours ago</p>
+                                                    <p class="datetimetracking">@totalDaysCom days, @remainingHours hours ago</p>
                                                 }
                                            }
                                              </div>                   

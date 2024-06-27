@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using System.Data;
 using Tsero_Social.Dbcontext;
@@ -16,13 +17,30 @@ namespace Tsero_Social.Services
             _Context = Context;
         }
 
+        //  Login
         public bool Login(string Email, string Password)
         {
-            var user = _Context.Users.FirstOrDefault(u => u.Email == Email && u.Password == Password);
-            User.Loged_user.Clear();
-            User.Loged_user.Add(user);
-            return user != null;
+            var user = _Context.Users.FirstOrDefault(u => u.Email == Email);
+
+            if (user != null)
+            {
+                string hashedPassword = user.Password;
+                bool isPasswordCorrect = VerifyPassword(Password, hashedPassword);
+
+                if (isPasswordCorrect)
+                {
+                    User.Loged_user.Clear(); 
+                    User.Loged_user.Add(user);
+
+                    return true;
+                }
+            }
+
+            return false;
         }
+
+
+        //  Registration
 
         public bool Register(User user)
         {
@@ -35,14 +53,41 @@ namespace Tsero_Social.Services
             {
                 if (user.Username.Length <= 12)
                 {
-                    _Context.Users.Add(user);
+                    var hashed = HashPassword(user.Password);
+                    var Register_customer = new User
+                    {
+                        Email = user.Email,
+                        Lastname = user.Lastname,
+                        Name = user.Name,
+                        Password = hashed,
+                        CoverPicture = user.CoverPicture,
+                        Isonline = user.Isonline,
+                        ProfilePicture = user.ProfilePicture,
+                        Username = user.Username,
+                    };
+                    _Context.Users.Add(Register_customer);
                     _Context.SaveChanges();
-                    return user == null;
                 }
                 return user == null;
             }
         }
+        public string HashPassword(string password)
+        {
+            string salt = BCrypt.Net.BCrypt.GenerateSalt();
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password, salt);
 
+            return hashedPassword;
+        }
+
+        public bool VerifyPassword(string password, string hashedPassword)
+        {
+            return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
+        }
+
+        //End of Registration
+
+
+        //Profile update
         public void ProfilePhoto(string path)
         {
             int id = 0;
@@ -58,6 +103,7 @@ namespace Tsero_Social.Services
                 _Context.SaveChanges();
             }
         }
+
         public List<User> GetUserLogedUsers()
         {
             return User.Loged_user;

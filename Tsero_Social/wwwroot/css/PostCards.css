@@ -285,6 +285,7 @@
     display: flex;
     align-items: start;
     justify-content: space-between;
+    margin-top:20px;
 }
 .Comment_data_Parent{
     display:flex;
@@ -313,6 +314,7 @@
     overflow: hidden;
     border-radius: 50%;
     flex-direction:column;
+    border:1px solid white;
 }
 .LiteralComment {
     color: white;
