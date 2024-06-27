@@ -7,7 +7,7 @@ namespace Tsero_Social.Models
     {
         public int Id { get; set; }
         public string? post { get; set; }
-        public string? Photo { get; set; }
+        public string? Photo { get; set; }  
         public int UserID { get; set; }
         public DateTime DateTime { get; set; }
         public int? PostType { get;set; }

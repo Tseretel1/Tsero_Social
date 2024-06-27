@@ -21,7 +21,7 @@ namespace Tsero_Social.Services
             var Following = _Context.Users.FirstOrDefault(u=>u.id ==FollowingID);
             if(Follower != null && Following != null && FollowerID != FollowingID)
             {
-                var IF_Following = _Context.Follows.FirstOrDefault(u=> u.FollowerID == Follower.id && u.FollowingID == Following.id);
+                var IF_Following = _Context.Follows.FirstOrDefault(u=> u.User1 == Follower.id && u.User2 == Following.id);
                 if (IF_Following != null)
                 {
                     _Context.Follows.Remove(IF_Following);
@@ -29,10 +29,10 @@ namespace Tsero_Social.Services
                 }
                 else
                 {
-                    var Follow = new Models.FollowFriends
+                    var Follow = new Models.Follows
                     {
-                        FollowerID = Follower.id,
-                        FollowingID = Following.id
+                        User1 = Follower.id,
+                        User2 = Following.id,
                     };
                     _Context.Follows.Add(Follow);
                     _Context.SaveChanges();
@@ -41,10 +41,8 @@ namespace Tsero_Social.Services
                     {
                         User1 = FollowerID,
                         User2 = FollowingID,
-                        Seen = false,
                         DateTime = DateTime.Now,
                         Type = type,
-                        userid = FollowerID
                     };
                     _Notifycations.Notification(NewNotification);
                 }
@@ -53,7 +51,7 @@ namespace Tsero_Social.Services
 
         public void RemoveFollower(int UserToRmoveID, int MyID)
         {
-            var IFfollowExists = _Context.Follows.FirstOrDefault(u => u.FollowerID == UserToRmoveID && u.FollowingID == MyID);
+            var IFfollowExists = _Context.Follows.FirstOrDefault(u => u.User1 == UserToRmoveID && u.User2 == MyID);
             if (IFfollowExists != null)
             {
                 _Context.Follows.Remove(IFfollowExists);
@@ -61,10 +59,10 @@ namespace Tsero_Social.Services
             }
             else if(IFfollowExists == null)
             {
-                var NewFollower = new Models.FollowFriends
+                var NewFollower = new Models.Follows
                 {
-                    FollowerID = UserToRmoveID,
-                    FollowingID = MyID
+                    User1 = UserToRmoveID,
+                    User2= MyID
                 };
                 _Context.Follows.Add(NewFollower);
                 _Context.SaveChanges();
@@ -73,7 +71,7 @@ namespace Tsero_Social.Services
 
         public void RemoveFollowing(int FollowingToDelete, int MyID)
         {
-            var IFfollowExists = _Context.Follows.FirstOrDefault(u => u.FollowingID == FollowingToDelete && u.FollowerID == MyID);
+            var IFfollowExists = _Context.Follows.FirstOrDefault(u => u.User2 == FollowingToDelete && u.User1== MyID);
             if (IFfollowExists != null)
             {
                 _Context.Follows.Remove(IFfollowExists);
@@ -81,14 +79,15 @@ namespace Tsero_Social.Services
             }
             else if (IFfollowExists == null)
             {
-                var NewFollower = new Models.FollowFriends
+                var NewFollower = new Models.Follows
                 {
-                     FollowingID = FollowingToDelete,
-                     FollowerID = MyID
+                     User2 = FollowingToDelete,
+                     User1 = MyID
                 };
                 _Context.Follows.Add(NewFollower);
                 _Context.SaveChanges();
             }
+            
         }
     }
 }

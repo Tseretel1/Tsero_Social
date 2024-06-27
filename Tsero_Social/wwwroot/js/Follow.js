@@ -1,4 +1,5 @@
-﻿function FollowFunc(button) {
+﻿//fopllow functional
+function FollowFunc(button) {
     button.addEventListener('click', function () {
         navigator.vibrate(100);
 
@@ -84,6 +85,7 @@ window.addEventListener('load', function () {
     });
 });
 
+// This is likes functionl
 
 function likeFunc(button) {
     button.addEventListener('click', function () {
@@ -103,3 +105,23 @@ function likeFunc(button) {
         likeCountElement.textContent = likeCount;
     });
 }
+
+
+// comment sesciton functional 
+var commentSections = document.querySelectorAll('.commentSection');
+let display = false;
+commentSections.forEach(function (commentSection) {
+    var button = commentSection.querySelectorAll('.comclick');
+    button.addEventListener('click', function () {
+        var comments = this.nextElementSibling; 
+
+        if (display==false) {
+            comments.style.display = "flex";
+            display == true;
+        } else {
+
+            comments.style.display = "none";
+            display == false;
+        }
+    });
+});

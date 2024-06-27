@@ -22,6 +22,32 @@ namespace Tsero_Social.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Tsero_Social.Models.Com_Likes", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<int>("CommentID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Commentsid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Commentsid");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Com_Likes", (string)null);
+                });
+
             modelBuilder.Entity("Tsero_Social.Models.Comments", b =>
                 {
                     b.Property<int>("id")
@@ -45,10 +71,14 @@ namespace Tsero_Social.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Comments");
+                    b.HasIndex("PostID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Comments", (string)null);
                 });
 
-            modelBuilder.Entity("Tsero_Social.Models.Follow", b =>
+            modelBuilder.Entity("Tsero_Social.Models.Follows", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
@@ -69,7 +99,7 @@ namespace Tsero_Social.Migrations
 
                     b.HasIndex("userid");
 
-                    b.ToTable("Follows");
+                    b.ToTable("Follows", (string)null);
                 });
 
             modelBuilder.Entity("Tsero_Social.Models.ImageUpload", b =>
@@ -98,7 +128,7 @@ namespace Tsero_Social.Migrations
 
                     b.HasIndex("Userid");
 
-                    b.ToTable("images");
+                    b.ToTable("images", (string)null);
                 });
 
             modelBuilder.Entity("Tsero_Social.Models.Likes", b =>
@@ -117,7 +147,11 @@ namespace Tsero_Social.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Likes");
+                    b.HasIndex("PostID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Likes", (string)null);
                 });
 
             modelBuilder.Entity("Tsero_Social.Models.Notificationss", b =>
@@ -143,9 +177,12 @@ namespace Tsero_Social.Migrations
                     b.Property<int>("User2")
                         .HasColumnType("int");
 
+                    b.Property<int>("userid")
+                        .HasColumnType("int");
+
                     b.HasKey("id");
 
-                    b.ToTable("Notifications");
+                    b.ToTable("Notifications", (string)null);
                 });
 
             modelBuilder.Entity("Tsero_Social.Models.Post", b =>
@@ -173,7 +210,7 @@ namespace Tsero_Social.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Posts");
+                    b.ToTable("Posts", (string)null);
                 });
 
             modelBuilder.Entity("Tsero_Social.Models.User", b =>
@@ -215,7 +252,7 @@ namespace Tsero_Social.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Tsero_Social.Models.VideoUpload", b =>
@@ -241,13 +278,51 @@ namespace Tsero_Social.Migrations
 
                     b.HasIndex("Userid");
 
-                    b.ToTable("videos");
+                    b.ToTable("videos", (string)null);
                 });
 
-            modelBuilder.Entity("Tsero_Social.Models.Follow", b =>
+            modelBuilder.Entity("Tsero_Social.Models.Com_Likes", b =>
+                {
+                    b.HasOne("Tsero_Social.Models.Comments", "Comments")
+                        .WithMany("Com_Likes")
+                        .HasForeignKey("Commentsid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Tsero_Social.Models.User", "User")
+                        .WithMany("Comlikes")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comments");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Tsero_Social.Models.Comments", b =>
+                {
+                    b.HasOne("Tsero_Social.Models.Post", "post")
+                        .WithMany("Comments")
+                        .HasForeignKey("PostID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Tsero_Social.Models.User", "user")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("post");
+
+                    b.Navigation("user");
+                });
+
+            modelBuilder.Entity("Tsero_Social.Models.Follows", b =>
                 {
                     b.HasOne("Tsero_Social.Models.User", "user")
-                        .WithMany("Follow")
+                        .WithMany("Followers")
                         .HasForeignKey("userid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -258,10 +333,29 @@ namespace Tsero_Social.Migrations
             modelBuilder.Entity("Tsero_Social.Models.ImageUpload", b =>
                 {
                     b.HasOne("Tsero_Social.Models.User", "user")
-                        .WithMany("ImageUpload")
+                        .WithMany()
                         .HasForeignKey("Userid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("user");
+                });
+
+            modelBuilder.Entity("Tsero_Social.Models.Likes", b =>
+                {
+                    b.HasOne("Tsero_Social.Models.Post", "post")
+                        .WithMany("Likes")
+                        .HasForeignKey("PostID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Tsero_Social.Models.User", "user")
+                        .WithMany("Likes")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("post");
 
                     b.Navigation("user");
                 });
@@ -269,7 +363,7 @@ namespace Tsero_Social.Migrations
             modelBuilder.Entity("Tsero_Social.Models.VideoUpload", b =>
                 {
                     b.HasOne("Tsero_Social.Models.User", "user")
-                        .WithMany("VideoUpload")
+                        .WithMany("videoUpload")
                         .HasForeignKey("Userid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -277,13 +371,29 @@ namespace Tsero_Social.Migrations
                     b.Navigation("user");
                 });
 
+            modelBuilder.Entity("Tsero_Social.Models.Comments", b =>
+                {
+                    b.Navigation("Com_Likes");
+                });
+
+            modelBuilder.Entity("Tsero_Social.Models.Post", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("Likes");
+                });
+
             modelBuilder.Entity("Tsero_Social.Models.User", b =>
                 {
-                    b.Navigation("Follow");
+                    b.Navigation("Comlikes");
 
-                    b.Navigation("ImageUpload");
+                    b.Navigation("Comments");
 
-                    b.Navigation("VideoUpload");
+                    b.Navigation("Followers");
+
+                    b.Navigation("Likes");
+
+                    b.Navigation("videoUpload");
                 });
 #pragma warning restore 612, 618
         }

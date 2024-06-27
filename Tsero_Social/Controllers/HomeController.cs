@@ -30,6 +30,7 @@ namespace Tsero_Social.Controllers
                 .ToList();
             ViewBag.Users = _dbcontext.Users.ToList();
             ViewBag.Comments = _dbcontext.Comments.ToList();
+            ViewBag.Comment_Likes = _dbcontext.Com_Likes.ToList();
             ViewBag.Likes = _dbcontext.Likes.ToList();
             ViewBag.UserPosts = allPosts;
             ViewBag.Posts = new List<User>();
@@ -54,6 +55,7 @@ namespace Tsero_Social.Controllers
                    .ToList();
             ViewBag.Users = _dbcontext.Users.ToList();
             ViewBag.Comments = _dbcontext.Comments.ToList();
+            ViewBag.Comment_Likes = _dbcontext.Com_Likes.ToList();
             ViewBag.Likes = _dbcontext.Likes.ToList();
             ViewBag.UserPosts = allPosts;
             ViewBag.Posts = new List<User>();
@@ -100,6 +102,7 @@ namespace Tsero_Social.Controllers
                     .ToList();
                 ViewBag.Users = _dbcontext.Users.ToList();
                 ViewBag.Comments = _dbcontext.Comments.ToList();
+                ViewBag.Comment_Likes = _dbcontext.Com_Likes.ToList();
                 ViewBag.Likes = _dbcontext.Likes.ToList();
                 ViewBag.Follows = _dbcontext.Follows.ToList();
                 ViewBag.UserPosts = allPosts;
@@ -157,6 +160,12 @@ namespace Tsero_Social.Controllers
             {
                 return BadRequest("An error occurred while following the person.");
             }
+        }
+        [HttpPost]
+        public IActionResult Com_Likes(int CommentID, int UserId)
+        {
+            _LikeComment.Comment_like(CommentID, UserId);
+            return NoContent();
         }
     }
 }

@@ -8,5 +8,6 @@ namespace Tsero_Social.InterFaces
         int GetLikeCount(int postId);
         bool IsPostLikedByUser(int postId, int userId);
         void AddComment(int Postid, int currentUserID,string Comment);
+        void Comment_like(int CommentID, int UserId);
     }
 }

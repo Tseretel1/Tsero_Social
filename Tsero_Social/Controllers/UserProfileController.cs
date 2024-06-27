@@ -38,12 +38,12 @@ namespace Tsero_Social.Controllers
                             ViewBag.NoPosts = "NO Post Available";
 
 
-                            var Followers = _userDbcontext.Follows.Where(u => u.FollowingID == logedUser.id).ToList();
+                            var Followers = _userDbcontext.Follows.Where(u => u.User2 == logedUser.id).ToList();
                             ViewBag.MyFollowers = Followers;
-                            var Following = _userDbcontext.Follows.Where(u => u.FollowerID == logedUser.id).ToList();
+                            var Following = _userDbcontext.Follows.Where(u => u.User1 == logedUser.id).ToList();
                             ViewBag.MyFollowings = Following;
-                            var FollowersCount = _userDbcontext.Follows.Where(u => u.FollowingID == logedUser.id).Count();
-                            var FollowingCount = _userDbcontext.Follows.Where(u => u.FollowerID == logedUser.id).Count();
+                            var FollowersCount = _userDbcontext.Follows.Where(u => u.User2 == logedUser.id).Count();
+                            var FollowingCount = _userDbcontext.Follows.Where(u => u.User1 == logedUser.id).Count();
                             ViewBag.Followers = FollowersCount;
                             ViewBag.Following = FollowingCount;
 

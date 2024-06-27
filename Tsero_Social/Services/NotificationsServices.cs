@@ -39,8 +39,6 @@ namespace Tsero_Social.Services
                     User2= Notification.User2,
                     DateTime = DateTime.Now,
                     Type = Notification.Type,
-                    Seen = false,
-                    userid = Notification.User1,
                 };
                 _dbcontext.Notifications.Add(Notify);
                 _dbcontext.SaveChanges();

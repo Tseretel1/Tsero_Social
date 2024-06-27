@@ -77,8 +77,8 @@
 
     @{
         var users2 = ViewBag.Users as List<User>;
-        var MyFollowers = ViewBag.MyFollowers as List<FollowFriends>;
-        var MyFollowing = ViewBag.MyFollowings as List<FollowFriends>;
+        var MyFollowers = ViewBag.MyFollowers as List<Follows>;
+        var MyFollowing = ViewBag.MyFollowings as List<Follows>;
         var MyNotifications = ViewBag.MyNotifications as List<Notificationss>;
         bool IFFollowersExist = false;
         string UserN = "@";
@@ -105,7 +105,7 @@
              <div class = "YOurFollowers">Followers</div>
             @foreach (var item in MyFollowers)
              {
-                 var User = users2?.Where(u => u.id == item.FollowerID).FirstOrDefault();
+                 var User = users2?.Where(u => u.id == item.User1).FirstOrDefault();
                  if (User != null)
                  {
                      <div class="EachFollower">
@@ -152,7 +152,7 @@
                <div class = "YOurFollowers">Followings</div>
               @foreach (var item in MyFollowing)
               {
-                  var User = users2?.Where(u => u.id == item.FollowingID).FirstOrDefault();
+                  var User = users2?.Where(u => u.id == item.User2).FirstOrDefault();
                   if (User != null)
                   {
                     <div class="EachFollower">
@@ -187,7 +187,7 @@
      
 @using(Html.BeginForm("Profile", "MyProfile", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        var Follows = ViewBag.Follows as List<FollowFriends>;
+        var Follows = ViewBag.Follows as List<Follows>;
         @if (ViewBag.UserPosts != null)
         {
             <div class="containercenter">
@@ -399,34 +399,122 @@
                                <div class= "comclick">Comment @comcount</div>
                            </div>
 
-                  <div class = "commentSection">
+                 <div class="commentSection">
                       @if (users != null)
-                      {
-                          var usercoment = comments.Where(u => u.PostID == post.Id);
-                          if (usercoment != null)
-                          {
+                      {  
+                         var usercoment = comments.Where(u => u.PostID == post.Id);
+                         <div class="EachComment_Patent">
+
+                          @if (usercoment != null)
+                          {                             
                               foreach (var item in usercoment)
                               {
-                                  var userData = users.Where(u => u.id == item.UserID);
-                                  <div class = "eachcomment">
+                               var userData = users.Where(u => u.id == item.UserID);
+                               <div class = "eachcomment">
                                       @foreach (var user in userData)
-                                      {                      
+                                      {   
+                                          
                                        <div class = "commenterProfile">
-                                         <img class="profilepic" src="@user.ProfilePicture" alt="">
-                                         <b> @user.Username</b>
-                                       </div>
+                                         <div class= "commenterphtotousername">
+                                            <div class = "CoomenterprofileComntainer">
+                                              <img class="profilepic" src="@user.ProfilePicture" alt="">
+                                            </div>
+                                         </div>
+                                         <div class="Comment_data_Parent">
+                                             <div class = "UserName_Datetime"> 
+                                                <b class="commenterUsername"> @user.Username</b>
+                                                            @{
+                                           DateTime dbDateTimeCom = item.DateTime;
+                                           DateTime currentDateTimeCom = DateTime.Now;
+                                           TimeSpan timeDifferenceCom = currentDateTimeCom - dbDateTimeCom;
+                                      
+                                           int totalMinutesCom = (int)timeDifferenceCom.TotalMinutes;
+                                           int totalHoursCom = (int)timeDifferenceCom.TotalHours;
+                                           int totalDaysCom = (int)timeDifferenceCom.TotalDays;
+                                      
+                                           if (totalMinutesCom < 60)
+                                           {                                           
+                                               <p class="datetimetracking">@totalMinutesCom minutes ago</p>
+                                           }
+                                           else if (totalHoursCom < 24)
+                                           {
+                                               int remainingMinutes = totalMinutesCom % 60;
+                                               <p class="datetimetracking">@totalHoursCom hours and @remainingMinutes minutes ago</p>
+                                           }
+                                           else
+                                           {
+                                               int remainingHours = totalHoursCom % 24;
+                                                    <p class="datetimetracking">@totalDaysCom days, @totalHoursCom hours ago</p>
+                                                }
+                                           }
+                                             </div>                   
+                                             <p class="LiteralComment">@item.Comment</p>
+                                         </div>
+                                </div>
                                       }
-                                  <p>@item.Comment</p>
+                                  <div class="CommentLike">
+                                    @if (ViewBag.CurrentUser != null)
+                                    {
+                                        bool Like = true;
+                                        string YouAnd = "By You And";
+                                        string Others = "Others";
+                                        int Likecount = 0;
+                                        @foreach(var like in Likes)
+                                        {
+                                            var LikeCountQuery = Likes.Where(u => u.PostID == @post.Id).Count();
+                                            var ifLiked = Likes.FirstOrDefault(u => u.UserID == @CurrentUserID && u.PostID == @post.Id);
+                                            if (ifLiked != null)
+                                            {
+                                                Like = true;
+                                                Likecount = LikeCountQuery;
+                                            }
+                                            else
+                                            {
+                                                Like = false;
+                                                Likecount = LikeCountQuery;
+                                            }
+                                          
+                                            
+                                        }
+                                        if (Like)
+                                        {
+                                            <form class="Formdelete" method="post" asp-action="Like">
+                                                <input type="hidden" class="LikeTosend" name="Postid" value="@post.Id" />
+                                                <input type="hidden" class="PostTodeltte" name="CurrentUserID" value="@CurrentUserID"/>
+                                                <button class="Like" id="Like">
+                                                    <i class="fas fa-heart" style="color: red;"></i>
+                                                    <span class="like-count">@Likecount</span>
+                                                </button>
+
+                                            </form>
+                                        }
+                                        else if(!Like)
+                                        {
+                                            <form class="Formdelete" method="post" asp-action="Like">
+                                                <input type="hidden" class="LikeTosend" name="Postid" value="@post.Id" />
+                                                <input type="hidden" class="PostTodeltte" name="CurrentUserID" value="@CurrentUserID"/>
+                                                <button class="Like" id="Like">
+                                                    <i class="fas fa-heart" style="color: white;"></i>
+                                                    <span class="like-count">@Likecount</span>
+                                                </button>
+
+                                            </form>
+                                        }
+
+                                }
                                   </div>
+                                  </div>
+                               
                               }
+                             
                           }
+
                           else
                           {
-
                           }
+                          </div>
                      }
-                      </div>   
-                         
+                      </div> 
                      </div>
                      </div>                         
                     }

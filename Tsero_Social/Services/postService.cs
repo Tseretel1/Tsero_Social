@@ -59,7 +59,6 @@ namespace Tsero_Social.Services
                                 var image = new ImageUpload
                                 {
                                     ImagePath = filePath,
-                                    Title = title,
                                     PathToDisplay = PattoDisplay,
                                     Userid = userid,
                                 };

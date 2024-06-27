@@ -31,6 +31,26 @@ namespace Tsero_Social.Services
             }
         }
 
+        public void Comment_like(int CommentID, int UserID)
+        {
+            var IF_Comment_IS_Liked = _dbcontext.Com_Likes.FirstOrDefault(u => u.CommentID == CommentID && u.UserID == UserID);
+            if (IF_Comment_IS_Liked != null)
+            {
+                _dbcontext.Com_Likes.Remove(IF_Comment_IS_Liked);
+                _dbcontext.SaveChanges();
+            }
+            else
+            {
+                var Com_Like = new Com_Likes()
+                {
+                    CommentID = CommentID,
+                    UserID = UserID
+                };
+                _dbcontext.Com_Likes.Add(Com_Like);
+                _dbcontext.SaveChanges();
+            }
+        }
+
         public int GetLikeCount(int postId)
         {
             return _dbcontext.Likes.Count(l => l.PostID == postId);
@@ -69,9 +89,8 @@ namespace Tsero_Social.Services
                             User1 = CurrentUserID,
                             User2 = Postauthor.UserID,
                             Type = Notificationtype,
-                            Seen = false,
                             DateTime = DateTime.Now,
-                            userid = CurrentUserID,
+
                         };
                         _notificationss.Notification(Notification);
                     }
